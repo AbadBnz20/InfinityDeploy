@@ -13,7 +13,6 @@ import { cloneElement, createElement } from "react";
 import { AmenityGroup } from "@/interfaces/details-response";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { AmenitiesIcon } from "@/icons/ListIcon";
-import { useTheme } from "next-themes";
 
 interface Props {
   services: AmenityGroup[];
