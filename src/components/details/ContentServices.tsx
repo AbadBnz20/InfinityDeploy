@@ -59,7 +59,6 @@ interface Props2 {
 
 const ButtonServices = ({ index, item }: Props2) => {
   const amenity = AmenitiesIcon.find((x) => x.name === item.group_name);
-  const { theme } = useTheme();
   const IconComponent = amenity
     ? cloneElement(createElement(amenity.icon), { size: 34 })
     : null;
