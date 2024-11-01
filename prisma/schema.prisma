@@ -1,0 +1,254 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type HotelsAmenityGroups {
+  amenities          String[]
+  group_name         String
+  non_free_amenities String[]
+}
+
+type HotelsDescriptionStruct {
+  paragraphs String[]
+  title      String
+}
+
+type HotelsFacts {
+  electricity    HotelsFactsElectricity
+  floors_number  Int?
+  rooms_number   Int?
+  year_built     Int?
+  year_renovated Int?
+}
+
+type HotelsFactsElectricity {
+  frequency Int[]
+  sockets   String[]
+  voltage   Int[]
+}
+
+type HotelsKeysPickup {
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  apartment_extra_information Json?
+  apartment_office_address    String?
+  email                       String?
+  is_contactless              Boolean
+  phone                       String?
+  type                        String
+}
+
+type HotelsMetapolicyStruct {
+  add_fee            HotelsMetapolicyStructAddFee[]
+  check_in_check_out HotelsMetapolicyStructCheckInCheckOut[]
+  children           HotelsMetapolicyStructChildren[]
+  children_meal      HotelsMetapolicyStructChildrenMeal[]
+  cot                HotelsMetapolicyStructCot[]
+  deposit            HotelsMetapolicyStructDeposit[]
+  extra_bed          HotelsMetapolicyStructExtraBed[]
+  internet           HotelsMetapolicyStructInternet[]
+  meal               HotelsMetapolicyStructMeal[]
+  no_show            HotelsMetapolicyStructNoShow
+  parking            HotelsMetapolicyStructParking[]
+  pets               HotelsMetapolicyStructPets[]
+  shuttle            HotelsMetapolicyStructShuttle[]
+  visa               HotelsMetapolicyStructVisa
+}
+
+type HotelsMetapolicyStructAddFee {
+  currency   String
+  fee_type   String
+  price      String
+  price_unit String
+}
+
+type HotelsMetapolicyStructCheckInCheckOut {
+  check_in_check_out_type String
+  currency                String
+  inclusion               String
+  price                   String
+}
+
+type HotelsMetapolicyStructChildren {
+  age_end   Int
+  age_start Int
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  currency  Json?
+  extra_bed String
+  price     String
+}
+
+type HotelsMetapolicyStructChildrenMeal {
+  age_end   Int
+  age_start Int
+  currency  String
+  inclusion String
+  meal_type String
+  price     String
+}
+
+type HotelsMetapolicyStructCot {
+  amount     Int
+  currency   String
+  inclusion  String
+  price      String
+  price_unit String
+}
+
+type HotelsMetapolicyStructDeposit {
+  availability   String
+  currency       String
+  deposit_type   String
+  payment_type   String
+  price          String
+  price_unit     String
+  pricing_method String
+}
+
+type HotelsMetapolicyStructExtraBed {
+  amount     Int
+  currency   String?
+  inclusion  String
+  price      String
+  price_unit String
+}
+
+type HotelsMetapolicyStructInternet {
+  currency      String?
+  inclusion     String
+  internet_type String
+  price         String
+  price_unit    String
+  work_area     String
+}
+
+type HotelsMetapolicyStructMeal {
+  currency  String
+  inclusion String
+  meal_type String
+  price     String
+}
+
+type HotelsMetapolicyStructNoShow {
+  availability String
+  day_period   String
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  time         Json?
+}
+
+type HotelsMetapolicyStructParking {
+  currency       String?
+  inclusion      String
+  price          String
+  price_unit     String
+  territory_type String
+}
+
+type HotelsMetapolicyStructPets {
+  currency   String
+  inclusion  String
+  pets_type  String
+  price      String
+  price_unit String
+}
+
+type HotelsMetapolicyStructShuttle {
+  currency         String?
+  destination_type String
+  inclusion        String
+  price            String
+  shuttle_type     String
+}
+
+type HotelsMetapolicyStructVisa {
+  visa_support String
+}
+
+type HotelsPolicyStruct {
+  paragraphs String[]
+  title      String
+}
+
+type HotelsRegion {
+  country_code String?
+  iata         String?
+  id           Int
+  name         String?
+  type         String?
+  type_v2      String?
+}
+
+type HotelsRoomGroups {
+  images         String[]
+  name           String
+  name_struct    HotelsRoomGroupsNameStruct
+  rg_ext         HotelsRoomGroupsRgExt
+  room_amenities String[]
+  room_group_id  Int
+}
+
+type HotelsRoomGroupsNameStruct {
+  bathroom     String?
+  bedding_type String?
+  main_name    String
+}
+
+type HotelsRoomGroupsRgExt {
+  balcony  Int
+  bathroom Int
+  bedding  Int
+  bedrooms Int
+  capacity Int
+  class    Int
+  club     Int
+  family   Int
+  floor    Int
+  quality  Int
+  sex      Int
+  view     Int
+}
+
+type HotelsStarCertificate {
+  certificate_id String
+  valid_to       String
+}
+
+model Hotels {
+  id                               String                    @id @default(auto()) @map("_id") @db.ObjectId
+  address                          String
+  amenity_groups                   HotelsAmenityGroups[]
+  check_in_time                    String
+  check_out_time                   String
+  deleted                          Boolean
+  description_struct               HotelsDescriptionStruct[]
+  email                            String?
+  facts                            HotelsFacts
+  front_desk_time_end              String?
+  front_desk_time_start            String?
+  hid                              Int
+  hotel_chain                      String
+  id_                              String                    @map("id")
+  images                           String[]
+  is_closed                        Boolean
+  is_gender_specification_required Boolean
+  keys_pickup                      HotelsKeysPickup
+  kind                             String
+  latitude                         Float
+  longitude                        Float
+  metapolicy_extra_info            String?
+  metapolicy_struct                HotelsMetapolicyStruct
+  name                             String
+  payment_methods                  String[]
+  phone                            String?
+  policy_struct                    HotelsPolicyStruct[]
+  postal_code                      String?
+  region                           HotelsRegion
+  room_groups                      HotelsRoomGroups[]
+  serp_filters                     String[]
+  star_certificate                 HotelsStarCertificate?
+  star_rating                      Int
+}
