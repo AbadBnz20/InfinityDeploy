@@ -62,7 +62,6 @@ export const ContentPackage = () => {
       setLoading(true);
       const packagebyid = await GetPackageByIDResponse();
       const resp = await GetPackage();
-      console.log(packagebyid?.data.packageUser.package);
       setbyid(packagebyid?.data.packageUser.package.name || "");
       setdata(resp);
       setLoading(false);
@@ -74,7 +73,7 @@ export const ContentPackage = () => {
   const handleChange = async () => {
     setLoading2(true);
     if (byid) {
-     await UpdatePackageByIDResponse(byid);
+     UpdatePackageByIDResponse(byid);
     }
     setLoading2(false);
 

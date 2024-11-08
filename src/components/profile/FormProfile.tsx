@@ -1,6 +1,5 @@
 'use client';
-import { Input } from "@nextui-org/react"
-import { useSession } from "next-auth/react";
+import {  Input } from "@nextui-org/react"
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ContentPackage } from "./ContentPackage";
@@ -15,20 +14,25 @@ interface FormData{
 }
 
 
-export const FormProfile = () => {
-  const { data } = useSession();
-  const {register,setValue}=useForm<FormData>()
+interface Props  {
+  firstname: string;
+  lastname: string;
+  email: string;
+  birthdate: string;
+  country: string;
+  phone: string;
+};
 
+export const FormProfile = ({firstname,lastname,country,birthdate,phone,email}:Props) => {
+  const {register,setValue}=useForm<FormData>()
   useEffect(() => {
-    if (data?.user) {
-      setValue("firstName",data?.user.firstname);
-      setValue("LastName",data?.user.lastname);
-      setValue("Country",data?.user.country);
-      setValue("Email",data?.user.email);
-      setValue("Phone",data?.user.phone);
-      setValue("Age",data?.user.birthdate);
-    }
-  }, [data])
+    setValue("firstName",firstname);
+      setValue("LastName",lastname);
+      setValue("Country",country);
+      setValue("Email",email);
+      setValue("Phone",phone);
+      setValue("Age",birthdate);
+  }, [])
   
 
   return (

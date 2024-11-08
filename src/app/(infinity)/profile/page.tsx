@@ -54,7 +54,7 @@ export default async function ProfilePage() {
         </div>
       </aside>
       <main className="col-span-3 p-6">
-        <FormProfile/>
+        <FormProfile firstname={session.user.firstname} lastname={session.user.lastname} birthdate={session.user.birthdate} country={session.user.country} email={session.user.email} phone={session.user.phone} />
       </main>
     </div>
   );
