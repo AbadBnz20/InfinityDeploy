@@ -39,7 +39,16 @@ interface FormValues {
   supplier_data: User;
 }
 
-export const FormRoom = () => {
+interface Props  {
+  firstname: string;
+  lastname: string;
+  email: string;
+  birthdate: string;
+  country: string;
+  phone: string;
+};
+
+export const FormRoom = ({firstname,lastname,country,birthdate,phone,email}:Props) => {
   const { guest, checkin, checkout } = DestinationStore();
   const { destination, name, nameroom, subtotal, total, book_hash } =
     ReservationStore();
@@ -53,7 +62,7 @@ export const FormRoom = () => {
     reset,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: { rooms: [] },
+    defaultValues: { rooms: []  },
   });
   const router = useRouter();
   const { setPaymentData } = PaymentStore();
@@ -70,20 +79,27 @@ export const FormRoom = () => {
               age: 0,
             })),
           ],
+          
         })),
+        supplier_data:{
+          first_name_original:firstname,
+          last_name_original:lastname,
+          email: email,
+          phone: phone,
+        }
       });
     }
   }, [guest, reset]);
 
-  useEffect(() => {
-    if (data?.user) {
+  // useEffect(() => {
+  //   if (data?.user) {
 
-      setValue("supplier_data.first_name_original", data?.user.firstname);
-      setValue("supplier_data.last_name_original", data?.user.lastname);
-      setValue("supplier_data.email", data?.user.email);
-      setValue("supplier_data.phone", data?.user.phone);
-    }
-  }, [data]);
+  //     setValue("supplier_data.first_name_original", data?.user.firstname);
+  //     setValue("supplier_data.last_name_original", data?.user.lastname);
+  //     setValue("supplier_data.email", data?.user.email);
+  //     setValue("supplier_data.phone", data?.user.phone);
+  //   }
+  // }, [data]);
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const obj: ReservationStrapi = {
@@ -136,7 +152,8 @@ export const FormRoom = () => {
                 {...register("supplier_data.first_name_original", {
                   required: "El campo de nombre es requerido",
                 })}
-                label="Nombre"
+                label="Nombre" 
+                placeholder="Ingrese nombre"
                 type="text"
               />
               <Input
@@ -152,7 +169,7 @@ export const FormRoom = () => {
               <Input
                 label="Pais"
                 type="text"
-                defaultValue={data?.user.country}
+                defaultValue={country}
                 placeholder="Ingrese pais"
               />
             </div>
@@ -180,7 +197,7 @@ export const FormRoom = () => {
               <Input
                 type="text"
                 label="Fecha Nacimiento"
-                defaultValue={data?.user.birthdate}
+                defaultValue={birthdate}
                 placeholder="Ingrese Edad"
               />
             </div>
