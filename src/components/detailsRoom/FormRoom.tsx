@@ -58,7 +58,6 @@ export const FormRoom = ({firstname,lastname,country,birthdate,phone,email}:Prop
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<FormValues>({
