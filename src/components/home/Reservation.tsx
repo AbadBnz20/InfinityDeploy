@@ -17,7 +17,6 @@ import { getLocalTimeZone, today } from "@internationalized/date";
 
 export const Reservation = () => {
   const {
-    register,
     setValue,
     handleSubmit,
     watch,
@@ -27,7 +26,7 @@ export const Reservation = () => {
     end: today(getLocalTimeZone()).add({ days: 2 }),
   });
   const [validate, setValidate] = useState(true);
-  const { setDestinationData } = DestinationStore();
+  const { setDestinationData,guest } = DestinationStore();
   const router = useRouter();
   useEffect(() => {
     setValue(
@@ -63,9 +62,10 @@ export const Reservation = () => {
             className="grid grid-cols-1 md:grid-cols-5 items-center gap-2"
           >
             <div className="col-span-2">
-              <SelectDestination register={register} setValue={setValue} />
+              <SelectDestination  setValue={setValue} />
             </div>
-            <div className="space-y-2">
+           <div className=" col-span-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+           <div className="space-y-2">
               <label
                 htmlFor="rooms"
                 className="block text-sm font-medium "
@@ -86,19 +86,21 @@ export const Reservation = () => {
               >
                 Seleccionar
               </label>
-              <SelectGuest setValue={setValue} />
+              <SelectGuest setValue={setValue} value={guest} />
             </div>
-
             <div className="mt-6">
               <Button
                 isDisabled={validate}
                 type="submit"
               
-                className="w-[200px]"
+                className="w-full"
               >
                 Buscar
               </Button>
             </div>
+           </div>
+
+            
           </form>
         </div>
       </div>

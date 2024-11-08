@@ -7,8 +7,7 @@ import { useState } from "react";
 export const useDestination = () => {
     const [items, setItems] = useState<Region[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-
-    const loadPokemon = async (text:string) => {
+    const loadDestination = async (text:string) => {
         try {
           setIsLoading(true);
           const resp = await GetDestination(text);
@@ -24,6 +23,6 @@ export const useDestination = () => {
   return {
     items,
     isLoading,
-    loadPokemon
+    loadDestination
   }
 }

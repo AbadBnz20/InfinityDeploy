@@ -73,8 +73,6 @@ const translations = {
 
 export default async function HomePage() {
   const language = "es";
-
-  
   const t = translations[language as keyof typeof translations];
   const arraySlider = [
     {

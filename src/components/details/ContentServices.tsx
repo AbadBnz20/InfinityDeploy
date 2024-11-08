@@ -44,9 +44,11 @@ export const ContentServices = ({ services }: Props) => {
   return (
     <div className=" p-5 ">
       <h2 className="text-2xl font-bold mb-2 ">{t.title}</h2>
+      <div className="grid grid-cols-2 md:grid-cols-7 ">
       {services.map((item, index) => (
         <ButtonServices key={index} index={index} item={item} />
       ))}
+      </div>
     </div>
   );
 };
@@ -65,8 +67,8 @@ const ButtonServices = ({ index, item }: Props2) => {
     <Dropdown key={index} placement="bottom-end">
       <DropdownTrigger>
         <Button
-          size="lg"
-          className=" m-2 bg-maincolor  h-[100px]"
+          size="sm"
+          className=" m-2 bg-maincolor text-wrap  h-[80px]"
           endContent={<IoChevronDownOutline />}
         >
           {IconComponent} {item.group_name}

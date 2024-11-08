@@ -37,10 +37,14 @@ export const authConfig: NextAuthConfig = {
         const user = await ValidateUser(email, password);
         if (!user) return null;
         return {
-          id: user.user.id.toString(),
-          name: user.user.username,
+          firstname: user.user.firstname,
+          lastname: user.user.lastname,
           email: user.user.email,
-          token: user.jwt,
+          birthdate: user.user.birthdate,
+          image:user.user.photo.formats.small.url,
+          country:user.user?.pais?.nombre,
+          phone:`${user.user.phone.code}${user.user.number}`,
+          token: user.token,
         };
       },
     }),

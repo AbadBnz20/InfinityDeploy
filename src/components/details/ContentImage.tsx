@@ -45,30 +45,30 @@ export const ContentImage = ({ images }: Props) => {
   return (
    <>
     <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-col-1  md:grid-cols-3 gap-4">
         <div className="col-span-2">
           <img
             src={mainImage}
             alt="Main hotel view"
-            className="w-full h-[500px] object-cover rounded-lg"
+            className="w-full  h-[300px] md:h-[520px] object-cover rounded-lg"
           />
         </div>
-        <div className="grid gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-1  gap-4">
           <img
             src={SizeImage(images[1], "x500")}
             alt="Secondary hotel view 1"
-            className="w-full h-[250px] object-cover rounded-lg cursor-pointer"
+            className="w-full h-[150px]  md:h-[250px] object-cover rounded-lg cursor-pointer"
             onClick={() => setMainImage(SizeImage(images[1], "1024x768"))}
           />
           <img
             src={SizeImage(images[2], "x500")}
             alt="Secondary hotel view 2"
-            className="w-full h-[250px] object-cover rounded-lg cursor-pointer"
+            className="w-full  h-[150px]  md:h-[250px] object-cover rounded-lg cursor-pointer"
             onClick={() => setMainImage(SizeImage(images[2], "1024x768"))}
           />
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
         {images.length <= 8
           ? images.slice(3, images.length).map((img, index) => (
               <div key={index} className="relative group">

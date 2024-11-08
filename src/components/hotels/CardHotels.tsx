@@ -1,3 +1,4 @@
+import { currencyFormat } from "@/helpers/CurrenFormat";
 import { SizeImage } from "@/helpers/SizeImage";
 import { Hotel } from "@/interfaces/hotels-response";
 import { Button } from "@nextui-org/react";
@@ -9,12 +10,11 @@ interface Props {
   index: string;
   image: Array<string>;
   title: string;
- 
+  percentage: number;
   rating: number;
   addres: string;
- 
   description: string;
-  rooms:Hotel;
+  rooms: Hotel;
 }
 
 const CardHotels = ({
@@ -25,10 +25,15 @@ const CardHotels = ({
   addres,
   rooms,
   description,
+  percentage,
 }: Props) => {
+  const number = percentage / 100;
+  const price = +rooms.rates[0].payment_options.payment_types[0].amount;
+  const increasedPrice = price + price * number;
+
   return (
-    <div className="bg-maincolor rounded-lg shadow overflow-hidden">
-      <div className="relative">
+    <div className="bg-maincolor rounded-lg shadow overflow-hidden flex flex-col">
+      <div className="relative flex-grow">
         {image[0] ? (
           <img
             src={SizeImage(image[0], "x500")}
@@ -51,16 +56,21 @@ const CardHotels = ({
           {rating}
         </span>
       </div>
-      <div className="p-4 ">
-        <h2 className="text-2xl  font-bold">{title}</h2>
+      <div className="p-4 flex-grow">
+        <h2 className="text-2xl font-bold">{title}</h2>
         <p className="text-sm text-gray-400 text-muted-foreground flex items-center mb-3 whitespace-nowrap overflow-hidden text-ellipsis">
           <IoLocationOutline color="white" size={"15px"} /> {addres}
         </p>
         <p className="text-sm mb-4">{description}</p>
+      </div>
+      <div className="p-4">
         <div className="flex justify-between items-center">
           <div>
             <p className="text-sm font-medium text-gray-400">Desde</p>
-            <p className="text-xl font-bold ">{rooms.rates[0].payment_options.payment_types[0].amount } {rooms.rates[0].payment_options.payment_types[0].currency_code }</p>
+            <p className="text-xl font-bold">
+              {currencyFormat(increasedPrice)}{" "}
+              {rooms.rates[0].payment_options.payment_types[0].currency_code}
+            </p>
           </div>
           <Link href={`/hotels/${index}`} className="text-white">
             <Button endContent={<IoChevronForwardOutline className="ml-1" />}>
@@ -72,6 +82,5 @@ const CardHotels = ({
     </div>
   );
 };
-
 
 export default CardHotels;

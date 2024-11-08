@@ -1,5 +1,7 @@
 "use client";
 import {  GetRooms } from "@/actions/getDestination";
+import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
+import { currencyFormat } from "@/helpers/CurrenFormat";
 import { DataDetails } from "@/interfaces/details-response";
 import { Hotel, Rate } from "@/interfaces/rooms-response";
 
@@ -37,6 +39,8 @@ export const ContentRoom = ({ hotel }: Props) => {
   const { checkin, checkout, guest } = DestinationStore();
   const {setReservationData}=ReservationStore()
   const [rooms, setRooms] = useState<Hotel>();
+  const [percentage, setPercentage] = useState(0)
+
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (checkin && checkout && guest.length > 0) {
@@ -49,7 +53,8 @@ export const ContentRoom = ({ hotel }: Props) => {
     console.log('cambiar el slug a produccion');
 
     const rooms = await GetRooms('test_hotel_do_not_book', checkin, checkout, guest);
-    console.log(rooms);
+    const resp = await GetPackageByIDResponse();
+    setPercentage(resp?.data.packageUser.package.percentage || 0)
     setRooms(rooms[0]);
     setLoading(false);
   };
@@ -67,22 +72,30 @@ export const ContentRoom = ({ hotel }: Props) => {
           <Spinner />{" "}
         </div>
       ) : (
-        <div className=" mt-5 grid grid-cols-2 gap-4">
-          { rooms?.rates.map((item) => (
-            <Card key={item.match_hash} className="bg-maincolor">
-              <CardHeader className="flex gap-3">
-                <div className="flex flex-col">
-                  <p className="text-md ">{item.room_name}</p>
-                  <p className="text-small  text-gray-500 dark:text-gray-300 ">{item.room_data_trans.main_room_type}</p>
-                </div>
-              </CardHeader>
-              <CardFooter className="flex justify-between">
-              <p className="text-lg font-bold  ">{item.payment_options.payment_types[0].amount } {item.payment_options.payment_types[0].currency_code }</p> <Link href={'/detailroom'}><Button onClick={()=>onRegisterReservation(item)}>Seleccionar</Button> </Link>  
-              </CardFooter>
-            </Card>
-          ))}
+        <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+          { rooms?.rates.map((item) => {
+             const number = percentage / 100;
+             const price = +item.payment_options.payment_types[0].amount;
+             const increasedPrice = price + price * number;
+
+            return <Card key={item.match_hash} className="bg-maincolor">
+            <CardHeader className="flex gap-3">
+              <div className="flex flex-col">
+                <p className="text-md ">{item.room_name}</p>
+                <p className="text-small  text-gray-500 dark:text-gray-300 ">{item.room_data_trans.main_room_type}</p>
+              </div>
+            </CardHeader>
+            <CardFooter className="flex justify-between">
+            <p className="text-lg font-bold  ">{currencyFormat(increasedPrice)  } {item.payment_options.payment_types[0].currency_code }</p> <Link href={'/detailroom'}><Button onClick={()=>onRegisterReservation(item)}>Seleccionar</Button> </Link>  
+            </CardFooter>
+          </Card>
+          } )}
         </div>
       )}
     </div>
   );
 };
+
+
+
+

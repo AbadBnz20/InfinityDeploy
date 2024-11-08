@@ -27,7 +27,7 @@ export const InformationRoom = () => {
         />
         <div>
           <h3 className="font-semibold text-xl">{name}</h3>
-          <h5 className="font-semibold  text-medium text-gray-300">{nameroom}</h5>
+          <h5 className="font-medium   text-gray-300">{nameroom}</h5>
           <p className="font-semibold text-small">{destination}</p>
         </div>
       </div>

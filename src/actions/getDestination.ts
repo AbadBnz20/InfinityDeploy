@@ -68,7 +68,36 @@ export const Getoffers = async (
   try {
     const collection = await ConnectMongo();
     const [offers, rooms] = await Promise.all([
-      collection.find({ "region.id": id }).toArray(),
+      collection.find({ "region.id": id })
+      .toArray(),
+      GetHotels(id, checkin, checkout, guest),
+    ]);
+    const checkrooms: DataDetailsRooms[] = [];
+    rooms.forEach((x) => {
+      const check = offers.find((y) => y.id === x.id);
+      if (check) {
+        checkrooms.push({ DataDetails: check, RoomsCheck: x });
+      }
+    });
+
+    return checkrooms.sort((a, b) => b.DataDetails.star_rating - a.DataDetails.star_rating);
+  } catch (error) {
+    console.log(error)
+    return [];
+  }
+};
+
+export const Getoffersbystart = async (
+  id: number,
+  checkin: string,
+  checkout: string,
+  guest: Array<any>,
+  start: number
+): Promise<any[]> => {
+  try {
+    const collection = await ConnectMongo();
+    const [offers, rooms] = await Promise.all([
+      collection.find({ "region.id": id,star_rating:start}).toArray(),
       GetHotels(id, checkin, checkout, guest),
     ]);
     const checkrooms: DataDetailsRooms[] = [];
@@ -85,6 +114,9 @@ export const Getoffers = async (
     return [];
   }
 };
+
+
+
 export const GetRooms = async (
   id: string,
   checkin: string,

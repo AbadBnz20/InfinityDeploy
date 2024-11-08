@@ -1,12 +1,13 @@
 import { Destination } from '@/interfaces/Destination';
 import { Button } from '@nextui-org/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { UseFormSetValue } from 'react-hook-form';
+import { IoCloseOutline } from 'react-icons/io5';
 interface Props {
-  
     setValue:UseFormSetValue<Destination>;
+    value: { adults: number; children: number[] }[]; 
   }
-export const SelectGuest = ({setValue}:Props) => {
+export const SelectGuest = ({setValue,value}:Props) => {
     const [isOpen, setIsOpen] = useState(false);
   const [rooms, setRooms] = useState<{ adults: number; children: number[] }[]>([
     { adults: 1, children: [] },
@@ -21,6 +22,12 @@ export const SelectGuest = ({setValue}:Props) => {
       setRooms(newRooms);
     }
   };
+  useEffect(() => {
+    if (value.length >0) {
+      setRooms(value);
+    }
+  }, [value])
+  
 
   const updateRoom = (index: number, field: 'adults' | 'children', value: number): void => {
     const newRooms = [...rooms];
@@ -50,12 +57,12 @@ export const SelectGuest = ({setValue}:Props) => {
   };
 
   return (
-    <div className="relative w-full max-w-sm">
+    <div className="relative w-full ">
       <Button
         variant="solid"
         role="combobox"
         aria-expanded={isOpen}
-        className="w-full justify-between bg-white  dark:bg-[#27272a]"
+        className="w-full justify-between bg-[#f4f4f5]  dark:bg-[#27272a]"
         onClick={() => setIsOpen(!isOpen)}
       >
         {getSummary()}
@@ -73,25 +80,27 @@ export const SelectGuest = ({setValue}:Props) => {
                   className="absolute top-0 right-0"
                   onClick={() => removeRoom(index)}
                 >
-                  X
+                  <IoCloseOutline color='black' />
                 </Button>
               )}
               <div className="flex items-center justify-between mb-2">
                 <span className='text-gray-900'>Adultos</span>
-                <div className="flex items-center">
+                <div className="flex items-center text-black">
                   <Button
                     size="sm"
                     isIconOnly
                     variant="bordered"
+                    className='text-black'
                     onClick={() => updateRoom(index, 'adults', Math.max(1, room.adults - 1))}
                   >
                     -
                   </Button>
-                  <span className="mx-2">{room.adults}</span>
+                  <span className="mx-2 text-black">{room.adults}</span>
                   <Button
                     size="sm"
                     isIconOnly
                     variant="bordered"
+                      className='text-black'
                     onClick={() => updateRoom(index, 'adults', room.adults + 1)}
                   >
                     +
@@ -105,15 +114,17 @@ export const SelectGuest = ({setValue}:Props) => {
                     size="sm"
                     isIconOnly
                     variant="bordered"
+                      className='text-black'
                     onClick={() => updateRoom(index, 'children', Math.max(0, room.children.length - 1))}
                   >
                     -
                   </Button>
-                  <span className="mx-2">{room.children.length}</span>
+                  <span className="mx-2 text-black">{room.children.length}</span>
                   <Button
                     size="sm"
                     isIconOnly
                     variant="bordered"
+                      className='text-black'
                     onClick={() => updateRoom(index, 'children', room.children.length + 1)}
                   >
                     +

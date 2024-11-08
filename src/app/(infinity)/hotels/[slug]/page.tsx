@@ -17,10 +17,6 @@ export async function generateMetadata(
 
   // fetch data
   const hotel = await getDetailBySlug(slug);
-
-  // optionally access and extend (rather than replace) parent metadata
-  // const previousImages = (await parent).openGraph?.images || []
-
   return {
     title: hotel?.name ?? "hotel no encontrado",
     description: hotel?.description_struct[0]?.paragraphs[0] ?? "",
@@ -40,7 +36,7 @@ export default async function DetailsPage({ params }: Props) {
     <div className="container mx-auto p-4">
       <div className="  items-center mb-4">
         <h1 className="text-4xl font-bold ">{hotel.name}</h1>
-        <p className="text-md font-bold text-gray-400">{hotel.address}</p>
+        <p className="text-md font-medium text-gray-400">{hotel.address}</p>
       </div>
       {hotel.images.length > 0 && <ContentImage images={hotel.images} />}
       {hotel.description_struct.length > 0 && (

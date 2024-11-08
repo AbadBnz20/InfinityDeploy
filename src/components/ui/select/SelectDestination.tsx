@@ -1,27 +1,30 @@
 "use client";
 import { useDestination } from "@/hooks/useDestination";
 import { Destination } from "@/interfaces/Destination";
+import { DestinationStore } from "@/store/DestinationStore";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
-import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import {  UseFormSetValue } from "react-hook-form";
 
 interface Props {
-  register: UseFormRegister<Destination>;
   setValue: UseFormSetValue<Destination>;
 }
 
-export const SelectDestination = ({ register, setValue }: Props) => {
-  const { items, isLoading, loadPokemon } = useDestination();
+export const SelectDestination = ({ setValue }: Props) => {
+  const { items, isLoading, loadDestination } = useDestination();
+  const { setname } = DestinationStore();
+
   const onSelectionChange = (key: React.Key | null) => {
     console.log(key);
-    console.log(register);
-
+   
     if (key) {
-      setValue("id", Number(key));
+      const cad =  key.toString().split('/');
+      setValue("id", Number(cad[0]));
+      setname(cad[1]);
     }
   };
 
   return (
-    <div className="w-full max-w-md relative">
+    <div className="w-full  relative">
       <Autocomplete
         labelPlacement={"outside"}
         className="w-full"
@@ -29,12 +32,14 @@ export const SelectDestination = ({ register, setValue }: Props) => {
         defaultItems={items}
         label="Destino"
         placeholder="Selecciona destino"
-        onInputChange={(e) => loadPokemon(e)}
+        onInputChange={(e) => {
+          setTimeout(() => loadDestination(e), 2000);
+        }}
         onSelectionChange={onSelectionChange}
         defaultFilter={() => true}
       >
         {(item) => (
-          <AutocompleteItem key={item.id}>
+          <AutocompleteItem key={`${item.id}/${item.name}, ${item.country_code}`}>
             {`${item.name}, ${item.country_code}`}
           </AutocompleteItem>
         )}

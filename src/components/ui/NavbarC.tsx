@@ -43,7 +43,7 @@ const translations = {
     explore: "Explorar",
     phone: "Teléfono",
     followUs: "Síguenos",
-    title:'Iniciar sesion'
+    title: "Iniciar sesion",
   },
   en: {
     destinations: "Destinations",
@@ -76,8 +76,7 @@ const translations = {
     explore: "Explore",
     phone: "Phone",
     followUs: "Follow Us",
-    title:'Login'
-
+    title: "Login",
   },
 };
 
@@ -90,42 +89,61 @@ export const NavbarC = () => {
 
   return (
     // <header className="fixed bg-gradient-to-r from-gray-900 to-black w-full z-20">
-    <Navbar shouldHideOnScroll  className="p-2 bg-maincolor bg-opacity-80 backdrop-blur-md">
+    <Navbar
+      shouldHideOnScroll
+      className="p-2 bg-maincolor bg-opacity-80 backdrop-blur-md"
+    >
       <NavbarBrand>
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-eigb5La26zWW8G8xrkuVbJPlSSBNEC.png"
-          alt="Infinity Luxury Travel Logo"
-          className="h-16"
-        />
+        <Link href="/">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-eigb5La26zWW8G8xrkuVbJPlSSBNEC.png"
+            alt="Infinity Luxury Travel Logo"
+            className="h-16"
+          />
+        </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#"  className="text-lg font-medium hover:text-gold-500 transition-colors ">
-          {t.destinations}
+          <Link
+            color="foreground"
+            href="#"
+            className="text-lg font-medium hover:text-gold-500 transition-colors "
+          >
+            {t.destinations}
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page"  className="text-lg font-medium hover:text-gold-500 transition-colors ">
-          {t.experiences}
+          <Link
+            href="#"
+            aria-current="page"
+            className="text-lg font-medium hover:text-gold-500 transition-colors "
+          >
+            {t.experiences}
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#"  className="text-lg font-medium hover:text-gold-500 transition-colors ">
-          {t.aboutUs}
+          <Link
+            color="foreground"
+            href="#"
+            className="text-lg font-medium hover:text-gold-500 transition-colors "
+          >
+            {t.aboutUs}
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#"  className="text-lg font-medium hover:text-gold-500 transition-colors ">
-          {t.aboutUs}
+          <Link
+            color="foreground"
+            href="#"
+            className="text-lg font-medium hover:text-gold-500 transition-colors "
+          >
+            {t.aboutUs}
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        <NavbarItem>{/* <SelectLanguage/> */}</NavbarItem>
         <NavbarItem>
-        {/* <SelectLanguage/> */}
-        </NavbarItem>
-        <NavbarItem>
-        <UserContent/>
+          <UserContent />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
@@ -134,8 +152,8 @@ export const NavbarC = () => {
   );
 };
 
-
-{/* <div className="container mx-auto px-4">
+{
+  /* <div className="container mx-auto px-4">
 <div className="flex items-center justify-between py-4">
   <div className="flex items-center">
     <img
@@ -175,4 +193,5 @@ export const NavbarC = () => {
     <SelectLanguage/>
   </div>
 </div>
-</div> */}
+</div> */
+}
