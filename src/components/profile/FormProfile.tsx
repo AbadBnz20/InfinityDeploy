@@ -1,6 +1,5 @@
 'use client';
 import {  Input } from "@nextui-org/react"
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ContentPackage } from "./ContentPackage";
 
