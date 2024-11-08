@@ -24,16 +24,17 @@ interface Props  {
 };
 
 export const FormProfile = ({firstname,lastname,country,birthdate,phone,email}:Props) => {
-  const {register,setValue}=useForm<FormData>()
-  useEffect(() => {
-    setValue("firstName",firstname);
-      setValue("LastName",lastname);
-      setValue("Country",country);
-      setValue("Email",email);
-      setValue("Phone",phone);
-      setValue("Age",birthdate);
-  }, [])
-  
+  const {register}=useForm<FormData>({
+    defaultValues: {
+      firstName: firstname,
+      LastName: lastname,
+      Country: country,
+      Email: email,
+      Phone: phone,
+      Age: birthdate,
+    },
+  })
+
 
   return (
     <div className="p-6">
