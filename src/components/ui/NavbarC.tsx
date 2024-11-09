@@ -12,6 +12,7 @@ import { UserContent } from "./user/UserContent";
 
 const translations = {
   es: {
+    home:"Inicio",
     destinations: "Destinos",
     experiences: "Experiencias",
     aboutUs: "Sobre Nosotros",
@@ -46,6 +47,7 @@ const translations = {
     title: "Iniciar sesion",
   },
   en: {
+    home:"Home",
     destinations: "Destinations",
     experiences: "Experiences",
     aboutUs: "About Us",
@@ -106,13 +108,13 @@ export const NavbarC = () => {
         <NavbarItem>
           <Link
             color="foreground"
-            href="#"
+            href="/"
             className="text-lg font-medium hover:text-gold-500 transition-colors "
           >
-            {t.destinations}
+            {t.home}
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
+        {/* <NavbarItem isActive>
           <Link
             href="#"
             aria-current="page"
@@ -120,20 +122,11 @@ export const NavbarC = () => {
           >
             {t.experiences}
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem>
           <Link
             color="foreground"
-            href="#"
-            className="text-lg font-medium hover:text-gold-500 transition-colors "
-          >
-            {t.aboutUs}
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            color="foreground"
-            href="#"
+            href="/about"
             className="text-lg font-medium hover:text-gold-500 transition-colors "
           >
             {t.aboutUs}

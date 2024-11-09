@@ -5,23 +5,23 @@ import { OrderBokingResponse } from "@/interfaces/order-boking-response";
 import { ReservationResonse } from "@/interfaces/reservation-resonse";
 
 export interface ReservationStrapi {
-  Fecha_Inicio: string;
-  Fecha_Final: string;
-  Numero_Habitaciones: number;
-  Numero_Ninos: number;
-  Numero_Adultos: number;
-  Destino: string;
-  Precio: number;
-  Sub_Total: number;
-  Descuento: number;
-  Total: number;
-  nombre_habitacion: string;
-  hotel: string;
+  start_date: string;
+  end_date: string;
+  rooms_number: number;
+  number_children: number;
+  number_adults: number;
+  destination: string;
+  price: number;
+  sub_total: number;
+  discount: number;
+  total: number;
+  room_name: string;
+  hotel_name: string;
 }
 
 export const RegisterReservation = async (reservation: ReservationStrapi) => {
   try {
-    const resp = await Strapi.post<ReservationResonse>("/reservas", {
+    const resp = await Strapi.post<ReservationResonse>("/bookings", {
       data: reservation,
     });
     return resp.data;

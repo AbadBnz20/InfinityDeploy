@@ -4,9 +4,12 @@ import React, { useEffect, useState } from 'react'
 export const ContentImagesLogin = () => {
     const [currentImage, setCurrentImage] = useState(0)
     const images = [
-      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/30518861.jpg?k=ea4dc061719609f2348e7ee7df8cebc5c9a50c4e736c070f7dd882ac04cdea4d&o=&hp=1",
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/3b/d9/48/un-hostal-muy-sencillo.jpg?w=700&h=-1&s=1",
-      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/bb/56/34/hotel-del-sol.jpg?w=700&h=-1&s=1"
+      "/login/01.jpg",
+      "/login/02.jfif",
+      "/login/03.jpg",
+      "/login/04.jpg",
+      "/login/05.jpg",
+      "/login/06.jpg"
     ]
   
     useEffect(() => {

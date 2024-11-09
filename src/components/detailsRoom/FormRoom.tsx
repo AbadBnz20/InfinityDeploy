@@ -102,18 +102,18 @@ export const FormRoom = ({firstname,lastname,country,birthdate,phone,email}:Prop
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const obj: ReservationStrapi = {
-      Descuento: 0,
-      Destino: destination,
-      Fecha_Final: await formatDateToISO(checkin),
-      Fecha_Inicio: await formatDateToISO(checkout),
-      hotel: name,
-      nombre_habitacion: nameroom,
-      Numero_Adultos: guest.reduce((sum, item) => sum + item.adults, 0),
-      Numero_Habitaciones: guest.length,
-      Numero_Ninos: guest.reduce((sum, item) => sum + item.children.length, 0),
-      Precio: subtotal,
-      Sub_Total: subtotal,
-      Total: total,
+      discount: 0,
+      destination: destination,
+      end_date: await formatDateToISO(checkin),
+      start_date: await formatDateToISO(checkout),
+      hotel_name: name,
+      room_name: nameroom,
+      number_adults: guest.reduce((sum, item) => sum + item.adults, 0),
+      rooms_number: guest.length,
+      number_children: guest.reduce((sum, item) => sum + item.children.length, 0),
+      price: subtotal,
+      sub_total: subtotal,
+      total: total,
     };
     const reservation = await RegisterReservation(obj);
     if (reservation) {
