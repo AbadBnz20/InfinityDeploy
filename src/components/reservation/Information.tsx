@@ -1,14 +1,20 @@
 "use client";
+import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
 import {
   RegisterTokenizerCard,
   TokenizerCard,
 } from "@/actions/reservation/payment";
+import { OrderBooking } from "@/interfaces/OrderBookingInterface";
 import { PaymentStore } from "@/store/PaymentStore";
+import { ReservationStore } from "@/store/ReservationStore";
 import { Button, Input } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IoBagCheckOutline, IoCardOutline } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
+import { toast, ToastContainer } from "react-toastify";
+import { CreateOrderBooking } from "@/actions/reservation/orderbooking";
+import { useRouter } from "next/navigation";
 interface Card {
   number: string;
   firtsname: string;
@@ -25,7 +31,17 @@ export const Information = () => {
     control,
   } = useForm<Card>();
   const [loading, setLoading] = useState(false);
-  const { item_id } = PaymentStore();
+  const { item_id, supplier_data, partner, rooms } = PaymentStore();
+  const { price } = ReservationStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    const getinfo = async () => {
+      const resp = await GetPackageByIDResponse();
+    };
+    getinfo();
+  }, []);
+
   const OnSubmitget: SubmitHandler<Card> = async (data) => {
     setLoading(true);
     const myUuid = uuidv4();
@@ -47,12 +63,60 @@ export const Information = () => {
       user_first_name: data.firtsname,
     };
 
-
-
     const resp = await RegisterTokenizerCard(card);
-    console.log(resp);
-    setLoading(false);
+    if (!resp) {
+      toast.error("Ha ocurrido un error al procesar los datos de la tarjeta", {
+        position: "top-right",
+      });
+      setLoading(false);
 
+      return;
+    }
+    const orderbooking: OrderBooking = {
+      user: {
+        email: "infinity@gmail.com",
+        comment: "comment",
+        phone: "+525585266251",
+      },
+      supplier_data: {
+        first_name_original: supplier_data.first_name_original,
+        last_name_original: supplier_data.last_name_original,
+        phone: supplier_data.phone,
+        email: supplier_data.email,
+      },
+      partner: {
+        partner_order_id: partner.partner_order_id,
+      },
+      language: "es",
+      rooms: rooms,
+      payment_type: {
+        type: "now",
+        amount: price,
+        currency_code: "USD",
+        init_uuid: myUuid2,
+        pay_uuid: myUuid,
+      },
+      return_path: "http://localhost:3000/success",
+    };
+
+    const booking = await CreateOrderBooking(orderbooking);
+    console.log(booking)
+
+    if (!booking) {
+      toast.error("Ha ocurrido un error a registrar la reserva ", {
+        position: "top-right",
+      });
+      setLoading(false);
+      return;
+    }
+
+    toast.success("Se ha registrado correctamente.", {
+      position: "top-right",
+    });    
+     setTimeout(() => {
+      router.push("/");
+     }, 2000);
+    setLoading(false);
   };
 
   const formatExpirationDate = (value: any) => {
@@ -64,6 +128,8 @@ export const Information = () => {
   };
 
   return (
+   <>
+     
     <div className="md:col-span-2 space-y-6">
       <div>
         <div>
@@ -130,10 +196,7 @@ export const Information = () => {
                       message: "Formato inválido, usa MM/YY",
                     },
                   }}
-                  render={({
-                    field: { onChange, value },
-                  
-                  }) => (
+                  render={({ field: { onChange, value } }) => (
                     <Input
                       id="expirationDate"
                       size="sm"
@@ -174,7 +237,7 @@ export const Information = () => {
               Su transacción está segura con encriptación SSL
             </div>
             <Button
-            isLoading={loading}
+              isLoading={loading}
               className="bg-black text-white dark:bg-white dark:text-black mt-2  w-[200px]"
               type="submit"
             >
@@ -184,5 +247,6 @@ export const Information = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };

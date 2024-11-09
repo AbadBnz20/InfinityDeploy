@@ -41,7 +41,6 @@ export const RegisterTokenizerCard = async (card: TokenizerCard) => {
     if (resp.data.status === 'ok') {
        return true;
     } else {
-
       return false;
     }
 

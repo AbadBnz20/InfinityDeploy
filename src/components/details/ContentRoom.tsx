@@ -59,8 +59,8 @@ export const ContentRoom = ({ hotel }: Props) => {
     setLoading(false);
   };
 
- const onRegisterReservation = (room:Rate,price:number,subtotal:number)=>{
-  setReservationData(hotel.images[0],hotel.name,room.room_name,subtotal,hotel.region.name,price,room.book_hash);
+ const onRegisterReservation = (room:Rate,price:number,subtotal:number,priceroom:string)=>{
+  setReservationData(hotel.images[0],hotel.name,room.room_name,subtotal,hotel.region.name,price,room.book_hash,priceroom);
  }
 
 
@@ -90,7 +90,7 @@ export const ContentRoom = ({ hotel }: Props) => {
               </div>
             </CardHeader>
             <CardFooter className="flex justify-between">
-            <p className="text-lg font-bold  ">{currencyFormat(increasedPrice)  } {item.payment_options.payment_types[0].currency_code }</p> <Link href={'/detailroom'}><Button onClick={()=>onRegisterReservation(item,increasedPrice,subtotal)}>Seleccionar</Button> </Link>  
+            <p className="text-lg font-bold  ">{currencyFormat(increasedPrice)  } {item.payment_options.payment_types[0].currency_code }</p> <Link href={'/detailroom'}><Button onClick={()=>onRegisterReservation(item,increasedPrice,subtotal,item.payment_options.payment_types[0].amount)}>Seleccionar</Button> </Link>  
             </CardFooter>
           </Card>
           } )}

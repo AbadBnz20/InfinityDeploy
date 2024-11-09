@@ -9,6 +9,7 @@ interface State {
   destination: string;
   total: number;
   book_hash: string;
+  price:string;
   setReservationData: (
     image: string,
     name: string,
@@ -16,7 +17,8 @@ interface State {
     subtotal: number,
     destination: string,
     total: number,
-    book_hash: string
+    book_hash: string,
+    price: string
   ) => void;
 }
 
@@ -29,6 +31,7 @@ export const ReservationStore = create<State>()(
       subtotal: 0,
       destination:"",
       total: 0,
+      price: "",
       book_hash: "",
       setReservationData: (
         image: string,
@@ -37,9 +40,10 @@ export const ReservationStore = create<State>()(
         subtotal: number,
         destination: string,
         total: number,
-        book_hash: string
+        book_hash: string,
+        price: string
       ) => {
-        set({ image, name, nameroom, subtotal,destination, total, book_hash });
+        set({ image, name, nameroom, subtotal,destination, total, book_hash,price });
       },
     }),
     {

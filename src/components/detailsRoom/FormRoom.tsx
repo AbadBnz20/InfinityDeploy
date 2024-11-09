@@ -54,7 +54,6 @@ export const FormRoom = ({firstname,lastname,country,birthdate,phone,email}:Prop
     ReservationStore();
   const [loading, setLoading] = useState(false);
   const { data } = useSession();
-  console.log(data);
   const {
     register,
     handleSubmit,
