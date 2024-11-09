@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { IoBagCheckOutline, IoCardOutline } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { CreateOrderBooking } from "@/actions/reservation/orderbooking";
 import { useRouter } from "next/navigation";
 interface Card {
@@ -37,7 +37,7 @@ export const Information = () => {
 
   useEffect(() => {
     const getinfo = async () => {
-      const resp = await GetPackageByIDResponse();
+      await GetPackageByIDResponse();
     };
     getinfo();
   }, []);
