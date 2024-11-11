@@ -9,11 +9,9 @@ import {
   DropdownTrigger,
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 
 const translations = {
   es: {
@@ -59,17 +57,10 @@ export const UserContent = () => {
 const UserActive = () => {
   const [language] = useState("es");
   const t = translations[language as keyof typeof translations];
-  const { theme, setTheme } = useTheme();
   const { data } = useSession();
 
   const router = useRouter();
-  const Onchange = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
+
 
   const Onredirect = () => {
     router.push("/profile");
@@ -98,21 +89,6 @@ const UserActive = () => {
         </DropdownItem>
         {/* <DropdownItem key="team_settings">{t.option2}</DropdownItem> */}
         <DropdownItem key="configurations">{t.option3}</DropdownItem>
-        <DropdownItem
-          onClick={() => Onchange()}
-          description="Tema actual"
-          key="theme"
-          endContent={
-            theme === "light" ? (
-              <IoMoonOutline size={"24px"} />
-            ) : (
-              <IoSunnyOutline size={"24px"} />
-            )
-          }
-        >
-          {" "}
-          {theme === "light" ? "Light" : "Dark"}{" "}
-        </DropdownItem>
         <DropdownItem onClick={() => logout()} key="logout" color="danger">
           {t.subtitle}
         </DropdownItem>

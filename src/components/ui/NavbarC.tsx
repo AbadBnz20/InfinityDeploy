@@ -9,10 +9,12 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import { UserContent } from "./user/UserContent";
+import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
+import { useTheme } from "next-themes";
 
 const translations = {
   es: {
-    home:"Inicio",
+    home: "Inicio",
     destinations: "Destinos",
     experiences: "Experiencias",
     aboutUs: "Sobre Nosotros",
@@ -47,7 +49,7 @@ const translations = {
     title: "Iniciar sesion",
   },
   en: {
-    home:"Home",
+    home: "Home",
     destinations: "Destinations",
     experiences: "Experiences",
     aboutUs: "About Us",
@@ -84,6 +86,14 @@ const translations = {
 
 export const NavbarC = () => {
   const [language] = useState("es");
+  const { theme, setTheme } = useTheme();
+  const Onchange = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
 
   //   const language = "es";
 
@@ -134,7 +144,13 @@ export const NavbarC = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>{/* <SelectLanguage/> */}</NavbarItem>
+        <NavbarItem className="cursor-pointer" onClick={()=>Onchange()}>
+          {theme === "light" ? (
+            <IoMoonOutline size={"24px"} />
+          ) : (
+            <IoSunnyOutline size={"24px"} />
+          )}
+        </NavbarItem>
         <NavbarItem>
           <UserContent />
         </NavbarItem>

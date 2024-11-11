@@ -35,6 +35,7 @@ export const authConfig: NextAuthConfig = {
         }
         const { email, password } = parsedCredentials.data;
         const user = await ValidateUser(email, password);
+        console.log(user);
         if (!user) return null;
         return {
           firstname: user.user.firstname,
@@ -42,7 +43,7 @@ export const authConfig: NextAuthConfig = {
           email: user.user.email,
           birthdate: user.user.birthdate,
           image:user.user.photo.formats.small.url,
-          country:user.user?.pais?.nombre,
+          country:user.user?.country?.name,
           phone:`${user.user.phone.code}${user.user.number}`,
           token: user.token,
         };

@@ -16,7 +16,7 @@ export interface User {
     birthdate: Date;
     id:        number;
     photo:     Photo;
-    pais:      Pais;
+    country:      Country;
     package:   Package;
     phone:     Phone;
 }
@@ -35,8 +35,8 @@ export interface Package {
     locale:      null;
 }
 
-export interface Pais {
-    nombre: string;
+export interface Country {
+    name: string;
 }
 
 export interface Phone {
