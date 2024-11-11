@@ -35,14 +35,14 @@ export const authConfig: NextAuthConfig = {
         }
         const { email, password } = parsedCredentials.data;
         const user = await ValidateUser(email, password);
-        console.log(user);
+        // console.log(user?.user.photo);
         if (!user) return null;
         return {
           firstname: user.user.firstname,
           lastname: user.user.lastname,
           email: user.user.email,
           birthdate: user.user.birthdate,
-          image:user.user.photo.formats.small.url,
+          image:user.user.photo.formats.thumbnail.url,
           country:user.user?.country?.name,
           phone:`${user.user.phone.code}${user.user.number}`,
           token: user.token,
