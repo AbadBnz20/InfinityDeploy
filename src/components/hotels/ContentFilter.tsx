@@ -15,6 +15,7 @@ import { DestinationStore } from "@/store/DestinationStore";
 import { formatDateToISO } from "@/actions/getDestination";
 import { IoCreateOutline } from "react-icons/io5";
 import { SelectDestination } from "../ui/select/SelectDestination";
+import { ContentDays } from "../ui/select/ContentDays";
 
 export const ContentFilter = () => {
   const { setValue, handleSubmit, watch } = useForm<Destination>();
@@ -99,6 +100,12 @@ export const ContentFilter = () => {
             Seleccionar
           </label>
           <SelectGuest setValue={setValue} value={guest} />
+        </div>
+        <div className="space-y-2 mt-4">
+        <label htmlFor="rooms" className="block text-sm font-medium ">
+            Noches
+          </label>
+            <ContentDays/>
         </div>
         <Button type="submit" isDisabled={validate} className="w-full mt-5">
           Buscar

@@ -9,8 +9,8 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import { UserContent } from "./user/UserContent";
-import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 import { useTheme } from "next-themes";
+import { ContentTheme } from "./user/ContentTheme";
 
 const translations = {
   es: {
@@ -145,11 +145,7 @@ export const NavbarC = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="cursor-pointer" onClick={()=>Onchange()}>
-          {theme === "light" ? (
-            <IoMoonOutline size={"24px"} />
-          ) : (
-            <IoSunnyOutline size={"24px"} />
-          )}
+          <ContentTheme/>
         </NavbarItem>
         <NavbarItem>
           <UserContent />

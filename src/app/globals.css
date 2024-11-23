@@ -8,11 +8,12 @@
 
 :root {
   --backgroundmain: #e9ecef;
-  
+  --colorlabel:dark;
 }
 
 .dark {
   --backgroundmain: #111827;
+  --colorlabel:white;
 
 }
 

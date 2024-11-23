@@ -2,8 +2,9 @@
 
 import { authenticate } from "@/actions/auth/login";
 import { Button, Input } from "@nextui-org/react";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   IoAlertCircleOutline,
   IoEyeOffOutline,
@@ -15,16 +16,26 @@ export const LoginForm = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const onChange = (e: string | null) => setCaptchaToken(e);
 
   useEffect(() => {
     if (state === "Success") {
-      window.location.replace('/');
+      window.location.replace("/");
     }
   }, [state]);
 
   return (
     <div className="w-full max-w-md m-auto p-6">
-      <form action={dispath}>
+      <form
+        action={(e) => {
+          if (!captchaToken) {
+            alert("Por favor, completa el reCAPTCHA.");
+            return;
+          }
+          dispath(e); // Enviar el token junto con otros datos
+        }}
+      >
         <div className="space-y-6">
           <div className="space-y-2 text-center flex justify-center items-center flex-col">
             <img
@@ -36,7 +47,9 @@ export const LoginForm = () => {
           {state === "Invalid credentials." && (
             <div className="flex flex-row mb-2 p-2 bg-[#FDEDED] rounded-lg">
               <IoAlertCircleOutline className="h-5 w-5 text-red-500" />
-              <p className=" ml-2 text-sm text-red-500">Verifique las credenciales</p>
+              <p className=" ml-2 text-sm text-red-500">
+                Verifique las credenciales
+              </p>
             </div>
           )}
 
@@ -84,6 +97,13 @@ export const LoginForm = () => {
                 type={isVisible ? "text" : "password"}
               />
             </div>
+            <div className="space-y-2 flex justify-center">
+              <ReCAPTCHA
+                sitekey="6LfU04MqAAAAAGnXmTVCtPTWrDDt2UPn-UYwnIf3"
+                onChange={onChange}
+              />
+            </div>
+
             <LoginButton />
           </div>
         </div>

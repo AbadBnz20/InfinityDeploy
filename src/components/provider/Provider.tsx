@@ -9,7 +9,7 @@ interface Props {
 
 export const Provider = ({ children }: Props) => {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="dark">
+    <NextThemesProvider attribute="class" defaultTheme="light">
       <SessionProvider>{children}</SessionProvider>
     </NextThemesProvider>
   );

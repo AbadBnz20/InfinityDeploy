@@ -27,15 +27,27 @@ export const authConfig: NextAuthConfig = {
   providers: [
     Credentials({
       async authorize(credentials) {
+
+        console.log(credentials);
         const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
-          .safeParse(credentials);
+        .object({
+          email: z.string().email(),
+          password: z.string().min(6),
+          'g-recaptcha-response': z.string(),
+        })
+        .safeParse(credentials);
+
+           
         if (!parsedCredentials.success) {
           return null;
         }
-        const { email, password } = parsedCredentials.data;
+        const { email, password, 'g-recaptcha-response': captchaToken } = parsedCredentials.data;
+        
+        if (!captchaToken) {
+          return null;
+          
+        }
         const user = await ValidateUser(email, password);
-        // console.log(user?.user.photo);
         if (!user) return null;
         return {
           firstname: user.user.firstname,
