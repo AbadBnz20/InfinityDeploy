@@ -1,6 +1,6 @@
-import {  Getoffers, Getoffersbystart } from "@/actions/getDestination";
+import { Getoffers } from "@/actions/getDestination";
 import { Destination } from "@/interfaces/Destination";
-import {  DataDetailsRooms } from "@/interfaces/details-response";
+import { DataDetailsRooms } from "@/interfaces/details-response";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -15,9 +15,11 @@ interface State extends Destination {
     guest: any[]
   ) => void;
   hotels: DataDetailsRooms[];
+  hotelsaux: DataDetailsRooms[];
   filterHotelsByStars: (stars: number) => void;
-  setname: (name: string) => void;
+  filterHotels: (filter: Array<string>) => void;
 
+  setname: (name: string) => void;
 }
 
 export const DestinationStore = create<State>()(
@@ -29,6 +31,7 @@ export const DestinationStore = create<State>()(
       name: "",
       guest: [],
       hotels: [],
+      hotelsaux: [],
       loading: false,
       setDestinationData: (
         id: number,
@@ -46,32 +49,44 @@ export const DestinationStore = create<State>()(
           checkout,
           guest
         )) as DataDetailsRooms[];
-        set({ hotels: resp });
+        set({ hotels: resp, hotelsaux: resp });
       },
       filterHotelsByStars: async (stars: number) => {
-        set({ loading:true});
-        const { id, checkin, checkout, guest } = get();
-        const resp = (await Getoffersbystart(
-          id,
-          checkin,
-          checkout,
-          guest,
-          stars
-        )) as DataDetailsRooms[];
-        const filteredHotels = resp.filter(hotel => hotel.DataDetails.star_rating === stars);
-        set({ hotels: filteredHotels,loading:false });
+        set({ loading: true });
+        const { hotelsaux } = get();
+        const filteredHotels = hotelsaux.filter(
+          (hotel) => hotel.DataDetails.star_rating === stars
+        );
+        set({ hotels: filteredHotels, loading: false });
+      },
+      filterHotels: (filters: Array<string>) => {
+        const { hotelsaux } = get();
+        if (filters.length > 0) {
+          const filteredHotels = hotelsaux.filter((hotel) =>
+            hotel.DataDetails.serp_filters.some((filter) =>
+              filters.includes(filter)
+            )
+          );
+          set({ hotels: filteredHotels });
+        } else {
+          set({ hotels: hotelsaux });
+        }
+
+      
       },
       setname: (name: string) => {
-        set({ name:name});
-      }
-
+        set({ name: name });
+      },
     }),
-    { name: "search-filter",partialize: (state) => ({
-      id: state.id,
-      checkin: state.checkin,
-      checkout: state.checkout,
-      guest: state.guest,
-      name:state.name
-    }), }
+    {
+      name: "search-filter",
+      partialize: (state) => ({
+        id: state.id,
+        checkin: state.checkin,
+        checkout: state.checkout,
+        guest: state.guest,
+        name: state.name,
+      }),
+    }
   )
 );

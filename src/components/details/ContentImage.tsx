@@ -27,6 +27,7 @@ export const ContentImage = ({ images }: Props) => {
 
   const openGallery = (index: number) => {
     setCurrentIndex(index)
+    console.log(mainImage);
     setIsOpen(true)
   }
 
@@ -47,11 +48,34 @@ export const ContentImage = ({ images }: Props) => {
     <div className="space-y-4">
       <div className="grid grid-col-1  md:grid-cols-3 gap-4">
         <div className="col-span-2">
-          <img
+          {/* <img
             src={mainImage}
             alt="Main hotel view"
             className="w-full  h-[300px] md:h-[520px] object-cover rounded-lg"
-          />
+          /> */}
+          <div className="relative w-full h-[300px] md:h-[520px]">
+            <img
+               src={SizeImage(images[currentIndex] , "1024x768")}
+              alt={`Large Image ${currentIndex + 1}`}
+              className="w-full h-full object-cover"
+            />
+            <Button
+              variant="light"
+              isIconOnly
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white"
+              onClick={goToPrevious}
+            >
+            <IoChevronBackOutline/>
+            </Button>
+            <Button
+              variant="light"
+             isIconOnly
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white"
+              onClick={goToNext}
+            >
+               <IoChevronForwardOutline/>
+            </Button>
+          </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-1  gap-4">
           <img

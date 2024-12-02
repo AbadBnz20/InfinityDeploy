@@ -1,9 +1,10 @@
 "use client";
 import { GetRooms } from "@/actions/getDestination";
 import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
+import { createAuthCookie } from "@/actions/terms/termscookies";
 import { currencyFormat } from "@/helpers/CurrenFormat";
 import { DataDetails } from "@/interfaces/details-response";
-import { Hotel, Rate } from "@/interfaces/rooms-response";
+import {  Rate, RoomDataTrans } from "@/interfaces/rooms-response";
 
 import { DestinationStore } from "@/store/DestinationStore";
 import { ReservationStore } from "@/store/ReservationStore";
@@ -33,12 +34,17 @@ interface Props {
   hotel: DataDetails;
 }
 
+interface RoomGroup {
+  room_name: string;
+  room_data_trans: RoomDataTrans;
+  rates: Rate[];
+}
 export const ContentRoom = ({ hotel }: Props) => {
   const language = "es";
   const t = translations[language as keyof typeof translations];
   const { checkin, checkout, guest } = DestinationStore();
   const { setReservationData } = ReservationStore();
-  const [rooms, setRooms] = useState<Hotel>();
+  const [rooms, setRooms] = useState<RoomGroup[]>([]);
   const [percentage, setPercentage] = useState(0);
 
   const [loading, setLoading] = useState(false);
@@ -60,12 +66,34 @@ export const ContentRoom = ({ hotel }: Props) => {
     );
     const resp = await GetPackageByIDResponse();
     setPercentage(resp?.data.packageUser.package.percentage || 0);
-    setRooms(rooms[0]);
+
+    const groupedRooms: RoomGroup[] = Object.values(
+      rooms[0].rates.reduce((acc: Record<string, RoomGroup>, item: Rate) => {
+        const roomName = item.room_name;
+
+        if (!acc[roomName]) {
+          acc[roomName] = {
+            room_name: roomName,
+            room_data_trans: item.room_data_trans,
+            rates: [],
+          };
+        }
+
+        acc[roomName].rates.push(item);
+
+        return acc;
+      }, {})
+    );
+
+    console.log(groupedRooms);
+
+    setRooms(groupedRooms);
     setLoading(false);
   };
 
-  const onRegisterReservation = (
-    room: Rate,
+  const onRegisterReservation = async (
+    name: string,
+    book_hash: string,
     price: number,
     subtotal: number,
     priceroom: string
@@ -73,13 +101,15 @@ export const ContentRoom = ({ hotel }: Props) => {
     setReservationData(
       hotel.images[0],
       hotel.name,
-      room.room_name,
+      name,
       subtotal,
       hotel.region.name,
       price,
-      room.book_hash,
+      book_hash,
       priceroom
     );
+
+    await createAuthCookie(hotel.metapolicy_extra_info);
   };
 
   return (
@@ -91,44 +121,70 @@ export const ContentRoom = ({ hotel }: Props) => {
         </div>
       ) : (
         <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {rooms?.rates.map((item) => {
-            const number = percentage / 100;
-            const price = +item.payment_options.payment_types[0].amount;
-            const increasedPrice = price + price * number;
-
-            const pricexday = +item.daily_prices[0];
-            const subtotal = pricexday + pricexday * number;
-
+          {rooms.map((item) => {
             return (
-              <Card key={item.match_hash} className="bg-maincolor">
+              <Card
+                key={item.room_data_trans.main_name}
+                className="bg-maincolor"
+              >
                 <CardHeader className="flex gap-3">
                   <div className="flex flex-col">
-                    <p className="text-md ">{item.room_name}</p>
+                    <p className="text-md ">{item.room_data_trans.main_name}</p>
                     <p className="text-small  text-gray-500 dark:text-gray-300 ">
                       {item.room_data_trans.main_room_type}
                     </p>
                   </div>
                 </CardHeader>
-                <CardFooter className="flex justify-between">
-                  <p className="text-lg font-bold  ">
-                    {currencyFormat(increasedPrice)}{" "}
-                    {item.payment_options.payment_types[0].currency_code}
-                  </p>{" "}
-                  <Link href={"/detailroom"}>
-                    <Button
-                      onClick={() =>
-                        onRegisterReservation(
-                          item,
-                          increasedPrice,
-                          subtotal,
-                          item.payment_options.payment_types[0].amount
-                        )
-                      }
-                    >
-                      Seleccionar
-                    </Button>{" "}
-                  </Link>
-                </CardFooter>
+                {item.rates.map((r) => {
+                  const number = percentage / 100;
+                  const price = +r.payment_options.payment_types[0].amount;
+                  const increasedPrice = price + price * number;
+
+                  const pricexday = +r.daily_prices[0];
+                  const subtotal = pricexday + pricexday * number;
+                  const amenitiesMap: Record<string, string> = {
+                    has_bathroom: "Baño incluido",
+                    has_breakfast: "Desayuno incluido",
+                    has_internet: "Internet incluido",
+                  };
+
+                  return (
+                    <>
+                      <CardFooter key={r.book_hash} className="flex justify-between items-end">
+                        <div>
+                          {r.serp_filters.map((amenity, index) => (
+                            <li key={index}>
+                              <em className="text-gray-500 dark:text-gray-300 text-small">
+                                {amenitiesMap[amenity] ||
+                                  "Servicio no especificado"}
+                              </em>
+                            </li>
+                          ))}
+                          <p className="text-lg font-bold  mt-4 ">
+                            {currencyFormat(+increasedPrice)}{" "}
+                            {r.payment_options.payment_types[0].currency_code}
+                          </p>
+                        </div>
+
+                        <Link href={"/detailroom"}>
+                          <Button
+                            onClick={() =>
+                              onRegisterReservation(
+                                item.room_name,
+                                r.book_hash,
+                                increasedPrice,
+                                subtotal,
+                                r.payment_options.payment_types[0].amount
+                              )
+                            }
+                          >
+                            Seleccionar
+                          </Button>
+                        </Link>
+                      </CardFooter>
+                    </>
+                  );
+                })}
               </Card>
             );
           })}
@@ -137,3 +193,45 @@ export const ContentRoom = ({ hotel }: Props) => {
     </div>
   );
 };
+
+// {rooms?.rates.map((item) => {
+//   const number = percentage / 100;
+//   const price = +item.payment_options.payment_types[0].amount;
+//   const increasedPrice = price + price * number;
+
+//   const pricexday = +item.daily_prices[0];
+//   const subtotal = pricexday + pricexday * number;
+
+//   return (
+//     <Card key={item.match_hash} className="bg-maincolor">
+//       <CardHeader className="flex gap-3">
+//         <div className="flex flex-col">
+//           <p className="text-md ">{item.room_name}</p>
+//           <p className="text-small  text-gray-500 dark:text-gray-300 ">
+//             {item.room_data_trans.main_room_type}
+//           </p>
+//         </div>
+//       </CardHeader>
+//       <CardFooter className="flex justify-between">
+//         <p className="text-lg font-bold  ">
+//           {currencyFormat(increasedPrice)}{" "}
+//           {item.payment_options.payment_types[0].currency_code}
+//         </p>{" "}
+//         <Link href={"/detailroom"}>
+//           <Button
+//             onClick={() =>
+//               onRegisterReservation(
+//                 item,
+//                 increasedPrice,
+//                 subtotal,
+//                 item.payment_options.payment_types[0].amount
+//               )
+//             }
+//           >
+//             Seleccionar
+//           </Button>
+//         </Link>
+//       </CardFooter>
+//     </Card>
+//   );
+// })}

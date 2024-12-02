@@ -374,7 +374,7 @@ export const FormRoom = ({
               <InformationRoom />
               <div className=" w-full">
                 <Button
-                  className="w-full bg-black text-white dark:bg-white dark:text-black mt-4"
+                  className="w-full bg-black text-white dark:bg-white dark:text-black mt-1"
                   type="submit"
                   isLoading={loading}
                 >

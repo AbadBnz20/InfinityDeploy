@@ -22,7 +22,7 @@ export const ContentTaps = ({ hotel, slug }: Props) => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-4  sticky top-0 z-40  bg-white dark:bg-black">
         <Tabs
           variant="underlined"
           onSelectionChange={(key) => {
@@ -35,6 +35,8 @@ export const ContentTaps = ({ hotel, slug }: Props) => {
           <Tab key="photos" title="Alojamiento" className="p-3 md:p-10 " />
           <Tab key="music" title="Servicio" className="p-3 md:p-10" />
           <Tab key="videos" title="Habitaciones" className="p-3 md:p-10" />
+          <Tab key="location" title="Ubicacion" className="p-3 md:p-10" />
+
         </Tabs>
       </div>
       <section ref={section1Ref}>

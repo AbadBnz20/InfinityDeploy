@@ -2,6 +2,7 @@ import React from "react";
 import ContentHotels from "./ContentHotels";
 import { ContentFilter } from "./ContentFilter";
 import { StartFilter } from "./StartFilter";
+import { SerpFilter } from "./SerpFilter";
 export const ContentMain = () => {
 
   
@@ -11,6 +12,7 @@ export const ContentMain = () => {
         <aside className="w-full md:w-1/4">
           <ContentFilter/>
           <StartFilter/>
+          <SerpFilter/>
         </aside>
         <div className="w-full md:w-3/4">
           <ContentHotels />

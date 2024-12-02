@@ -24,7 +24,6 @@ const CardHotels = ({
   rating,
   addres,
   rooms,
-  description,
   percentage,
 }: Props) => {
   const number = percentage / 100;
@@ -61,7 +60,7 @@ const CardHotels = ({
         <p className="text-sm text-gray-400 text-muted-foreground flex items-center mb-3 whitespace-nowrap overflow-hidden text-ellipsis">
           <IoLocationOutline color="white" size={"15px"} /> {addres}
         </p>
-        <p className="text-sm mb-4">{description}</p>
+        {/* <p className="text-sm mb-4">{description}</p> */}
       </div>
       <div className="p-4">
         <div className="flex justify-between items-center">

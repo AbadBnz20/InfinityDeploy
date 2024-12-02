@@ -4,6 +4,7 @@ import { DestinationStore } from "@/store/DestinationStore";
 import { ReservationStore } from "@/store/ReservationStore";
 import { Divider, Input } from "@nextui-org/react";
 import React from "react";
+import { ModalTerm } from "./ModalTerm";
 
 export const InformationRoom = () => {
   const { image, name, nameroom, subtotal, destination, total } =
@@ -70,7 +71,7 @@ export const InformationRoom = () => {
         </div>
       </div>
       <Divider />
-      <div className=" pt-4 space-y-2">
+      <div className="py-4 space-y-2">
         <div className="flex justify-between">
           <span className="text-gray-400 font-medium">Precio por dia</span>
           <span className="font-medium ">{subtotal} USD</span>
@@ -81,6 +82,9 @@ export const InformationRoom = () => {
       <div className=" mt-4 pt-4 flex justify-between items-center">
         <span className="font-semibold text-gray-400">Total</span>
         <span className="font-semibold text-xl">{total} USD</span>
+      </div>
+      <div className="pt-2">
+       <p>Leer <ModalTerm/> del hotel. </p>
       </div>
     </div>
   );
