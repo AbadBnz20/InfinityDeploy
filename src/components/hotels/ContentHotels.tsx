@@ -29,7 +29,7 @@ const ContentHotels = () => {
       await gethotels();
 
       const resp = await GetPackageByIDResponse();
-      setPercentage(resp?.data.packageUser.package.percentage || 0)
+      setPercentage( resp.percentage || 0)
       setLoading(false);
     };
 
@@ -44,7 +44,6 @@ const ContentHotels = () => {
     });
     window.scrollTo(0, 0);
   };
-
   return (
     <div className="w-full md:w-full">
       <div className=" mb-6">

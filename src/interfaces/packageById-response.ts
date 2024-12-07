@@ -1,26 +1,31 @@
 export interface PackageByIDResponse {
-    data: Data;
+  data: Data;
 }
 
 export interface Data {
-    packageUser: PackageUser;
+  packageUser: PackageUser;
 }
 
 export interface PackageUser {
-    id:      number;
-    package: Package;
+  id: number;
+  package: Package;
 }
 
 export interface Package {
-    id:          number;
-    documentId:  string;
-    name:        string;
-    percentage:  number;
-    price:       number;
-    description: string;
-    state:       boolean;
-    createdAt:   Date;
-    updatedAt:   Date;
-    publishedAt: null;
-    locale:      null;
+  id: number;
+  documentId: string;
+  name: string;
+  percentage: number;
+  price: number;
+  description: string;
+  state: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: null;
+  locale: null;
 }
+
+export interface PackageMain {
+    percentage?: number;
+  }
+

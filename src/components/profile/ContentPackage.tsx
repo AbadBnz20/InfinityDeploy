@@ -1,5 +1,5 @@
 import { GetPackage } from "@/actions/package/Package";
-import { GetPackageByIDResponse, UpdatePackageByIDResponse } from "@/actions/package/PackageByUserClientId";
+import {  UpdatePackageByIDResponse } from "@/actions/package/PackageByUserClientId";
 import { Datum } from "@/interfaces/package-response";
 import {
   RadioGroup,
@@ -60,9 +60,10 @@ export const ContentPackage = () => {
   useEffect(() => {
     const getPackage = async () => {
       setLoading(true);
-      const packagebyid = await GetPackageByIDResponse();
+      // const packagebyid = await GetPackageByIDResponse();
+
       const resp = await GetPackage();
-      setbyid(packagebyid?.data.packageUser.package.name || "");
+      setbyid("");
       setdata(resp);
       setLoading(false);
     };

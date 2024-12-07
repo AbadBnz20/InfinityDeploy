@@ -1,13 +1,12 @@
 "use client";
 import { GetRooms } from "@/actions/getDestination";
 import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
-import { createAuthCookie } from "@/actions/terms/termscookies";
 import { currencyFormat } from "@/helpers/CurrenFormat";
 import { DataDetails } from "@/interfaces/details-response";
 import {  Rate, RoomDataTrans } from "@/interfaces/rooms-response";
 
 import { DestinationStore } from "@/store/DestinationStore";
-import { ReservationStore } from "@/store/ReservationStore";
+// import { ReservationStore } from "@/store/ReservationStore";
 import {
   Button,
   Card,
@@ -41,9 +40,10 @@ interface RoomGroup {
 }
 export const ContentRoom = ({ hotel }: Props) => {
   const language = "es";
+  console.log(hotel)
   const t = translations[language as keyof typeof translations];
   const { checkin, checkout, guest } = DestinationStore();
-  const { setReservationData } = ReservationStore();
+  // const { setReservationData } = ReservationStore();
   const [rooms, setRooms] = useState<RoomGroup[]>([]);
   const [percentage, setPercentage] = useState(0);
 
@@ -65,7 +65,7 @@ export const ContentRoom = ({ hotel }: Props) => {
       guest
     );
     const resp = await GetPackageByIDResponse();
-    setPercentage(resp?.data.packageUser.package.percentage || 0);
+    setPercentage(resp.percentage || 0);
 
     const groupedRooms: RoomGroup[] = Object.values(
       rooms[0].rates.reduce((acc: Record<string, RoomGroup>, item: Rate) => {
@@ -91,26 +91,26 @@ export const ContentRoom = ({ hotel }: Props) => {
     setLoading(false);
   };
 
-  const onRegisterReservation = async (
-    name: string,
-    book_hash: string,
-    price: number,
-    subtotal: number,
-    priceroom: string
-  ) => {
-    setReservationData(
-      hotel.images[0],
-      hotel.name,
-      name,
-      subtotal,
-      hotel.region.name,
-      price,
-      book_hash,
-      priceroom
-    );
+  // const onRegisterReservation = async (
+  //   name: string,
+  //   book_hash: string,
+  //   price: number,
+  //   subtotal: number,
+  //   priceroom: string
+  // ) => {
+  //   setReservationData(
+  //     hotel.images[0],
+  //     hotel.name,
+  //     name,
+  //     subtotal,
+  //     hotel.region.name,
+  //     price,
+  //     book_hash,
+  //     priceroom
+  //   );
 
-    await createAuthCookie(hotel.metapolicy_extra_info);
-  };
+  //   await createAuthCookie(hotel.metapolicy_extra_info);
+  // };
 
   return (
     <div className="p-5">
@@ -142,6 +142,7 @@ export const ContentRoom = ({ hotel }: Props) => {
 
                   const pricexday = +r.daily_prices[0];
                   const subtotal = pricexday + pricexday * number;
+                  console.log(subtotal)
                   const amenitiesMap: Record<string, string> = {
                     has_bathroom: "Baño incluido",
                     has_breakfast: "Desayuno incluido",
@@ -166,17 +167,21 @@ export const ContentRoom = ({ hotel }: Props) => {
                           </p>
                         </div>
 
-                        <Link href={"/detailroom"}>
+                        <Link 
+                        // href={"/detailroom"}
+                        href={"/hotels"}
+
+                        >
                           <Button
-                            onClick={() =>
-                              onRegisterReservation(
-                                item.room_name,
-                                r.book_hash,
-                                increasedPrice,
-                                subtotal,
-                                r.payment_options.payment_types[0].amount
-                              )
-                            }
+                            // onClick={() =>
+                            //   onRegisterReservation(
+                            //     item.room_name,
+                            //     r.book_hash,
+                            //     increasedPrice,
+                            //     subtotal,
+                            //     r.payment_options.payment_types[0].amount
+                            //   )
+                            // }
                           >
                             Seleccionar
                           </Button>
@@ -194,44 +199,3 @@ export const ContentRoom = ({ hotel }: Props) => {
   );
 };
 
-// {rooms?.rates.map((item) => {
-//   const number = percentage / 100;
-//   const price = +item.payment_options.payment_types[0].amount;
-//   const increasedPrice = price + price * number;
-
-//   const pricexday = +item.daily_prices[0];
-//   const subtotal = pricexday + pricexday * number;
-
-//   return (
-//     <Card key={item.match_hash} className="bg-maincolor">
-//       <CardHeader className="flex gap-3">
-//         <div className="flex flex-col">
-//           <p className="text-md ">{item.room_name}</p>
-//           <p className="text-small  text-gray-500 dark:text-gray-300 ">
-//             {item.room_data_trans.main_room_type}
-//           </p>
-//         </div>
-//       </CardHeader>
-//       <CardFooter className="flex justify-between">
-//         <p className="text-lg font-bold  ">
-//           {currencyFormat(increasedPrice)}{" "}
-//           {item.payment_options.payment_types[0].currency_code}
-//         </p>{" "}
-//         <Link href={"/detailroom"}>
-//           <Button
-//             onClick={() =>
-//               onRegisterReservation(
-//                 item,
-//                 increasedPrice,
-//                 subtotal,
-//                 item.payment_options.payment_types[0].amount
-//               )
-//             }
-//           >
-//             Seleccionar
-//           </Button>
-//         </Link>
-//       </CardFooter>
-//     </Card>
-//   );
-// })}

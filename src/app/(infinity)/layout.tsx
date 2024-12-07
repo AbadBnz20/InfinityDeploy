@@ -1,27 +1,33 @@
-import { auth } from "@/auth.config";
 import { Footer, NavbarC } from "@/components";
+import { createClient } from "@/utils/supabase/server";
 import { NextUIProvider } from "@nextui-org/react";
 import { redirect } from "next/navigation";
-
 
 export default async function InfinityLayoutPage({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-  console.log(session)
-  if (!session?.user) {
-    redirect("/auth/login");
-  }
+  const supabase = await createClient();
+  
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  // console.log(user);
+  if (!user) {
+    return redirect("/auth/login");
+  }
   return (
-    <main className="min-h-screen flex flex-col">
-      <NextUIProvider>
-        <NavbarC />
-        <div className="flex-grow">{children}</div>
-        <Footer  />
-      </NextUIProvider>
-    </main>
+    <>
+      
+      <main className="min-h-screen flex flex-col">
+        <NextUIProvider>
+          <NavbarC />
+          <div className="flex-grow">{children}</div>
+          <Footer />
+        </NextUIProvider>
+      </main>
+    </>
   );
 }

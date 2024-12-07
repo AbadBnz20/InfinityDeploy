@@ -1,3 +1,4 @@
+
 export interface AuthResponse {
     data: Data;
 }
@@ -72,3 +73,24 @@ export interface ProviderMetadata {
     public_id:     string;
     resource_type: string;
 }
+
+export interface UserActive{
+    profileId: string,
+    firstname:string,
+    lastname: string,
+    address: string,
+    photo: string,
+    state: boolean,
+    user_id:string,
+    stateId: string,
+    packageId: string,
+    languageId: string,
+    roleId: string
+  }
+export interface UserCookie {
+    firstname:string,
+    lastname:string,
+    email:string,
+    phono:string
+  
+   }
