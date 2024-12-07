@@ -3,7 +3,7 @@ import { GetRooms } from "@/actions/getDestination";
 import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
 import { currencyFormat } from "@/helpers/CurrenFormat";
 import { DataDetails } from "@/interfaces/details-response";
-import {  Rate, RoomDataTrans } from "@/interfaces/rooms-response";
+import { Rate, RoomDataTrans } from "@/interfaces/rooms-response";
 
 import { DestinationStore } from "@/store/DestinationStore";
 // import { ReservationStore } from "@/store/ReservationStore";
@@ -64,9 +64,10 @@ export const ContentRoom = ({ hotel }: Props) => {
       checkout,
       guest
     );
+    console.log(rooms);
     const resp = await GetPackageByIDResponse();
     setPercentage(resp.percentage || 0);
-
+   if (rooms.length>0) {
     const groupedRooms: RoomGroup[] = Object.values(
       rooms[0].rates.reduce((acc: Record<string, RoomGroup>, item: Rate) => {
         const roomName = item.room_name;
@@ -84,10 +85,9 @@ export const ContentRoom = ({ hotel }: Props) => {
         return acc;
       }, {})
     );
-
-    console.log(groupedRooms);
-
     setRooms(groupedRooms);
+   }
+    
     setLoading(false);
   };
 
@@ -117,10 +117,10 @@ export const ContentRoom = ({ hotel }: Props) => {
       <h2 className="text-2xl font-bold mb-2 ">{t.title}</h2>
       {loading ? (
         <div className="w-ful h-[300px] flex justify-center items-center">
-          <Spinner />{" "}
+          <Spinner />
         </div>
-      ) : (
-        <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+      ) : rooms.length > 0 ? (
+        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
           {rooms.map((item) => {
             return (
               <Card
@@ -129,8 +129,8 @@ export const ContentRoom = ({ hotel }: Props) => {
               >
                 <CardHeader className="flex gap-3">
                   <div className="flex flex-col">
-                    <p className="text-md ">{item.room_data_trans.main_name}</p>
-                    <p className="text-small  text-gray-500 dark:text-gray-300 ">
+                    <p className="text-md">{item.room_data_trans.main_name}</p>
+                    <p className="text-small text-gray-500 dark:text-gray-300">
                       {item.room_data_trans.main_room_type}
                     </p>
                   </div>
@@ -142,7 +142,7 @@ export const ContentRoom = ({ hotel }: Props) => {
 
                   const pricexday = +r.daily_prices[0];
                   const subtotal = pricexday + pricexday * number;
-                  console.log(subtotal)
+                  console.log(subtotal);
                   const amenitiesMap: Record<string, string> = {
                     has_bathroom: "Baño incluido",
                     has_breakfast: "Desayuno incluido",
@@ -150,52 +150,41 @@ export const ContentRoom = ({ hotel }: Props) => {
                   };
 
                   return (
-                    <>
-                      <CardFooter key={r.book_hash} className="flex justify-between items-end">
-                        <div>
-                          {r.serp_filters.map((amenity, index) => (
-                            <li key={index}>
-                              <em className="text-gray-500 dark:text-gray-300 text-small">
-                                {amenitiesMap[amenity] ||
-                                  "Servicio no especificado"}
-                              </em>
-                            </li>
-                          ))}
-                          <p className="text-lg font-bold  mt-4 ">
-                            {currencyFormat(+increasedPrice)}{" "}
-                            {r.payment_options.payment_types[0].currency_code}
-                          </p>
-                        </div>
-
-                        <Link 
-                        // href={"/detailroom"}
-                        href={"/hotels"}
-
-                        >
-                          <Button
-                            // onClick={() =>
-                            //   onRegisterReservation(
-                            //     item.room_name,
-                            //     r.book_hash,
-                            //     increasedPrice,
-                            //     subtotal,
-                            //     r.payment_options.payment_types[0].amount
-                            //   )
-                            // }
-                          >
-                            Seleccionar
-                          </Button>
-                        </Link>
-                      </CardFooter>
-                    </>
+                    <CardFooter
+                      key={r.book_hash}
+                      className="flex justify-between items-end"
+                    >
+                      <div>
+                        {r.serp_filters.map((amenity, index) => (
+                          <li key={index}>
+                            <em className="text-gray-500 dark:text-gray-300 text-small">
+                              {amenitiesMap[amenity] ||
+                                "Servicio no especificado"}
+                            </em>
+                          </li>
+                        ))}
+                        <p className="text-lg font-bold mt-4">
+                          {currencyFormat(+increasedPrice)}{" "}
+                          {r.payment_options.payment_types[0].currency_code}
+                        </p>
+                      </div>
+                      <Link href={"/hotels"}>
+                        <Button>Seleccionar</Button>
+                      </Link>
+                    </CardFooter>
                   );
                 })}
               </Card>
             );
           })}
         </div>
+      ) : (
+        <div className="w-ful h-[300px] flex justify-center items-center">
+          <em className="text-lg">
+            Habitaciones no disponibles
+          </em>
+        </div>
       )}
     </div>
   );
 };
-

@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import { getCookie } from "cookies-next";
 // import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const translations = {
   es: {
@@ -48,7 +48,21 @@ const UserActive = () => {
   const [language] = useState("es");
   const t = translations[language as keyof typeof translations];
   
-  const userAuth:UserCookie = JSON.parse(getCookie('userAuth') || "") ;
+  const [userAuth, setUserAuth] = useState<UserCookie | null>(null);
+
+  useEffect(() => {
+    try {
+      const cookieValue = getCookie("userAuth");
+      setUserAuth(cookieValue ? JSON.parse(cookieValue) : null);
+    } catch (error) {
+      console.error("Error parsing userAuth cookie:", error);
+      setUserAuth(null);
+    }
+  }, []);
+
+  if (!userAuth) {
+    return <p>.</p>;
+  }
   // const router = useRouter();
 
 
