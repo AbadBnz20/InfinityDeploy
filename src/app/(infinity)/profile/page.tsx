@@ -1,11 +1,18 @@
-import { auth } from "@/auth.config";
+import { UserActive } from "@/actions/auth/getuser";
 import { FormProfile } from "@/components/profile/FormProfile";
+import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 export default async function ProfilePage() {
-  const session = await auth();
-  if (!session?.user) {
-    redirect("/auth/login");
+
+const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return redirect("/auth/login");
   }
+
+  const useractive = await UserActive(user.id);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 container mx-auto  mt-6">
@@ -16,45 +23,17 @@ export default async function ProfilePage() {
               <img
                 alt="Profile"
                 className="rounded-full object-cover"
-                src={session.user.image}
+                src={useractive.photo}
               />
             </div>
           </div>
-          <h2 className="mt-4 text-xl font-semibold">{session.user.firstname} {session.user.lastname}</h2>
-          <p className="text-sm text-gray-500">{session.user.email}</p>
+          <h2 className="mt-4 text-xl font-semibold">{useractive.firstname} {useractive.lastname}</h2>
+          <p className="text-sm text-gray-500">{user.email}</p>
 
-          {/* <nav className="mt-8 w-full">
-            <Link
-              className="flex items-center rounded-lg bg-blue-50 px-4 py-2 text-blue-600"
-              href="#"
-            >
-              <div className="mr-2 h-2 w-2 rounded-full bg-blue-600" />
-              Personal Information
-            </Link>
-            <Link
-              className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-50"
-              href="#"
-            >
-              Payment
-            </Link>
-            <Link
-              className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-50"
-              href="#"
-            >
-              Change Password
-            </Link>
-            <Link
-              className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-50"
-              href="#"
-            >
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
-            </Link>
-          </nav> */}
         </div>
       </aside>
       <main className="col-span-3 p-6">
-        <FormProfile firstname={session.user.firstname} lastname={session.user.lastname} birthdate={session.user.birthdate} country={session.user.country} email={session.user.email} phone={session.user.phone} />
+        <FormProfile firstname={useractive.firstname} lastname={useractive.lastname} birthdate={""} country={""} email={user.email || ""} phone={user.phone || ""} />
       </main>
     </div>
   );

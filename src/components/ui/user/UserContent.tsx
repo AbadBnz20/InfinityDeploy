@@ -1,5 +1,6 @@
 "use client";
 import { signOutAction } from "@/actions/auth/login";
+import { useSession } from "@/hooks/useSession";
 import { UserCookie } from "@/interfaces/auth-response";
 import {
   Avatar,
@@ -7,10 +8,10 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Spinner,
 } from "@nextui-org/react";
-import { getCookie } from "cookies-next";
-// import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import React, {  useState } from "react";
 
 const translations = {
   es: {
@@ -33,42 +34,30 @@ export const UserContent = () => {
   const [language] = useState("es");
   const t = translations[language as keyof typeof translations];
   console.log(t);
-  // const { data: session } = useSession();
+   const {session,loading}= useSession();
 
-  // const isAuthenticated = !!session?.user;
-  // console.log(isAuthenticated)
+
   return (
     <>
-      <UserActive />
+    {
+      loading ? <Spinner  size="sm"/> : session &&  <UserActive user={session} /> 
+    }
+     
     </>
   );
 };
+interface Props{
+  user:UserCookie
+}
 
-const UserActive = () => {
+const UserActive = ({user}:Props) => {
   const [language] = useState("es");
   const t = translations[language as keyof typeof translations];
-  
-  const [userAuth, setUserAuth] = useState<UserCookie | null>(null);
-
-  useEffect(() => {
-    try {
-      const cookieValue = getCookie("userAuth");
-      setUserAuth(cookieValue ? JSON.parse(cookieValue) : null);
-    } catch (error) {
-      console.error("Error parsing userAuth cookie:", error);
-      setUserAuth(null);
-    }
-  }, []);
-
-  if (!userAuth) {
-    return <p>.</p>;
+   const route =  useRouter();
+  const Onredirect = ()=>{
+    route.push('/profile')
   }
-  // const router = useRouter();
 
-
-  // const Onredirect = () => {
-  //   router.push("/profile");
-  // };
 
   return (
     <Dropdown placement="bottom-end">
@@ -80,20 +69,26 @@ const UserActive = () => {
           color="default"
           name="Jason Hughes"
           size="sm"
-          src={userAuth?.phono}
+          src={user.phono}
         />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownItem key="profile" className="h-14 gap-2">
-          <p className="font-semibold">{userAuth?.firstname} {userAuth?.lastname} </p>
-          <p className="font-semibold">{userAuth?.email}</p>
+          <p className="font-semibold">
+            {user.firstname} {user.lastname}{" "}
+          </p>
+          <p className="font-semibold">{user.email}</p>
         </DropdownItem>
-        {/* <DropdownItem key="settings" onClick={()=>Onredirect()}>
-        {t.option1}
-        </DropdownItem> */}
+        <DropdownItem key="settings" onPress={() => Onredirect()}>
+          {t.option1}
+        </DropdownItem>
         {/* <DropdownItem key="team_settings">{t.option2}</DropdownItem> */}
         <DropdownItem key="configurations">{t.option3}</DropdownItem>
-        <DropdownItem onClick={() => signOutAction()} key="logout" color="danger">
+        <DropdownItem
+          onClick={() => signOutAction()}
+          key="logout"
+          color="danger"
+        >
           {t.subtitle}
         </DropdownItem>
       </DropdownMenu>

@@ -1,23 +1,28 @@
-import { auth } from "@/auth.config";
+import { UserActive } from "@/actions/auth/getuser";
 import { FormRoom } from "@/components/detailsRoom/FormRoom";
+import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function DetailRoomPage() {
-  const session = await auth();
-  if (!session?.user) {
-    redirect("/auth/login");
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return redirect("/auth/login");
   }
 
+  const useractive = await UserActive(user.id);
   return (
     <div className="container mx-auto p-4 ">
       <h1 className="text-2xl font-bold mb-2">Datos de los huespedes</h1>
       <FormRoom
-        firstname={session.user.firstname}
-        lastname={session.user.lastname}
-        birthdate={session.user.birthdate}
-        country={session.user.country}
-        email={session.user.email}
-        phone={session.user.phone}
+        firstname={useractive.firstname}
+        lastname={useractive.lastname}
+        birthdate={''}
+        country={'Bolivia'}
+        email={user.email || ""}
+        phone={user.phone || ""}
       />
     </div>
   );

@@ -14,7 +14,6 @@ export default async function InfinityLayoutPage({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  // console.log(user);
   if (!user) {
     return redirect("/auth/login");
   }

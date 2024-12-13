@@ -83,12 +83,12 @@ export const FormProfile = ({firstname,lastname,country,birthdate,phone,email}:P
                 />
               </div>
             </div>
-            <div>
+            {/* <div>
               <label className="text-sm font-medium" htmlFor="designation">
                 Pais
               </label>
               <Input {...register("Country")}  id="designation" />
-            </div>
+            </div> */}
           </div>
           <h4 className="mt-8 text-lg font-semibold">Paquetes adquirido</h4>
           <ContentPackage/>

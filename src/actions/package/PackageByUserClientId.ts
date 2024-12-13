@@ -1,7 +1,7 @@
 'use server';
-import { Strapi } from "@/Api/Strapi";
-import { auth } from "@/auth.config";
-import { PackageByIDResponse, PackageMain } from "@/interfaces/packageById-response";
+
+
+import { PackageMain } from "@/interfaces/packageById-response";
 import { createClient } from "@/utils/supabase/server";
 
 export const GetPackageByIDResponse = async () => {
@@ -22,20 +22,6 @@ export const GetPackageByIDResponse = async () => {
 };
 
 export const UpdatePackageByIDResponse = async (name:string) => {
-  const session = await auth();
-try {
-  const resp = await Strapi.post<PackageByIDResponse>(
-    "/userclient/upgradePackage",
-    {
-      token: session?.user.token,
-      name
-    }
-  );
-  return resp.data;
-} catch (error) {
-  console.log(error)
-
-  return null;
-}
+  return name
 };
 

@@ -1,11 +1,13 @@
 "use client";
 import { GetRooms } from "@/actions/getDestination";
 import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
+import { createAuthCookie } from "@/actions/terms/termscookies";
 import { currencyFormat } from "@/helpers/CurrenFormat";
 import { DataDetails } from "@/interfaces/details-response";
 import { Rate, RoomDataTrans } from "@/interfaces/rooms-response";
 
 import { DestinationStore } from "@/store/DestinationStore";
+import { ReservationStore } from "@/store/ReservationStore";
 // import { ReservationStore } from "@/store/ReservationStore";
 import {
   Button,
@@ -43,7 +45,7 @@ export const ContentRoom = ({ hotel }: Props) => {
   console.log(hotel)
   const t = translations[language as keyof typeof translations];
   const { checkin, checkout, guest } = DestinationStore();
-  // const { setReservationData } = ReservationStore();
+  const { setReservationData } = ReservationStore();
   const [rooms, setRooms] = useState<RoomGroup[]>([]);
   const [percentage, setPercentage] = useState(0);
 
@@ -91,26 +93,26 @@ export const ContentRoom = ({ hotel }: Props) => {
     setLoading(false);
   };
 
-  // const onRegisterReservation = async (
-  //   name: string,
-  //   book_hash: string,
-  //   price: number,
-  //   subtotal: number,
-  //   priceroom: string
-  // ) => {
-  //   setReservationData(
-  //     hotel.images[0],
-  //     hotel.name,
-  //     name,
-  //     subtotal,
-  //     hotel.region.name,
-  //     price,
-  //     book_hash,
-  //     priceroom
-  //   );
+  const onRegisterReservation = async (
+    name: string,
+    book_hash: string,
+    price: number,
+    subtotal: number,
+    priceroom: string
+  ) => {
+    setReservationData(
+      hotel.images[0],
+      hotel.name,
+      name,
+      subtotal,
+      hotel.region.name,
+      price,
+      book_hash,
+      priceroom
+    );
 
-  //   await createAuthCookie(hotel.metapolicy_extra_info);
-  // };
+    await createAuthCookie(hotel.metapolicy_extra_info);
+  };
 
   return (
     <div className="p-5">
@@ -168,8 +170,8 @@ export const ContentRoom = ({ hotel }: Props) => {
                           {r.payment_options.payment_types[0].currency_code}
                         </p>
                       </div>
-                      <Link href={"/hotels"}>
-                        <Button>Seleccionar</Button>
+                      <Link href={"/detailroom"}>
+                        <Button onClick={()=>onRegisterReservation(item.room_data_trans.main_name,r.book_hash,increasedPrice,subtotal,r.payment_options.payment_types[0].amount)}>Seleccionar</Button>
                       </Link>
                     </CardFooter>
                   );

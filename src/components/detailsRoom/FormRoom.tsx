@@ -12,7 +12,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 // } from "@/actions/reservation/registerreservation";
 // import { formatDateToISO } from "@/actions/getDestination";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { InformationRoom } from "../reservation/InformationRoom";
 
 export interface Guest {
@@ -60,7 +59,6 @@ export const FormRoom = ({
   const { guest } = DestinationStore();
 
   const [loading, setLoading] = useState(false);
-  const { data } = useSession();
   const {
     register,
     handleSubmit,
@@ -157,8 +155,7 @@ export const FormRoom = ({
 
   return (
     <>
-      {data && (
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-5">
             <div className="col-span-3">
               <div className="mt-5">
@@ -384,7 +381,6 @@ export const FormRoom = ({
             </div>
           </div>
         </form>
-      )}
     </>
   );
 };

@@ -33,7 +33,7 @@ export const SelectDestination = ({ setValue }: Props) => {
         label="Destino"
         placeholder="Selecciona destino"
         onInputChange={(e) => {
-          setTimeout(() => loadDestination(e), 2000);
+          loadDestination(e)
         }}
         onSelectionChange={onSelectionChange}
         defaultFilter={() => true}

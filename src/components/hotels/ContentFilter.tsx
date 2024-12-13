@@ -90,7 +90,7 @@ export const ContentFilter = () => {
           </label>
           <DateRangePicker
             value={date}
-            onChange={setdate}
+            onChange={()=>setdate}
             minValue={today(getLocalTimeZone())}
             className="text-blue-600"
           />

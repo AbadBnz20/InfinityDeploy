@@ -18,7 +18,7 @@ export const SignIn = () => {
     watch,
   } = useForm<State>();
   const [loading, setLoading] = useState(false);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange,onClose } = useDisclosure();
   const [captchaToken, setCaptchaToken] = useState("");
   const site= "29125b28-4758-4a6e-9c02-1334e26a77da";
   const emailValue = watch("email");
@@ -62,6 +62,7 @@ export const SignIn = () => {
         </div>
       </form>
       <SignInModal
+      onClose={onClose}
         isOpen={isOpen}
         onOpen={onOpen}
         onOpenChange={onOpenChange}

@@ -1,13 +1,21 @@
 'use server';
-import { Strapi } from "@/Api/Strapi";
-import { PackageResponse } from "@/interfaces/package-response";
+
+import { Package } from "@/interfaces/package-response";
+import { createClient } from "@/utils/supabase/server";
+
 
 export const GetPackage = async () => {
-  try {
-    const resp = await Strapi.get<PackageResponse>("/packages");
-    return resp.data.data;
-  } catch (error) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+  .from('package')
+  .select('*')
+  .eq("state", true);
+  if (error) {
     console.log(error)
-    return [];
+     return []
   }
+
+
+   return data as Package[]
 };

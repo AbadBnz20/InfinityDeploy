@@ -1,6 +1,5 @@
 import { GetPackage } from "@/actions/package/Package";
-import {  UpdatePackageByIDResponse } from "@/actions/package/PackageByUserClientId";
-import { Datum } from "@/interfaces/package-response";
+import {  Package } from "@/interfaces/package-response";
 import {
   RadioGroup,
   useRadio,
@@ -52,7 +51,7 @@ export const CustomRadio = (props: RadioProps) => {
   );
 };
 export const ContentPackage = () => {
-  const [data, setdata] = useState<Datum[]>([]);
+  const [data, setdata] = useState<Package[]>([]);
   const [byid, setbyid] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
@@ -63,7 +62,8 @@ export const ContentPackage = () => {
       // const packagebyid = await GetPackageByIDResponse();
 
       const resp = await GetPackage();
-      setbyid("");
+      console.log(resp)
+      setbyid('Gold');
       setdata(resp);
       setLoading(false);
     };
@@ -73,10 +73,10 @@ export const ContentPackage = () => {
 
   const handleChange = async () => {
     setLoading2(true);
-    if (byid) {
-     UpdatePackageByIDResponse(byid);
-    }
-    setLoading2(false);
+    // if (byid) {
+    //  UpdatePackageByIDResponse(byid);
+    // }
+    // setLoading2(false);
 
   };
 

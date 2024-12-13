@@ -62,16 +62,16 @@ export const ContentImage = ({ images }: Props) => {
             <Button
               variant="light"
               isIconOnly
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white"
-              onClick={goToPrevious}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white bg-default/30"
+              onPress={goToPrevious}
             >
             <IoChevronBackOutline/>
             </Button>
             <Button
               variant="light"
              isIconOnly
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white"
-              onClick={goToNext}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white  bg-default/30"
+              onPress={goToNext}
             >
                <IoChevronForwardOutline/>
             </Button>
@@ -133,7 +133,7 @@ export const ContentImage = ({ images }: Props) => {
               variant="light"
               isIconOnly
               className="absolute top-2 right-2 text-white"
-              onClick={closeGallery}
+              onPress={closeGallery}
             >
              <IoCloseOutline/>
             </Button>
@@ -141,7 +141,7 @@ export const ContentImage = ({ images }: Props) => {
               variant="light"
               isIconOnly
               className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white"
-              onClick={goToPrevious}
+              onPress={goToPrevious}
             >
             <IoChevronBackOutline/>
             </Button>
@@ -149,7 +149,7 @@ export const ContentImage = ({ images }: Props) => {
               variant="light"
              isIconOnly
               className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white"
-              onClick={goToNext}
+              onPress={goToNext}
             >
                <IoChevronForwardOutline/>
             </Button>
@@ -160,7 +160,7 @@ export const ContentImage = ({ images }: Props) => {
                 key={index}
                 variant="light"
                 className={`p-0 h-16 w-24 ${index === currentIndex ? 'ring-2 ring-primary' : ''}`}
-                onClick={() => setCurrentIndex(index)}
+                onPress={() => setCurrentIndex(index)}
               >
                 <img src={SizeImage(src, "1024x768")} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
               </Button>

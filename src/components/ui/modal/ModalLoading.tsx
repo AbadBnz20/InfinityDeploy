@@ -14,7 +14,7 @@ interface Props {
 export const ModalLoading = ({loading}:Props) => {
   return (
     <>
-      <Modal backdrop={"blur"} isOpen={loading} >
+      <Modal backdrop={"blur"} isOpen={loading}  hideCloseButton={true}  >
         <ModalContent>
           <>
             <ModalHeader className="flex flex-col gap-1 text-center">

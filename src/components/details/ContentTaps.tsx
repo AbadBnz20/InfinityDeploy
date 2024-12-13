@@ -22,7 +22,7 @@ export const ContentTaps = ({ hotel, slug }: Props) => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-4  sticky top-0 z-40  bg-white dark:bg-black">
+      <div className="flex w-full flex-col gap-4  sticky top-0 z-40  bg-white dark:bg-black">
         <Tabs
           variant="underlined"
           onSelectionChange={(key) => {

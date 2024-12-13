@@ -1,4 +1,5 @@
-import { Experiences, Reservation, Roms, Slider } from "@/components";
+import { Experiences,  Roms, Slider } from "@/components";
+import { TapsMain } from "@/components/home/TapsMain";
 
 
 const translations = {
@@ -94,7 +95,7 @@ export default async function HomePage() {
   return (
     <div className="">
       <Slider array={arraySlider} />
-      <Reservation />
+      <TapsMain />
       <Experiences />
       <Roms />
     </div>

@@ -87,6 +87,8 @@ export interface UserActive{
     languageId: string,
     roleId: string
   }
+
+  
 export interface UserCookie {
     firstname:string,
     lastname:string,

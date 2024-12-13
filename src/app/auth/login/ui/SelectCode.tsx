@@ -30,7 +30,7 @@ export const SelectCode = ({control}:Props) => {
           onInputChange={(value) => field.onChange(value)}
         >
           {(item) => (
-            <AutocompleteItem key={item.code} startContent={<Avatar alt={item.code} className="w-6 h-6" src={item.image} />}>
+            <AutocompleteItem key={item.key} value={item.code} startContent={<Avatar alt={item.code} className="w-6 h-6" src={item.image} />}>
               {item.code}
             </AutocompleteItem>
           )}
