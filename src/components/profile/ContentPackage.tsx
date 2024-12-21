@@ -1,13 +1,13 @@
 import { GetPackage } from "@/actions/package/Package";
-import {  Package } from "@/interfaces/package-response";
+import {  Profile } from "@/interfaces/package-response";
 import {
-  RadioGroup,
   useRadio,
   VisuallyHidden,
   RadioProps,
   cn,
-  Button,
   Spinner,
+  Card,
+  CardHeader,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
@@ -51,62 +51,30 @@ export const CustomRadio = (props: RadioProps) => {
   );
 };
 export const ContentPackage = () => {
-  const [data, setdata] = useState<Package[]>([]);
-  const [byid, setbyid] = useState<string | null>(null);
+  const [data, setdata] = useState<Profile>();
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
 
   useEffect(() => {
     const getPackage = async () => {
       setLoading(true);
-      // const packagebyid = await GetPackageByIDResponse();
-
       const resp = await GetPackage();
-      console.log(resp)
-      setbyid('Gold');
+      console.log(data);
       setdata(resp);
       setLoading(false);
     };
 
     getPackage();
   }, []);
-
-  const handleChange = async () => {
-    setLoading2(true);
-    // if (byid) {
-    //  UpdatePackageByIDResponse(byid);
-    // }
-    // setLoading2(false);
-
-  };
+  if (loading) {
+    return  <Spinner/>
+  }
 
   return (
-    <>
-      {byid && (
-        <RadioGroup value={byid} onValueChange={setbyid}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
-            {loading ? (
-              <Spinner />
-            ) : data.length > 0 ? (
-              data.map((item) => (
-                <CustomRadio
-                  key={item.name}
-                  description={item.description}
-                  value={item.name}
-                >
-                  {item.name}
-                </CustomRadio>
-              ))
-            ) : (
-              <p>No hay elementos disponibles.</p> 
-            )}
-          </div>
-        </RadioGroup>
-      )}
-
-      <div className="mt-6 flex justify-end">
-        <Button onClick={()=>handleChange()} isLoading={loading2} >Guardar Cambios</Button>
-      </div>
-    </>
+    <Card className="py-4 w-[300px] shadow-md">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        {/* <h4 className="font-bold text-large">{data?.package.name}</h4>
+        <small className="text-default-500">{data?.package.description}</small> */}
+      </CardHeader>
+    </Card>
   );
 };

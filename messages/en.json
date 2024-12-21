@@ -1,0 +1,117 @@
+{
+  "Navbar": {
+    "option1": "Home",
+    "option2": "About"
+  },
+  "dropdown": {
+    "option1": "Profile",
+    "option2": "language",
+    "option3": "Reservations",
+    "option4": "Log Out"
+  },
+  "slider": {
+    "option1": {
+      "title": "Exclusive Experiences",
+      "subtitle": "Discover unexplored paradises and luxurious retreats"
+    },
+    "option2": {
+      "title": "Gourmet Cuisine",
+      "subtitle": "Taste culinary creations from Michelin-starred chefs"
+    },
+    "option3": {
+      "title": "Personalized Wellness",
+      "subtitle": "Fitness and spa programs designed for you"
+    }
+  },
+  "TapsMain": {
+    "option1": "Hotels",
+    "option2": "Last Minute Weeks",
+    "option3": "yachts",
+    "option4": "Plan your vacation",
+    "option5": "Transfers"
+
+  },
+  "Filter": {
+    "seach": {
+      "title": "Destination",
+      "placeholder": "Find your destiny"
+    },
+    "room": {
+      "title": "Select",
+      "subtitle": "Room",
+      "option1": "Adults",
+      "option2": "Children",
+      "button1": "Add room",
+      "button2": "accept"
+    },
+    "option": "Nights",
+    "button": "Seach"
+  },
+  "Experiences": {
+    "title": "Exclusive Experiences",
+    "item1": {
+      "title": "Exotic Destinations",
+      "description": "Discover unexplored paradises and luxurious retreats"
+    },
+    "item2": {
+      "title": "Signature Gastronomy",
+      "description": "Taste culinary creations from Michelin star chefs"
+    },
+    "item3": {
+      "title": "Premium Connectivity",
+      "description": "Stay connected with high-speed Wi-Fi at all times"
+    },
+    "item4": {
+      "title": "Personalized Wellness",
+      "description": "Fitness and spa programs designed for you"
+    }
+  },
+  "Footer": {
+    "contact": "Contact",
+    "phone": "Phone",
+    "followUs": "Follow us"
+  },
+  "Hotels": {
+    "title": "Results",
+    "subtitle": "Total results found for this region:"
+  },
+  "Start": {
+    "option": "Stars",
+    "option2": "Star"
+  },
+  "SerpFilter": {
+    "item1": {
+      "title": "Facilities",
+      "option1": "Pool available",
+      "option2": "Internet access",
+      "option3": "Gym available",
+      "option4": "Jacuzzi available",
+      "option5": "Spa available",
+      "option6": "Kitchen available in room or common area"
+    },
+    "item2": {
+      "title": "Services",
+      "option1": "Food service or restaurant",
+      "option2": "Business center available",
+      "option3": "Airport transportation available",
+      "option4": "Support for people with disabilities"
+    },
+    "item3": {
+      "title": "Pets",
+      "option1": "Pets allowed"
+    },
+    "item4": {
+      "title": "Amenities",
+      "option1": "Air conditioning available",
+      "option2": "Parking available",
+      "option3": "Electric car chargers available",
+      "option4": "Smoking permitted areas"
+    },
+    "item5": {
+      "title": "Activities",
+      "option1": "Access or proximity to ski activities",
+      "option2": "Activities or facilities for children",
+      "option3": "Proximity or access to the beach"
+    }
+  }
+}

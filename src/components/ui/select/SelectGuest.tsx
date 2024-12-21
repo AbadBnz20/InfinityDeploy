@@ -1,5 +1,6 @@
 import { Destination } from '@/interfaces/Destination';
 import { Button } from '@nextui-org/react'
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react'
 import { UseFormSetValue } from 'react-hook-form';
 import { IoCloseOutline } from 'react-icons/io5';
@@ -9,6 +10,8 @@ interface Props {
   }
 export const SelectGuest = ({setValue,value}:Props) => {
     const [isOpen, setIsOpen] = useState(false);
+    const t = useTranslations("Filter");
+
   const [rooms, setRooms] = useState<{ adults: number; children: number[] }[]>([
     { adults: 1, children: [] },
   ]);
@@ -63,7 +66,7 @@ export const SelectGuest = ({setValue,value}:Props) => {
         role="combobox"
         aria-expanded={isOpen}
         className="w-full justify-between bg-[#f4f4f5]  dark:bg-[#27272a]"
-        onClick={() => setIsOpen(!isOpen)}
+        onPress={() => setIsOpen(!isOpen)}
       >
         {getSummary()}
       </Button>
@@ -71,7 +74,7 @@ export const SelectGuest = ({setValue,value}:Props) => {
         <div className="absolute top-full left-0 w-full mt-2 p-4 bg-white border rounded-md shadow-lg z-10">
           {rooms.map((room, index) => (
             <div key={index} className="mb-4 pb-4 border-b last:border-b-0 relative">
-              <h3 className="font-semibold mb-2 text-gray-900">Habitación {index + 1}</h3>
+              <h3 className="font-semibold mb-2 text-gray-900">{t('room.subtitle')} {index + 1}</h3>
               {rooms.length > 1 && (
                 <Button
                   size="sm"
@@ -84,7 +87,7 @@ export const SelectGuest = ({setValue,value}:Props) => {
                 </Button>
               )}
               <div className="flex items-center justify-between mb-2">
-                <span className='text-gray-900'>Adultos</span>
+                <span className='text-gray-900'>{t('room.option1')}</span>
                 <div className="flex items-center text-black">
                   <Button
                     size="sm"
@@ -108,14 +111,14 @@ export const SelectGuest = ({setValue,value}:Props) => {
                 </div>
               </div>
               <div className="flex items-center justify-between mb-2">
-                <span className='text-gray-900'>Niños</span>
+                <span className='text-gray-900'>{t('room.option2')}</span>
                 <div className="flex items-center">
                   <Button
                     size="sm"
                     isIconOnly
                     variant="bordered"
                       className='text-black'
-                    onClick={() => updateRoom(index, 'children', Math.max(0, room.children.length - 1))}
+                    onPress={() => updateRoom(index, 'children', Math.max(0, room.children.length - 1))}
                   >
                     -
                   </Button>
@@ -125,7 +128,7 @@ export const SelectGuest = ({setValue,value}:Props) => {
                     isIconOnly
                     variant="bordered"
                       className='text-black'
-                    onClick={() => updateRoom(index, 'children', room.children.length + 1)}
+                      onPress={() => updateRoom(index, 'children', room.children.length + 1)}
                   >
                     +
                   </Button>
@@ -133,11 +136,12 @@ export const SelectGuest = ({setValue,value}:Props) => {
               </div>
             </div>
           ))}
-          <Button onClick={addRoom} className="w-full bg-gray-900 text-white">
-            Añadir habitación
+          <Button onPress={addRoom} className="w-full bg-gray-900 text-white">
+          {t('room.button1')}
           </Button>
-          <Button onClick={() => setIsOpen(false)} className="w-full mt-2 bg-gray-900 text-white">
-            Aceptar
+          <Button onPress={() => setIsOpen(false)} className="w-full mt-2 bg-gray-900 text-white">
+          {t('room.button2')}
+
           </Button>
         </div>
       )}

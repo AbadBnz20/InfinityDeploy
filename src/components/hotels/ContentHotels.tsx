@@ -5,6 +5,7 @@ import { DestinationStore } from "@/store/DestinationStore";
 import { Pagination, Spinner } from "@nextui-org/react";
 import { ModalLoading } from "../ui/modal/ModalLoading";
 import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
+import { useTranslations } from "next-intl";
 
 const ContentHotels = () => {
   const {
@@ -16,7 +17,7 @@ const ContentHotels = () => {
     guest,
     loading: isloading,
   } = DestinationStore();
-
+   const t = useTranslations("Hotels");
   const [filter, setFilter] = useState({
     init: 0,
     final: 9,
@@ -27,7 +28,6 @@ const ContentHotels = () => {
     const fetchHotels = async () => {
       setLoading(true);
       await gethotels();
-
       const resp = await GetPackageByIDResponse();
       setPercentage( resp.percentage || 0)
       setLoading(false);
@@ -47,9 +47,9 @@ const ContentHotels = () => {
   return (
     <div className="w-full md:w-full">
       <div className=" mb-6">
-        <h2 className="text-2xl font-semibold ">Resultados</h2>
+        <h2 className="text-2xl font-semibold ">{t('title')}</h2>
         <h2 className="text-medium font-medium text-gray-400">
-          Total de resultados encontrados para esta region: {hotels.length}
+        {t('subtitle')} {hotels.length}
         </h2>
         <ModalLoading loading={loading} />
       </div>

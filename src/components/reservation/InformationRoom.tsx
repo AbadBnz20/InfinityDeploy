@@ -5,6 +5,7 @@ import { ReservationStore } from "@/store/ReservationStore";
 import { Divider, Input } from "@nextui-org/react";
 import React from "react";
 import { ModalTerm } from "./ModalTerm";
+import { currencyFormat } from "@/helpers/CurrenFormat";
 
 export const InformationRoom = () => {
   const { image, name, nameroom, subtotal, destination, total } =
@@ -74,7 +75,7 @@ export const InformationRoom = () => {
       <div className="py-4 space-y-2">
         <div className="flex justify-between">
           <span className="text-gray-400 font-medium">Precio por dia</span>
-          <span className="font-medium ">{subtotal} USD</span>
+          <span className="font-medium ">{currencyFormat(+subtotal) } USD</span>
         </div>
        
       </div>

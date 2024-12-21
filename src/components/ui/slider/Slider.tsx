@@ -6,12 +6,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./style.css";
+import { useTranslations } from "next-intl";
 
-interface Props {
-  array: Array<any>;
-}
+export const Slider = () => {
+  const t = useTranslations("slider");
 
-export const Slider = ({ array }: Props) => {
+  const arraySlider = [
+    {
+      img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0001-c4FngqJGMvcds8oGrOkoicZtd5kjPk.jpg',
+      title: "option1",  
+      subtitle: "option1", 
+    },
+    {
+      img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0001-c4FngqJGMvcds8oGrOkoicZtd5kjPk.jpg',
+      title: "option2",        
+      subtitle:"option2", 
+    },
+    {
+      img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0001-c4FngqJGMvcds8oGrOkoicZtd5kjPk.jpg',
+      title:"option3",  
+      subtitle:"option3"
+    }
+  ];
   return (
     <div>
       <Swiper
@@ -26,7 +42,7 @@ export const Slider = ({ array }: Props) => {
         navigation={true}
         className="mySwiper"
       >
-        {array.map((item, index) => (
+        {arraySlider.map((item, index) => (
           <SwiperSlide key={index}>
             <section  className="relative h-[70vh] overflow-hidden">
               <img
@@ -37,10 +53,10 @@ export const Slider = ({ array }: Props) => {
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                 <div className="text-center">
                   <h1 className="text-6xl font-bold mb-6 animate-fade-in-up text-white">
-                    {item.title}
+                    {t(`${item.title}.title`)}
                   </h1>
                   <p className="text-2xl mb-8 animate-fade-in-up animation-delay-300 text-gray-300">
-                  {item.subtitle}
+                  {t(`${item.subtitle}.subtitle`)}
                   </p>
                 </div>
               </div>

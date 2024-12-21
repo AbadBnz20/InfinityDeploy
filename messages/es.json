@@ -1,0 +1,116 @@
+{
+  "Navbar": {
+    "option1": "Inicio",
+    "option2": "Quienes somos"
+  },
+  "dropdown": {
+    "option1": "Mi Perfil",
+    "option2": "Idioma",
+    "option3": "Reservas",
+    "option4": "Cerrar Sesion"
+  },
+  "slider": {
+    "option1": {
+      "title": "Experiencias Exclusivas",
+      "subtitle": "Descubre paraísos inexplorados y lujosos retiros"
+    },
+    "option2": {
+      "title": "Gastronomía de Autor",
+      "subtitle": "Degusta creaciones culinarias de chefs estrella Michelin"
+    },
+    "option3": {
+      "title": "Bienestar Personalizado",
+      "subtitle": "Programas de fitness y spa diseñados para ti"
+    }
+  },
+  "TapsMain": {
+    "option1": "Hoteles",
+    "option2": "Semanas Ultimo Minuto",
+    "option3": "Yates",
+    "option4": "Planea vacaciones",
+    "option5": "Traslados"
+  },
+  "Filter": {
+    "seach": {
+      "title": "Destino",
+      "placeholder": "Busca tu destino"
+    },
+    "room": {
+      "title": "Seleccione",
+      "subtitle": "Habitación",
+      "option1": "Adultos",
+      "option2": "Niños",
+      "button1": "Añadir habitación",
+      "button2": "Aceptar"
+    },
+    "option": "Noches",
+    "button": "Buscar"
+  },
+  "Experiences": {
+    "title": "Experiencias Exclusivas",
+    "item1": {
+      "title": "Destinos Exóticos",
+      "description": "Descubre paraísos inexplorados y lujosos retiros"
+    },
+    "item2": {
+      "title": "Gastronomía de Autor",
+      "description": "Degusta creaciones culinarias de chefs estrella Michelin"
+    },
+    "item3": {
+      "title": "Conectividad Premium",
+      "description": "Mantente conectado con Wi-Fi de alta velocidad en todo momento"
+    },
+    "item4": {
+      "title": "Bienestar Personalizado",
+      "description": "Programas de fitness y spa diseñados para ti"
+    }
+  },
+  "Footer": {
+    "contact": "Contacto",
+    "phone": "Telefono",
+    "followUs": "Siguenos"
+  },
+  "Hotels": {
+    "title": "Resultados",
+    "subtitle": "Total de resultados encontrados para esta region:"
+  },
+  "Start": {
+    "option": "Estrellas",
+    "option2": "Estrella"
+  },
+  "SerpFilter": {
+    "item1": {
+      "title": "Instalaciones",
+      "option1": "Piscina disponible",
+      "option2": "Acceso a internet",
+      "option3": "Gimnasio disponible",
+      "option4": "Jacuzzi disponible",
+      "option5": "Spa disponible",
+      "option6": "Cocina disponible en habitación o área común."
+    },
+    "item2": {
+      "title": "Servicios",
+      "option1": "Servicio de comidas o restaurante",
+      "option2": "Centro de negocios disponible",
+      "option3": "Transporte al aeropuerto disponible",
+      "option4": "Soporte para personas con discapacidades"
+    },
+    "item3": {
+      "title": "Mascotas",
+      "option1": "Se permiten mascotas"
+    },
+    "item4": {
+      "title": "Comodidades",
+      "option1": "Aire acondicionado disponible",
+      "option2": "Estacionamiento disponible",
+      "option3": "Cargadores para autos eléctricos disponibles",
+      "option4": "Zonas permitidas para fumar"
+    },
+    "item5": {
+      "title": "Actividades",
+      "option1": "Acceso o cercanía a actividades de esquí",
+      "option2": "Actividades o instalaciones para niños",
+      "option3": "Cercanía o acceso a la playa"
+    }
+  }
+}

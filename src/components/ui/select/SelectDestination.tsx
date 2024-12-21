@@ -3,6 +3,7 @@ import { useDestination } from "@/hooks/useDestination";
 import { Destination } from "@/interfaces/Destination";
 import { DestinationStore } from "@/store/DestinationStore";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import {  UseFormSetValue } from "react-hook-form";
 
 interface Props {
@@ -12,6 +13,8 @@ interface Props {
 export const SelectDestination = ({ setValue }: Props) => {
   const { items, isLoading, loadDestination } = useDestination();
   const { setname } = DestinationStore();
+     const t = useTranslations("Filter");
+  
 
   const onSelectionChange = (key: React.Key | null) => {
     console.log(key);
@@ -30,8 +33,8 @@ export const SelectDestination = ({ setValue }: Props) => {
         className="w-full"
         isLoading={isLoading}
         defaultItems={items}
-        label="Destino"
-        placeholder="Selecciona destino"
+        label={t('seach.title')}
+        placeholder={t('seach.placeholder')}
         onInputChange={(e) => {
           loadDestination(e)
         }}

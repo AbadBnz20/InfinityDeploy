@@ -8,32 +8,16 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+
   Spinner,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import React, {  useState } from "react";
 
-const translations = {
-  es: {
-    title: "Iniciar sesion",
-    option1: "Mi Perfil",
-    option2: "Paquetes",
-    option3: "Reservas",
-    subtitle: "Cerrar Sesion",
-  },
-  en: {
-    title: "Login",
-    option1: "Profile",
-    option2: "Packages",
-    option3: "Reservations",
-    subtitle: "Log Out",
-  },
-};
+import { SelectLenguage } from "./SelectLenguage";
+import { useTranslations } from "next-intl";
+
 
 export const UserContent = () => {
-  const [language] = useState("es");
-  const t = translations[language as keyof typeof translations];
-  console.log(t);
    const {session,loading}= useSession();
 
 
@@ -51,13 +35,12 @@ interface Props{
 }
 
 const UserActive = ({user}:Props) => {
-  const [language] = useState("es");
-  const t = translations[language as keyof typeof translations];
+    const t = useTranslations("dropdown");
    const route =  useRouter();
   const Onredirect = ()=>{
     route.push('/profile')
   }
-
+ 
 
   return (
     <Dropdown placement="bottom-end">
@@ -80,16 +63,25 @@ const UserActive = ({user}:Props) => {
           <p className="font-semibold">{user.email}</p>
         </DropdownItem>
         <DropdownItem key="settings" onPress={() => Onredirect()}>
-          {t.option1}
+        {t("option1")}
         </DropdownItem>
-        {/* <DropdownItem key="team_settings">{t.option2}</DropdownItem> */}
-        <DropdownItem key="configurations">{t.option3}</DropdownItem>
+        <DropdownItem
+            key="theme"
+            isReadOnly
+            className="cursor-default"
+            endContent={
+              <SelectLenguage/>
+            }
+          >
+             {t("option2")}
+          </DropdownItem>
+        <DropdownItem key="configurations"> {t("option3")}</DropdownItem>
         <DropdownItem
           onClick={() => signOutAction()}
           key="logout"
           color="danger"
         >
-          {t.subtitle}
+          {t("option4")}
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

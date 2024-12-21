@@ -16,16 +16,17 @@ import { formatDateToISO } from "@/actions/getDestination";
 import { IoCreateOutline } from "react-icons/io5";
 import { SelectDestination } from "../ui/select/SelectDestination";
 import { ContentDays } from "../ui/select/ContentDays";
+import { useTranslations } from "next-intl";
 
 export const ContentFilter = () => {
-  const { setValue, handleSubmit, watch } = useForm<Destination>();
+  const { setValue, handleSubmit } = useForm<Destination>();
   const [visible, setVisible] = useState(true);
-  const [date, setdate] = useState<RangeValue<DateValue>>({
-    start: today(getLocalTimeZone()).add({ days: 1 }),
-    end: today(getLocalTimeZone()).add({ days: 2 }),
-  });
-  const [validate, setValidate] = useState(true);
-  const { setDestinationData, guest, checkin, checkout, name } =
+    const t = useTranslations("Filter");
+    const [date, setdate] = useState<RangeValue<DateValue> | null>({
+      start: today(getLocalTimeZone()).add({ days: 1 }),
+      end: today(getLocalTimeZone()).add({ days: 2 }),
+    });
+  const { setDestinationData, guest, checkin, checkout, name,id } =
     DestinationStore();
   useEffect(() => {
     setValue(
@@ -37,15 +38,6 @@ export const ContentFilter = () => {
       `${date?.end.year}-${date?.end.month}-${date?.end.day}`
     );
   }, [date]);
-  const watchFields = watch("id");
-
-  useEffect(() => {
-    if (watchFields) {
-      setValidate(false);
-    } else {
-      setValidate(true);
-    }
-  }, [watchFields]);
   useEffect(() => {
     const fetchData = async () => {
       if (checkin && checkout) {
@@ -60,6 +52,10 @@ export const ContentFilter = () => {
   }, [checkin, checkout]);
 
   const onsubmit: SubmitHandler<Destination> = (data) => {
+    if (!data.id) {
+       setDestinationData(id, data.checkin, data.checkout, data.guest);
+       return;
+    }
     setDestinationData(data.id, data.checkin, data.checkout, data.guest);
   };
 
@@ -67,7 +63,7 @@ export const ContentFilter = () => {
     <form onSubmit={handleSubmit(onsubmit)}>
       <div className="bg-maincolor rounded-lg shadow p-6 mt-6">
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold mb-4 ">Buscar</h2>
+          <h2 className="text-xl font-semibold mb-4 ">{t('button')}</h2>
           {visible ? (
             <Input
               type="text"
@@ -90,25 +86,25 @@ export const ContentFilter = () => {
           </label>
           <DateRangePicker
             value={date}
-            onChange={()=>setdate}
+            onChange={setdate}
             minValue={today(getLocalTimeZone())}
             className="text-blue-600"
           />
         </div>
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Seleccionar
+           {t('room.title')}
           </label>
           <SelectGuest setValue={setValue} value={guest} />
         </div>
         <div className="space-y-2 mt-4">
         <label htmlFor="rooms" className="block text-sm font-medium ">
-            Noches
+        {t('option')}
           </label>
             <ContentDays/>
         </div>
-        <Button type="submit" isDisabled={validate} className="w-full mt-5">
-          Buscar
+        <Button type="submit"  className="w-full mt-5">
+        {t('button')}
         </Button>
       </div>
     </form>

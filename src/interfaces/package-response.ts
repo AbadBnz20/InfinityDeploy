@@ -28,11 +28,16 @@ export interface Pagination {
   total: number;
 }
 
+export interface Profile{
+  profileId:string;
+  package:Package;
+}
+
 export interface Package {
   packageId:string;
   name: string;
   description: string;
   percentage: number;
-  price:number;
-  state: boolean;
+  price: number;
+  state:boolean;
 }

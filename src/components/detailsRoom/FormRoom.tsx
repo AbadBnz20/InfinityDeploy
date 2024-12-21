@@ -166,6 +166,7 @@ export const FormRoom = ({
                       required: "El campo de nombre es requerido",
                     })}
                     label="Nombre"
+                    defaultValue={firstname}
                     placeholder="Ingrese nombre"
                     type="text"
                   />
@@ -174,6 +175,7 @@ export const FormRoom = ({
                       required: "El campo de apellido es requerido",
                     })}
                     label="Apellido"
+                    defaultValue={lastname}
                     type="text"
                     placeholder="Ingrese apellido"
                     isInvalid={!!errors.supplier_data?.last_name_original}
@@ -196,6 +198,8 @@ export const FormRoom = ({
                     label="Correo"
                     type="email"
                     placeholder="Ingrese Correo"
+                    defaultValue={email}
+
                     isInvalid={!!errors.supplier_data?.email}
                     errorMessage={errors.supplier_data?.email?.message}
                   />
@@ -205,6 +209,8 @@ export const FormRoom = ({
                     })}
                     label="Numero"
                     type="text"
+                    defaultValue={phone}
+
                     placeholder="Ingrese numero"
                     isInvalid={!!errors.supplier_data?.phone}
                     errorMessage={errors.supplier_data?.phone?.message}

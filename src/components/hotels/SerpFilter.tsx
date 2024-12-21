@@ -2,58 +2,57 @@
 
 import { DestinationStore } from "@/store/DestinationStore";
 import { Accordion, AccordionItem, Checkbox } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 const instalation = [
-  { key: "has_pool", description: "Piscina disponible" },
-  { key: "has_internet", description: "Acceso a internet" },
-  { key: "has_fitness", description: "Gimnasio disponible" },
-  { key: "has_jacuzzi", description: "Jacuzzi disponible" },
-  { key: "has_spa", description: "Spa disponible" },
+  { key: "has_pool", description: "item1.option1" },
+  { key: "has_internet", description: "item1.option2" },
+  { key: "has_fitness", description: "item1.option3" },
+  { key: "has_jacuzzi", description: "item1.option4" },
+  { key: "has_spa", description: "item1.option5" },
   {
     key: "kitchen",
-    description: "Cocina disponible en la habitación o área común",
+    description: "item1.option6",
   },
 ];
 
 const services = [
-  { key: "has_meal", description: "Servicio de comidas o restaurante" },
-  { key: "has_business", description: "Centro de negocios disponible" },
+  { key: "has_meal", description: "item2.option1" },
+  { key: "has_business", description: "item2.option2" },
   {
     key: "has_airport_transfer",
-    description: "Transporte al aeropuerto disponible",
+    description: "item2.option3",
   },
   {
     key: "has_disabled_support",
-    description: "Soporte para personas con discapacidades",
+    description: "item2.option4",
   },
 ];
 
 const comfort = [
-  { key: "air_conditioning", description: "Aire acondicionado disponible" },
-  { key: "has_parking", description: "Estacionamiento disponible" },
+  { key: "air_conditioning", description: "item4.option1" },
+  { key: "has_parking", description: "item4.option2" },
   {
     key: "has_ecar_charger",
-    description: "Cargadores para autos eléctricos disponibles",
+    description: "item4.option3",
   },
-  { key: "has_smoking", description: "Zonas permitidas para fumar" },
+  { key: "has_smoking", description: "item4.option4" },
 ];
 
 const activities = [
-  { key: "has_ski", description: "Acceso o cercanía a actividades de esquí" },
-  { key: "has_kids", description: "Actividades o instalaciones para niños" },
-  { key: "beach", description: "Cercanía o acceso a la playa" },
+  { key: "has_ski", description:  "item5.option1" },
+  { key: "has_kids", description: "item5.option2" },
+  { key: "beach", description: "item5.option3" },
 ];
 
 export const SerpFilter = () => {
   const [filters, setFilters] = useState<string[]>([]);
-  const {filterHotels}=DestinationStore();
-
+  const { filterHotels } = DestinationStore();
+  const t = useTranslations("SerpFilter");
   useEffect(() => {
     filterHotels(filters);
-  }, [filters])
-  
-
+  }, [filters]);
 
   const handleFilterChange = (value: string) => {
     setFilters((prevFilters) =>
@@ -74,7 +73,7 @@ export const SerpFilter = () => {
       >
         <AccordionItem
           key={"1"}
-          title="Instalaciones"
+          title={t("item1.title")}
           value="points-of-interest"
         >
           <div className="space-y-2">
@@ -89,13 +88,17 @@ export const SerpFilter = () => {
                   htmlFor="plaza"
                   className="flex-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {item.description}
+                  {t(`${item.description}`)}
                 </label>
               </div>
             ))}
           </div>
         </AccordionItem>
-        <AccordionItem key={"2"} title="Servicios" value="points-of-interest">
+        <AccordionItem
+          key={"2"}
+          title={t("item2.title")}
+          value="points-of-interest"
+        >
           <div className="space-y-2">
             {services.map((item) => (
               <div key={item.key} className="flex items-center space-x-2">
@@ -108,13 +111,13 @@ export const SerpFilter = () => {
                   htmlFor="plaza"
                   className="flex-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {item.description}
+                  {t(`${item.description}`)}
                 </label>
               </div>
             ))}
           </div>
         </AccordionItem>
-        <AccordionItem title="Mascotas" value="points-of-interest">
+        <AccordionItem title={t("item3.title")} value="points-of-interest">
           <div className="space-y-2">
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -126,12 +129,12 @@ export const SerpFilter = () => {
                 htmlFor="plaza"
                 className="flex-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                Se permiten mascotas
+                {t("item3.option1")}
               </label>
             </div>
           </div>
         </AccordionItem>
-        <AccordionItem title="Comodidades" value="points-of-interest">
+        <AccordionItem title={t("item4.title")} value="points-of-interest">
           <div className="space-y-2">
             {comfort.map((item) => (
               <div key={item.key} className="flex items-center space-x-2">
@@ -144,13 +147,13 @@ export const SerpFilter = () => {
                   htmlFor="plaza"
                   className="flex-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {item.description}
+                   {t(`${item.description}`)}
                 </label>
               </div>
             ))}
           </div>
         </AccordionItem>
-        <AccordionItem title="Actividades" value="points-of-interest">
+        <AccordionItem title={t("item5.title")} value="points-of-interest">
           <div className="space-y-2">
             {activities.map((item) => (
               <div key={item.key} className="flex items-center space-x-2">
@@ -163,7 +166,7 @@ export const SerpFilter = () => {
                   htmlFor="plaza"
                   className="flex-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {item.description}
+                   {t(`${item.description}`)}
                 </label>
               </div>
             ))}

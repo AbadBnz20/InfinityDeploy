@@ -13,6 +13,7 @@ import { SelectGuest } from "../ui/select/SelectGuest";
 import { DestinationStore } from "@/store/DestinationStore";
 import { useRouter } from "next/navigation";
 import { getLocalTimeZone, today } from "@internationalized/date";
+import { useTranslations } from "next-intl";
 
 export const Reservation = () => {
   const { setValue, handleSubmit, watch } = useForm<Destination>();
@@ -20,6 +21,8 @@ export const Reservation = () => {
     start: today(getLocalTimeZone()).add({ days: 1 }),
     end: today(getLocalTimeZone()).add({ days: 2 }),
   });
+  const t = useTranslations("Filter");
+
   const [validate, setValidate] = useState(true);
   const { setDestinationData, guest } = DestinationStore();
   const router = useRouter();
@@ -71,13 +74,13 @@ export const Reservation = () => {
           </div>
           <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Seleccionar
+              {t('room.title')}
             </label>
             <SelectGuest setValue={setValue} value={guest} />
           </div>
           <div className="mt-6">
             <Button isDisabled={validate} type="submit" className="w-full">
-              Buscar
+              {t('button')}
             </Button>
           </div>
         </div>
