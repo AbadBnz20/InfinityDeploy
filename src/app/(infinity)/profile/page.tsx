@@ -1,5 +1,8 @@
 import { UserActive } from "@/actions/auth/getuser";
+import { ContentPackage } from "@/components/profile/ContentPackage";
+import { ContentPhone } from "@/components/profile/ContentPhone";
 import { FormProfile } from "@/components/profile/FormProfile";
+import { ModalPhone } from "@/components/profile/ModalPhone";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
@@ -10,12 +13,12 @@ const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  // console.log(user);
   if (!user) {
     return redirect("/auth/login");
   }
 
   const useractive = await UserActive(user.id);
-
   return (
    <>
     <ToastContainer/>
@@ -39,6 +42,11 @@ const supabase = await createClient();
       </aside>
       <main className="col-span-3 p-6">
         <FormProfile firstname={useractive.firstname} lastname={useractive.lastname} birthdate={""} country={""} email={user.email || ""} />
+        <ModalPhone >
+        <ContentPhone IdPackage={user.phone || ""}/>
+        </ModalPhone>
+        <h4 className="mt-8 text-lg font-semibold">Paquetes adquirido</h4>
+        <ContentPackage data={useractive.package} />
       </main>
     </div>
    </>

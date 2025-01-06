@@ -4,7 +4,8 @@ import { Reservation } from "./Reservation";
 import { useTranslations } from "next-intl";
 import { LuHotel,LuShip  } from "react-icons/lu";
 import { FaRegClock, FaRegPaperPlane } from "react-icons/fa";
-import { IoCarSportOutline } from "react-icons/io5";
+import {  IoSwapHorizontalOutline } from "react-icons/io5";
+import { Transfers } from "./Transfers";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
   return (
@@ -26,16 +27,11 @@ export const TapsMain = () => {
           </Tab>
           <Tab key="traslados" title={
                <div className="flex items-center space-x-2">
-               <IoCarSportOutline  />
+               <IoSwapHorizontalOutline  />
                <span>{t("option5")}</span>
              </div>
             }>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.2222
-            </div>
+            <Transfers/>
           </Tab>
           <Tab key="ultimo" title={
                <div className="flex items-center space-x-2">

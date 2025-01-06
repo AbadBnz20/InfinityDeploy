@@ -101,7 +101,7 @@ export const FormPhone = ({getnumbers}:Props) => {
       <Button
         isLoading={loading}
         type="submit"
-        className="col-span-full"
+       
         color="primary"
         size="sm"
       >

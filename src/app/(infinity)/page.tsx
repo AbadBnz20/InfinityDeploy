@@ -1,4 +1,4 @@
-import { Experiences,  Roms, Slider } from "@/components";
+import { Experiences,   Slider } from "@/components";
 import { TapsMain } from "@/components/home/TapsMain";
 export default async function HomePage() {
 
@@ -8,7 +8,7 @@ export default async function HomePage() {
       <Slider  />
       <TapsMain />
       <Experiences />
-      <Roms />
+      {/* <Roms /> */}
     </div>
   );
 }

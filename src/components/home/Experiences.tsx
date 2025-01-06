@@ -11,7 +11,7 @@ export const Experiences = () => {
         <h2 className="text-3xl font-bold text-center mb-16 text-gold-500 ">
           {t("title")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {[
             {
               icon: (
@@ -82,41 +82,15 @@ export const Experiences = () => {
               title: "item3",
               description: "item3",
             },
-            {
-              icon: (
-                <svg
-                  className="size-16"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M2 12h1" />
-                  <path d="M6 8h-2a1 1 0 0 0 -1 1v6a1 1 0 0 0 1 1h2" />
-                  <path d="M6 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z" />
-                  <path d="M9 12h6" />
-                  <path d="M15 7v10a1 1 0 0 0 1 1h1a1 1 0 0 0 1 -1v-10a1 1 0 0 0 -1 -1h-1a1 1 0 0 0 -1 1z" />
-                  <path d="M18 8h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2" />
-                  <path d="M22 12h-1" />
-                </svg>
-              ),
-              title: "item4",
-              description: "item4",
-            },
           ].map((feature, index) => (
             <div key={index} className="text-center group">
               <div className="mb-6 text-gold-500 transition-transform duration-300 transform group-hover:scale-110">
-                {feature.icon}
+                {/* {feature.icon} */}
               </div>
               <h3 className="text-xl font-semibold mb-2 ">
                 {t(`${feature.title}.title`)}
               </h3>
-              <p className="text-gray-500">
+              <p className="text-gray-500 text-justify">
                 {t(`${feature.description}.description`)}
               </p>
             </div>

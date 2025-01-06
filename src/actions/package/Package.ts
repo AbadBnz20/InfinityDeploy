@@ -1,8 +1,7 @@
-'use server';
+"use server";
 
-import {  Package, Profile } from "@/interfaces/package-response";
+import {  Profile } from "@/interfaces/package-response";
 import { createClient } from "@/utils/supabase/server";
-
 
 export const GetPackage = async () => {
   const supabase = await createClient();
@@ -11,20 +10,14 @@ export const GetPackage = async () => {
   } = await supabase.auth.getUser();
 
   const { data, error } = await supabase
-  .from('profile')
-  .select(`profileId,package(name,description)`)
-  .eq("user_id", user?.id);
-   console.log(data?.[0].package)
+    .from("profile")
+    .select(`*, package(*)`)
+    .eq("user_id", user?.id);
+
   if (error) {
-    console.log(error)
-     return {} as Profile;
-  }
-   
-  const  profile: Profile ={
-    profileId: data?.[0].profileId,
-    package: { } as Package
+    console.log(error);
+    return {} as Profile;
   }
 
- return profile
-
+  return data?.[0] as Profile;
 };

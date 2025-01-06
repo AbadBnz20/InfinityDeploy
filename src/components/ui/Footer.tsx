@@ -30,13 +30,13 @@ export const Footer = () => {
             </h3>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.facebook.com/infinityluxurytravel"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400"
               >
                 Facebook
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/infinityluxurytravelclub/"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400"
               >
                 Instagram

@@ -1,3 +1,4 @@
+'use client';
 import {
     Modal,
     ModalContent,
@@ -7,9 +8,12 @@ import {
     Button,
     useDisclosure,
   } from "@nextui-org/react";
-import { ContentPhone } from "./ContentPhone";
-  
-export const ModalPhone = () => {
+
+interface Props{
+  children: React.ReactNode;
+}
+
+export const ModalPhone = ({children}:Props) => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -21,7 +25,7 @@ export const ModalPhone = () => {
             <>
               <ModalHeader className="flex flex-col gap-1"></ModalHeader>
               <ModalBody>
-                <ContentPhone/>
+                {children}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>

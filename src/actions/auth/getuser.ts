@@ -1,5 +1,6 @@
 import { Strapi } from "@/Api/Strapi";
-import { AuthResponse, UserActive as user } from "@/interfaces/auth-response";
+import { AuthResponse} from "@/interfaces/auth-response";
+import { Profile } from "@/interfaces/package-response";
 import { createClient } from "@/utils/supabase/server";
 
 export const ValidateUser = async (email: string, password: string) => {
@@ -20,10 +21,10 @@ export const UserActive = async (id: string) => {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("profile")
-    .select(`* `)
+    .select(`*, package(*)`)
     .eq("user_id", id);
   if (error) {
-    return {} as user;
+    return {} as Profile;
   }
-  return data?.[0] as user;
+  return data?.[0] as Profile;
 };

@@ -50,21 +50,18 @@
   "Experiences": {
     "title": "Exclusive Experiences",
     "item1": {
-      "title": "Exotic Destinations",
-      "description": "Discover unexplored paradises and luxurious retreats"
+      "title": "An Exclusive Vacation Club",
+      "description": "Infinity Luxury Travel is an exclusive vacation club that offers its members unique benefits and preferential rates, ensuring maximum value and an unparalleled travel experience.We take pride in providing our members with access to exclusive rates and unforgettable experiences at the Seadust Hotel and a wide range of destinations worldwide, thanks to our strategic partnerships."
     },
     "item2": {
-      "title": "Signature Gastronomy",
-      "description": "Taste culinary creations from Michelin star chefs"
+      "title": "Personalized and Exceptional Experiences",
+      "description": "We specialize in designing personalized and exceptional travel experiences that not only meet but exceed our partners' expectations, making us an essential part of their adventures.Our commitment is to ensure that every journey is memorable, unique, and enriching, creating moments they will cherish forever."
     },
     "item3": {
-      "title": "Premium Connectivity",
-      "description": "Stay connected with high-speed Wi-Fi at all times"
-    },
-    "item4": {
-      "title": "Personalized Wellness",
-      "description": "Fitness and spa programs designed for you"
+      "title": "Unforgettable Moments for Our Partners",
+      "description": "As a member of Infinity Luxury Travel, you will have access to exclusive travel experiences designed to create unforgettable moments. Enjoy luxury accommodations worldwide with preferential benefits, including room upgrades, personalized activities, and special rates on tours and excursions.Thanks to our strategic partnerships, you can explore beach destinations, mountain retreats, cosmopolitan cities, and cultural hubs, all with a unique touch and customized services. We are dedicated to tailoring each experience to your preferences, ensuring that every journey becomes a memory you will treasure forever."
     }
+   
   },
   "Footer": {
     "contact": "Contact",
