@@ -2,30 +2,35 @@ import { Button, Select, SelectItem } from "@nextui-org/react";
 import React, { useState } from "react";
 
 export const animals = [
-    {key: "1", label: "1"},
-    {key: "2", label: "2"},
-    {key: "3", label: "3"},
-    {key: "4", label: "4"},
-    {key: "5", label: "5"},
-    {key: "6", label: "6"},
-    {key: "7", label: "7"},
-    {key: "8", label: "8"},
-    {key: "9", label: "9"},
-   
-  ];
+  { key: "1", label: "1" },
+  { key: "2", label: "2" },
+  { key: "3", label: "3" },
+  { key: "4", label: "4" },
+  { key: "5", label: "5" },
+  { key: "6", label: "6" },
+  { key: "7", label: "7" },
+  { key: "8", label: "8" },
+  { key: "9", label: "9" },
+];
 export const SelectPassengers = () => {
-  const [adults, setAdults] = React.useState("2");
+  const [adults, setAdults] = React.useState<string>("2");
   const [children, setChildren] = React.useState("2");
   const [isOpen, setIsOpen] = useState(false);
   const getSummaryText = () => {
-       setAdults("2");
-       setChildren("2");
-
     const adultsText = `${adults} adultos`;
     const childrenText = children !== "0" ? `, ${children} niños` : "";
     return `${adultsText}${childrenText}`;
   };
 
+  const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setAdults(e.target.value);
+  };
+
+  const handleSelectionChangechildren = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setChildren(e.target.value);
+  };
 
   return (
     <div className="relative w-full max-w-sm ">
@@ -63,7 +68,12 @@ export const SelectPassengers = () => {
                   <label className="text-sm font-medium text-black">
                     Adultos
                   </label>
-                  <Select className="max-w-xs" >
+                  <Select
+                    defaultSelectedKeys={["2"]}
+                    value={adults}
+                    className="max-w-xs"
+                    onChange={handleSelectionChange}
+                  >
                     {animals.map((animal) => (
                       <SelectItem key={animal.key}>{animal.label}</SelectItem>
                     ))}
@@ -74,8 +84,12 @@ export const SelectPassengers = () => {
                     Niños
                   </label>
 
-                  <Select>
-                  {animals.map((animal) => (
+                  <Select
+                    defaultSelectedKeys={["2"]}
+                    value={children}
+                    onChange={handleSelectionChangechildren}
+                  >
+                    {animals.map((animal) => (
                       <SelectItem key={animal.key}>{animal.label}</SelectItem>
                     ))}
                   </Select>

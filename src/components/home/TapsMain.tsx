@@ -6,6 +6,7 @@ import { LuHotel,LuShip  } from "react-icons/lu";
 import { FaRegClock, FaRegPaperPlane } from "react-icons/fa";
 import {  IoSwapHorizontalOutline } from "react-icons/io5";
 import { Transfers } from "./Transfers";
+import { Ships } from "./Ships";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
   return (
@@ -52,12 +53,7 @@ export const TapsMain = () => {
                <span>{ t("option3")}</span>
              </div>
            }>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </div>
+           <Ships/>
           </Tab>
           <Tab key="vacacion" title={
             <div className="flex items-center space-x-2">
