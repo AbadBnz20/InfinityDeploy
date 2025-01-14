@@ -1,14 +1,17 @@
-import { getLocalTimeZone, now } from "@internationalized/date";
+import { getLocalTimeZone, now, parseDate, today } from "@internationalized/date";
 import {
   Autocomplete,
   AutocompleteItem,
   Button,
   DatePicker,
+  DateValue,
   Radio,
   RadioGroup,
 } from "@nextui-org/react";
-import React from "react";
-import { SelectPassengers } from "../ui/select/SelectPassengers";
+import React, { useState } from "react";
+import { childrenArray, SelectPassengers } from "../ui/select/SelectPassengers";
+import { useForm } from "react-hook-form";
+import { SellectOrigin } from "../ui/select/SellectOrigin";
 
 export const animals = [
   {
@@ -66,13 +69,43 @@ export const animals = [
     description: "A large semiaquatic reptile",
   },
 ];
+interface Transfers {
+  tripType: "Ida" | "Ida y vuelta";
+  origin: string;
+  destination: string;
+  arrivaltime: string;
+  departuretime: string;
+  adults: string;
+  children: string;
+}
 export const Transfers = () => {
+  // const { setValue, handleSubmit, watch } = useForm<Transfers>();
+  const [selected, setSelected] = useState("Ida");
+  const [origin, setOrigin] = useState<string>("");
+  const [Destination, setDestination] = useState<string>("");
+  const [arrivaltime, setArrivaltime] = React.useState<DateValue | null>(now(getLocalTimeZone()));
+  const [departuretime, setDeparturetime] = React.useState<DateValue | null>(now(getLocalTimeZone()));
+  const [passengers, setPassengers] = useState({
+    adults:"1",
+    children:"0"
+  })
+
+
+  const Onsubmit = ()=>{
+    console.log({selected,origin,Destination,arrivaltime,departuretime,passengers })
+  }
+
+
   return (
     <div className="p-2">
       <div>
-        <RadioGroup orientation="horizontal">
-          <Radio value="buenos-aires">Ida </Radio>
-          <Radio value="sydney">Ida y vuelta</Radio>
+        <RadioGroup
+          value={selected}
+          onValueChange={setSelected}
+          orientation="horizontal"
+        >
+          <Radio value="Ida">Ida </Radio>
+          <Radio value="Ida y vuelta">Ida y vuelta</Radio>
         </RadioGroup>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
@@ -80,31 +113,16 @@ export const Transfers = () => {
           <label htmlFor="rooms" className="block text-sm font-medium ">
             Origen
           </label>
-          <Autocomplete
-            className="w-full"
-            defaultItems={animals}
-            size="md"
-            placeholder="Seleccione origen"
-          >
-            {(item) => (
-              <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>
-            )}
-          </Autocomplete>
+          <SellectOrigin setvalue={setOrigin} placeholder="seleccione origen" />
         </div>
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
             Destino
           </label>
-          <Autocomplete
-            className="w-full"
-            defaultItems={animals}
-            size="md"
-            placeholder="Seleccione destino"
-          >
-            {(item) => (
-              <AutocompleteItem key={item.key}>{item.label}</AutocompleteItem>
-            )}
-          </Autocomplete>
+          <SellectOrigin
+            setvalue={setDestination}
+            placeholder="seleccione destino"
+          />
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
@@ -116,7 +134,8 @@ export const Transfers = () => {
             <DatePicker
               hideTimeZone
               showMonthAndYearPickers
-              defaultValue={now(getLocalTimeZone())}
+              value={arrivaltime}
+              onChange={setArrivaltime}
             />
           </div>
           <div className="w-full ">
@@ -124,9 +143,11 @@ export const Transfers = () => {
               Hora y fecha de salida de vuelo o transporte
             </label>
             <DatePicker
+              isDisabled={selected !== "Ida y vuelta"}
               hideTimeZone
               showMonthAndYearPickers
-              defaultValue={now(getLocalTimeZone())}
+              value={departuretime}
+              onChange={setDeparturetime}
             />
           </div>
         </div>
@@ -135,10 +156,10 @@ export const Transfers = () => {
             <label htmlFor="rooms" className="block text-sm font-medium ">
               Pasajeros
             </label>
-            <SelectPassengers />
+            <SelectPassengers setPassengers={setPassengers} passengers={passengers} />
           </div>
           <div className="w-full ">
-            <Button type="submit" className="w-full">
+            <Button onPress={()=>Onsubmit()} isDisabled={ origin === "" || Destination === "" } type="submit" className="w-full">
               Buscar
             </Button>
           </div>

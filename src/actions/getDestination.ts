@@ -11,7 +11,7 @@ import { HotelsResponse } from "@/interfaces/hotels-response";
 import { RoomsResponse } from "@/interfaces/rooms-response";
 
  export const formatDateToISO = (dateString: string): string => {
-  const formattedDate = DateTime.fromFormat(dateString, "yyyy-MM-d").toFormat("yyyy-MM-dd");
+  const formattedDate = DateTime.fromFormat(dateString, "yyyy-M-d").toFormat("yyyy-MM-dd");
   return formattedDate;
 };
 
@@ -38,7 +38,7 @@ export const GetHotels = async (
   checkout: string,
   guest: Array<any>
 ) => {
-  // console.log(formatDateToISO(checkin),formatDateToISO(checkout));
+  console.log( await formatDateToISO(checkin),await formatDateToISO(checkout));
 
   try {
     const resp = await HotelsApi.post<HotelsResponse>("/search/serp/region", {
@@ -54,7 +54,7 @@ export const GetHotels = async (
 
     return resp.data.data.hotels;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return [];
   }
 };

@@ -39,15 +39,15 @@ export const useDestination = () => {
   const [items, setItems] = useState<Region[]>(region);
   const [isLoading, setIsLoading] = useState(false);
   const loadDestination = async (text: string) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const resp = await GetDestination(text);
       setItems(resp);
 
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   return {
