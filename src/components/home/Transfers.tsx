@@ -1,7 +1,5 @@
-import { getLocalTimeZone, now, parseDate, today } from "@internationalized/date";
+import { getLocalTimeZone, now, } from "@internationalized/date";
 import {
-  Autocomplete,
-  AutocompleteItem,
   Button,
   DatePicker,
   DateValue,
@@ -9,8 +7,7 @@ import {
   RadioGroup,
 } from "@nextui-org/react";
 import React, { useState } from "react";
-import { childrenArray, SelectPassengers } from "../ui/select/SelectPassengers";
-import { useForm } from "react-hook-form";
+import {  SelectPassengers } from "../ui/select/SelectPassengers";
 import { SellectOrigin } from "../ui/select/SellectOrigin";
 
 export const animals = [

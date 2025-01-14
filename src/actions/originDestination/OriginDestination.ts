@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 export const GetOriginDestination = async () => {
   const supabase = await createClient();
 
-  const { data: categories, error } = await supabase.from(
+  const { data: categories } = await supabase.from(
     "category_origin_destination"
   ).select(`
      categoryId, name,

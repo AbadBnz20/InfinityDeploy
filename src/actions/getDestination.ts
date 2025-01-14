@@ -54,7 +54,7 @@ export const GetHotels = async (
 
     return resp.data.data.hotels;
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     return [];
   }
 };

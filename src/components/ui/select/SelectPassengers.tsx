@@ -39,8 +39,6 @@ interface Props {
   >;
 }
 export const SelectPassengers = ({passengers,setPassengers}:Props) => {
-  const [adults, setAdults] = React.useState<string>("2");
-  const [children, setChildren] = React.useState("2");
   const [isOpen, setIsOpen] = useState(false);
   const getSummaryText = () => {
     const adultsText = `${passengers.adults} adultos`;
