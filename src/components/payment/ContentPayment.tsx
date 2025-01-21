@@ -1,102 +1,44 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Appearance, loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import { CheckoutForm } from "./CheckoutForm";
-import { CheckoutContent } from "../checkoutpayment/CheckoutContent";
-import { ReservationStore } from "@/store/ReservationStore";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
-);
+import {  Card, CardBody, CardHeader, Input } from "@nextui-org/react";
+import { IoBagCheckOutline, IoCardOutline } from "react-icons/io5";
 
 export const ContentPayment = () => {
-  const [clientSecret, setClientSecret] = useState("");
-  const [dpmCheckerLink, setDpmCheckerLink] = useState("");
-  const [confirmed, setConfirmed] = useState<string | null>(null);
-  const { total } = ReservationStore();
-  useEffect(() => {
-    setConfirmed(
-      new URLSearchParams(window.location.search).get(
-        "payment_intent_client_secret"
-      )
-    );
-  });
-
-  useEffect(() => {
-    if (total) {
-      console.log(total)
-      fetch("/api/payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ room: { name: "room_1", price: total } }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setClientSecret(data.clientSecret);
-          setDpmCheckerLink(data.dpmCheckerLink);
-        });
-    }
-  }, [total]);
-
-  const appearance: Appearance = {
-    theme: "flat",
-    variables: {
-      fontFamily: '"Gill Sans", sans-serif',
-      fontLineHeight: "1.5",
-      borderRadius: "10px",
-      colorBackground: "#F6F8FA",
-      accessibleColorOnColorPrimary: "#262626",
-    },
-    rules: {
-      ".Block": {
-        backgroundColor: "var(--colorBackground)",
-        boxShadow: "none",
-        padding: "12px",
-      },
-      ".Input": {
-        padding: "12px",
-      },
-      ".Input:disabled, .Input--invalid:disabled": {
-        color: "lightgray",
-      },
-      ".Tab": {
-        padding: "10px 12px 8px 12px",
-        border: "none",
-      },
-      ".Tab:hover": {
-        border: "none",
-        boxShadow:
-          "0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)",
-      },
-      ".Tab--selected, .Tab--selected:focus, .Tab--selected:hover": {
-        border: "none",
-        backgroundColor: "#fff",
-        boxShadow:
-          "0 0 0 1.5px var(--colorPrimaryText), 0px 1px 1px rgba(0, 0, 0, 0.03), 0px 3px 7px rgba(18, 42, 66, 0.04)",
-      },
-      ".Label": {
-        fontWeight: "500",
-        color: "#cdcecf",
-      },
-    },
-  };
-  const options = {
-    clientSecret,
-    appearance,
-  };
-
   return (
     <>
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          {confirmed ? (
-            <CheckoutContent />
-          ) : (
-            <CheckoutForm dpmCheckerLink={dpmCheckerLink} />
-          )}
-        </Elements>
-      )}
+      <Card className="shadow-small ">
+        <CardHeader>
+          <IoCardOutline size={24} />
+          Metodo de pago
+        </CardHeader>
+        <CardBody>
+          <form className="mt-4 space-y-4">
+            <div>
+              <label htmlFor="cardNumber">Numero de tarjeta</label>
+              <Input id="cardNumber" placeholder="xxxx xxxx xxxx xxxx" />
+            </div>
+            <div>
+              <label htmlFor="cardHolder">Nombre del propietario</label>
+              <Input id="cardHolder" placeholder="John Doe" />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="expirationDate">Fecha de expiracion</label>
+                <Input id="expirationDate" placeholder="MM/YY" />
+              </div>
+              <div>
+                <label htmlFor="cvv">CVV/CVC</label>
+                <Input id="cvv" placeholder="***" type="password" />
+              </div>
+            </div>
+            <div className="flex items-center text-sm text-gray-500">
+              <IoBagCheckOutline className="h-4 w-4 mr-1" />
+              Su transacción está segura con encriptación SSL
+            </div>
+            
+          </form>
+        </CardBody>
+      </Card>
     </>
   );
 };
