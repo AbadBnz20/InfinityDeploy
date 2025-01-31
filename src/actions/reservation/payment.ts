@@ -39,15 +39,24 @@ export const RegisterTokenizerCard = async (card: TokenizerCard) => {
       }
     );
     if (resp.data.status === 'ok') {
-       return true;
+       return {
+        status: true,
+        message:''
+       }
     } else {
-      return false;
+      return {
+        status: false,
+        message: resp.data.error,
+      };
     }
 
 
   } catch (error) {
     console.log(error);
 
-    return false;
+    return {
+      status: 'error',
+      message: 'Ha ocurrido un error al procesar los datos de la tarjeta',
+    };
   }
 };

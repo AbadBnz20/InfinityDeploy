@@ -7,3 +7,10 @@ export interface OriginDestination {
   origindestinationId: string;
   name: string;
 }
+
+
+
+export interface OriginDestinationShip {
+  origin_destination_ship_id: string;
+  name: string;
+}

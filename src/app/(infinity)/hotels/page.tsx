@@ -1,9 +1,12 @@
+import { GetDiscountByUser } from "@/actions/package/PackageByUserClientId";
 import { ContentMain } from "@/components";
 
-export default  function HotelsPage() {
+export default async  function HotelsPage() {
+  const discount = await GetDiscountByUser()
+
   return (
     <div>
-      <ContentMain/>
+      <ContentMain discount={discount}/>
     </div>
   );
 }

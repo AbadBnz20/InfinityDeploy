@@ -3,14 +3,14 @@ import { DestinationStore } from "@/store/DestinationStore";
 import { Button, Divider, Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-// import { PaymentStore } from "@/store/PaymentStore";
-// import { ReservationStore } from "@/store/ReservationStore";
-// import {
-//   OrderBookingForm,
-//   RegisterReservation,
-//   ReservationStrapi,
-// } from "@/actions/reservation/registerreservation";
-// import { formatDateToISO } from "@/actions/getDestination";
+import { PaymentStore } from "@/store/PaymentStore";
+import { ReservationStore } from "@/store/ReservationStore";
+import {
+  OrderBookingForm,
+  RegisterReservation,
+  ReservationStrapi,
+} from "@/actions/reservation/registerreservation";
+import { formatDateToISO } from "@/actions/getDestination";
 import { useRouter } from "next/navigation";
 import { InformationRoom } from "../reservation/InformationRoom";
 
@@ -26,9 +26,9 @@ interface User {
   phone: string;
   email: string;
 }
-// interface Partner {
-//   partner_order_id: string;
-// }
+interface Partner {
+  partner_order_id: string;
+}
 
 export interface RoomGuest {
   guests: Guest[];
@@ -57,7 +57,9 @@ export const FormRoom = ({
   email,
 }: Props) => {
   const { guest } = DestinationStore();
-
+  const { checkin, checkout } = DestinationStore();
+  const { destination, name, nameroom, subtotal, total, book_hash } =
+    ReservationStore();
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -68,7 +70,7 @@ export const FormRoom = ({
     defaultValues: { rooms: [] },
   });
   const router = useRouter();
-  // const { setPaymentData } = PaymentStore();
+  const { setPaymentData } = PaymentStore();
   useEffect(() => {
     if (guest && guest.length > 0) {
       reset({
@@ -95,298 +97,284 @@ export const FormRoom = ({
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setLoading(true);
-    console.log(data);
-    // const obj: ReservationStrapi = {
-    //   discount: 0,
-    //   destination: destination,
-    //   end_date: await formatDateToISO(checkin),
-    //   start_date: await formatDateToISO(checkout),
-    //   hotel_name: name,
-    //   room_name: nameroom,
-    //   number_adults: guest.reduce((sum, item) => sum + item.adults, 0),
-    //   rooms_number: guest.length,
-    //   number_children: guest.reduce((sum, item) => sum + item.children.length, 0),
-    //   price: subtotal,
-    //   sub_total: subtotal,
-    //   total: total,
-    // };
-    // const reservation = await RegisterReservation(obj);
-    // if (reservation) {
-    //   const parther: Partner = {
-    //     partner_order_id: reservation.data.documentId,
-    //   };
+    // console.log(data);
+    const obj: ReservationStrapi = {
+      discount: 0,
+      destination: destination,
+      end_date: await formatDateToISO(checkin),
+      start_date: await formatDateToISO(checkout),
+      hotel_name: name,
+      room_name: nameroom,
+      number_adults: guest.reduce((sum, item) => sum + item.adults, 0),
+      rooms_number: guest.length,
+      number_children: guest.reduce(
+        (sum, item) => sum + item.children.length,
+        0
+      ),
+      price: subtotal,
+      sub_total: subtotal,
+      total: total,
+    };
+    const reservation = await RegisterReservation(obj);
+    if (reservation) {
+      const parther: Partner = {
+        partner_order_id: reservation.rom_reservation_id!,
+      };
 
-    //   const resp = await OrderBookingForm(
-    //     reservation.data.documentId,
-    //     book_hash
-    //   );
+      const resp = await OrderBookingForm(
+        reservation.rom_reservation_id!,
+        book_hash
+      );
 
-    //   if (resp?.data) {
-    //     setPaymentData(
-    //       resp.data.item_id,
-    //       data.rooms,
-    //       data.supplier_data,
-    //       parther
-    //     );
+      if (resp?.data) {
+        setPaymentData(
+          resp.data.item_id,
+          data.rooms,
+          data.supplier_data,
+          parther
+        );
 
-    //     router.push("/reservation");
-    //   }
-    // }
-    // setLoading(false);
-
-    // const width = 600;
-    // const height = 600;
-
-    // // Calcula la posición para centrar la ventana
-    // const left = (window.screen.width - width) / 2;
-    // const top = (window.screen.height - height) / 2;
-
-    // // Abre una nueva ventana con las dimensiones y posición especificadas
-    // window.open(
-    //   "/payment/checkout",
-    //   "_blank",
-    //   // `width=${width},height=${height},top=${top},left=${left}`
-    // );
-
-    router.push("/checkoutpayment");
+        router.push("/reservation");
+      }
+    }
     setLoading(false);
 
+    // router.push("/checkoutpayment");
+    // setLoading(false);
   };
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 md:grid-cols-5">
-            <div className="col-span-3">
-              <div className="mt-5">
-                <p className="font-semibold">Socio</p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
-                  <Input
-                    {...register("supplier_data.first_name_original", {
-                      required: "El campo de nombre es requerido",
-                    })}
-                    label="Nombre"
-                    defaultValue={firstname}
-                    placeholder="Ingrese nombre"
-                    type="text"
-                  />
-                  <Input
-                    {...register("supplier_data.last_name_original", {
-                      required: "El campo de apellido es requerido",
-                    })}
-                    label="Apellido"
-                    defaultValue={lastname}
-                    type="text"
-                    placeholder="Ingrese apellido"
-                    isInvalid={!!errors.supplier_data?.last_name_original}
-                    errorMessage={
-                      errors.supplier_data?.last_name_original?.message
-                    }
-                  />
-                  <Input
-                    label="Pais"
-                    type="text"
-                    defaultValue={country}
-                    placeholder="Ingrese pais"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
-                  <Input
-                    {...register("supplier_data.email", {
-                      required: "El campo de Correo es requerido",
-                    })}
-                    label="Correo"
-                    type="email"
-                    placeholder="Ingrese Correo"
-                    defaultValue={email}
-
-                    isInvalid={!!errors.supplier_data?.email}
-                    errorMessage={errors.supplier_data?.email?.message}
-                  />
-                  <Input
-                    {...register("supplier_data.phone", {
-                      required: "El campo de Numero es requerido",
-                    })}
-                    label="Numero"
-                    type="text"
-                    defaultValue={phone}
-
-                    placeholder="Ingrese numero"
-                    isInvalid={!!errors.supplier_data?.phone}
-                    errorMessage={errors.supplier_data?.phone?.message}
-                  />
-                  <Input
-                    type="text"
-                    label="Fecha Nacimiento"
-                    defaultValue={birthdate}
-                    placeholder="Ingrese Edad"
-                  />
-                </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid grid-cols-1 md:grid-cols-5">
+          <div className="col-span-3">
+            <div className="mt-5">
+              <p className="font-semibold">Socio</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+                <Input
+                  {...register("supplier_data.first_name_original", {
+                    required: "El campo de nombre es requerido",
+                  })}
+                  label="Nombre"
+                  defaultValue={firstname}
+                  placeholder="Ingrese nombre"
+                  type="text"
+                />
+                <Input
+                  {...register("supplier_data.last_name_original", {
+                    required: "El campo de apellido es requerido",
+                  })}
+                  label="Apellido"
+                  defaultValue={lastname}
+                  type="text"
+                  placeholder="Ingrese apellido"
+                  isInvalid={!!errors.supplier_data?.last_name_original}
+                  errorMessage={
+                    errors.supplier_data?.last_name_original?.message
+                  }
+                />
+                <Input
+                  label="Pais"
+                  type="text"
+                  defaultValue={country}
+                  placeholder="Ingrese pais"
+                />
               </div>
-
-              {guest.map((room, roomIndex) => (
-                <div className="my-5" key={roomIndex}>
-                  <p className="font-semibold">Habitación {roomIndex + 1}</p>
-
-                  {/* Campos de Adultos */}
-                  {Array.from({ length: room.adults }).map((_, adultIndex) => (
-                    <div
-                      key={`adult-${roomIndex}-${adultIndex}`}
-                      className="mt-5"
-                    >
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Adulto {adultIndex + 1}
-                      </p>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                        <Input
-                          {...register(
-                            `rooms.${roomIndex}.guests.${adultIndex}.first_name` as const,
-                            {
-                              required: "El campo de Nombre es requerido",
-                            }
-                          )}
-                          isInvalid={
-                            !!errors.rooms?.[roomIndex]?.guests?.[adultIndex]
-                              ?.first_name
-                          }
-                          errorMessage={
-                            errors.rooms?.[roomIndex]?.guests?.[adultIndex]
-                              ?.first_name?.message
-                          }
-                          label="Nombre"
-                          type="text"
-                          placeholder="Ingrese nombre"
-                        />
-                        <Input
-                          {...register(
-                            `rooms.${roomIndex}.guests.${adultIndex}.last_name` as const,
-                            {
-                              required: "El campo de Apellido es requerido",
-                            }
-                          )}
-                          isInvalid={
-                            !!errors.rooms?.[roomIndex]?.guests?.[adultIndex]
-                              ?.last_name
-                          }
-                          errorMessage={
-                            errors.rooms?.[roomIndex]?.guests?.[adultIndex]
-                              ?.last_name?.message
-                          }
-                          label="Apellido"
-                          type="text"
-                          placeholder="Ingrese apellido"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                  {room.children.map((age: any, childIndex: any) => (
-                    <div
-                      key={`child-${roomIndex}-${childIndex}`}
-                      className="mt-3"
-                    >
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Niño {childIndex + 1}
-                      </p>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                        <Input
-                          {...register(
-                            `rooms.${roomIndex}.guests.${
-                              room.adults + childIndex
-                            }.first_name` as const,
-                            {
-                              required: "El campo de Nombre es requerido",
-                            }
-                          )}
-                          isInvalid={
-                            !!errors.rooms?.[roomIndex]?.guests?.[
-                              room.adults + childIndex
-                            ]?.first_name
-                          }
-                          errorMessage={
-                            errors.rooms?.[roomIndex]?.guests?.[
-                              room.adults + childIndex
-                            ]?.first_name?.message
-                          }
-                          label="Nombre"
-                          type="text"
-                          placeholder="Ingrese nombre"
-                        />
-                        <Input
-                          {...register(
-                            `rooms.${roomIndex}.guests.${
-                              room.adults + childIndex
-                            }.last_name` as const,
-                            {
-                              required: "El campo de Apellido es requerido",
-                            }
-                          )}
-                          isInvalid={
-                            !!errors.rooms?.[roomIndex]?.guests?.[
-                              room.adults + childIndex
-                            ]?.last_name
-                          }
-                          errorMessage={
-                            errors.rooms?.[roomIndex]?.guests?.[
-                              room.adults + childIndex
-                            ]?.last_name?.message
-                          }
-                          label="Apellido"
-                          type="text"
-                          placeholder="Ingrese apellido"
-                        />
-                        <Input
-                          {...register(
-                            `rooms.${roomIndex}.guests.${
-                              room.adults + childIndex
-                            }.age` as const,
-                            {
-                              required: "El campo de Edad es requerido",
-                              min: {
-                                value: 0,
-                                message: "La edad no puede ser negativa",
-                              },
-                              max: {
-                                value: 18,
-                                message: "La edad no puede ser mayor a 120",
-                              },
-                            }
-                          )}
-                          isInvalid={
-                            !!errors.rooms?.[roomIndex]?.guests?.[
-                              room.adults + childIndex
-                            ]?.age
-                          }
-                          errorMessage={
-                            errors.rooms?.[roomIndex]?.guests?.[
-                              room.adults + childIndex
-                            ]?.age?.message
-                          }
-                          label="Edad"
-                          type="number"
-                          placeholder="Ingrese edad"
-                        />
-                      </div>
-                    </div>
-                  ))}
-
-                  <Divider className="my-5" />
-                </div>
-              ))}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+                <Input
+                  {...register("supplier_data.email", {
+                    required: "El campo de Correo es requerido",
+                  })}
+                  label="Correo"
+                  type="email"
+                  placeholder="Ingrese Correo"
+                  defaultValue={email}
+                  isInvalid={!!errors.supplier_data?.email}
+                  errorMessage={errors.supplier_data?.email?.message}
+                />
+                <Input
+                  {...register("supplier_data.phone", {
+                    required: "El campo de Numero es requerido",
+                  })}
+                  label="Numero"
+                  type="text"
+                  defaultValue={phone}
+                  placeholder="Ingrese numero"
+                  isInvalid={!!errors.supplier_data?.phone}
+                  errorMessage={errors.supplier_data?.phone?.message}
+                />
+                <Input
+                  type="text"
+                  label="Fecha Nacimiento"
+                  defaultValue={birthdate}
+                  placeholder="Ingrese Edad"
+                />
+              </div>
             </div>
-            <div className="col-span-2">
-              <InformationRoom />
-              <div className=" w-full">
-                <Button
-                  className="w-full bg-black text-white dark:bg-white dark:text-black mt-1"
-                  type="submit"
-                  isLoading={loading}
-                >
-                  Continuar
-                </Button>
+
+            {guest.map((room, roomIndex) => (
+              <div className="my-5" key={roomIndex}>
+                <p className="font-semibold">Habitación {roomIndex + 1}</p>
+
+                {/* Campos de Adultos */}
+                {Array.from({ length: room.adults }).map((_, adultIndex) => (
+                  <div
+                    key={`adult-${roomIndex}-${adultIndex}`}
+                    className="mt-5"
+                  >
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      Adulto {adultIndex + 1}
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      <Input
+                        {...register(
+                          `rooms.${roomIndex}.guests.${adultIndex}.first_name` as const,
+                          {
+                            required: "El campo de Nombre es requerido",
+                          }
+                        )}
+                        isInvalid={
+                          !!errors.rooms?.[roomIndex]?.guests?.[adultIndex]
+                            ?.first_name
+                        }
+                        errorMessage={
+                          errors.rooms?.[roomIndex]?.guests?.[adultIndex]
+                            ?.first_name?.message
+                        }
+                        label="Nombre"
+                        type="text"
+                        placeholder="Ingrese nombre"
+                      />
+                      <Input
+                        {...register(
+                          `rooms.${roomIndex}.guests.${adultIndex}.last_name` as const,
+                          {
+                            required: "El campo de Apellido es requerido",
+                          }
+                        )}
+                        isInvalid={
+                          !!errors.rooms?.[roomIndex]?.guests?.[adultIndex]
+                            ?.last_name
+                        }
+                        errorMessage={
+                          errors.rooms?.[roomIndex]?.guests?.[adultIndex]
+                            ?.last_name?.message
+                        }
+                        label="Apellido"
+                        type="text"
+                        placeholder="Ingrese apellido"
+                      />
+                    </div>
+                  </div>
+                ))}
+                {room.children.map((age: any, childIndex: any) => (
+                  <div
+                    key={`child-${roomIndex}-${childIndex}`}
+                    className="mt-3"
+                  >
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      Niño {childIndex + 1}
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                      <Input
+                        {...register(
+                          `rooms.${roomIndex}.guests.${
+                            room.adults + childIndex
+                          }.first_name` as const,
+                          {
+                            required: "El campo de Nombre es requerido",
+                          }
+                        )}
+                        isInvalid={
+                          !!errors.rooms?.[roomIndex]?.guests?.[
+                            room.adults + childIndex
+                          ]?.first_name
+                        }
+                        errorMessage={
+                          errors.rooms?.[roomIndex]?.guests?.[
+                            room.adults + childIndex
+                          ]?.first_name?.message
+                        }
+                        label="Nombre"
+                        type="text"
+                        placeholder="Ingrese nombre"
+                      />
+                      <Input
+                        {...register(
+                          `rooms.${roomIndex}.guests.${
+                            room.adults + childIndex
+                          }.last_name` as const,
+                          {
+                            required: "El campo de Apellido es requerido",
+                          }
+                        )}
+                        isInvalid={
+                          !!errors.rooms?.[roomIndex]?.guests?.[
+                            room.adults + childIndex
+                          ]?.last_name
+                        }
+                        errorMessage={
+                          errors.rooms?.[roomIndex]?.guests?.[
+                            room.adults + childIndex
+                          ]?.last_name?.message
+                        }
+                        label="Apellido"
+                        type="text"
+                        placeholder="Ingrese apellido"
+                      />
+                      <Input
+                        {...register(
+                          `rooms.${roomIndex}.guests.${
+                            room.adults + childIndex
+                          }.age` as const,
+                          {
+                            required: "El campo de Edad es requerido",
+                            min: {
+                              value: 0,
+                              message: "La edad no puede ser negativa",
+                            },
+                            max: {
+                              value: 18,
+                              message: "La edad no puede ser mayor a 120",
+                            },
+                          }
+                        )}
+                        isInvalid={
+                          !!errors.rooms?.[roomIndex]?.guests?.[
+                            room.adults + childIndex
+                          ]?.age
+                        }
+                        errorMessage={
+                          errors.rooms?.[roomIndex]?.guests?.[
+                            room.adults + childIndex
+                          ]?.age?.message
+                        }
+                        label="Edad"
+                        type="number"
+                        placeholder="Ingrese edad"
+                      />
+                    </div>
+                  </div>
+                ))}
+
+                <Divider className="my-5" />
               </div>
+            ))}
+          </div>
+          <div className="col-span-2">
+            <InformationRoom />
+            <div className=" w-full">
+              <Button
+                className="w-full bg-black text-white dark:bg-white dark:text-black mt-1"
+                type="submit"
+                isLoading={loading}
+              >
+                Continuar
+              </Button>
             </div>
           </div>
-        </form>
+        </div>
+      </form>
     </>
   );
 };

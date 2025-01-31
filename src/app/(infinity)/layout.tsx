@@ -9,7 +9,6 @@ export default async function InfinityLayoutPage({
   children: React.ReactNode;
 }) {
   const supabase = await createClient();
-  
 
   const {
     data: { user },
@@ -19,7 +18,7 @@ export default async function InfinityLayoutPage({
   }
   return (
     <>
-      
+    
       <main className="min-h-screen flex flex-col">
         <NextUIProvider>
           <NavbarC />

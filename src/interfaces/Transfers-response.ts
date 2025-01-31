@@ -6,7 +6,10 @@ export interface Car{
     image: string,
     description: string,
     transferprice: number,
-    state: boolean
+    state: boolean,
+    type: string,
+    brand: string,
+    color: string,
   }
 
 

@@ -16,21 +16,29 @@ export const ContentCars = () => {
     idcargoing,
     idcarreturn,
     selected,
+    origin,
+    destination
   } = TransfersStore();
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["1"]));
   const router = useRouter();
+
+
+  useEffect(() => {
+    // console.log(loading)
+  }, [loading])
+  
 
   useEffect(() => {
     const fetchHotels = async () => {
       setLoading(true);
       await getCars();
-      setLoading(false);
       updatecargoing("");
       updatecarreturn("");
+      setLoading(false);
     };
-
     fetchHotels();
-  }, []);
+
+  }, [selected,origin,destination]);
 
   const onRedirect = () => {
     router.push(`/detailstransfers`);
@@ -38,8 +46,11 @@ export const ContentCars = () => {
 
   return (
     <div className="w-full md:w-full">
-      <div className=" mb-6">
-        <ModalLoading loading={loading} />
+      <div className="mb-6">
+        
+         {
+          loading &&  <ModalLoading loading={loading} />
+         }
       </div>
       <div>
         <Accordion selectedKeys={selectedKeys} className="">

@@ -26,6 +26,10 @@ export interface Package {
 }
 
 export interface PackageMain {
-    percentage?: number;
-  }
+  percentage?: number;
+}
 
+export interface Discount {
+  discount: number;
+  package: { percentage: number };
+}

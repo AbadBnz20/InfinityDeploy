@@ -1,6 +1,6 @@
 "use client";
 import { GetRooms } from "@/actions/getDestination";
-import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
+import { GetDiscountByUser } from "@/actions/package/PackageByUserClientId";
 import { createAuthCookie } from "@/actions/terms/termscookies";
 import { currencyFormat } from "@/helpers/CurrenFormat";
 import { DataDetails } from "@/interfaces/details-response";
@@ -65,8 +65,8 @@ export const ContentRoom = ({ hotel }: Props) => {
       checkout,
       guest
     );
-    const resp = await GetPackageByIDResponse();
-    setPercentage(resp.percentage || 0);
+     const discount = await GetDiscountByUser()
+    setPercentage(discount || 0);
    if (rooms.length>0) {
     const groupedRooms: RoomGroup[] = Object.values(
       rooms[0].rates.reduce((acc: Record<string, RoomGroup>, item: Rate) => {
@@ -85,7 +85,7 @@ export const ContentRoom = ({ hotel }: Props) => {
         return acc;
       }, {})
     );
-    console.log(groupedRooms);
+    // console.log(groupedRooms);
 
     setRooms(groupedRooms);
    }

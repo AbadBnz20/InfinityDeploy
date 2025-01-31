@@ -1,6 +1,6 @@
 "use server";
 
-import { OriginDestination } from "@/interfaces/OriginDestination";
+import { OriginDestination, OriginDestinationShip } from "@/interfaces/OriginDestination";
 import {
   Car,
   DetailsDestination,
@@ -22,6 +22,19 @@ export const GetOriginDestination = async () => {
 
   return categories as OriginDestination[];
 };
+
+
+export const GetOriginDestinationShip = async () => {
+  const supabase = await createClient();
+
+  const { data: categories } = await supabase.from(
+    "origin_destination_ship"
+  ).select(`*`).eq("state", true);
+
+  return categories as OriginDestinationShip[];
+};
+
+
 
 export const GetCars = async (selected: "Ida" | "Ida y vuelta") => {
   const supabase = await createClient();

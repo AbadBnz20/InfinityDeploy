@@ -8,39 +8,34 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-
   Spinner,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-
-import { SelectLenguage } from "./SelectLenguage";
 import { useTranslations } from "next-intl";
 
-
 export const UserContent = () => {
-   const {session,loading}= useSession();
-
+  const { session, loading } = useSession();
 
   return (
     <>
-    {
-      loading ? <Spinner  size="sm"/> : session &&  <UserActive user={session} /> 
-    }
-     
+      {loading ? (
+        <Spinner size="sm" />
+      ) : (
+        session && <UserActive user={session} />
+      )}
     </>
   );
 };
-interface Props{
-  user:UserCookie
+interface Props {
+  user: UserCookie;
 }
 
-const UserActive = ({user}:Props) => {
-    const t = useTranslations("dropdown");
-   const route =  useRouter();
-  const Onredirect = ()=>{
-    route.push('/profile')
-  }
- 
+const UserActive = ({ user }: Props) => {
+  const t = useTranslations("dropdown");
+  const route = useRouter();
+  const Onredirect = () => {
+    route.push("/profile");
+  };
 
   return (
     <Dropdown placement="bottom-end">
@@ -63,21 +58,17 @@ const UserActive = ({user}:Props) => {
           <p className="font-semibold">{user.email}</p>
         </DropdownItem>
         <DropdownItem key="settings" onPress={() => Onredirect()}>
-        {t("option1")}
+          {t("option1")}
         </DropdownItem>
         <DropdownItem
-            key="theme"
-            isReadOnly
-            className="cursor-default"
-            endContent={
-              <SelectLenguage/>
-            }
-          >
-             {t("option2")}
-          </DropdownItem>
+          key="myreservations"
+          onPress={() => route.push("/myreservations")}
+        >
+          Mis Reservas
+        </DropdownItem>
         <DropdownItem key="configurations"> {t("option3")}</DropdownItem>
         <DropdownItem
-          onClick={() => signOutAction()}
+          onPress={() => signOutAction()}
           key="logout"
           color="danger"
         >

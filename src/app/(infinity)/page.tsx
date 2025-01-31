@@ -1,4 +1,4 @@
-import { Experiences,   Slider } from "@/components";
+import { Experiences, Slider } from "@/components";
 import { TapsMain } from "@/components/home/TapsMain";
 export default async function HomePage() {
 

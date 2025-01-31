@@ -4,10 +4,12 @@ import CardHotels from "./CardHotels";
 import { DestinationStore } from "@/store/DestinationStore";
 import { Pagination, Spinner } from "@nextui-org/react";
 import { ModalLoading } from "../ui/modal/ModalLoading";
-import { GetPackageByIDResponse } from "@/actions/package/PackageByUserClientId";
 import { useTranslations } from "next-intl";
 
-const ContentHotels = () => {
+interface Props {
+  discount: number;
+}
+const ContentHotels = ({ discount }: Props) => {
   const {
     gethotels,
     hotels,
@@ -17,25 +19,23 @@ const ContentHotels = () => {
     guest,
     loading: isloading,
   } = DestinationStore();
-   const t = useTranslations("Hotels");
+  const t = useTranslations("Hotels");
   const [filter, setFilter] = useState({
     init: 0,
     final: 9,
   });
-  const [percentage, setPercentage] = useState(0)
+  const [percentage, setPercentage] = useState(0);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchHotels = async () => {
       setLoading(true);
       await gethotels();
-      const resp = await GetPackageByIDResponse();
-      setPercentage( resp.percentage || 0)
+      setPercentage(discount);
       setLoading(false);
     };
 
     fetchHotels();
   }, [id, checkin, checkout, guest]);
-
 
   const handlePageChange = (page: number) => {
     setFilter({
@@ -47,11 +47,16 @@ const ContentHotels = () => {
   return (
     <div className="w-full md:w-full">
       <div className=" mb-6">
-        <h2 className="text-2xl font-semibold ">{t('title')}</h2>
+        <h2 className="text-2xl font-semibold ">{t("title")}</h2>
         <h2 className="text-medium font-medium text-gray-400">
-        {t('subtitle')} {hotels.length}
+          {t("subtitle")} {hotels.length}
         </h2>
-        <ModalLoading loading={loading} />
+        {/* <ModalLoading loading={loading} /> */}
+
+     {
+        loading && <ModalLoading loading={loading} />
+     }
+
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {isloading ? (

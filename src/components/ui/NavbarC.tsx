@@ -11,6 +11,7 @@ import { UserContent } from "./user/UserContent";
 import { useTheme } from "next-themes";
 import { ContentTheme } from "./user/ContentTheme";
 import { IoCallOutline, IoMailOutline } from "react-icons/io5";
+import { SelectLenguage } from "./user/SelectLenguage";
 
 export const NavbarC = () => {
   const { theme, setTheme } = useTheme();
@@ -30,7 +31,7 @@ export const NavbarC = () => {
           <span className="text-small">(+52) 998 500 2798 | (+1) 800 871 9040</span>
         </div>
         <div className="flex items-center space-x-2">
-          <IoMailOutline  /> <span className="text-small">members@infinityluxurytravelclub.com</span> 
+          <IoMailOutline  /> <span className="text-small">members@infinityluxurytravelclub.com </span> <span className="mx-2">|</span> <SelectLenguage/>
         </div>
       </div>
       <Divider />
@@ -49,22 +50,23 @@ export const NavbarC = () => {
             </Link>
           </NavbarBrand>
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
-            {/* <NavbarItem>
+            <NavbarItem>
               <Link
                 color="foreground"
                 href="/"
                 className="text-lg font-medium hover:text-gold-500 transition-colors "
               >
-                {t("option1")}
+                {/* {t("option1")} */}
+                Inicio
               </Link>
             </NavbarItem>
-            <NavbarItem>
+            {/* <NavbarItem>
               <Link
                 color="foreground"
                 href="/about"
                 className="text-lg font-medium hover:text-gold-500 transition-colors "
               >
-                {t("option2")}
+                Nosotros
               </Link>
             </NavbarItem> */}
           </NavbarContent>

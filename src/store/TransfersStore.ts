@@ -27,10 +27,10 @@ interface State {
   ) => void;
   getCars: () => void;
   transferCars: Transfer;
-  idcargoing:string | null;
-  idcarreturn:string | null;  
-  updatecargoing: (firstName:string) => void
-  updatecarreturn: (lastName: string) => void
+  idcargoing: string | null;
+  idcarreturn: string | null;
+  updatecargoing: (firstName: string) => void;
+  updatecarreturn: (lastName: string) => void;
 }
 
 export const TransfersStore = create<State>()(
@@ -41,8 +41,8 @@ export const TransfersStore = create<State>()(
       destination: "",
       arrivaltime: new Date(),
       departuretime: new Date(),
-      idcargoing:null,
-      idcarreturn:null,
+      idcargoing: null,
+      idcarreturn: null,
       passengers: {
         adults: 0,
         children: 0,
@@ -73,9 +73,7 @@ export const TransfersStore = create<State>()(
       },
 
       getCars: async () => {
-        const {
-          selected,
-        } = get();
+        const { selected } = get();
         const resp = await GetCars(selected);
         set({ transferCars: resp });
       },
@@ -90,7 +88,7 @@ export const TransfersStore = create<State>()(
         departuretime: state.departuretime,
         passengers: state.passengers,
         idcargoing: state.idcargoing,
-        idcarreturn:state.idcarreturn
+        idcarreturn: state.idcarreturn,
       }),
     }
   )

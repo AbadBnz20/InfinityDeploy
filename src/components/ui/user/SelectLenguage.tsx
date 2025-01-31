@@ -29,7 +29,7 @@ export const SelectLenguage = () => {
     <select
       value={language}
       onChange={handleLanguageChange}
-      className="z-10 outline-none w-20 py-0.5 rounded-md text-tiny group-data-[hover=true]:border-default-500 border-small border-default-300 dark:border-default-200 bg-transparent text-default-500"
+      className="z-10 outline-none w-20 py-0.5 rounded-md text-tiny  dark:border-default-200 bg-transparent text-default-500"
       id="theme"
       name="Idioma"
     >

@@ -33,8 +33,8 @@ export const Car = ({item,selected,updatetId}:Props) => {
         <CardBody className="p-6">
           <div className="space-y-4">
             <div>
-              <h2 className="text-xl font-semibold">{item.model}</h2>
-              <p className="text-muted-foreground">Privado</p>
+              <h2 className="text-xl font-semibold">{item.brand} {item.model}</h2>
+              <p className="text-muted-foreground">{item.type}</p>
             </div>
 
             <div className="flex items-center gap-2 text-muted-foreground">
@@ -42,15 +42,15 @@ export const Car = ({item,selected,updatetId}:Props) => {
             </div>
 
             <div className="space-y-2">
-              {/* <p className="text-sm text-muted-foreground">
-                Modelos del vehículo: 
+              <p className="text-sm text-muted-foreground">
+                Espesificaciones del vehículo: 
               </p>
               <ul className="text-sm text-muted-foreground">
-                <li>• Máximo 1 maletas grandes</li>
-                <li>• Máximo 2 pasajeros</li>
-              </ul> */}
+                <li>• Capacidad maxima: 1-{item.ability} pasajeros</li>
+                <li>• Color: {item.color}</li>
+              </ul>
               <p className="text-sm text-muted-foreground">
-                Capacidad maxima : {item.ability}
+                
               </p>
             </div>
             <div className="space-y-2">

@@ -38,9 +38,13 @@ export interface Props {
     children: number;
   };
   datetime:Date,
+  firstname:string,
+  lastname:string,
+  email:string,
+  phono:string
 }
 
-export const FormTransfer = ({ passengers,datetime }: Props) => {
+export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,phono }: Props) => {
   const {
     register,
     handleSubmit,
@@ -90,6 +94,7 @@ export const FormTransfer = ({ passengers,datetime }: Props) => {
                       required: "El campo de nombre es requerido",
                     })}
                     placeholder="Ingrese nombre"
+                    value={firstname}
                     isInvalid={!!errors.mainpassenger?.first_name}
                     errorMessage={errors.mainpassenger?.first_name?.message}
                     type="text"
@@ -102,6 +107,7 @@ export const FormTransfer = ({ passengers,datetime }: Props) => {
                       required: "El campo de apellido es requerido",
                     })}
                     type="text"
+                    value={lastname}
                     placeholder="Ingrese apellido"
                     isInvalid={!!errors.mainpassenger?.last_name}
                     errorMessage={errors.mainpassenger?.last_name?.message}
@@ -117,6 +123,7 @@ export const FormTransfer = ({ passengers,datetime }: Props) => {
                       required: "El campo de Correo es requerido",
                     })}
                     type="email"
+                    value={email}
                     placeholder="Ingrese Correo"
                     isInvalid={!!errors.mainpassenger?.email}
                     errorMessage={errors.mainpassenger?.email?.message}
@@ -129,6 +136,7 @@ export const FormTransfer = ({ passengers,datetime }: Props) => {
                       required: "El campo de Numero es requerido",
                     })}
                     type="text"
+                    value={phono}
                     placeholder="Ingrese numero"
                     isInvalid={!!errors.mainpassenger?.phone}
                     errorMessage={errors.mainpassenger?.phone?.message}

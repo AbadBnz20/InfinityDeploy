@@ -15,14 +15,22 @@ export const CreateOrderBooking = async (orderBooking: OrderBooking) => {
       "/hotel/order/booking/finish/",
       orderBooking
     );
-    console.log(resp);
     if (resp.data.status === "ok") {
-      return true;
+      return {
+        status: true,
+        message:''
+       };
     } else {
-      return false;
+      return {
+        status: false,
+        message:resp.data.error
+       };
     }
   } catch (error) {
     console.log(error);
-    return false;
+    return {
+      status: false,
+      message:'Ha ocurrido un error al registrar la reserva'
+     };
   }
 };

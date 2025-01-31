@@ -82,7 +82,7 @@ export const InformationRoom = () => {
       <Divider />
       <div className=" mt-4 pt-4 flex justify-between items-center">
         <span className="font-semibold text-gray-400">Total</span>
-        <span className="font-semibold text-xl">{total} USD</span>
+        <span className="font-semibold text-xl">{total.toFixed(2)} USD</span>
       </div>
       <div className="pt-2">
        <p>Leer <ModalTerm/> del hotel. </p>

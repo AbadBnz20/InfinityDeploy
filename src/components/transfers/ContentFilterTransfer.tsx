@@ -1,5 +1,9 @@
 "use client";
-import { getLocalTimeZone, now } from "@internationalized/date";
+import {
+  getLocalTimeZone,
+  now,
+  parseAbsoluteToLocal,
+} from "@internationalized/date";
 import {
   Button,
   DatePicker,
@@ -7,11 +11,22 @@ import {
   Radio,
   RadioGroup,
 } from "@nextui-org/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectPassengers } from "../ui/select/SelectPassengers";
 import { SellectOrigin } from "../ui/select/SellectOrigin";
+import { TransfersStore } from "@/store/TransfersStore";
 
 export const ContentFilterTransfer = () => {
+  const {
+    selected: type,
+    origin: originStore,
+    destination,
+    arrivaltime: timearrival,
+    departuretime: timedeparture,
+    passengers: passgersStore,
+    setTransfersData,
+  } = TransfersStore();
+
   const [selected, setSelected] = useState("Ida");
   const [origin, setOrigin] = useState<string>("");
   const [Destination, setDestination] = useState<string>("");
@@ -26,8 +41,45 @@ export const ContentFilterTransfer = () => {
     children: "0",
   });
 
+  useEffect(() => {
+    const isoDateStringarrival = new Date(timearrival);
+    const isoDateStringdeparture = new Date(timearrival);
+    setSelected(type);
+    setOrigin(originStore);
+    setDestination(destination);
+    setArrivaltime(parseAbsoluteToLocal(isoDateStringarrival.toISOString()));
+    setDeparturetime(
+      parseAbsoluteToLocal(isoDateStringdeparture.toISOString())
+    );
+    setPassengers({
+      adults: passgersStore.adults.toString(),
+      children: passgersStore.children.toString(),
+    });
+  }, [
+    type,
+    originStore,
+    destination,
+    timearrival,
+    timedeparture,
+    passgersStore,
+  ]);
+
   const Onsubmit = () => {
-    console.log("aqui");
+    const timearrivaltime: Date =
+      arrivaltime?.toDate(getLocalTimeZone()) || new Date();
+    const timedeparturetime: Date =
+      departuretime?.toDate(getLocalTimeZone()) || new Date();
+    setTransfersData(
+      selected as "Ida" | "Ida y vuelta",
+      origin,
+      Destination,
+      timearrivaltime,
+      timedeparturetime,
+      {
+        adults: +passengers.adults,
+        children: +passengers.children,
+      }
+    );
   };
 
   return (
@@ -50,6 +102,7 @@ export const ContentFilterTransfer = () => {
             </label>
             <SellectOrigin
               setvalue={setOrigin}
+              defaultSelectedKeys={origin}
               placeholder="seleccione origen"
             />
           </div>
@@ -59,6 +112,7 @@ export const ContentFilterTransfer = () => {
             </label>
             <SellectOrigin
               setvalue={setDestination}
+              defaultSelectedKeys={destination}
               placeholder="seleccione destino"
             />
           </div>

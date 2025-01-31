@@ -1,5 +1,5 @@
 import { Strapi } from "@/Api/Strapi";
-import { AuthResponse} from "@/interfaces/auth-response";
+import { AuthResponse, UserCookie } from "@/interfaces/auth-response";
 import { Profile } from "@/interfaces/package-response";
 import { createClient } from "@/utils/supabase/server";
 
@@ -27,4 +27,25 @@ export const UserActive = async (id: string) => {
     return {} as Profile;
   }
   return data?.[0] as Profile;
+};
+
+export const GetSession = async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {} as UserCookie;
+  }
+
+  const userdata = await UserActive(user?.id);
+
+  const userActive: UserCookie = {
+    firstname: userdata.firstname,
+    lastname: userdata.lastname,
+    email: user?.email || '',
+    phono: user?.phone || '',
+  };
+  return userActive;
 };

@@ -1,14 +1,8 @@
 "use client";
 import { GetDetailsDestination } from "@/actions/originDestination/OriginDestination";
 import { Car, DetailsDestination } from "@/interfaces/Transfers-response";
+import { parseAbsoluteToLocal } from "@internationalized/date";
 import {
-
-
-  parseAbsoluteToLocal,
-
-} from "@internationalized/date";
-import {
- 
   Card,
   CardBody,
   CardFooter,
@@ -54,7 +48,6 @@ export const ContentTransferdetail = ({
   const GetDetails = async () => {
     const resp = await GetDetailsDestination(origin, destination, car);
     setDate(resp);
-    console.log()
     const isoDateString = new Date(datetime);
     setTime(parseAbsoluteToLocal(isoDateString.toISOString()));
   };
@@ -147,17 +140,17 @@ const Carcontent = ({ car }: Props2) => {
       <CardBody className="p-6">
         <div className="space-y-2">
           <div>
-            <h2 className="text-xl font-semibold">{car.model}</h2>
-            <p className="text-muted-foreground">Privado</p>
+            <h2 className="text-xl font-semibold">{car.brand} {car.model}</h2>
+            <p className="text-muted-foreground">{car.type}</p>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground"></div>
           <div className="space-y-1">
             <p className="text-sm text-muted-foreground">
-              Capacidad maxima : {car.ability}
+              Capacidad maxima : 1-{car.ability} pasajeros
             </p>
-          </div>
-          <div className="space-y-2">
-            {/* <p className="text-sm text-muted-foreground">Descripcion :{car.description} </p> */}
+            <p className="text-sm text-muted-foreground">
+              Color : {car.color}
+            </p>
           </div>
         </div>
       </CardBody>

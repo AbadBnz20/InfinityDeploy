@@ -4,7 +4,13 @@ import { ContentTransferdetail } from "../detailstransfers/ContentTransferdetail
 import { FormTransfer } from "./FormTransfer";
 import { TransfersStore } from "@/store/TransfersStore";
 
-export const ContentMain = () => {
+interface Props {
+  firstname: string;
+  lastname: string;
+  email: string;
+  phono: string;
+}
+export const ContentMain = ({ firstname, lastname, email, phono }: Props) => {
   const {
     selected,
     origin,
@@ -37,7 +43,14 @@ export const ContentMain = () => {
           />
         )}
       </div>
-      <FormTransfer passengers={passengers} datetime={arrivaltime} />
+      <FormTransfer
+        passengers={passengers}
+        datetime={arrivaltime}
+        firstname={firstname}
+        lastname={lastname}
+        email={email}
+        phono={phono}
+      />
     </>
   );
 };

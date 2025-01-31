@@ -4,7 +4,10 @@ import { ContentFilter } from "./ContentFilter";
 import { StartFilter } from "./StartFilter";
 import { SerpFilter } from "./SerpFilter";
 import { FilterDrawer } from "./FilterDrawer";
-export const ContentMain = () => {
+interface Props {
+  discount:number;
+}
+export const ContentMain = ({discount}:Props) => {
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="mb-2 block lg:hidden ">
@@ -17,7 +20,7 @@ export const ContentMain = () => {
           <SerpFilter />
         </aside>
         <div className="w-full md:w-3/4">
-          <ContentHotels />
+          <ContentHotels discount={discount} />
         </div>
       </div>
     </main>
