@@ -8,6 +8,7 @@ export interface DetailsResponse {
 }
 
 export interface DataDetails {
+    _id: string;
     address:                          string;
     amenity_groups:                   AmenityGroup[];
     check_in_time:                    string;

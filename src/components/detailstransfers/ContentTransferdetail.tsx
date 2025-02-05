@@ -71,48 +71,63 @@ export const ContentTransferdetail = ({
         <div>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-small">Lugar de Recogida</label>
+              <label className="text-small" >
+                Lugar de Recogida
+              </label>
               <Input
+               
                 startContent={<IoLocationOutline size={24} />}
                 value={date?.origin}
                 isDisabled
                 placeholder="Ej: Aeropuerto Internacional"
+                aria-label="Lugar de Recogida"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-small">Destino</label>
+              <label className="text-small" >
+                Destino
+              </label>
               <div className="flex gap-2">
                 <Input
                   startContent={<IoLocationOutline size={24} />}
                   value={date?.destination}
                   isDisabled
                   placeholder="Ej: Aeropuerto Internacional"
+                  aria-label="Destino"
                 />
               </div>
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-small">Fecha</label>
+              <label className="text-small" >
+                Fecha
+              </label>
               <div className="flex gap-2">
                 <DateInput
+                
                   startContent={<IoCalendarOutline size={24} />}
                   isDisabled
                   granularity="day"
                   hideTimeZone
                   value={time}
+                  aria-label="Fecha"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-small">Hora</label>
+              <label className="text-small" >
+                Hora
+              </label>
               <div className="flex gap-2">
                 <TimeInput
+                
                   startContent={<IoTimeOutline size={24} />}
                   isDisabled
                   value={time}
+                  aria-label="Hora"
                 />
               </div>
             </div>
@@ -140,7 +155,9 @@ const Carcontent = ({ car }: Props2) => {
       <CardBody className="p-6">
         <div className="space-y-2">
           <div>
-            <h2 className="text-xl font-semibold">{car.brand} {car.model}</h2>
+            <h2 className="text-xl font-semibold">
+              {car.brand} {car.model}
+            </h2>
             <p className="text-muted-foreground">{car.type}</p>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground"></div>
@@ -148,9 +165,7 @@ const Carcontent = ({ car }: Props2) => {
             <p className="text-sm text-muted-foreground">
               Capacidad maxima : 1-{car.ability} pasajeros
             </p>
-            <p className="text-sm text-muted-foreground">
-              Color : {car.color}
-            </p>
+            <p className="text-sm text-muted-foreground">Color : {car.color}</p>
           </div>
         </div>
       </CardBody>

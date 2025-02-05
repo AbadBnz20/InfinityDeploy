@@ -43,7 +43,7 @@ export default function AboutPage() {
               </p>
             </CardBody>
           </Card>
-
+      
           <Card className="flex flex-col">
            
             <CardHeader className="grid grid-cols-1">

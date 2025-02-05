@@ -42,6 +42,7 @@ export const DestinationStore = create<State>()(
         set({ id, checkin, checkout, guest });
       },
       gethotels: async () => {
+        console.log('entra en la funcion get')
         const { id, checkin, checkout, guest } = get();
         const resp = (await Getoffers(
           id,

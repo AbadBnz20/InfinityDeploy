@@ -26,16 +26,26 @@ const ContentHotels = ({ discount }: Props) => {
   });
   const [percentage, setPercentage] = useState(0);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const fetchHotels = async () => {
-      setLoading(true);
-      await gethotels();
-      setPercentage(discount);
-      setLoading(false);
-    };
 
+  // useEffect(() => {
+  //   console.log(hotels)
+  // }, [hotels])
+  
+
+
+  useEffect(() => {
     fetchHotels();
+
   }, [id, checkin, checkout, guest]);
+
+
+  const fetchHotels = async () => {
+    setLoading(true);
+    await gethotels();
+    setPercentage(discount);
+    setLoading(false);
+  };
+
 
   const handlePageChange = (page: number) => {
     setFilter({
@@ -53,10 +63,7 @@ const ContentHotels = ({ discount }: Props) => {
         </h2>
         {/* <ModalLoading loading={loading} /> */}
 
-     {
-        loading && <ModalLoading loading={loading} />
-     }
-
+        {loading && <ModalLoading loading={loading} />}
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {isloading ? (

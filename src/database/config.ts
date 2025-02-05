@@ -3,10 +3,8 @@ import { MongoClient } from "mongodb";
 
 export const ConnectMongo = async () => {
   try {
-    const client = new MongoClient(process.env.DATABASE_URL || "", {
-      driverInfo: { name: "langchainjs" },
-    });
-
+    const client = new MongoClient(process.env.DATABASE_URL || "");
+    await client.connect();
     const collection = client.db("HotelDB").collection<DataDetails>("Hotels");
     return collection;
   } catch (error) {

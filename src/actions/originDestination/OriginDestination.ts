@@ -1,5 +1,4 @@
 "use server";
-
 import { OriginDestination, OriginDestinationShip } from "@/interfaces/OriginDestination";
 import {
   Car,
@@ -77,7 +76,7 @@ export const GetDetailsDestination = async (
   }
 };
 
-const GetDestination = async (idDestination: string) => {
+export const GetDestination = async (idDestination: string) => {
   const supabase = await createClient();
 
   const { data: origin_destination, error } = await supabase
@@ -93,7 +92,7 @@ const GetDestination = async (idDestination: string) => {
   return origin_destination?.name;
 };
 
-const GetCar = async (id: string) => {
+ export const GetCar = async (id: string) => {
   const supabase = await createClient();
   const { data: car, error } = await supabase
     .from("car")
