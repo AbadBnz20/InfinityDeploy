@@ -71,7 +71,7 @@ const CardHotels = ({
               {rooms.rates[0].payment_options.payment_types[0].currency_code}
             </p>
           </div>
-          <Link href={`/hotels/${index}`} className="text-white">
+          <Link href={`/hotels/${index}`} className="text-white" target="_blank" rel="noopener noreferrer">
             <Button endContent={<IoChevronForwardOutline className="ml-1" />}>
               Ver más
             </Button>

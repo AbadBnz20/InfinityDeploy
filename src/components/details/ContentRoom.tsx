@@ -66,6 +66,7 @@ export const ContentRoom = ({ hotel }: Props) => {
       guest
     );
      const discount = await GetDiscountByUser()
+     console.log(rooms);
     setPercentage(discount || 0);
    if (rooms.length>0) {
     const groupedRooms: RoomGroup[] = Object.values(

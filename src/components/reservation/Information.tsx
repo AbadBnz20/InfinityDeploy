@@ -56,8 +56,8 @@ export const Information = () => {
       credit_card_data_core: {
         year: date[1],
         card_number: data.number,
-        // card_holder: `${data.firtsname} ${data.lastname}`,
-        card_holder: `TEST`,
+        card_holder: `${data.firtsname} ${data.lastname}`,
+        // card_holder: `TEST`,
         month: date[0],
       },
       user_first_name: data.firtsname,

@@ -101,8 +101,8 @@ export const FormRoom = ({
     const obj: ReservationStrapi = {
       discount: 0,
       destination: destination,
-      end_date: await formatDateToISO(checkin),
-      start_date: await formatDateToISO(checkout),
+      end_date: await formatDateToISO(checkout),
+      start_date: await formatDateToISO( checkin),
       hotel_name: name,
       room_name: nameroom,
       number_adults: guest.reduce((sum, item) => sum + item.adults, 0),
