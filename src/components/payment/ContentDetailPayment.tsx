@@ -5,7 +5,6 @@ import {
 } from "@/actions/originDestination/OriginDestination";
 import { TransfersStore } from "@/store/TransfersStore";
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -217,12 +216,7 @@ export const ContentDetailPayment = () => {
       )}
 
       <CardFooter>
-        <Button
-          className="w-full bg-black text-white dark:bg-white dark:text-black"
-          type="submit"
-        >
-          Pagar
-        </Button>
+        
       </CardFooter>
     </Card>
   );

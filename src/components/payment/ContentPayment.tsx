@@ -1,6 +1,6 @@
 "use client";
 
-import {  Card, CardBody, CardHeader, Input } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Input } from "@nextui-org/react";
 import { IoBagCheckOutline, IoCardOutline } from "react-icons/io5";
 
 export const ContentPayment = () => {
@@ -35,7 +35,12 @@ export const ContentPayment = () => {
               <IoBagCheckOutline className="h-4 w-4 mr-1" />
               Su transacción está segura con encriptación SSL
             </div>
-            
+            <Button
+              className="w-full bg-black text-white dark:bg-white dark:text-black"
+              type="submit"
+            >
+              Pagar
+            </Button>
           </form>
         </CardBody>
       </Card>

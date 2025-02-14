@@ -14,6 +14,7 @@ import { IoBagCheckOutline, IoCardOutline } from "react-icons/io5";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { CreateOrderBooking } from "@/actions/reservation/orderbooking";
+import { RegisterPointsBySession } from "@/actions/points/RegisterPoints";
 
 interface Card {
   number: string;
@@ -32,7 +33,7 @@ export const Information = () => {
   } = useForm<Card>();
   const [loading, setLoading] = useState(false);
   const { item_id, supplier_data, partner, rooms } = PaymentStore();
-  const { price } = ReservationStore();
+  const { price,total } = ReservationStore();
 
   useEffect(() => {
     const getinfo = async () => {
@@ -115,6 +116,8 @@ export const Information = () => {
       setLoading(false);
       return;
     }
+
+await  RegisterPointsBySession(Math.round(total))
 
     toast.success("Se ha registrado correctamente.", {
       position: "top-right",
