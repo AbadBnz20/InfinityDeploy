@@ -1,46 +1,57 @@
 "use server";
 
-import { UserCookie } from "@/interfaces/auth-response";
 import { createClient } from "@/utils/supabase/server";
-
+interface Hotel {
+  rating: number;
+  service: string;
+}
 export interface TripFormRegister {
   country_origin: string;
   city_origin: string;
   contry_destination: string;
   city_destination: string;
-  departure_date: string;
-  return_date: string;
-  budget: string;
+  date_start: string;
+  date_end: string;
+  flight?: boolean;
+  hotel?: Hotel;
+  car?: string;
+  attractions?: string;
   adult: string;
-  children: string;
+  children: Array<string>;
+  details: string;
+  budget: string;
+  currency: string;
 }
 
 export const RegisterTrip = async (trip: TripFormRegister) => {
   const supabase = await createClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log(user?.user_metadata);
-
-  const activeuser = user?.user_metadata as UserCookie;
-
+  
   const { error } = await supabase
     .from("quotes")
     .insert([
       {
-        user: `${activeuser.firstname}${activeuser.lastname}`,
+        user: `${user?.user_metadata.firstname} ${user?.user_metadata.lastname}`,
         email: user?.email,
         phone: user?.phone,
         country_origin: trip.country_origin,
         city_origin: trip.city_origin,
         contry_destination: trip.contry_destination,
         city_destination: trip.city_origin,
-        departure_date: trip.departure_date,
-        return_date: trip.return_date,
+        departure_date: trip.date_start,
+        return_date: trip.date_end,
+        flight: trip.flight,
+        hotel: trip.hotel,
+        car: trip.car,
+        attractions: trip.attractions,
+        details: trip.details,
         budget: trip.budget,
-        passengers: +trip.adult + +trip.children,
-        adult: trip.adult,
-        children: trip.children,
+        adult: +trip.adult,
+        childrens: trip.children,
+        currency: trip.currency,
       },
     ])
     .select();
@@ -51,6 +62,8 @@ export const RegisterTrip = async (trip: TripFormRegister) => {
       message: error.message,
     };
   }
+
+  
 
   return {
     status: true,

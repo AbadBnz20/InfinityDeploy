@@ -40,7 +40,7 @@ export interface Props {
   datetime:Date,
   firstname:string,
   lastname:string,
-  email:string,
+  email:string | undefined,
   phono:string
 }
 

@@ -16,7 +16,15 @@ export const useSession = () => {
       data: { user },
     } = await supabase.auth.getUser();
      if (user) {
-       setSession(user?.user_metadata as UserCookie);
+      const userSession:UserCookie={
+        firstname: user.user_metadata.firstname,
+        lastname: user.user_metadata.lastname,
+        email: user.email,
+        number: user.phone,
+        phono: user.user_metadata.phono, 
+      }      
+
+       setSession(userSession);
     }
     setLoading(false);
   };

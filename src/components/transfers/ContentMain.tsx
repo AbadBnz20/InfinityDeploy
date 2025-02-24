@@ -7,7 +7,7 @@ import { TransfersStore } from "@/store/TransfersStore";
 interface Props {
   firstname: string;
   lastname: string;
-  email: string;
+  email: string | undefined;
   phono: string;
 }
 export const ContentMain = ({ firstname, lastname, email, phono }: Props) => {

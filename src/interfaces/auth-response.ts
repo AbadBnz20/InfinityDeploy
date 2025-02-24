@@ -92,7 +92,14 @@ export interface UserActive{
 export interface UserCookie {
     firstname:string,
     lastname:string,
-    email:string,
-    phono:string
-  
+    email:string | undefined,
+    phono:string 
+    number: string | undefined,
+   }
+
+   export interface UserCookieSession {
+    firstname:string,
+    lastname:string,
+    email:string | undefined,
+    phono:string 
    }

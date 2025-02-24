@@ -1,5 +1,5 @@
 import { Strapi } from "@/Api/Strapi";
-import { AuthResponse, UserCookie } from "@/interfaces/auth-response";
+import { AuthResponse, UserCookie, UserCookieSession } from "@/interfaces/auth-response";
 import { Profile } from "@/interfaces/package-response";
 import { createClient } from "@/utils/supabase/server";
 
@@ -41,7 +41,7 @@ export const GetSession = async () => {
 
   const userdata = await UserActive(user?.id);
 
-  const userActive: UserCookie = {
+  const userActive: UserCookieSession = {
     firstname: userdata.firstname,
     lastname: userdata.lastname,
     email: user?.email || '',
