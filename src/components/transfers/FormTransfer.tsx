@@ -41,10 +41,10 @@ export interface Props {
   firstname:string,
   lastname:string,
   email:string | undefined,
-  phono:string
+  number:string
 }
 
-export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,phono }: Props) => {
+export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,number }: Props) => {
   const {
     register,
     handleSubmit,
@@ -136,7 +136,7 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,phon
                       required: "El campo de Numero es requerido",
                     })}
                     type="text"
-                    value={phono}
+                    value={number}
                     placeholder="Ingrese numero"
                     isInvalid={!!errors.mainpassenger?.phone}
                     errorMessage={errors.mainpassenger?.phone?.message}

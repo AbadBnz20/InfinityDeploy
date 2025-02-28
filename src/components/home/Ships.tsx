@@ -1,95 +1,147 @@
-import React, { useState } from 'react'
-import { Button, DatePicker,  DateValue, Radio, RadioGroup } from '@nextui-org/react';
-import { getLocalTimeZone, now } from '@internationalized/date';
-import { SelectDestinationShip } from '../ui/select/SelectDestinationShip';
-import { SelectPassengers } from '../ui/select/SelectPassengers';
+import React, {  useState } from "react";
+import {
+  Button,
+  DatePicker,
+  DateValue,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { SelectDestinationShip } from "../ui/select/SelectDestinationShip";
+import { Controller, useForm } from "react-hook-form";
+import { SelectEngine } from "../ui/select/SelectEngine";
+import { SelectExperience } from "../ui/select/SelectExperience";
+import { YachtsStore } from "@/store/YachtsStore";
+import { useRouter } from "next/navigation";
+
+export interface FormYacht {
+  idLocation: string;
+  idEngine: string;
+  idExperience: string;
+
+  passengers: string;
+}
 
 export const Ships = () => {
-    const [selected, setSelected] = useState("Ida");
-      const [origin, setOrigin] = useState<string>("");
-      const [Destination, setDestination] = useState<string>("");
-      const [arrivaltime, setArrivaltime] = React.useState<DateValue | null>(now(getLocalTimeZone()));
-      const [departuretime, setDeparturetime] = React.useState<DateValue | null>(now(getLocalTimeZone()));
-      const [passengers, setPassengers] = useState({
-        adults:"1",
-        children:"0"
-      }) 
+  const [date, setdate] = useState<DateValue | null>(today(getLocalTimeZone()));
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormYacht>();
+  const {SetYahtsData} = YachtsStore();
+  const router = useRouter();
+  // useEffect(() => {
+  //   setValue('idEngine',"b1aa48c4-97ba-4293-af9d-0faacd9ac395")
+  // }, []);
 
-
-
-      const Onsubmit = ()=>{
-        console.log({selected,origin,Destination,arrivaltime,departuretime,passengers })
-      }
+  const Onsubmit = (data: FormYacht) => {
+    if (!date) {
+      return;
+    }
+    const departureDate = date?.toDate(getLocalTimeZone());
+    SetYahtsData(
+      data.idLocation,
+      data.idEngine,
+      data.idExperience,
+      departureDate,
+      data.passengers
+    );
+    router.push(`/yachts`);
+  };
 
   return (
-     <div className="p-2">
-      <div>
-        <RadioGroup
-          value={selected}
-          onValueChange={setSelected}
-          orientation="horizontal"
-        >
-          <Radio value="Ida">Ida </Radio>
-          <Radio value="Ida y vuelta">Ida y vuelta</Radio>
-        </RadioGroup>
-      </div>
+    <form onSubmit={handleSubmit(Onsubmit)} className="p-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Origen
+            Puerto de salida
           </label>
-          <SelectDestinationShip setvalue={setOrigin} placeholder="seleccione origen" />
+          <SelectDestinationShip control={control}  name="idLocation" error={errors.idLocation} />
         </div>
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Destino
+            Motor del Yate
           </label>
-          <SelectDestinationShip
-            setvalue={setDestination}
-            placeholder="seleccione destino"
-          />
+          <SelectEngine control={control}  name="idEngine" error={errors.idEngine} />
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <div className="w-full ">
+          <div className="w-full space-y-2 ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Hora y fecha de llegada
+              Fecha
             </label>
             <DatePicker
-              hideTimeZone
-              showMonthAndYearPickers
-              value={arrivaltime}
-              onChange={setArrivaltime}
+              value={date}
+              onChange={setdate}
+              minValue={today(getLocalTimeZone())}
             />
           </div>
-          <div className="w-full ">
+          <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Hora y fecha de salida de vuelo o transporte
+              Tipo de experiencia
             </label>
-            <DatePicker
-              isDisabled={selected !== "Ida y vuelta"}
-              hideTimeZone
-              showMonthAndYearPickers
-              value={departuretime}
-              onChange={setDeparturetime}
+            <SelectExperience
+              control={control}
+              name="idExperience" error={errors.idExperience}
             />
           </div>
         </div>
         <div className="grid  grid-cols-1 md:grid-cols-2 items-end gap-2">
-          <div>
+          <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Pasajeros
+              Huespedes
             </label>
-            <SelectPassengers setPassengers={setPassengers} passengers={passengers} />
+            <Controller
+              control={control}
+              name="passengers"
+              rules={{ required: "Seleccione cantidad de huéspedes" }}
+              render={({ field, fieldState, formState }) => {
+                return (
+                  <Select
+                    {...field}
+                    placeholder="Seleccione"
+                    isInvalid={fieldState.invalid}
+                    errorMessage={formState.errors.passengers?.message}
+                  >
+                    <SelectItem key={"1-6"}>1-6 Huespedes</SelectItem>
+                    <SelectItem key={"7-12"}>7-12 Huespedes</SelectItem>
+                    <SelectItem key={"13-18"}>13-18 Huespedes</SelectItem>
+                    <SelectItem key={"+19"}>+19 Huespedes</SelectItem>
+                  </Select>
+                );
+              }}
+            />
           </div>
           <div className="w-full ">
-            <Button onPress={()=>Onsubmit()} isDisabled={ origin === "" || Destination === "" } type="submit" className="w-full">
+            <Button type="submit" className="w-full">
               Buscar
             </Button>
           </div>
         </div>
       </div>
-    </div>
-  )
-}
+    </form>
+  );
+};
+
+// interface SelectProps {
+//   label: string;
+//   options: { value: string; label: string }[];
+//   register: UseFormRegisterReturn;
+// }
+
+// const Select = forwardRef<HTMLSelectElement, SelectProps>(({ label, options, register }, ref) => {
+//   return (
+//     <div>
+//       <label>{label}</label>
+//       <select ref={ref} {...register}>
+//         {options.map((option) => (
+//           <option key={option.value} value={option.value}>
+//             {option.label}
+//           </option>
+//         ))}
+//       </select>
+//     </div>
+//   );
+// });

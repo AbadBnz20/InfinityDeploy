@@ -216,6 +216,7 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
             </label>
             <Select
               value={selection.children.toString()}
+              defaultSelectedKeys={selection.children.toString()}
               placeholder="Seleccione niños"
               onChange={handleSelectionChange}
             >
@@ -226,7 +227,6 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
               ))}
             </Select>
           </div>
-
           {/* Edades de los niños */}
           {selection.children > 0 && (
             <div className="space-y-3">
@@ -240,6 +240,7 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
                     <Select
                       key={index}
                       value={age}
+                      defaultSelectedKeys={age}
                       onChange={(e) => {
                         const newAges = [...selection.childrenAges];
                         newAges[index] = e.target.value;
@@ -265,7 +266,7 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
             <Button
               variant="flat"
               onPress={() => setIsOpen(false)}
-              className="min-w-[100px]"
+              className="min-w-[100px] bg-black text-white"
             >
               Aceptar
             </Button>

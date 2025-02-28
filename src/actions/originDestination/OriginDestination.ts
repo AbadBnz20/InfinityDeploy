@@ -17,7 +17,7 @@ export const GetOriginDestination = async () => {
      origin_destination (
        origindestinationId,name
      )
-   `);
+   `).eq('origin_destination.state', true);
 
   return categories as OriginDestination[];
 };

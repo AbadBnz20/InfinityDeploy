@@ -1,11 +1,17 @@
 "use client";
 
 import { TripStore } from "@/store/TripStore";
-import { getLocalTimeZone } from "@internationalized/date";
-import { Button, DatePicker, DateValue, Input } from "@nextui-org/react";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import {
+  Button,
+  DateRangePicker,
+  DateValue,
+  Input,
+  RangeValue,
+} from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 export interface TripForm {
   country_origin: string;
   city_origin: string;
@@ -20,17 +26,22 @@ export const MyTrip = () => {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm<TripForm>();
+  const [date, setdate] = useState<RangeValue<DateValue> | null>({
+    start: today(getLocalTimeZone()).add({ days: 1 }),
+    end: today(getLocalTimeZone()).add({ days: 2 }),
+  });
   const { SetbudgetData } = TripStore();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: TripForm) => {
+    if (!date) {
+      return;
+    }
     setLoading(true);
-
-    const departureDate = data.departure_date.toDate(getLocalTimeZone());
-    const returnDate = data.return_date.toDate(getLocalTimeZone());
+    const departureDate = date?.start.toDate(getLocalTimeZone());
+    const returnDate = date?.end.toDate(getLocalTimeZone());
     SetbudgetData(
       data.country_origin,
       data.city_origin,
@@ -107,43 +118,21 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Fecha de Salida
+            Fecha
           </label>
-          <Controller
-            name="departure_date"
-            control={control}
-            rules={{ required: "La fecha es requerida" }}
-            render={({ field }) => (
-              <DatePicker
-                {...field}
-                isInvalid={!!errors.departure_date}
-                errorMessage={errors.departure_date?.message}
-              />
-            )}
+          <DateRangePicker
+            value={date}
+            onChange={setdate}
+            minValue={today(getLocalTimeZone())}
+            className="text-blue-600"
           />
         </div>
-        <div className="w-full ">
-          <label htmlFor="rooms" className="block text-sm font-medium ">
-            Fecha de Regreso
-          </label>
-          <Controller
-            name="return_date"
-            control={control}
-            rules={{ required: "La fecha es requerida" }}
-            render={({ field }) => (
-              <DatePicker
-                {...field}
-                isInvalid={!!errors.return_date}
-                errorMessage={errors.return_date?.message}
-              />
-            )}
-          />
-        </div>
-        <div className="col-span-full flex  justify-end">
+        <div className="w-full flex items-end ">
           <Button
             type="submit"
+            fullWidth
             isLoading={loading}
-            className="bg-black text-white dark:bg-white dark:text-black w-[300px]"
+            // className="bg-black text-white dark:bg-white dark:text-black"
           >
             Continuar
           </Button>

@@ -16,7 +16,7 @@ export const ContentCardflights = () => {
   return (
     <Card className={`group overflow-hidden transition-all hover:shadow-lg`}>
       <CardHeader
-        className={`relative h-72 overflow-hidden p-0  ${
+        className={`relative h-48 overflow-hidden p-0  ${
           !flight ? "opacity-75" : ""
         }`}
       >
@@ -31,7 +31,7 @@ export const ContentCardflights = () => {
           <h3 className="text-xl font-semibold">VUELOS</h3>
         </div>
       </CardHeader>
-      <CardFooter className="p-4">
+      <CardFooter className="p-4 flex items-end h-full">
         <Button
           className={`w-full flex items-center justify-center gap-2 text-white ${
             flight ? "bg-red-500 " : "bg-black "
@@ -101,7 +101,8 @@ export const ContentCardHotels = () => {
           <h3 className="text-xl font-semibold">HOTELES</h3>
         </div>
       </CardHeader>
-      <CardBody className="p-4 space-y-3">
+      <CardBody >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <Select
           value={hotelData.includesMeals}
           variant="bordered"
@@ -127,6 +128,7 @@ export const ContentCardHotels = () => {
           <SelectItem key="4">★★★★</SelectItem>
           <SelectItem key="5">★★★★★</SelectItem>
         </Select>
+        </div>
       </CardBody>
       <CardFooter className="p-4">
         <Button

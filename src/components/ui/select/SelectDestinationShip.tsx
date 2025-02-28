@@ -1,27 +1,77 @@
-import { useOriginaDestinationShip } from "@/hooks/useOriginDestinationShip";
-import { Select, SelectItem } from "@nextui-org/react";
-import React from "react";
-interface Props {
-  placeholder: string;
-  setvalue: React.Dispatch<React.SetStateAction<string>>;
+import { GetOriginDestinationShip } from "@/actions/originDestination/OriginDestination";
+import { OriginDestinationShip } from "@/interfaces/OriginDestination";
+import { Progress, Select, SelectItem } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
+import {
+  Control,
+  Controller,
+  FieldError,
+  FieldValues,
+  Path,
+} from "react-hook-form";
+
+interface Props<T extends FieldValues> {
+  control: Control<T, any>;
+  name: Path<T>;
+  error?: FieldError;
+  status?:boolean
 }
-export const SelectDestinationShip = ({ placeholder, setvalue }: Props) => {
-  const { loading, Items } = useOriginaDestinationShip();
-  const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setvalue(e.target.value);
+
+export const SelectDestinationShip = <T extends FieldValues>({ control,name,error,status=false }: Props<T>) => {
+  const [Items, setItems] = useState<OriginDestinationShip[]>([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    loadItems();
+  }, []);
+
+  const loadItems = async () => {
+    setLoading(true);
+    try {
+      const resp = await GetOriginDestinationShip();
+      setItems(resp);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
+
+  if (loading) {
+    return (
+      <div className="my-4">
+        <Progress size="sm" isIndeterminate aria-label="Loading..." />
+      </div>
+    );
+  }
+
   return (
-    <Select
-      className="w-full"
-      placeholder={placeholder}
-      isLoading={loading}
-      onChange={handleSelectionChange}
-    >
-      <>
-        {Items.map((item) => (
-          <SelectItem key={item.origin_destination_ship_id}>{item.name}</SelectItem>
-        ))}
-      </>
-    </Select>
+    <Controller
+      control={control}
+      name={name}
+      rules={{ required: "Seleccione ubicacion" }}
+      render={({ field, fieldState }) => {
+        return (
+          <Select
+            {...field}
+            className="w-full"
+            isDisabled={status}
+            isInvalid={fieldState.invalid}
+            errorMessage={error?.message}
+            placeholder="Seleccione ubicacion"
+            defaultSelectedKeys={
+              field.value ? new Set([field.value]) : new Set()
+            }
+            onSelectionChange={(keys) => field.onChange(Array.from(keys).pop())}
+          >
+            <>
+              {Items.map((item) => (
+                <SelectItem key={item.origin_destination_ship_id}>
+                  {item.name}
+                </SelectItem>
+              ))}
+            </>
+          </Select>
+        );
+      }}
+    />
   );
 };

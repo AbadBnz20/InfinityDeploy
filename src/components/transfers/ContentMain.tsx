@@ -8,9 +8,9 @@ interface Props {
   firstname: string;
   lastname: string;
   email: string | undefined;
-  phono: string;
+  number: string;
 }
-export const ContentMain = ({ firstname, lastname, email, phono }: Props) => {
+export const ContentMain = ({ firstname, lastname, email, number }: Props) => {
   const {
     selected,
     origin,
@@ -49,7 +49,7 @@ export const ContentMain = ({ firstname, lastname, email, phono }: Props) => {
         firstname={firstname}
         lastname={lastname}
         email={email}
-        phono={phono}
+        number={number}
       />
     </>
   );

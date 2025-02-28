@@ -9,12 +9,21 @@ import { Transfers } from "./Transfers";
 import { PiAirplaneTakeoffLight } from "react-icons/pi";
 import { Ships } from "./Ships";
 import { MyTrip } from "./MyTrip";
+import { Key, useState } from "react";
+import { TapsStore } from "@/store/TapsMainStore";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
+  const [selected, setSelected] = useState("mytrip");
+ const {SetYahtsData}=TapsStore();
+
+    const onChange = (e:Key)=>{
+     setSelected(e.toString())
+     SetYahtsData(e.toString())
+    }
   return (
     <section className="container mx-auto -mt-[165px] relative z-10">
       <div className="bg-maincolor shadow-xl rounded-lg  py-2 px-4 flex w-full flex-col">
-        <Tabs size="lg" variant="light" aria-label="Options">
+        <Tabs size="lg" variant="light" aria-label="Options" selectedKey={selected} onSelectionChange={onChange}>
           <Tab
             key="seadust"
             title={

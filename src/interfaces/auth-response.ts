@@ -101,5 +101,5 @@ export interface UserCookie {
     firstname:string,
     lastname:string,
     email:string | undefined,
-    phono:string 
+    number:string 
    }
