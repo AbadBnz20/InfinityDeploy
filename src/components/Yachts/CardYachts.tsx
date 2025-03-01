@@ -1,5 +1,5 @@
 import {  PackageYachtsLocation } from "@/interfaces/Yach";
-import { Button, Card, Image } from "@nextui-org/react";
+import { Button, Card } from "@nextui-org/react";
 import Link from "next/link";
 import React from "react";
 import {
@@ -18,9 +18,9 @@ export const CardYachts = ({ yachts }: Props) => {
     <Card className="group max-w-[450px] overflow-hidden  rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
       {/* Imagen y overlay */}
       <div className="relative w-full">
-        <Image
+        <img
           src={yachts.image}
-          className="object-cover w-full transition-transform duration-300 group-hover:scale-105"
+          className="object-fill  h-[270px] w-[100%] transition-transform duration-300 group-hover:scale-105"
         />
 
         {/* Overlay superior con puntos */}

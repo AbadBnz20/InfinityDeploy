@@ -23,7 +23,7 @@ export const TapsPerfecttrip = () => {
       <Tabs
         size="lg"
         aria-label="Options"
-        variant="underlined"
+       
         selectedKey={selected}
       >
         <Tab key="1" title="Paso 1">

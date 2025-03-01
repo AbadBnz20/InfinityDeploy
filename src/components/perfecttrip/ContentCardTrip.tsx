@@ -10,6 +10,8 @@ import {
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { IoAddOutline, IoTrashOutline } from "react-icons/io5";
+import { SelectCategoryCar } from "../ui/select/SelectCategoryCar";
+import { SelectAttraction } from "../ui/select/SelectAttraction";
 
 export const ContentCardflights = () => {
   const { flight, SetFlightData } = TripStore();
@@ -21,7 +23,7 @@ export const ContentCardflights = () => {
         }`}
       >
         <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AwWC4UXLCGBn7ZpAQhIoBGWpNS3gSS.png"
+          src="perfecttrip/vuelos.jpg"
           alt="Passengers relaxing on a plane"
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
         />
@@ -91,7 +93,7 @@ export const ContentCardHotels = () => {
         }`}
       >
         <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AwWC4UXLCGBn7ZpAQhIoBGWpNS3gSS.png"
+            src="perfecttrip/hoteles.jfif"
           alt="Hotel breakfast service"
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
         />
@@ -177,7 +179,7 @@ export const ContentCardCars = () => {
         }`}
       >
         <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AwWC4UXLCGBn7ZpAQhIoBGWpNS3gSS.png"
+          src="perfecttrip/autos.jpeg"
           alt="People in convertible car"
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
         />
@@ -188,26 +190,7 @@ export const ContentCardCars = () => {
         </div>
       </CardHeader>
       <CardBody className="p-4">
-        <Select
-          value={carData}
-          variant="bordered"
-          placeholder="Seleccione tipo"
-          defaultSelectedKeys={["Economico"]}
-          isDisabled={!state}
-          onChange={(e) => handleCarsChange(e.target.value)}
-        >
-          <SelectItem key="Economico">Económico</SelectItem>
-          <SelectItem key="Compacto">Compacto</SelectItem>
-          <SelectItem key="Intermedio">Intermedio</SelectItem>
-          <SelectItem key="Standard">Standard</SelectItem>
-          <SelectItem key="Tamaño_Completo">Tamaño Completo</SelectItem>
-          <SelectItem key="Premium">Premium</SelectItem>
-          <SelectItem key="Lujo">Lujo</SelectItem>
-          <SelectItem key="Especial">Especial</SelectItem>
-          <SelectItem key="Convertible">Convertible</SelectItem>
-          <SelectItem key="Van">Van</SelectItem>
-          <SelectItem key="SUV">SUV</SelectItem>
-        </Select>
+        <SelectCategoryCar carData={carData} state={state} handleCarsChange={handleCarsChange} />
       </CardBody>
       <CardFooter className="p-4">
         <Button
@@ -256,7 +239,7 @@ export const ContentCardAttraction = () => {
         }`}
       >
         <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AwWC4UXLCGBn7ZpAQhIoBGWpNS3gSS.png"
+            src="perfecttrip/atracciones.jpg"
           alt="Disney characters at Magic Kingdom"
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
         />
@@ -267,19 +250,7 @@ export const ContentCardAttraction = () => {
         </div>
       </CardHeader>
       <CardBody className="p-4">
-        <Select
-          value={attractionsData}
-          variant="bordered"
-          placeholder="Seleccione tipo"
-          defaultSelectedKeys={["Parque_Tematico"]}
-          isDisabled={!state}
-          onChange={(e) => handleAttractionsChange(e.target.value)}
-        >
-          <SelectItem key="Parque_Tematico">Parque Temático</SelectItem>
-          <SelectItem key="Tours">Tours</SelectItem>
-          <SelectItem key="Cultural">Cultural</SelectItem>
-          <SelectItem key="Aventura">Aventura</SelectItem>
-        </Select>
+        <SelectAttraction attractionsData={attractionsData}  state={state}  handleAttractionsChange={handleAttractionsChange} />
       </CardBody>
       <CardFooter className="p-4">
         <Button

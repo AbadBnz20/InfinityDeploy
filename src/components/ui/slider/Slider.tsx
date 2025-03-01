@@ -13,20 +13,20 @@ export const Slider = () => {
 
   const arraySlider = [
     {
-      img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0001-c4FngqJGMvcds8oGrOkoicZtd5kjPk.jpg',
+      img: 'home/002.jfif',
       title: "option1",  
       subtitle: "option1", 
     },
     {
-      img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0001-c4FngqJGMvcds8oGrOkoicZtd5kjPk.jpg',
+      img: 'home/003.jfif',
       title: "option2",        
       subtitle:"option2", 
     },
-    {
-      img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0001-c4FngqJGMvcds8oGrOkoicZtd5kjPk.jpg',
-      title:"option3",  
-      subtitle:"option3"
-    }
+    // {
+    //   img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0001-c4FngqJGMvcds8oGrOkoicZtd5kjPk.jpg',
+    //   title:"option3",  
+    //   subtitle:"option3"
+    // }
   ];
   return (
     <div>

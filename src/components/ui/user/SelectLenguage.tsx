@@ -45,9 +45,9 @@ export const SelectLenguage = () => {
               <img
                 src="/flags/es.png"
                 alt="Español"
-                style={{ width: "20px", marginRight: "8px" }}
+                style={{ width: "20px", marginRight: "0px" }}
               />
-              Español
+             <span className="text-[12px] hidden md:block"> Español</span>
             </>
           ) : (
             <>
@@ -56,7 +56,7 @@ export const SelectLenguage = () => {
                 alt="Inglés"
                 style={{ width: "20px", marginRight: "8px" }}
               />
-              Inglés
+             <span className="text-[12px] hidden md:block"> Ingles</span>
             </>
           )}
         </Button>
