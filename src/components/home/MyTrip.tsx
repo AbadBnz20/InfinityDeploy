@@ -10,6 +10,7 @@ import {
   RangeValue,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 export interface TripForm {
@@ -33,6 +34,7 @@ export const MyTrip = () => {
   });
   const { SetbudgetData } = TripStore();
   const router = useRouter();
+  const posthog = usePostHog();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: TripForm) => {
@@ -51,6 +53,7 @@ export const MyTrip = () => {
       returnDate.toISOString()
     );
     router.push(`/perfecttrip`);
+    posthog.capture("$pageview", { $current_url: '/perfecttrip' });
     setLoading(false);
   };
 

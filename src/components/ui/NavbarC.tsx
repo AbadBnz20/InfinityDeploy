@@ -15,6 +15,7 @@ import { SelectLenguage } from "./user/SelectLenguage";
 
 export const NavbarC = () => {
   const { theme, setTheme } = useTheme();
+  const image = theme === 'dark' ? "https://res.cloudinary.com/devz7obre/image/upload/v1742005463/ACT_350X55px-04_b5dqrf.png" : "https://res.cloudinary.com/devz7obre/image/upload/v1742005463/ACT_350X55px-02_2_f9gxig.png"
   const Onchange = () => {
     if (theme === "light") {
       setTheme("dark");
@@ -43,9 +44,9 @@ export const NavbarC = () => {
           <NavbarBrand>
             <Link href="/">
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-eigb5La26zWW8G8xrkuVbJPlSSBNEC.png"
+                src={image}
                 alt="Infinity Luxury Travel Logo"
-                className="h-16"
+                className="h-16 object-cover"
               />
             </Link>
           </NavbarBrand>

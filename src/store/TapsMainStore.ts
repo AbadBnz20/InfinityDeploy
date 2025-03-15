@@ -9,7 +9,7 @@ interface State {
   
 
 export const TapsStore = create<State>()((set)=>({
-    tapName:'',
+    tapName:'mytrip',
     SetYahtsData:(tapName)=>{
         set({tapName});
     }

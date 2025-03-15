@@ -13,6 +13,7 @@ import { SelectEngine } from "../ui/select/SelectEngine";
 import { SelectExperience } from "../ui/select/SelectExperience";
 import { YachtsStore } from "@/store/YachtsStore";
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 
 export interface FormYacht {
   idLocation: string;
@@ -31,6 +32,8 @@ export const Ships = () => {
   } = useForm<FormYacht>();
   const {SetYahtsData} = YachtsStore();
   const router = useRouter();
+  const posthog = usePostHog();
+
   // useEffect(() => {
   //   setValue('idEngine',"b1aa48c4-97ba-4293-af9d-0faacd9ac395")
   // }, []);
@@ -48,6 +51,8 @@ export const Ships = () => {
       data.passengers
     );
     router.push(`/yachts`);
+    posthog.capture("$pageview", { $current_url: '/yachts' });
+
   };
 
   return (

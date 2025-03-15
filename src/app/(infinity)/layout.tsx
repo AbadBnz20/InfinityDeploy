@@ -1,4 +1,5 @@
 import { Footer, NavbarC } from "@/components";
+import { WidgetChatbot } from "@/components/chatbot/WidgetChatbot";
 import { createClient } from "@/utils/supabase/server";
 import { NextUIProvider } from "@nextui-org/react";
 import { redirect } from "next/navigation";
@@ -24,6 +25,7 @@ export default async function InfinityLayoutPage({
           <NavbarC />
           <div className="flex-grow">{children}</div>
           <Footer />
+          <WidgetChatbot/>
         </NextUIProvider>
       </main>
     </>

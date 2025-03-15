@@ -5,28 +5,26 @@ import { SignInModal } from "./SignInModal";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 interface State {
   email: string;
 }
 
 export const SignIn = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-  } = useForm<State>();
+  const { register, handleSubmit, watch } = useForm<State>();
   const [loading, setLoading] = useState(false);
-  const { isOpen, onOpen, onOpenChange,onClose } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [captchaToken, setCaptchaToken] = useState("");
-  const site= "29125b28-4758-4a6e-9c02-1334e26a77da";
+  // const site = "29125b28-4758-4a6e-9c02-1334e26a77da";
+  const site = "0x4AAAAAABAG3GMy0bEbQ6Da";
+
   const emailValue = watch("email");
   const OnSubmit = async (state: State) => {
     setLoading(true);
-    console.log(captchaToken)
-    const resp = await signInAction(state.email,captchaToken);
-    console.log(resp)
+    // console.log(captchaToken);
+    const resp = await signInAction(state.email, captchaToken);
+    console.log(resp);
     if (!resp.status) {
       setLoading(false);
       return toast.error(resp.message, {
@@ -49,9 +47,15 @@ export const SignIn = () => {
             required: "El campo de Email es requerido",
           })}
         />
-        <HCaptcha
+        {/* <HCaptcha
           sitekey={site}
           onVerify={(token) => {
+            setCaptchaToken(token);
+          }}
+        /> */}
+        <Turnstile
+          siteKey={site}
+          onSuccess={(token) => {
             setCaptchaToken(token);
           }}
         />
@@ -62,7 +66,7 @@ export const SignIn = () => {
         </div>
       </form>
       <SignInModal
-      onClose={onClose}
+        onClose={onClose}
         isOpen={isOpen}
         onOpen={onOpen}
         onOpenChange={onOpenChange}

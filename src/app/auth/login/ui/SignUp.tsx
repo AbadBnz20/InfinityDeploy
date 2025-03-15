@@ -8,7 +8,7 @@ import {
 } from "@/actions/auth/login";
 import { toast } from "react-toastify";
 import { SignInModal } from "./SignInModal";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export interface StateForm {
   code: string;
@@ -21,8 +21,8 @@ export const SignUp = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const emailValue = `${watch("code")}${watch("phone")}`;
   const [captchaToken, setCaptchaToken] = useState("");
-  const site = "29125b28-4758-4a6e-9c02-1334e26a77da";
-
+  // const site = "29125b28-4758-4a6e-9c02-1334e26a77da";
+  const site = "0x4AAAAAABAG3GMy0bEbQ6Da";
   const Onhandle = async (state: StateForm) => {
     setLoading(true);
 
@@ -59,13 +59,18 @@ export const SignUp = () => {
             type="number"
           />
         </div>
-        <HCaptcha
+        {/* <HCaptcha
           sitekey={site}
           onVerify={(token) => {
             setCaptchaToken(token);
           }}
+        /> */}
+        <Turnstile
+          siteKey={site}
+          onSuccess={(token) => {
+            setCaptchaToken(token);
+          }}
         />
-
         <div className="flex gap-2 justify-end">
           <Button isLoading={loading} type="submit" fullWidth color="primary">
             Login

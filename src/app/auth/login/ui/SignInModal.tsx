@@ -42,7 +42,7 @@ export const SignInModal = ({
 
   return (
     <>
-      <Modal backdrop={"blur"} isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal hideCloseButton  isDismissable={false}  backdrop={"blur"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
         <>
               <ModalHeader className="flex flex-col gap-1">

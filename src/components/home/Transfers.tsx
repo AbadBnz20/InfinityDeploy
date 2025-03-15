@@ -12,6 +12,7 @@ import {  SelectPassengers } from "../ui/select/SelectPassengers";
 import { SellectOrigin } from "../ui/select/SellectOrigin";
 import { TransfersStore } from "@/store/TransfersStore";
 import { useRouter } from "next/navigation";
+import { usePostHog } from "posthog-js/react";
 
 // interface Transfers {
 //   tripType: "Ida" | "Ida y vuelta";
@@ -34,6 +35,7 @@ export const Transfers = () => {
   })
 const {setTransfersData}=TransfersStore()
 const router = useRouter();
+const posthog = usePostHog();
   const Onsubmit = ()=>{
     // console.log({selected,origin,Destination,arrivaltime,departuretime,passengers })
    const timearrivaltime:Date = arrivaltime?.toDate(getLocalTimeZone()) || new Date();
@@ -43,6 +45,7 @@ const router = useRouter();
       children: +passengers.children,
     })
     router.push(`/transfers`);
+    posthog.capture("$pageview", { $current_url: '/transfers' });
   }
 
 
