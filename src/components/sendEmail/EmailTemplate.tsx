@@ -53,7 +53,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   >
     <div style={{ textAlign: "center", marginBottom: "20px" }}>
       <img
-        src="https://infinityluxurytravelclub.com/imgs/infinity-luxury/logo.png"
+        src="https://res.cloudinary.com/devz7obre/image/upload/v1742005463/ACT_350X55px-02_2_f9gxig.png"
         alt="Infinity Luxury Travel"
         style={{ width: "150px" }}
       />

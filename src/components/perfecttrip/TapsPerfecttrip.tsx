@@ -19,11 +19,10 @@ export const TapsPerfecttrip = () => {
   };
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col justify-center">
       <Tabs
         size="lg"
         aria-label="Options"
-       
         selectedKey={selected}
       >
         <Tab key="1" title="Paso 1">

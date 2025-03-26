@@ -11,8 +11,6 @@ import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 import { FormMessage, Message } from "./form-message";
 import { useTheme } from "next-themes";
-
-
   interface Props{
     searchParams:Message
   }
@@ -117,7 +115,7 @@ export const LoginForm = ({searchParams}:Props) => {
           </div>
         </div>
       </form> */}
-
+     
       <div className="space-y-2 text-center flex justify-center items-center flex-col">
         <img
           src={image}
