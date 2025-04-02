@@ -1,5 +1,6 @@
 'use client';
 import { Button, Select, SelectItem } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 export const adultsArray = [
@@ -40,6 +41,8 @@ interface Props {
 }
 export const SelectPassengers = ({passengers,setPassengers}:Props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const t = useTranslations("Transfers");
   const getSummaryText = () => {
     const adultsText = `${passengers.adults} adultos`;
     const childrenText = passengers.children !== "0" ? `, ${passengers.children} niños` : "";
@@ -90,7 +93,7 @@ export const SelectPassengers = ({passengers,setPassengers}:Props) => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-black">
-                    Adultos
+                  {t("item7")}
                   </label>
                   <Select
                     defaultSelectedKeys={[passengers.adults]}
@@ -105,7 +108,7 @@ export const SelectPassengers = ({passengers,setPassengers}:Props) => {
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-black">
-                    Niños
+                  {t("item8")}
                   </label>
 
                   <Select
@@ -126,7 +129,7 @@ export const SelectPassengers = ({passengers,setPassengers}:Props) => {
                 className="w-full bg-gray-900 text-white"
                 onPress={() => setIsOpen(false)}
               >
-                Aceptar
+                 {t("item9")}
               </Button>
             </div>
           </div>

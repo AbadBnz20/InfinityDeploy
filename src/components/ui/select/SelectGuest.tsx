@@ -71,7 +71,7 @@ export const SelectGuest = ({setValue,value}:Props) => {
         {getSummary()}
       </Button>
       {isOpen && (
-        <div className="absolute top-full left-0 w-full mt-2 p-4 bg-white border rounded-md shadow-lg z-10">
+        <div className="absolute top-full left-0 w-full mt-2 p-4 bg-white border rounded-md shadow-lg z-5">
           {rooms.map((room, index) => (
             <div key={index} className="mb-4 pb-4 border-b last:border-b-0 relative">
               <h3 className="font-semibold mb-2 text-gray-900">{t('room.subtitle')} {index + 1}</h3>

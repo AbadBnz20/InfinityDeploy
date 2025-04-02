@@ -12,9 +12,11 @@ import React, { useEffect, useState } from "react";
 import { IoAddOutline, IoTrashOutline } from "react-icons/io5";
 import { SelectCategoryCar } from "../ui/select/SelectCategoryCar";
 import { SelectAttraction } from "../ui/select/SelectAttraction";
+import { useTranslations } from "next-intl";
 
 export const ContentCardflights = () => {
   const { flight, SetFlightData } = TripStore();
+  const t = useTranslations("MyperfectPage");
   return (
     <Card className={`group overflow-hidden transition-all hover:shadow-lg`}>
       <CardHeader
@@ -30,7 +32,7 @@ export const ContentCardflights = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
           {/* <Plane className="h-5 w-5" /> */}
-          <h3 className="text-xl font-semibold">VUELOS</h3>
+          <h3 className="text-xl font-semibold">{t("card.title")}</h3>
         </div>
       </CardHeader>
       <CardFooter className="p-4 flex items-end h-full">
@@ -43,12 +45,12 @@ export const ContentCardflights = () => {
           {flight ? (
             <>
               <IoTrashOutline />
-              Eliminar
+              {t("buttoncarddelete")}
             </>
           ) : (
             <>
               <IoAddOutline />
-              Agregar
+              {t("buttoncardadd")}
             </>
           )}
         </Button>
@@ -60,6 +62,8 @@ export const ContentCardflights = () => {
 export const ContentCardHotels = () => {
   const [state, setstate] = useState(false);
   const { SetHotelsData } = TripStore();
+  const t = useTranslations("MyperfectPage");
+
   const [hotelData, setHotelData] = useState({
     includesMeals: "con_alimentos",
     rating: "1",
@@ -100,7 +104,7 @@ export const ContentCardHotels = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
           {/* <Hotel className="h-5 w-5" /> */}
-          <h3 className="text-xl font-semibold">HOTELES</h3>
+          <h3 className="text-xl font-semibold"> {t("card1.title")}</h3>
         </div>
       </CardHeader>
       <CardBody >
@@ -108,13 +112,13 @@ export const ContentCardHotels = () => {
         <Select
           value={hotelData.includesMeals}
           variant="bordered"
-          placeholder="seleccione opcion"
+          placeholder={t("card1.placeholder")}
           defaultSelectedKeys={["con_alimentos"]}
           isDisabled={!state}
           onChange={(e) => handleMealsChange(e.target.value)}
         >
-          <SelectItem key="con_alimentos">Con Alimentos</SelectItem>
-          <SelectItem key="sin_alimentos">Sin Alimentos</SelectItem>
+          <SelectItem key="Con alimentos">Con Alimentos</SelectItem>
+          <SelectItem key="Sin alimentos">Sin Alimentos</SelectItem>
         </Select>
         <Select
           variant="bordered"
@@ -142,12 +146,12 @@ export const ContentCardHotels = () => {
           {state ? (
             <>
               <IoTrashOutline />
-              Eliminar
+              {t("buttoncarddelete")}
             </>
           ) : (
             <>
               <IoAddOutline />
-              Agregar
+              {t("buttoncardadd")}
             </>
           )}
         </Button>
@@ -159,6 +163,8 @@ export const ContentCardHotels = () => {
 export const ContentCardCars = () => {
   const [state, setstate] = useState(false);
   const { SetCarData } = TripStore();
+  const t = useTranslations("MyperfectPage");
+
   const [carData, setcarData] = useState("Economico");
   const handleCarsChange = (value: string) => setcarData(value);
   const toggleCard = (status: boolean) => setstate(status);
@@ -186,7 +192,7 @@ export const ContentCardCars = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
           {/* <Car className="h-5 w-5" /> */}
-          <h3 className="text-xl font-semibold">AUTOS</h3>
+          <h3 className="text-xl font-semibold">{t("card2.title")}</h3>
         </div>
       </CardHeader>
       <CardBody className="p-4">
@@ -202,12 +208,12 @@ export const ContentCardCars = () => {
           {state ? (
             <>
               <IoTrashOutline />
-              Eliminar
+              {t("buttoncarddelete")}
             </>
           ) : (
             <>
               <IoAddOutline />
-              Agregar
+              {t("buttoncardadd")}
             </>
           )}
         </Button>
@@ -222,6 +228,7 @@ export const ContentCardAttraction = () => {
   const [attractionsData, setattractionsData] = useState("Economico");
   const handleAttractionsChange = (value: string) => setattractionsData(value);
   const toggleCard = (status: boolean) => setstate(status);
+  const t = useTranslations("MyperfectPage");
 
   useEffect(() => {
     if (state) {
@@ -246,7 +253,7 @@ export const ContentCardAttraction = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
           {/* <Ticket className="h-5 w-5" /> */}
-          <h3 className="text-xl font-semibold">ATRACCIONES</h3>
+          <h3 className="text-xl font-semibold">{t("card3.title")}</h3>
         </div>
       </CardHeader>
       <CardBody className="p-4">
@@ -262,12 +269,12 @@ export const ContentCardAttraction = () => {
           {state ? (
             <>
               <IoTrashOutline />
-              Eliminar
+              {t("buttoncarddelete")}
             </>
           ) : (
             <>
               <IoAddOutline />
-              Agregar
+              {t("buttoncardadd")}
             </>
           )}
         </Button>

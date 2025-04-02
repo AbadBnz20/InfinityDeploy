@@ -5,7 +5,6 @@ import React from "react";
 import {
   IoLocationOutline,
   IoPeopleOutline,
-  IoRibbonOutline,
   IoTimeOutline,
 } from "react-icons/io5";
 
@@ -24,12 +23,12 @@ export const CardYachts = ({ yachts }: Props) => {
         />
 
         {/* Overlay superior con puntos */}
-        <div className="absolute top-4 right-4 z-10">
+        {/* <div className="absolute top-4 right-4 z-10">
           <div className="flex items-center gap-1.5 bg-black/75 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
             <IoRibbonOutline className="h-4 w-4" />
             <span>Obtenga {yachts.points} Club Points</span>
           </div>
-        </div>
+        </div> */}
 
         {/* Overlay inferior con ubicación */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t  to-transparent p-4"></div>
@@ -64,10 +63,10 @@ export const CardYachts = ({ yachts }: Props) => {
         {/* Precio y botón */}
         <div className="flex items-end justify-between pt-2">
           <div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Desde</p>
+            {/* <p className="text-xs text-slate-500 dark:text-slate-400">Desde</p>
             <p className="text-2xl font-bold text-slate-800  dark:text-slate-300">
               {yachts.price} <span className="text-sm font-normal">MXN</span>
-            </p>
+            </p> */}
           </div>
          <Link href={`/yachts/${yachts.yachtPackageId}`}>
          <Button className="bg-black dark:bg-white dark:text-black text-white px-6">

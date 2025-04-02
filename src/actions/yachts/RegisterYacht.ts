@@ -14,6 +14,7 @@ interface YachtFormRegister {
   typeOfExperienceId: string;
   motorYachtId: string;
   packageYachtId?: string;
+  note:string;
 }
 
 export const RegisterYacht = async (yacht: YachtFormRegister) => {
@@ -34,6 +35,7 @@ export const RegisterYacht = async (yacht: YachtFormRegister) => {
         typeOfExperienceId: yacht.typeOfExperienceId,
         motorYachtId: yacht.motorYachtId,
         packageYachtId: yacht.packageYachtId,
+        note:yacht.note
       },
     ])
     .select();

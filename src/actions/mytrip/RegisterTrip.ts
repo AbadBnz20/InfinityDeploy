@@ -29,7 +29,7 @@ export const RegisterTrip = async (trip: TripFormRegister) => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  
+
   const { error } = await supabase
     .from("quotes")
     .insert([
@@ -63,10 +63,35 @@ export const RegisterTrip = async (trip: TripFormRegister) => {
     };
   }
 
-  
-
   return {
     status: true,
     message: "Datos enviado correctamente",
+  };
+};
+
+export const GetNumberContract = async () => {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+   
+  const { data: profile, error } = await supabase
+    .from("profile")
+    .select("NroContract")
+    .eq("user_id", user?.id)
+    .single();
+
+  if (error) {
+    return {
+      status: false,
+      message: error.message,
+      data: null,
+    };
+  }
+
+  return {
+    status: true,
+    message: "Exitoso",
+    data: profile?.NroContract,
   };
 };

@@ -4,13 +4,18 @@ import { TapsStore } from "@/store/TapsMainStore";
 import { useTranslations } from "next-intl";
 import { ContentYachts } from "../Yachts/ContentYachts";
 import { Image } from "@nextui-org/react";
+import { WeekMinute } from "./WeekMinute";
 
 export const Experiences = () => {
   const t = useTranslations("Experiences");
+  const tt = useTranslations("Seadust");
+  const ttt = useTranslations("MyperfectHome");
+  const tttt = useTranslations("TransfersHome");
+
   const { tapName } = TapsStore();
 
   return (
-    <section className="py-24 bg-maincolor">
+    <section className="py-24 bg-maincolor mt-5">
       <div className="container mx-auto px-4">
         {tapName === "yates" ? (
           <>
@@ -19,24 +24,24 @@ export const Experiences = () => {
         ) : tapName === "mytrip" ? (
           <>
             <h2 className="text-3xl font-bold text-center mb-16 text-gold-500 ">
-              Mi viaje perfecto
+            {ttt("title")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {[
                 {
                   src: "home/destino.jpg",
-                  title: "Escoge tu destino",
-                  description: "crucero1",
+                  title: "item1",
+                  description: "item1",
                 },
                 {
                   src: "home/Personalizatuviaje.jpg",
-                  title: "Personaliza tu viaje",
-                  description: "crucero2",
+                  title: "item2",
+                  description: "item2",
                 },
                 {
                   src: "home/disfrutatusvacaciones.jpg",
-                  title: "crucero3",
-                  description: "Disfruta tus vacaciones",
+                  title: "item3",
+                  description: "item2",
                 },
               ].map((feature, index) => (
                 <div key={index} className="text-center group">
@@ -49,16 +54,104 @@ export const Experiences = () => {
                     />
                   </div>
                   <h3 className="text-xl font-semibold mb-2 ">
-                    {feature.title}
+                  {ttt(`${feature.description}.title`)}
                   </h3>
-                  {/* <p className="text-gray-500 text-justify">
-                    {t(`${feature.description}.description`)}
-                  </p> */}
+                  <p className="text-gray-500 text-justify">
+                  {ttt(`${feature.description}.description`)}
+                  </p>
                 </div>
               ))}
             </div>
           </>
-        ) : (
+        ): tapName === "ultimo" ? (
+          <>
+            <WeekMinute/>
+          </>
+        ) : tapName === "seadust" ? (
+          <>
+            <h2 className="text-3xl font-bold text-center mb-16 text-gold-500 ">
+              Seadust
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {[
+                {
+                  src: "seadust/image3.jpg",
+                  title: "Escoge tu destino",
+                  description: "item",
+                },
+                {
+                  src: "seadust/image1.jpg",
+                  title: "Personaliza tu viaje",
+                  description: "item1",
+                },
+                {
+                  src: "seadust/image2.jfif",
+                  title: "crucero3",
+                  description: "item2",
+                },
+              ].map((feature, index) => (
+                <div key={index} className="text-center group">
+                  <div>
+                    <Image
+                      isZoomed
+                    
+                      src={feature.src}
+                      className="object-cover w-full mb-5 z-2"
+                    />
+                  </div>
+                  {/* <h3 className="text-xl font-semibold mb-2 ">
+                    {feature.title}
+                  </h3> */}
+                  <p className="text-gray-500 text-justify">
+                    {tt(`${feature.description}.description`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </>
+        )  : tapName === "traslados" ? (
+          <>
+            <h2 className="text-3xl font-bold text-center mb-16 text-gold-500 ">
+            {tttt("title")}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {[
+                {
+                  src: "transport/image1.jpg",
+                  title: "item1",
+                  description: "item1",
+                },
+                {
+                  src: "transport/image2.jpg",
+                  title: "item2",
+                  description: "item2",
+                },
+                {
+                  src: "transport/image3.jpg",
+                  title: "item3",
+                  description: "item2",
+                },
+              ].map((feature, index) => (
+                <div key={index} className="text-center group">
+                  <div>
+                    <Image
+                      isZoomed
+                      isBlurred
+                      src={feature.src}
+                      className="object-cover w-full mb-5"
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 ">
+                  {tttt(`${feature.description}.title`)}
+                  </h3>
+                  <p className="text-gray-500 text-justify">
+                  {tttt(`${feature.description}.description`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </>
+        )  : (
           <>
             <h2 className="text-3xl font-bold text-center mb-16 text-gold-500 ">
               {t("title")}
@@ -87,7 +180,7 @@ export const Experiences = () => {
                       isZoomed
                       isBlurred
                       src={feature.src}
-                      className="object-cover w-full mb-5"
+                      className="object-cover w-full mb-5 z-2"
                     />
                   </div>
                   <h3 className="text-xl font-semibold mb-2 ">

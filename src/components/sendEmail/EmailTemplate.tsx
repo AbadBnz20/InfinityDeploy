@@ -3,6 +3,8 @@ interface Hotel {
   service: string;
 }
 interface EmailTemplateProps {
+  budget:string,
+  nrocontract:string,
   fullname: string;
   email: string;
   phone: string;
@@ -23,6 +25,8 @@ interface EmailTemplateProps {
 }
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
+  nrocontract,
+  budget,
   fullname,
   email,
   phone,
@@ -38,7 +42,6 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   attractions,
   adult,
   children,
-  details,
   currency,
 }) => (
   <div
@@ -75,22 +78,21 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       style={{ width: "100%", borderCollapse: "collapse", lineHeight: "1.6" }}
     >
       <tbody>
+      <tr>
+          <td>
+            <strong>Numero de contrato:</strong>
+          </td>
+          <td>
+              {nrocontract}
+          </td>
+        </tr>
         <tr>
           <td>
             <strong>Número de Teléfono:</strong>
           </td>
           <td>{phone}</td>
         </tr>
-        <tr>
-          <td>
-            <strong>Usuario:</strong>
-          </td>
-          <td>
-            <a href={email} style={{ color: "#007bff" }}>
-              {email}
-            </a>
-          </td>
-        </tr>
+        
         <tr>
           <td>
             <strong>Email:</strong>
@@ -175,7 +177,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           <td>
             <strong>Presupuesto:</strong>
           </td>
-          <td>{details}</td>
+          <td>{budget}</td>
         </tr>
         <tr>
           <td>
@@ -208,7 +210,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         borderTop: "1px solid #ccc",
       }}
     >
-      Gracias por elegir Infinity Luxury Travel
+      Gracias por elegir Advantage
     </p>
   </div>
 );

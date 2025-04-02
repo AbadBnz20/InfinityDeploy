@@ -11,6 +11,7 @@ import {
   Input,
   TimeInput,
 } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import {
   IoArrowBackOutline,
@@ -39,6 +40,8 @@ export const ContentTransferdetail = ({
   const [time, setTime] = useState(
     parseAbsoluteToLocal("2024-04-08T18:45:22Z")
   );
+    const t = useTranslations("TransfersPage");
+  
   useEffect(() => {
     if (origin && destination && car) {
       GetDetails();
@@ -58,12 +61,13 @@ export const ContentTransferdetail = ({
         {type === "Ida" ? (
           <h1 className="flex items-center gap-2  text-xl">
             <IoArrowForwardOutline size={24} />
-            Detalles de Ida
+            {t("item.title")}
           </h1>
         ) : (
           <h1 className="flex items-center gap-2  text-xl">
             <IoArrowBackOutline size={24} />
-            Detalles de Vuelta
+            {t("title1")}
+
           </h1>
         )}
       </CardHeader>
@@ -72,7 +76,7 @@ export const ContentTransferdetail = ({
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-small" >
-                Lugar de Recogida
+              {t("item.item")}
               </label>
               <Input
                
@@ -86,7 +90,7 @@ export const ContentTransferdetail = ({
 
             <div className="space-y-2">
               <label className="text-small" >
-                Destino
+              {t("item.item1")}
               </label>
               <div className="flex gap-2">
                 <Input
@@ -101,8 +105,8 @@ export const ContentTransferdetail = ({
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-small" >
-                Fecha
+              <label className="text-small">
+              {t("item.item2")}
               </label>
               <div className="flex gap-2">
                 <DateInput
@@ -119,7 +123,7 @@ export const ContentTransferdetail = ({
 
             <div className="space-y-2">
               <label className="text-small" >
-                Hora
+              {t("item.item3")}
               </label>
               <div className="flex gap-2">
                 <TimeInput
@@ -135,7 +139,7 @@ export const ContentTransferdetail = ({
         </div>
       </CardBody>
       <CardFooter className="grid">
-        <label className="py-2 text-small">Detalles del vehiculo</label>
+        <label className="py-2 text-small">{t("item.subtitle")}</label>
         {date?.car && <Carcontent car={date?.car} />}
       </CardFooter>
     </Card>
@@ -148,7 +152,7 @@ interface Props2 {
 
 const Carcontent = ({ car }: Props2) => {
   return (
-    <div className="grid md:grid-cols-[250px,1fr,200px] gap-4">
+    <div className="grid md:grid-cols-[200px,1fr,100px] gap-4">
       <div className="relative h-[100%] md:h-full">
         <img src={car.image} className="max-h-[150px] object-cover" />
       </div>

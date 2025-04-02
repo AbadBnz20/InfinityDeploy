@@ -1,6 +1,7 @@
 import { useSession } from "@/hooks/useSession";
 import { TripStore } from "@/store/TripStore";
 import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import React, { Key, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronDown } from "react-icons/io5";
@@ -21,6 +22,8 @@ interface Props {
 export const ContentFormTrip = ({ onchange }: Props) => {
   const { session } = useSession();
   const { SetPersonalData } = TripStore();
+  const t = useTranslations("MyperfectPage");
+
   const {
     register,
     handleSubmit,
@@ -46,7 +49,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
         <div className="">
           <label className="block text-sm font-medium mb-2">
-            Nombre Completo
+          {t("item.title")}
           </label>
           <Input
             placeholder="Nombre"
@@ -61,7 +64,8 @@ export const ContentFormTrip = ({ onchange }: Props) => {
         </div>
         <div className=" ">
           <label className="block text-sm font-medium mb-2">
-            Numero de telefono
+          {t("item1.title")}
+
           </label>
           <Input
             placeholder="Telefono"
@@ -80,22 +84,26 @@ export const ContentFormTrip = ({ onchange }: Props) => {
         </div>
         <div className="">
           <label className="block text-sm font-medium mb-2">
-            Confirmar Email
+          {t("item2.title")}
+
           </label>
           <Input
             placeholder="Email"
             type="Email"
             {...register("email", {
               required: "El campo es requerido",
+              validate: (value) =>
+                value === session?.email || "El email no coincide con el original",
             })}
             isInvalid={!!errors.email}
             errorMessage={errors.email?.message}
           />
         </div>
         <div className="">
-          <label className="block text-sm font-medium mb-2">Adultos</label>
+          <label className="block text-sm font-medium mb-2">{t("item3.title")}
+          </label>
           <Select
-            placeholder="seleccione opcion"
+            placeholder={t("item3.placeholder")}
             {...register("adults", {
               required: "El campo es requerido",
             })}
@@ -110,7 +118,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
           </Select>
         </div>
         <div className="">
-          <label className="block text-sm font-medium mb-2">Niños</label>
+          <label className="block text-sm font-medium mb-2">{t("item4.title")}</label>
           <ContentFormChildren
             selection={selection}
             setSelection={setSelection}
@@ -118,10 +126,10 @@ export const ContentFormTrip = ({ onchange }: Props) => {
         </div>
         <div className="col-span-2">
           <label className="block text-sm font-medium mb-2">
-            Agrega detalle{" "}
+          {t("item5.title")}
           </label>
           <Textarea
-            placeholder="Agrega detalle"
+            placeholder={t("item5.placeholder")}
             {...register("details", {
               required: "El campo es requerido",
             })}
@@ -132,10 +140,10 @@ export const ContentFormTrip = ({ onchange }: Props) => {
       </div>
       <div className="w-full flex justify-end gap-3">
         <Button onPress={() => onchange("1" as Key)} variant="light">
-          Anterior
+        {t("buttonStepprev")}
         </Button>
         <Button type="submit" variant="flat">
-          Siguiente
+        {t("buttonStepnext")}
         </Button>
       </div>
     </form>

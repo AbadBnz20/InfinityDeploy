@@ -28,8 +28,8 @@
     "option2": "Last Minute Weeks",
     "option3": "yachts",
     "option4": "Plan your vacation",
-    "option5": "Transfers"
-
+    "option5": "Transfers",
+    "option6": "My perfect trip"
   },
   "Filter": {
     "seach": {
@@ -61,8 +61,220 @@
       "title": "Unforgettable Moments for Our Partners",
       "description": "As a member of Infinity Luxury Travel, you will have access to exclusive travel experiences designed to create unforgettable moments. Enjoy luxury accommodations worldwide with preferential benefits, including room upgrades, personalized activities, and special rates on tours and excursions.Thanks to our strategic partnerships, you can explore beach destinations, mountain retreats, cosmopolitan cities, and cultural hubs, all with a unique touch and customized services. We are dedicated to tailoring each experience to your preferences, ensuring that every journey becomes a memory you will treasure forever."
     }
-   
   },
+  "MyperfectHome": {
+    "title": "My Perfect Trip",
+    "item1": {
+      "title": "Choose your destiny",
+      "description": "Discover a world of luxury and exclusivity with Advantage! Choose your dream destination and indulge in one-of-akind experiences designed exclusively for our members. From pristine beaches and vibrant city getaways to tranquil nature retreats, every journey becomes unforgettable. Embrace the freedom to explore the world with style and comfort. Join Advantage today and turn your vacations into cherished memories that will last a lifetime."
+    },
+    "item2": {
+      "title": "Customize your trip",
+      "description": "At Advantage, your journey is as unique as you are. Personalize every aspect of your experience, choosing from a wide range of activities and destinations tailored to your desires. Whether you seek adventure or a relaxing experience, we offer exclusive options available only to our members. Enjoy personalized service and create bespoke memories at every destination you explore. Join Advantage and transform your travels into unparalleled moments."
+    },
+    "item3": {
+      "title": "Enjoy your vacation",
+      "description": "Enjoy your vacations like never before with Advantage, where every journey becomes a unique experience. Indulge in exceptional moments crafted exclusively for our members, with personalized services that exceed every expectation. Relax and explore in comfort, enjoying the distinction you deserve. Join Advantage and turn every getaway into an unforgettable memory, filled with sophistication, delight, and moments you will cherish forever."
+    }
+  },
+
+  "TransfersHome": {
+    "title": "Transport",
+    "item1": {
+      "title": "Private Transportation",
+      "description": "We offer a private and secure transportation service available anywhere, designed to ensure an exceptional travel experience. Enjoy comfort, peace of mind, and punctuality on every journey, with highly trained drivers and well aintained vehicles. Itʼs the ideal choice for Club Advantage members seeking efficient, reliable, and personalized transfers. Travel confidently, knowing you are in the best hands."
+    },
+    "item2": {
+      "title": "Luxury Transportation",
+      "description": " Experience private transportation that blends safety, comfort, and elegance on every ride. Our professional drivers and pristine vehicles ensure an outstanding experience. Designed especially for Club Advantage members who value exclusivity and peace of mind when traveling. Choose the best option for your transfers and enjoy a worry-free journey."
+    },
+    "item3": {
+      "title": "Don't wait any longer",
+      "description": "Avoid long waits and the uncertainty of transport that doesnʼt arrive when you need it most. As a Club Advantage member, enjoy a direct, fast, and reliable service by booking your trip with us. Whether to the airport or any other destination, one of our drivers will be waiting for you at the designated pickup point in minutes. Forget about unexpected delays—contact us today and enjoy an exclusive, comfortable transfer to your destination."
+    }
+  },
+
+  "Seadust": {
+    "item": {
+      "description": " At Seadust Cancun Family Resort, your ideal family vacation becomes a reality. Relax in its stunning pools, enjoy bars with refreshing drinks, and indulge in exceptional cuisine at its excellent restaurants. Experience the excitement of the themed water park, mini-golf, zip lines, and activities for all ages. With nightly entertainment and specialized care for babies, every family member will have a unique and unforgettable experience."
+    },
+    "item1": {
+      "description": " Enjoy exciting activities, expansive recreational facilities, and a vibrant atmosphere that lets you experience Cancun like never before. At Seadust Cancun Family Resort, everyone can come together, share unique moments, and create unforgettable memories. With options for all ages, every family member will  find the perfect place to make the most of a truly ideal vacation."
+    },
+    "item2": {
+      "description": "After a day full of excitement, unwind with a unique experience at The Spa at Seadust in  Seadust Cancun Family Resort. Enjoy exclusive, personalized service in a serene environment where every detail is designed to balance body and mind. With exclusive rituals and facial and body treatments inspired by Mayan, Asian, and European cultures, your well-being will be our priority. Experience a rejuvenating journey that will revitalize your senses."
+    }
+  },
+
+  "Myperfect": {
+    "item": {
+      "title": "Country of Origin",
+      "placeholder": "origin"
+    },
+    "item1": {
+      "title": "City of Origin",
+      "placeholder": "city of origin"
+    },
+    "item2": {
+      "title": "Country of Destination",
+      "placeholder": "destination"
+    },
+    "item3": {
+      "title": "City of Destination",
+      "placeholder": "destination city"
+    },
+    "date": "Date",
+    "button": "Search"
+  },
+  "MyperfectPage": {
+    "title": "My Perfect Trip",
+    "step": "Step 1",
+    "step1": "Step 2",
+    "step2": "Step 3",
+    "buttonStepprev": "Back",
+    "buttonStepnext": "Next",
+    "buttoncarddelete": "Delete",
+    "buttoncardadd": "Add",
+    "button": "Regiser",
+    "card": {
+      "title": "Flights"
+    },
+    "card1": {
+      "title": "Hotels",
+      "placeholder": "Select Option"
+    },
+    "card2": {
+      "title": "Cars"
+    },
+    "card3": {
+      "title": "Attractions"
+    },
+    "item": {
+      "title": "Full Name"
+    },
+    "item1": {
+      "title": "Phone Number"
+    },
+    "item2": {
+      "title": "Confirm Email"
+    },
+    "item3": {
+      "title": "Adults",
+      "placeholder": "Select Option"
+    },
+    "item4": {
+      "title": "Children"
+    },
+    "item5": {
+      "title": "Add Details",
+      "placeholder": "Details"
+    },
+    "item6": { "title": "Budget" },
+    "item7": { "title": "Currency Type" }
+  },
+  "Yachts": {
+    "item": {
+      "title": "Departure Port",
+      "placeholder": "Select Location"
+    },
+    "item1": {
+      "title": "Yacht Motor",
+      "placeholder": "Select Engine"
+    },
+    "item2": {
+      "title": "Experience Type",
+      "placeholder": "Select Experience"
+    },
+    "item3": {
+      "title": "Guests",
+      "placeholder": "Select Guests"
+    },
+    "date": "Date",
+    "button": "Search"
+  },
+  "YachtsPage": {
+    "title": "Yacht Request",
+    "title1": "User Information",
+
+    "item": {
+      "title": "Yacht Engine",
+      "placeholder": "Select Engine"
+    },
+    "item1": {
+      "title": "Experience Type",
+      "placeholder": "Select Experience"
+    },
+    "item2": "First Name",
+    "item3": "Last Name",
+    "item4": "Phone",
+    "item5": "Note",
+    "item6": "Passengers",
+    "date": "Date",
+    "time": "Time",
+    "Button": "Submit Request"
+  },
+
+  "Transfers": {
+    "item": {
+      "title": "Country of Origin",
+      "placeholder": "Select Origin"
+    },
+    "item1": {
+      "title": "Destination",
+      "placeholder": "Select Destination"
+    },
+    "item2": "Arrival Time and Date",
+    "item3": "Flight or Transportation Departure Time and Date",
+    "item4": "One Way",
+    "item5": "Round Trip",
+    "item6": "Passengers",
+    "item7": "Adults",
+    "item8": "Children",
+    "item9": "Accept",
+    "button": "Search"
+  },
+  "TransfersPage": {
+    "title": "Select Arrival Transfer",
+    "subtitile": "Vehicles Found",
+    "title1": "Select Return Transfer",
+    "empy": "No results found",
+    "button": "Continue",
+    "item": {
+      "title": " Outbound Details",
+      "title1": " Return Details",
+      "item": " Pickup Location",
+      "item1": " Destination",
+      "item2": " Date",
+      "item3": " Time",
+      "subtitle": " Vehicle Details"
+    },
+    "item2": {
+      "title": "Passenger Details",
+      "subtitle": "Primary Contact",
+      "item2": "First Name",
+      "item3": "Last Name",
+      "placeholder":"Enter First Name",
+"placeholder1":"Enter Last Name",
+      "item4": "Phone",
+      "item5": "Adult Passengers",
+      "item6": "Child Passengers",
+      "adult": "Adult",
+      "children": "Child",
+      "item7": "Age",
+      "item8": "Transportation Details",
+      "item9": "Transportation Number",
+      "placeholder2":"Enter the transport number (flight, train, bus),",
+      "item10": "Date",
+      "item11": "Terms of Use",
+      "item12": "Mandatory",
+      "item13": "By continuing I agree to the",
+      "item14": "privacy terms",
+      "item15": "Visa terms",
+      "item16": "terms of use, the comments, and the cancellation policies.",
+      "button": "Continue"
+    }
+  },
+
   "Footer": {
     "contact": "Contact",
     "phone": "Phone",

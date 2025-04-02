@@ -28,7 +28,8 @@
     "option2": "Semanas Ultimo Minuto",
     "option3": "Yates",
     "option4": "Planea vacaciones",
-    "option5": "Traslados"
+    "option5": "Traslados",
+    "option6": "Mi viaje perfecto"
   },
   "Filter": {
     "seach": {
@@ -60,8 +61,242 @@
       "title": "Momentos inolvidables para nuestros socios",
       "description": "como socio de Infinity Luxury Travel, tendrás acceso a experiencias de viaje exclusivas, diseñadas para crear momentos inolvidables. Disfruta de hospedajes de lujo en todo el mundo, con beneficios preferenciales que incluyen mejoras en habitaciones, actividades personalizadas, y tarifas especiales en tours y excursiones.Gracias a nuestras alianzas estratégicas, podrás explorar destinos de playa, montaña, ciudades cosmopolitas y centros culturales con un toque único y servicios a la medida. Nos dedicamos a adaptar cada experiencia a tus preferencias, asegurando que cada viaje sea un recuerdo que atesorarás para siempre."
     }
-  
   },
+  "MyperfectHome": {
+    "title": "Mi viaje Perfecto",
+    "item1": {
+      "title": "Escoge tu destino ",
+      "description": " ¡Descubre un mundo de lujo y exclusividad con Advantage! Escoge tu destino soñado y disfruta de experiencias únicas, creadas especialmente para nuestros socios. Desde playas paradisíacas y escapadas urbanas vibrantes hasta refugios tranquilos en la naturaleza, cada viaje será inolvidable. Vive la libertad de explorar el mundo con estilo y comodidad. Únete a Advantage hoy y transforma tus vacaciones en momentos memorables que atesorarás para siempre"
+    },
+    "item2": {
+      "title": "Personaliza tu viaje",
+      "description": "En Advantage, tu viaje es único, como tú. Personaliza cada aspecto de tu experiencia, eligiendo entre una amplia gama de actividades y destinos adaptados a tus deseos. Ya sea que busques aventura o una experiencia relajante, tenemos opciones exclusivas solo para nuestros socios. Disfruta de una atención personalizada y crea recuerdos a medida en cada lugar que explores. Únete a Advantage y transforma tus viajes en momentos inigualables."
+    },
+    "item3": {
+      "title": "Disfruta tus vacaciones",
+      "description": " Disfruta tus vacaciones como nunca antes con Advantage, donde cada viaje se convierte en una experiencia única. Vive momentos excepcionales diseñados exclusivamente para nuestros socios, con servicios personalizados que superan cualquier expectativa. Relájate y explora con comodidad, disfrutando de la distinción que mereces. Únete a Advantage y transforma cada escapada en un recuerdo inolvidable, lleno de sofisticación, placer y momentos que atesorarás para siempre"
+    }
+  },
+  "TransfersHome": {
+    "title": "Transporte",
+    "item1": {
+      "title": "Tansporte Privado",
+      "description": "Ofrecemos un servicio de transporte privado y seguro disponible en cualquier lugar, diseñado para garantizar una experiencia de viaje excepcional. Disfrute de comodidad, tranquilidad y puntualidad en cada trayecto, con conductores altamente capacitados y vehículos en óptimas condiciones. Es la opción ideal para los socios del Club Advantage que buscan minutes. Forget about traslados eficientes, confiables y personalizados. Viaje con la certeza de estar en las mejores manos."
+    },
+    "item2": {
+      "title": "Transporte de Lujo",
+      "description": "Descubra un servicio de transporte privado que combina seguridad, confort y elegancia en cada recorrido. Contamos con conductores expertos y vehículos impecables para garantizar una experiencia excepcional. Pensado especialmente para los socios del Club Advantage que valoran la exclusividad y la tranquilidad al desplazarse. Elija la mejor opción para sus traslados y disfrute de un viaje sin preocupaciones."
+    },
+    "item3": {
+      "title": "No esperes mas",
+      "description": "Evita largas esperas y la incertidumbre de transportes que no llegan a tiempo. Si eres socio del Club Advantage, disfruta de un servicio directo, rápido y confiable reservando tu trayecto con nosotros. Ya sea al aeropuerto o cualquier otro destino, uno de nuestros conductores estará esperando en el punto de recogida en minutos. Olvídate de retrasos imprevistos, contáctanos hoy mismo y disfruta de un traslado cómodo y exclusivo."
+    }
+  },
+
+"Seadust":{
+   "item":{
+    "description":"En Seadust Cancun Family Resort, tu plan de vacaciones familiares perfecto se hace realidad. Relájate en sus impresionantes piscinas, disfruta de bares con deliciosas bebidas y saborea una gastronomía excepcional en sus excelentes restaurantes. Vive la emoción del parque acuático temático, minigolf, tirolesas y actividades para todas las edades. Con entretenimiento nocturno y atención especializada para bebés, toda la familia vivirá una experiencia única e inolvidable."
+   },
+   "item1":{
+    "description":"Disfruta de emocionantes actividades, amplias instalaciones recreativas y un ambiente vibrante que te permitirá vivir Cancún como nunca antes. En Seadust Cancun Family Resort, toda la familia podrá reunirse, compartir momentos únicos y crear recuerdos inolvidables. Con opciones para todas las edades, cada miembro de la familia encontrará su lugar ideal para disfrutar al máximo de unas vacaciones perfectas."
+   },
+   "item2":{
+    "description":"Después de un día lleno de emociones, relájate con una experiencia única en The Spa at Seadust en Seadust Cancun Family Resort. Disfruta de un servicio exclusivo y personalizado en un entorno de tranquilidad total, donde cada detalle está diseñado para equilibrar cuerpo y mente. Con rituales exclusivos y tratamientos faciales y corporales inspirados en las culturas maya, asiática y europea, tu bienestar será nuestra prioridad. Vive una experiencia rejuvenecedora que revitalizará tus sentidos."
+   }
+},
+
+
+  "Myperfect": {
+    "item": {
+      "title": "Pais Origen",
+      "placeholder": "origen"
+    },
+    "item1": {
+      "title": "Ciudad Origen",
+      "placeholder": "ciudad de origen"
+    },
+    "item2": {
+      "title": "Pais de Destino",
+      "placeholder": "destino"
+    },
+    "item3": {
+      "title": "Ciudad de Destino",
+      "placeholder": " ciudad destino"
+    },
+    "date": "Fecha",
+    "button": "Buscar"
+  },
+
+  "MyperfectPage": {
+    "title":"Mi viaje Perfecto",
+    "step":"Paso 1",
+    "step1":"Paso 2",
+    "step2":"Paso 3",
+    "buttonStepprev":"Atras",
+    "buttonStepnext":"Siguiente",
+    "buttoncarddelete":"Eliminar",
+    "buttoncardadd":"Agregar",
+    "button":"Registrar",
+
+    "card":{
+      "title":"Vuelos"
+     
+    },
+    "card1":{
+      "title":"Hotels",
+      "placeholder":"Seleccione Opcion"
+    },
+    "card2":{
+      "title":"Autos"
+    },
+    "card3":{
+      "title":"Atracciones"
+    },
+    "item":{
+      "title":"Nombre Completo"
+    },
+    "item1":{
+      "title":"Numero de telefono"
+    },
+    "item2":{
+      "title":"Confirmar Email"
+    },
+    "item3":{
+      "title":"Adultos",
+      "placeholder":"Seleccione opcion"
+    },
+    "item4":{
+      "title":"Niños"
+    },
+    "item5":{
+      "title":"Agregar Detalle",
+      "placeholder":"Detalle"
+    },
+    "item6":{
+      "title":"Presupuesto"
+    },
+    "item7":{
+      "title":"Tipo de moneda"
+    }
+
+
+
+
+  },
+  "Yachts": {
+    "item": {
+      "title": "Puerto de salida",
+      "placeholder": "Seleccione ubicacion"
+    },
+    "item1": {
+      "title": "Motor de Yate",
+      "placeholder": "Seleccione Motor"
+    },
+    "item2": {
+      "title": "Tipo de experiencia",
+      "placeholder": "Seleccione Experiencia"
+    },
+    "item3": {
+      "title": "Huespedes",
+      "placeholder": "Seleccione Huespedes"
+    },
+    "date": "Fecha",
+    "button": "Buscar"
+  },
+  "YachtsPage":{
+    "title":"Solicitud de yates",
+    "title1":"Informacion De usuario",
+
+    "item": {
+      "title": "Motor de Yate",
+      "placeholder": "Seleccione Motor"
+    },
+    "item1": {
+      "title": "Tipo de experiencia",
+      "placeholder": "Seleccione Experiencia"
+    },
+    "item2":"Nombre",
+    "item3":"Apellido",
+    "item4":"Telefono",
+    "item5":"Nota",
+    "item6":"Pasajeros",
+
+    "date": "Fecha",
+    "time":"Tiempo",
+    "Button":"Enviar Solicitud"
+  },
+
+
+  "Transfers": {
+    "item": {
+      "title": "Pais Origen",
+      "placeholder": "Seleccione Origen"
+    },
+    "item1": {
+      "title": "Destino",
+      "placeholder": "Seleccione Destino"
+    },
+    "item2": "Hora Y fecha de llegada",
+    "item3":"Hora y fecha de salida de vuelo o transporte",
+    "item4":"Ida",
+    "item5":"Ida y vuelta",
+    "item6":"Pasajeros",
+    "item7":"Adultos",
+    "item8":"Niños",
+    "item9":"Aceptar",
+    "button": "Buscar"
+  },
+ "TransfersPage":{
+  "title":"Seleccione traslado Llegada",
+  "subtitile":"Vehiculos encontrados",
+  "title1":"Seleccionar traslado Regreso",
+  "empy":"No se encontraron resultados",
+  "button":"Continuar",
+  
+  "item":{
+    "title":" Detalles de Ida",
+    "title1":" Detalles de Vuelta",
+    "item":"Lugar de Recogida",
+    "item1":"Destino",
+    "item2":"Fecha",
+    "item3":"Hora",
+    "subtitle":"Detalles del vehiculo"
+  },
+  "item2":{
+    "title":"Detalle de Pasajero",
+    "subtitle":"Contacto Principal",
+    "item2":"Nombre",
+    "item3":"Apellido",
+    "placeholder":"Ingrese Nombre",
+    "placeholder1":"Ingrese Apellido",
+
+    "item4":"Telefono",
+    "item5":"Pasajeros Adultos",
+    "item6":"Pasajeros niños",
+    "adult":"Adulto",
+    "children":"Niño",
+
+    "item7":"Edad",
+    "item8":"Detalles del Transporte",
+    "item9":"Numero de transporte",
+    "placeholder2":"Introduzca el numero de transporte vuelo,tren,bus",
+    "item10":"Fecha",
+    "item11":"Condiciones de Uso",
+    "item12":"Obligatorio",
+    "item13":" Al continuar acepto las",
+    "item14":"condiciones de privacidad",
+    "item15":"condiciones de visa",
+    "item16":"condiciones de uso, las observaciones y las políticas de cancelación.",
+    "button":"Continuar"
+  }
+
+
+
+ },
+
+
+
+
   "Footer": {
     "contact": "Contacto",
     "phone": "Telefono",

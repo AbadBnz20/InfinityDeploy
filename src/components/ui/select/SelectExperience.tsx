@@ -1,6 +1,7 @@
 import { GetSelectExperience } from "@/actions/yachts/GetSelect";
 import { Experience } from "@/interfaces/selectYatch-response";
 import { Progress, Select, SelectItem } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import {
   Control,
@@ -18,6 +19,7 @@ export const SelectExperience = <T extends FieldValues>({ control,name,error }: 
  
   const [data, setdata] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(false);
+    const t = useTranslations("Yachts");
   useEffect(() => {
     const GetCountry = async () => {
       setLoading(true);
@@ -51,7 +53,7 @@ export const SelectExperience = <T extends FieldValues>({ control,name,error }: 
           <Select
             {...field}
             items={data}
-            placeholder="Seleccione Experiencia"
+            placeholder={t("item2.placeholder")}
             className="mt-3"
             defaultSelectedKeys={field.value ? new Set([field.value]) : new Set()}
             onSelectionChange={(keys) => field.onChange(Array.from(keys).pop())}

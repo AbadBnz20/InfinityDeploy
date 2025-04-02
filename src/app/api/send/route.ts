@@ -6,6 +6,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   const body = await request.json();
   const {
+    budget,
+    nrocontract,
     fullname,
     email,
     phone,
@@ -27,10 +29,12 @@ export async function POST(request: Request) {
 
   try {
     const {  error } = await resend.emails.send({
-      from: "Infinity <onboarding@advantageinfinityclub.com>",
+      from: "Advantage <onboarding@advantageinfinityclub.com>",
       to: [email],
-      subject: "Hello world",
+      subject: "Solicitud",
       react: EmailTemplate({
+        budget,
+        nrocontract,
         fullname: fullname,
         email: email,
         phone: phone,
@@ -52,12 +56,14 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      console.log(error)
       return Response.json({ error }, { status: 500 });
     }
 
     return Response.json({message: 'Email Enviado' });
 
   } catch (error) {
+    console.log(error)
     return Response.json({ error }, { status: 500 });
   }
 }

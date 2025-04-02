@@ -14,6 +14,7 @@ import { SelectExperience } from "../ui/select/SelectExperience";
 import { YachtsStore } from "@/store/YachtsStore";
 import { useRouter } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
+import { useTranslations } from "next-intl";
 
 export interface FormYacht {
   idLocation: string;
@@ -33,7 +34,7 @@ export const Ships = () => {
   const {SetYahtsData} = YachtsStore();
   const router = useRouter();
   const posthog = usePostHog();
-
+   const t = useTranslations("Yachts");
   // useEffect(() => {
   //   setValue('idEngine',"b1aa48c4-97ba-4293-af9d-0faacd9ac395")
   // }, []);
@@ -60,13 +61,13 @@ export const Ships = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Puerto de salida
+          {t("item.title")}
           </label>
           <SelectDestinationShip control={control}  name="idLocation" error={errors.idLocation} />
         </div>
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Motor del Yate
+          {t("item1.title")}
           </label>
           <SelectEngine control={control}  name="idEngine" error={errors.idEngine} />
         </div>
@@ -75,7 +76,7 @@ export const Ships = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="w-full space-y-2 ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Fecha
+            {t("date")}
             </label>
             <DatePicker
               value={date}
@@ -85,7 +86,7 @@ export const Ships = () => {
           </div>
           <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Tipo de experiencia
+            {t("item2.title")}
             </label>
             <SelectExperience
               control={control}
@@ -96,7 +97,7 @@ export const Ships = () => {
         <div className="grid  grid-cols-1 md:grid-cols-2 items-end gap-2">
           <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Huespedes
+            {t("item3.title")}
             </label>
             <Controller
               control={control}
@@ -106,7 +107,7 @@ export const Ships = () => {
                 return (
                   <Select
                     {...field}
-                    placeholder="Seleccione"
+                    placeholder= {t("item3.placeholder")}
                     isInvalid={fieldState.invalid}
                     errorMessage={formState.errors.passengers?.message}
                   >
@@ -121,7 +122,7 @@ export const Ships = () => {
           </div>
           <div className="w-full ">
             <Button type="submit" className="w-full">
-              Buscar
+            {t("button")}
             </Button>
           </div>
         </div>

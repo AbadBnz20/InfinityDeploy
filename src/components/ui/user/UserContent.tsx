@@ -66,7 +66,7 @@ const UserActive = ({ user }: Props) => {
         >
           Mis Reservas
         </DropdownItem>
-        <DropdownItem key="configurations"> {t("option3")}</DropdownItem>
+       
         <DropdownItem
           onPress={() => signOutAction()}
           key="logout"

@@ -9,6 +9,7 @@ import {
   Input,
   RangeValue,
 } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
 import React, { useState } from "react";
@@ -32,6 +33,7 @@ export const MyTrip = () => {
     start: today(getLocalTimeZone()).add({ days: 1 }),
     end: today(getLocalTimeZone()).add({ days: 2 }),
   });
+   const t = useTranslations("Myperfect");
   const { SetbudgetData } = TripStore();
   const router = useRouter();
   const posthog = usePostHog();
@@ -65,10 +67,10 @@ export const MyTrip = () => {
       >
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Pais de Origen
+          {t("item.title")}
           </label>
           <Input
-            placeholder="origen"
+            placeholder= {t("item.placeholder")}
             type="text"
             {...register("country_origin", {
               required: "El campo es requerido",
@@ -79,10 +81,10 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Ciudad de origen
+          {t("item1.title")}
           </label>
           <Input
-            placeholder="ciudad de origen"
+            placeholder= {t("item1.placeholder")}
             type="text"
             {...register("city_origin", {
               required: "El campo es requerido",
@@ -93,10 +95,10 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Pais de Destino
+          {t("item2.title")}
           </label>
           <Input
-            placeholder="origen"
+            placeholder= {t("item2.placeholder")}
             type="text"
             {...register("contry_destination", {
               required: "El campo es requerido",
@@ -107,10 +109,10 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Ciudad de Destino
+          {t("item3.title")}
           </label>
           <Input
-            placeholder="ciudad de origen"
+            placeholder={t("item3.placeholder")}
             type="text"
             {...register("city_destination", {
               required: "El campo es requerido",
@@ -121,7 +123,7 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Fecha
+          {t("date")}
           </label>
           <DateRangePicker
             value={date}
@@ -137,7 +139,7 @@ export const MyTrip = () => {
             isLoading={loading}
             // className="bg-black text-white dark:bg-white dark:text-black"
           >
-            Continuar
+             {t("button")}
           </Button>
         </div>
       </form>

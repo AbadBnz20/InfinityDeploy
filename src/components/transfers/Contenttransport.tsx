@@ -10,6 +10,7 @@ import {
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { IoCalendarOutline, IoSwapHorizontalOutline } from "react-icons/io5";
 import { FormValuesTransfer } from "./FormTransfer";
+import { useTranslations } from "next-intl";
 
 interface Props {
   register:UseFormRegister<FormValuesTransfer>,
@@ -19,23 +20,23 @@ interface Props {
 
 export const Contenttransport = ({register,errors,date}:Props) => {
     const datetime = new Date(date);
-
+    const t = useTranslations("TransfersPage");
 
 
   return (
     <Card className="my-3 shadow-none">
       <CardHeader>
         <h1 className="flex items-center gap-2  text-xl">
-          Detalles del Transporte
+        {t("item2.item8")}
         </h1>
       </CardHeader>
       <CardBody>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-small">Numero de transporte</label>
+            <label className="text-small">{t("item2.item9")}</label>
             <Input
               startContent={<IoSwapHorizontalOutline size={24} />}
-              placeholder="Introduzca el numero de transporte vuelo,tren,bus"
+              placeholder={t("item2.placeholder2")}
               {...register("codetransport", {
                 required: "El Numero de transporte es requerido",
               })}
@@ -44,7 +45,7 @@ export const Contenttransport = ({register,errors,date}:Props) => {
             />
           </div>
           <div className="space-y-2">
-            <label className="text-small">Fecha</label>
+            <label className="text-small">{t("item2.item10")}</label>
             <div className="flex gap-2">
               <DateInput
                 startContent={<IoCalendarOutline size={24} />}

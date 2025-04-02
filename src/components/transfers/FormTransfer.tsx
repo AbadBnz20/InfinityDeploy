@@ -10,8 +10,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Contenttransport } from "./Contenttransport";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface User {
   first_name: string;
@@ -53,6 +53,7 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
   } = useForm<FormValuesTransfer>();
 
   const [accepted, setAccepted] = useState(false);
+   const t = useTranslations("TransfersPage");
   const router = useRouter();
   useEffect(() => {
     reset({
@@ -78,17 +79,17 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
     <Card className="my-3 shadow">
       <CardHeader>
         <h1 className="flex items-center gap-2  text-xl">
-          Detalles de Pasajeros
+        {t("item2.title")}
         </h1>
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="p-3">
             <div className="">
-              <p className=" text-medium">Contacto Principal</p>
+              <p className=" text-medium">{t("item2.subtitle")}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
                 <div className="space-y-2">
-                  <label className="text-small">Nombre</label>
+                  <label className="text-small">{t("item2.item2")}</label>
                   <Input
                     {...register("mainpassenger.first_name", {
                       required: "El campo de nombre es requerido",
@@ -101,7 +102,7 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-small">Apellido</label>
+                  <label className="text-small">{t("item2.item3")}</label>
                   <Input
                     {...register("mainpassenger.last_name", {
                       required: "El campo de apellido es requerido",
@@ -116,7 +117,7 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
                 <div className="space-y-2">
-                  <label className="text-small">Correo</label>
+                  <label className="text-small">Email</label>
 
                   <Input
                     {...register("mainpassenger.email", {
@@ -130,7 +131,7 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-small">Numero</label>
+                  <label className="text-small">{t("item2.item4")}</label>
                   <Input
                     {...register("mainpassenger.phone", {
                       required: "El campo de Numero es requerido",
@@ -145,16 +146,16 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
               </div>
             </div>
             <div className="mt-2 ml-5">
-              <p className="mt-2 text-medium">Pasajeros Adultos</p>
+              <p className="mt-2 text-medium">{t("item2.item5")}</p>
               {Array.from({ length: passengers.adults }).map(
                 (_, adultIndex) => (
                   <div key={`adult-${adultIndex}`} className="mt-5">
                     <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Adulto {adultIndex + 1}
+                    {t("item2.adult")} {adultIndex + 1}
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                       <div className="space-y-2">
-                        <label className="text-small">Nombre </label>
+                        <label className="text-small">{t("item2.item2")} </label>
 
                         <Input
                           {...register(
@@ -172,11 +173,11 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                           }
                          
                           type="text"
-                          placeholder="Ingrese nombre"
+                          placeholder={t("item2.placeholder")}
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-small">Apellido</label>
+                        <label className="text-small">{t("item2.item3")}</label>
                         <Input
                           {...register(
                             `passaengers.${adultIndex}.last_name` as const,
@@ -191,7 +192,7 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                             errors.passaengers?.[adultIndex]?.last_name?.message
                           }
                           type="text"
-                          placeholder="Ingrese apellido"
+                          placeholder={t("item2.placeholder1")}
                         />
                       </div>
                     </div>
@@ -200,17 +201,17 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
               )}
               {passengers.children > 0 && (
                 <>
-                  <p className=" mt-2 text-medium">Pasajeros niños</p>
+                  <p className=" mt-2 text-medium">{t("item2.item6")}</p>
 
                   {Array.from({ length: passengers.children }).map(
                     (_, childIndex) => (
                       <div key={`child--${childIndex}`} className="mt-3">
                         <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Niño {childIndex + 1}
+                        {t("item2.children")} {childIndex + 1}
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                           <div className="space-y-2">
-                            <label className="text-small">Nombre </label>
+                            <label className="text-small">{t("item2.item2")} </label>
 
                             <Input
                               {...register(
@@ -227,11 +228,11 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                                   ?.message
                               }
                               type="text"
-                              placeholder="Ingrese nombre"
+                              placeholder={t("item2.placeholder")}
                             />
                           </div>
                           <div className="space-y-2">
-                            <label className="text-small">Apellido</label>
+                            <label className="text-small">{t("item2.item3")} </label>
 
                             <Input
                               {...register(
@@ -248,11 +249,11 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                                   ?.message
                               }
                               type="text"
-                              placeholder="Ingrese apellido"
+                              placeholder={t("item2.placeholder1")}
                             />
                           </div>
                           <div className="space-y-2">
-                            <label className="text-small">Edad</label>
+                            <label className="text-small">{t("item2.item7")}</label>
                             <Input
                               {...register(
                                 `passaengers.${childIndex}.age` as const,
@@ -290,8 +291,8 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
               <div className="space-y-6 p-4 mt-3">
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-medium">Condiciones de Uso</h2>
-                    <span className="text-sm text-blue-600">(Obligatorio)</span>
+                    <h2 className="text-lg font-medium">{t("item2.item11")}</h2>
+                    <span className="text-sm text-blue-600">({t("item2.item12")})</span>
                   </div>
 
                   <div className="flex items-center">
@@ -301,22 +302,21 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                       onValueChange={setAccepted}
                     />
                     <label htmlFor="terms" className="text-sm leading-relaxed">
-                      Al continuar acepto las{" "}
-                      <Link
-                        href="/privacy"
+                    {t("item2.item13")}
+                      <a
+                       
                         className="text-blue-600 hover:underline"
                       >
-                        condiciones de privacidad
-                      </Link>
+                        {t("item2.item14")}
+                      </a>
                       ,{" "}
-                      <Link
-                        href="/visa"
+                      <a
+                       
                         className="text-blue-600 hover:underline"
                       >
-                        condiciones de visa
-                      </Link>
-                      , condiciones de uso, las observaciones y las políticas de
-                      cancelación.
+                        {t("item2.item15")}
+                      </a>
+                      , {t("item2.item16")}
                     </label>
                   </div>
                 </div>
@@ -326,7 +326,7 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                   type="submit"
                   isDisabled={!accepted}
                 >
-                  Continuar
+                 {t("item2.button")}
                 </Button>
               </div>
             </div>

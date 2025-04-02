@@ -11,9 +11,10 @@ import { Ships } from "./Ships";
 import { MyTrip } from "./MyTrip";
 import { Key, useState } from "react";
 import { TapsStore } from "@/store/TapsMainStore";
+import { Seadust } from "./Seadust";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
-  const [selected, setSelected] = useState("mytrip");
+  const [selected, setSelected] = useState("");
  const {SetYahtsData}=TapsStore();
 
     const onChange = (e:Key)=>{
@@ -28,38 +29,20 @@ export const TapsMain = () => {
             key="seadust"
             title={
               <div className="flex items-center space-x-2">
-                <a href="https://infinityluxurytravelclub.com/" target="_blank">
-                  Seadust
-                </a>
+                <span> Seadust</span>
               </div>
             }
           >
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+             <Seadust/>
             </div>
           </Tab>
-          {/* <Tab key="vacacion" title={
-            <div className="flex items-center space-x-2">
-            <FaRegPaperPlane  size={24}/>
-            <span>{ t("option4")}</span>
-          </div>
-            }>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </div>
-          </Tab> */}
           <Tab
             key="mytrip"
             title={
               <div className="flex items-center space-x-2">
                 <PiAirplaneTakeoffLight size={24} />
-                <span>Mi viaje perfecto</span>
+                <span>{t("option6")}</span>
               </div>
             }
           >
@@ -75,11 +58,20 @@ export const TapsMain = () => {
               </div>
             }
           >
+            {/* <WeekMinute/> */}
+          </Tab>
+          <Tab
+            key="saving"
+            title={
+              <div className="flex items-center space-x-2">
+                <a href="https://www.rcihotelsavings.com/v6/register" target="_blank">
+                  SAVINGS
+                </a>
+              </div>
+            }
+          >
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.2222
+             
             </div>
           </Tab>
           <Tab

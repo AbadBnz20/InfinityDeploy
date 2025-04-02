@@ -11,15 +11,14 @@ import {
   Input,
   Select,
   SelectItem,
+  Textarea,
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import {
-  IoCashOutline,
   IoLocationOutline,
   IoPeopleOutline,
   IoPersonOutline,
 } from "react-icons/io5";
-import { SelectDestinationShip } from "../ui/select/SelectDestinationShip";
 import { Controller, useForm } from "react-hook-form";
 import { SelectEngine } from "../ui/select/SelectEngine";
 import { SelectExperience } from "../ui/select/SelectExperience";
@@ -28,6 +27,8 @@ import { YachInterface } from "@/interfaces/Yach";
 import { toast } from "react-toastify";
 import { RegisterYacht } from "@/actions/yachts/RegisterYacht";
 import { useRouter } from "next/navigation";
+import { GetReferences } from "@/actions/yachts/GetReferences";
+import { useTranslations } from "next-intl";
 
 interface FormDateYachts {
   idLocation: string;
@@ -41,6 +42,7 @@ interface FormDateYachts {
   email: string;
   phone: string;
   packageYachtId: string;
+  note: string;
 }
 
 export const FormYachts = ({ user, yachts }: YachInterface) => {
@@ -60,6 +62,8 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
     },
   });
   const [loading, setloading] = useState(false);
+    const t = useTranslations("YachtsPage");
+  
   const [date, setdate] = useState<DateValue | null>(
     parseDate(yachts.date.split("T")[0])
   );
@@ -69,6 +73,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
     if (!date) {
       return;
     }
+
     setloading(true);
 
     try {
@@ -86,12 +91,43 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
         typeOfExperienceId: data.idExperience,
         motorYachtId: data.idEngine,
         packageYachtId: data.packageYachtId,
+        note: data.note,
       });
+
       if (!resp.status) {
         return toast.error(resp.message, {
           position: "top-right",
         });
       }
+      const respDate = await GetReferences(
+        data.idLocation,
+        data.idExperience,
+        data.idEngine
+      );
+
+      const res = await fetch("/api/yachts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nrocontract: respDate.nrocontract,
+          date: departureDate.toISOString().split("T")[0],
+          time: data.time,
+          passengers: data.passengers,
+          firstName: data.firstname,
+          lastName: data.lastname,
+          email: data.email,
+          phone: data.phone,
+          ubication: respDate.nameubicacion,
+          typeOfExperience: respDate.namexperience,
+          motorYacht: respDate.namemotor,
+          note: data.note,
+        }),
+      });
+      const datafetch = await res.json();
+      console.log(datafetch);
+
       toast.success(resp.message, {
         position: "top-right",
       });
@@ -115,7 +151,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           <CardHeader>
             <h1 className="flex items-center gap-2  text-xl">
               <IoLocationOutline size={24} />
-              Solicitud de yates
+              {t("title")}
             </h1>
           </CardHeader>
           <CardBody>
@@ -124,14 +160,13 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 <div>
                   <Image
                     alt="HeroUI Album Cover"
-                  
                     src={yachts.image}
                     width={340}
                   />
                 </div>
               )}
               <div className="col-span-2  grid grid-cols-1 md:grid-cols-2 gap-3 my-3">
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
                     Puerto de salida
                   </label>
@@ -141,10 +176,10 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                     name="idLocation"
                     error={errors.idLocation}
                   />
-                </div>
+                </div> */}
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                    Motor del Yate
+                  {t("item.title")}
                   </label>
                   <SelectEngine
                     control={control}
@@ -154,7 +189,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="w-full space-y-2 ">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                    Fecha
+                  {t("date")}
                   </label>
                   <DatePicker
                     value={date}
@@ -164,7 +199,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                    Tipo de experiencia
+                  {t("item1.title")}
                   </label>
                   <SelectExperience
                     control={control}
@@ -174,7 +209,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                    Tiempo
+                  {t("time")}
                   </label>
 
                   <Controller
@@ -199,20 +234,9 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                               </SelectItem>
                             )}
                           </>
-                          <SelectItem key={"7Am - 11AM"}>7AM - 11AM</SelectItem>
-                          <SelectItem key={"7AM - 1PM"}>7AM - 1PM</SelectItem>
-                          <SelectItem key={"9AM - 1PM"}>9AM - 1PM </SelectItem>
-                          <SelectItem key={"9AM - 5PM"}>9AM - 5PM</SelectItem>
-                          <SelectItem key={"11:30AM - 5:30PM"}>
-                            11:30AM - 5:30PM
-                          </SelectItem>
-                          <SelectItem key={"1:30PM - 5:30PM"}>
-                            1:30PM - 5:30PM
-                          </SelectItem>
-                          <SelectItem key={"1:30PM - 7:30PM"}>
-                            1:30PM - 7:30PM
-                          </SelectItem>
-                          <SelectItem key={"6PM - 8PM"}>6PM - 8PM</SelectItem>
+                          <SelectItem key={"4 Horas"}>4 Horas</SelectItem>
+                          <SelectItem key={"6 Horas"}>6 Horas</SelectItem>
+                          <SelectItem key={"7 Horas"}>8 Horas</SelectItem>
                         </Select>
                       );
                     }}
@@ -221,44 +245,44 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
             </div>
 
-            <div className="grid  grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid  grid-cols-1 md:grid-cols-2 gap-4 mt-2">
               <Alert variant="bordered" icon={<IoPeopleOutline />}>
                 {" "}
                 <div>
-                  <span className="font-semibold"> Pasajeros:</span>{" "}
+                  <span className="font-semibold"> {t("item6")}:</span>{" "}
                   <span>{yachts.passengers} </span>
                 </div>{" "}
               </Alert>
-              {yachts.price && (
+              {/* {yachts.price && (
                 <Alert variant="bordered" icon={<IoCashOutline />}>
                   <div>
                     <span className="font-semibold"> Precio:</span>
                     <span> {yachts.price} MXN</span>
                   </div>
                 </Alert>
-              )}
+              )} */}
             </div>
-            <div className="my-2 ml-5">
+            {/* <div className="my-2 ml-5">
               {yachts.points && (
                 <em className="text-small">
                   Total de Puntos Obtenga {yachts.points} Club Points{" "}
                 </em>
               )}
-            </div>
+            </div> */}
           </CardBody>
         </Card>
         <Card className="my-3 shadow">
           <CardHeader>
             <h1 className="flex items-center gap-2  text-xl">
               <IoPersonOutline size={24} />
-              Informacion De usuario
+              {t("title1")}
             </h1>
           </CardHeader>
           <CardBody className="grid gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                  Nombre
+                {t("item2")}
                 </label>
                 <Input
                   {...register("firstname", {
@@ -271,7 +295,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                  Apellido
+                {t("item3")}
                 </label>
                 <Input
                   {...register("lastname", {
@@ -298,7 +322,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                  Telefono
+                {t("item4")}
                 </label>
                 <Input
                   type="number"
@@ -311,13 +335,26 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 />
               </div>
               <div className="col-span-full mt-3">
+                <label htmlFor="rooms" className="block text-sm font-medium ">
+                {t("item5")}
+                </label>
+                <Textarea
+                  type="text"
+                  {...register("note", {
+                    required: "El campo es requerido",
+                  })}
+                  isInvalid={!!errors.note}
+                  errorMessage={errors.note?.message}
+                />
+              </div>
+              <div className="col-span-full mt-3">
                 <Button
                   fullWidth
                   isLoading={loading}
                   type="submit"
                   className="bg-black text-white dark:bg-white dark:text-black"
                 >
-                  Enviar solicitud
+                  {t("Button")}
                 </Button>
               </div>
             </div>

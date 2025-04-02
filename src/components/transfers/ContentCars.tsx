@@ -5,6 +5,7 @@ import { Car } from "./Car";
 import { ModalLoading } from "../ui/modal/ModalLoading";
 import { Accordion, AccordionItem, Button, Selection } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export const ContentCars = () => {
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ export const ContentCars = () => {
   } = TransfersStore();
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["1"]));
   const router = useRouter();
+  const t = useTranslations("TransfersPage");
 
 
   useEffect(() => {
@@ -60,10 +62,10 @@ export const ContentCars = () => {
             startContent={
               <div className="text-start">
                 <h2 className="text-2xl font-semibold ">
-                  Seleccionar traslado Llegada
+                {t("title")}
                 </h2>
                 <h2 className="text-medium font-medium text-gray-400">
-                  {transferCars.going.length} vehiculos encontrados
+                {transferCars.going.length}  {t("subtitile")}
                 </h2>
               </div>
             }
@@ -71,7 +73,7 @@ export const ContentCars = () => {
             <div className=" grid gap-5">
               {transferCars.going.length === 0 ? (
                 <div className="col-span-full h-[300px] flex justify-center items-center">
-                  <em>No se encontraron resultados</em>
+                  <em>{t("empy")}</em>
                 </div>
               ) : (
                 transferCars.going.map((item) => (
@@ -92,10 +94,10 @@ export const ContentCars = () => {
               startContent={
                 <div className="text-start">
                   <h2 className="text-2xl font-semibold ">
-                    Seleccionar traslado Regreso
+                  {t("title1")}
                   </h2>
                   <h2 className="text-medium font-medium text-gray-400">
-                    {transferCars.going.length} vehiculos encontrados
+                    {transferCars.going.length} {t("subtitile")}
                   </h2>
                 </div>
               }
@@ -103,7 +105,7 @@ export const ContentCars = () => {
               <div className=" grid gap-5">
                 {transferCars.return.length === 0 ? (
                   <div className="col-span-full h-[300px] flex justify-center items-center">
-                    <em>No se encontraron resultados</em>
+                    <em>{t("empy")}</em>
                   </div>
                 ) : (
                   transferCars.return.map((item) => (
@@ -127,7 +129,7 @@ export const ContentCars = () => {
             className="bg-black text-white dark:bg-white dark:text-black"
             size="lg"
           >
-            Continuar
+           {t("button")}
           </Button>
         ) :idcargoing && (
           <Button
@@ -135,7 +137,7 @@ export const ContentCars = () => {
             className="bg-black text-white dark:bg-white dark:text-black"
             size="lg"
           >
-            Continuar
+           {t("button")}
           </Button>) }
       </div>
     </div>

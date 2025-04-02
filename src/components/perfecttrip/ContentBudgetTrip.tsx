@@ -1,7 +1,8 @@
-import { RegisterTrip, TripFormRegister } from "@/actions/mytrip/RegisterTrip";
+import { GetNumberContract, RegisterTrip, TripFormRegister } from "@/actions/mytrip/RegisterTrip";
 import { useSession } from "@/hooks/useSession";
 import { TripStore } from "@/store/TripStore";
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React, { Key, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -40,6 +41,8 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
   const [loading, setloading] = useState(false);
   const router = useRouter();
   const { session } = useSession();
+   const t = useTranslations("MyperfectPage");
+  
   const onSubmit = async (data: FormData) => {
     try {
       const obj: TripFormRegister = {
@@ -68,12 +71,15 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
       }
 
       if (session) {
+        const numberContract = await GetNumberContract();
         const res = await fetch("/api/send", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            nrocontract: numberContract.data,
+            budget: data.budget,
             fullname: `${session.firstname} ${session.lastname}`,
             email: session.email,
             phone: session.number,
@@ -118,10 +124,10 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
         <div className="grid grid-cols-3 gap-3 mb-5">
           <div className="col-span-2">
             <label className="block text-sm font-medium mb-2">
-              Presupuesto
+            {t("item6.title")}
             </label>
             <Input
-              placeholder="Nombre"
+              placeholder="0"
               type="number"
               {...register("budget", {
                 required: "El campo es requerido",
@@ -132,7 +138,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
           </div>
           <div className="">
             <label className="block text-sm font-medium mb-2">
-              Tipo de moneda
+            {t("item7.title")}
             </label>
             <Select
               placeholder="seleccione opcion"
@@ -156,7 +162,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
         </div>
         <div className="w-full flex justify-end gap-3">
           <Button onPress={() => onchange("2" as Key)} variant="light">
-            Anterior
+          {t("buttonStepprev")}
           </Button>
           <Button
             isLoading={loading}
@@ -164,7 +170,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
             type="submit"
             variant="flat"
           >
-            Registrar
+            {t("button")}
           </Button>
         </div>
       </form>
