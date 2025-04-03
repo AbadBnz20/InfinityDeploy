@@ -1,8 +1,8 @@
 "use client";
 import { Tabs, Tab } from "@nextui-org/react";
-import { Reservation } from "./Reservation";
+
 import { useTranslations } from "next-intl";
-import { LuHotel, LuShip } from "react-icons/lu";
+import {  LuShip } from "react-icons/lu";
 import { FaRegClock } from "react-icons/fa";
 import { IoSwapHorizontalOutline } from "react-icons/io5";
 import { Transfers } from "./Transfers";
@@ -96,7 +96,7 @@ export const TapsMain = () => {
           >
             <Transfers />
           </Tab>
-          <Tab
+          {/* <Tab
             key="main"
             title={
               <div className="flex items-center space-x-2">
@@ -108,7 +108,7 @@ export const TapsMain = () => {
             <div>
               <Reservation />
             </div>
-          </Tab>
+          </Tab> */}
         </Tabs>
       </div>
     </section>

@@ -79,7 +79,7 @@ export const SelectDestinationSeadust = () => {
       {t("seach.title")}
       </label>
       <Select placeholder={t("seach.placeholder")} className="mt-3">
-        <SelectItem key={"1"}>No hay opciones</SelectItem>
+        <SelectItem key={"1"}>Seadust</SelectItem>
       </Select>
     </>
   );

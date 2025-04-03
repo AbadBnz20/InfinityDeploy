@@ -21,6 +21,7 @@
     "@supabase/supabase-js": "^2.46.2",
     "@typebot.io/nextjs": "^0.3.62",
     "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
     "cookies-next": "^4.3.0",
     "crypto-js": "^4.2.0",
     "date-fns": "^4.1.0",
