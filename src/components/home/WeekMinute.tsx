@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./style.css"
 export const WeekMinute = () => {
   // const [content, setContent] = useState("");
   // useEffect(() => {
@@ -42,14 +42,18 @@ export const WeekMinute = () => {
 
   return (
     <div className="h-[100vh]">
-      {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
       <iframe
-        src="https://www.mywebrezvacations.com/travser"
+        src="/api/scrape"
         width="100%"
         height="100%"
         style={{ border: "none" }}
-        title="Página Web"
+        title="Página sin Navbar"
       />
+      {/* <iframe
+        src="https://www.mywebrezvacations.com/travser/"
+       width="100%"
+        height="100%"
+      ></iframe> */}
     </div>
   );
 };

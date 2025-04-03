@@ -38,13 +38,13 @@ export const GetSession = async () => {
   if (!user) {
     return {} as UserCookieSession;
   }
-
-  const userdata = await UserActive(user?.id);
+  // const userdata = await UserActive(user?.id);
+  // console.log(user)
 
   const userActive: UserCookieSession = {
-    firstname: userdata.firstname,
-    lastname: userdata.lastname,
-    email: user?.email || '',
+    firstname: user.user_metadata.firstname,
+    lastname: user.user_metadata.lastname,
+    email:  user.user_metadata.email,
     number: user?.phone || '',
   };
   return userActive;

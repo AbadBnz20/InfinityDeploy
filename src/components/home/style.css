@@ -1,0 +1,7 @@
+.header-container,
+.where-to-next,
+.js-disable-when-applicable,
+.footer-navigation-bar,
+.footer-main {
+    display: none !important;
+}

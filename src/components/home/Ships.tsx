@@ -7,7 +7,6 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import { getLocalTimeZone, today } from "@internationalized/date";
-import { SelectDestinationShip } from "../ui/select/SelectDestinationShip";
 import { Controller, useForm } from "react-hook-form";
 import { SelectEngine } from "../ui/select/SelectEngine";
 import { SelectExperience } from "../ui/select/SelectExperience";
@@ -45,7 +44,8 @@ export const Ships = () => {
     }
     const departureDate = date?.toDate(getLocalTimeZone());
     SetYahtsData(
-      data.idLocation,
+      // data.idLocation,
+      "3c177ba6-5d52-4cdf-8031-134dcf954484",
       data.idEngine,
       data.idExperience,
       departureDate,
@@ -59,12 +59,12 @@ export const Ships = () => {
   return (
     <form onSubmit={handleSubmit(Onsubmit)} className="p-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
-        <div className="space-y-2">
+        {/* <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
           {t("item.title")}
           </label>
           <SelectDestinationShip control={control}  name="idLocation" error={errors.idLocation} />
-        </div>
+        </div> */}
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
           {t("item1.title")}
