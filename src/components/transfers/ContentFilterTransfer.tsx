@@ -16,6 +16,7 @@ import { SelectPassengers } from "../ui/select/SelectPassengers";
 import { SellectOrigin } from "../ui/select/SellectOrigin";
 import { TransfersStore } from "@/store/TransfersStore";
 import { useTranslations } from "next-intl";
+import { SelectDestinationTranslate } from "../ui/select/SelectDestinationTranslate";
 
 export const ContentFilterTransfer = () => {
   const {
@@ -112,7 +113,7 @@ export const ContentFilterTransfer = () => {
             <label htmlFor="rooms" className="block text-sm font-medium ">
             {t("item1.title")}
             </label>
-            <SellectOrigin
+            <SelectDestinationTranslate
               setvalue={setDestination}
               defaultSelectedKeys={destination}
               placeholder={t("item1.placeholder")}

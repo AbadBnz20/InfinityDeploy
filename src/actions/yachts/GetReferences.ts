@@ -4,26 +4,22 @@ import { createClient } from "@/utils/supabase/server";
 import { GetNumberContract } from "../mytrip/RegisterTrip";
 
 interface DateYach {
-  nameubicacion: string;
   namexperience: string;
   namemotor: string;
   nrocontract: string;
 }
 
 export const GetReferences = async (
-  ubication: string,
   typeOfExperience: string,
   motorYacht: string
 ): Promise<DateYach> => {
-  const [ubicationname, experience, motoryach] = await Promise.all([
-    GetDate(ubication, "origin_destination_ship", "origin_destination_ship_id"),
+  const [ experience, motoryach] = await Promise.all([
     GetDate(typeOfExperience, "typeOfExperience", "typeOfExperienceId"),
     GetDate(motorYacht, "motorYacht", "motorYachtId"),
   ]);
   const nrocontract = await GetNumberContract();
 
   return {
-    nameubicacion: ubicationname,
     namexperience: experience,
     namemotor: motoryach,
     nrocontract: nrocontract.data,

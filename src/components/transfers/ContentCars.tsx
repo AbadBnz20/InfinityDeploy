@@ -122,11 +122,12 @@ export const ContentCars = () => {
           )}
         </Accordion>
       </div>
-      <div className="grid justify-end">
+      <div className="grid mt-2">
         { selected=== 'Ida y vuelta' ?   idcargoing && idcarreturn && (
           <Button
             onPress={() => onRedirect()}
             className="bg-black text-white dark:bg-white dark:text-black"
+            fullWidth
             size="lg"
           >
            {t("button")}
@@ -134,10 +135,11 @@ export const ContentCars = () => {
         ) :idcargoing && (
           <Button
             onPress={() => onRedirect()}
-            className="bg-black text-white dark:bg-white dark:text-black"
+            fullWidth
+            className="bg-black text-white dark:bg-white dark:text-black "
             size="lg"
           >
-           {t("button")}
+          {t("button")}
           </Button>) }
       </div>
     </div>

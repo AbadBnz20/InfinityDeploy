@@ -10,7 +10,6 @@ interface YachtFormRegister {
   lastName: string;
   email: string;
   phone: string;
-  ubicationId: string;
   typeOfExperienceId: string;
   motorYachtId: string;
   packageYachtId?: string;
@@ -31,7 +30,6 @@ export const RegisterYacht = async (yacht: YachtFormRegister) => {
         lastName: yacht.lastName,
         email: yacht.email,
         phone: yacht.phone,
-        ubicationId: yacht.ubicationId,
         typeOfExperienceId: yacht.typeOfExperienceId,
         motorYachtId: yacht.motorYachtId,
         packageYachtId: yacht.packageYachtId,

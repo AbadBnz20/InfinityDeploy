@@ -7,17 +7,24 @@ import {
 } from "@/interfaces/Transfers-response";
 import { createClient } from "@/utils/supabase/server";
 
-export const GetOriginDestination = async () => {
+export const GetOriginDestination = async (id:string) => {
   const supabase = await createClient();
 
-  const { data: categories } = await supabase.from(
-    "category_origin_destination"
-  ).select(`
-     categoryId, name,
-     origin_destination (
-       origindestinationId,name
-     )
-   `).eq('origin_destination.state', true);
+let query = supabase
+    .from("category_origin_destination")
+    .select(`
+      categoryId, name,
+      origin_destination (
+        origindestinationId, name
+      )
+    `)
+    .eq("origin_destination.state", true);
+
+  if (id) {
+    query = query.neq("origin_destination.origindestinationId", id);
+  }
+
+  const { data: categories } = await query;
 
   return categories as OriginDestination[];
 };

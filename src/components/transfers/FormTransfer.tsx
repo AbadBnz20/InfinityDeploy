@@ -4,14 +4,19 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Checkbox,
+
   Input,
 } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useForm } from "react-hook-form";
-import { Contenttransport } from "./Contenttransport";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { TransfersStore } from "@/store/TransfersStore";
+import {
+  GetCar,
+  GetDetailsDestination,
+} from "@/actions/originDestination/OriginDestination";
+import { Car } from "@/interfaces/Transfers-response";
 
 interface User {
   first_name: string;
@@ -28,7 +33,7 @@ export interface Passenger {
 
 export interface FormValuesTransfer {
   mainpassenger: User;
-  passaengers: Passenger[];
+
   codetransport: string;
 }
 
@@ -37,50 +42,102 @@ export interface Props {
     adults: number;
     children: number;
   };
-  datetime:Date,
-  firstname:string,
-  lastname:string,
-  email:string | undefined,
-  number:string
+  datetime: Date;
+  firstname: string;
+  lastname: string;
+  email: string | undefined;
+  number: string;
 }
 
-export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,number }: Props) => {
+export const FormTransfer = ({
+  passengers,
+  firstname,
+  lastname,
+  email,
+  number,
+}: Props) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormValuesTransfer>();
+  const {
+    selected,
+    origin,
+    destination,
+    idcargoing,
+    idcarreturn,
+    arrivaltime,
+    departuretime,
+    passengers: passengersmain,
+  } = TransfersStore();
 
-  const [accepted, setAccepted] = useState(false);
-   const t = useTranslations("TransfersPage");
+  // const [accepted, setAccepted] = useState(false);
+  const [loading, setloading] = useState(false);
+  const t = useTranslations("TransfersPage");
   const router = useRouter();
-  useEffect(() => {
-    reset({
-      passaengers: [
-        ...Array(2).fill({ first_name: "", last_name: "" }),
-        ...Array(2).fill({
-          first_name: "",
-          last_name: "",
-          is_child: true,
-          age: 0,
-        }),
-      ],
-    });
-  }, []);
 
   const onSubmit = async (data: FormValuesTransfer) => {
-    console.log(data);
-    router.push(`/checkoutpayment`);
+    setloading(true);
+    try {
+      let respreturn: Car | null = null;
+      const resp = await GetDetailsDestination(origin, destination, idcargoing!);
+      if (selected === "Ida y vuelta") {
+        respreturn = await GetCar(idcarreturn!);
+      }
+      const date = new Date(arrivaltime);
+      const dateReturn = new Date(departuretime);
+      const formattedDate = date.toISOString().split("T")[0];
+      const formattedTime = date.toISOString().split("T")[1].split(".")[0];
+      const formattedDateReturn = dateReturn.toISOString().split("T")[0];
+      const formattedTimeReturn = dateReturn
+        .toISOString()
+        .split("T")[1]
+        .split(".")[0];
+  
+      if (resp) {
+        const res = await fetch("/api/transfers", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            type: selected,
+            origin: resp.origin,
+            destination: resp.destination,
+            date: formattedDate,
+            time: formattedTime,
+            car: ` ${resp?.car?.brand} ${resp?.car?.model}`,
+            capacity: resp?.car?.ability,
+            price: resp?.car?.transferprice,
+            datereturn: formattedDateReturn,
+            timereturn: formattedTimeReturn,
+            carreturn: ` ${respreturn?.brand} ${respreturn?.model}`,
+            capacityreturn: respreturn?.ability,
+            pricereturn: respreturn?.transferprice,
+            firstName: data.mainpassenger.first_name,
+            lastname: data.mainpassenger.last_name,
+            email: email,
+            passengerAdult: passengersmain.adults.toString(),
+            passengerChildren: passengersmain.children.toString(),
+          }),
+        });
+        const datafetch = await res.json();
+        console.log(datafetch);
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
+    setloading(false);
 
+    router.push(`/`);
   };
 
   return (
     <Card className="my-3 shadow">
       <CardHeader>
-        <h1 className="flex items-center gap-2  text-xl">
-        {t("item2.title")}
-        </h1>
+        <h1 className="flex items-center gap-2  text-xl">{t("item2.title")}</h1>
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -145,154 +202,23 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                 </div>
               </div>
             </div>
-            <div className="mt-2 ml-5">
-              <p className="mt-2 text-medium">{t("item2.item5")}</p>
-              {Array.from({ length: passengers.adults }).map(
-                (_, adultIndex) => (
-                  <div key={`adult-${adultIndex}`} className="mt-5">
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                    {t("item2.adult")} {adultIndex + 1}
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                      <div className="space-y-2">
-                        <label className="text-small">{t("item2.item2")} </label>
-
-                        <Input
-                          {...register(
-                            `passaengers.${adultIndex}.first_name` as const,
-                            {
-                              required: "El campo de Nombre es requerido",
-                            }
-                          )}
-                          isInvalid={
-                            !!errors.passaengers?.[adultIndex]?.first_name
-                          }
-                          errorMessage={
-                            errors.passaengers?.[adultIndex]?.first_name
-                              ?.message
-                          }
-                         
-                          type="text"
-                          placeholder={t("item2.placeholder")}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-small">{t("item2.item3")}</label>
-                        <Input
-                          {...register(
-                            `passaengers.${adultIndex}.last_name` as const,
-                            {
-                              required: "El campo de Apellido es requerido",
-                            }
-                          )}
-                          isInvalid={
-                            !!errors.passaengers?.[adultIndex]?.last_name
-                          }
-                          errorMessage={
-                            errors.passaengers?.[adultIndex]?.last_name?.message
-                          }
-                          type="text"
-                          placeholder={t("item2.placeholder1")}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )
-              )}
-              {passengers.children > 0 && (
-                <>
-                  <p className=" mt-2 text-medium">{t("item2.item6")}</p>
-
-                  {Array.from({ length: passengers.children }).map(
-                    (_, childIndex) => (
-                      <div key={`child--${childIndex}`} className="mt-3">
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                        {t("item2.children")} {childIndex + 1}
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          <div className="space-y-2">
-                            <label className="text-small">{t("item2.item2")} </label>
-
-                            <Input
-                              {...register(
-                                `passaengers.${childIndex}.first_name` as const,
-                                {
-                                  required: "El campo de Nombre es requerido",
-                                }
-                              )}
-                              isInvalid={
-                                !!errors.passaengers?.[childIndex]?.first_name
-                              }
-                              errorMessage={
-                                errors.passaengers?.[childIndex]?.first_name
-                                  ?.message
-                              }
-                              type="text"
-                              placeholder={t("item2.placeholder")}
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <label className="text-small">{t("item2.item3")} </label>
-
-                            <Input
-                              {...register(
-                                `passaengers.${childIndex}.last_name` as const,
-                                {
-                                  required: "El campo de Apellido es requerido",
-                                }
-                              )}
-                              isInvalid={
-                                !!errors.passaengers?.[childIndex]?.last_name
-                              }
-                              errorMessage={
-                                errors.passaengers?.[childIndex]?.last_name
-                                  ?.message
-                              }
-                              type="text"
-                              placeholder={t("item2.placeholder1")}
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <label className="text-small">{t("item2.item7")}</label>
-                            <Input
-                              {...register(
-                                `passaengers.${childIndex}.age` as const,
-                                {
-                                  required: "El campo de Edad es requerido",
-                                  min: {
-                                    value: 0,
-                                    message: "La edad no puede ser negativa",
-                                  },
-                                  max: {
-                                    value: 18,
-                                    message: "La edad no puede ser mayor a 0",
-                                  },
-                                }
-                              )}
-                              isInvalid={
-                                !!errors.passaengers?.[childIndex]?.age
-                              }
-                              errorMessage={
-                                errors.passaengers?.[childIndex]?.age?.message
-                              }
-                              type="number"
-                              placeholder="Ingrese edad"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  )}
-                </>
-              )}
+            <div className="my-5  space-y-2">
+              <p className=" text-medium">
+                Pasajeros adultos:{passengers.adults}
+              </p>
+              <p className=" text-medium">
+                Pasajeros Niños:{passengers.children}
+              </p>
             </div>
             <div className=" w-full mt-3">
-              <Contenttransport date={datetime} register={register} errors={errors} />
+              {/* <Contenttransport date={datetime} register={register} errors={errors} /> */}
               <div className="space-y-6 p-4 mt-3">
-                <div className="space-y-4">
+                {/* <div className="space-y-4">
                   <div className="flex items-center gap-2">
                     <h2 className="text-lg font-medium">{t("item2.item11")}</h2>
-                    <span className="text-sm text-blue-600">({t("item2.item12")})</span>
+                    <span className="text-sm text-blue-600">
+                      ({t("item2.item12")})
+                    </span>
                   </div>
 
                   <div className="flex items-center">
@@ -302,31 +228,26 @@ export const FormTransfer = ({ passengers,datetime,firstname,lastname,email,numb
                       onValueChange={setAccepted}
                     />
                     <label htmlFor="terms" className="text-sm leading-relaxed">
-                    {t("item2.item13")}
-                      <a
-                       
-                        className="text-blue-600 hover:underline"
-                      >
+                      {t("item2.item13")}
+                      <a className="text-blue-600 hover:underline">
                         {t("item2.item14")}
                       </a>
                       ,{" "}
-                      <a
-                       
-                        className="text-blue-600 hover:underline"
-                      >
+                      <a className="text-blue-600 hover:underline">
                         {t("item2.item15")}
                       </a>
                       , {t("item2.item16")}
                     </label>
                   </div>
-                </div>
+                </div> */}
 
                 <Button
                   className="w-full bg-black text-white dark:bg-white dark:text-black"
                   type="submit"
-                  isDisabled={!accepted}
+                  isLoading={loading}
+                  // isDisabled={!accepted}
                 >
-                 {t("item2.button")}
+                  {t("item2.button")}
                 </Button>
               </div>
             </div>

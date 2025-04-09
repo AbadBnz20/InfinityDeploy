@@ -7,13 +7,13 @@ export const useOriginaDestination = () => {
  const [Items, setItems] = useState<OriginDestination[]>([])
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    loadItems();
+    loadItems("");
   }, []);
 
-  const loadItems = async () => {
+  const loadItems = async (id:string) => {
     setLoading(true);
     try {
-      const resp = await GetOriginDestination();
+      const resp = await GetOriginDestination(id);
       setItems(resp);
     } catch (error) {
       console.log(error);
@@ -22,6 +22,7 @@ export const useOriginaDestination = () => {
   };
   return {
      Items,
-     loading
+     loading,
+     loadItems
   };
 };

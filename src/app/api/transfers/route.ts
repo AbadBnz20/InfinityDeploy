@@ -1,42 +1,58 @@
-
-import { YachtsTemplate } from "@/components/sendEmail/YachtsTemplate";
+import { TransferTemplate } from "@/components/sendEmail/TransferTemplate";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   const body = await request.json();
+
   const {
-    nrocontract,
+    type,
+    origin,
+    destination,
     date,
     time,
-    passengers,
+    car,
+    capacity,
+    price,
+    datereturn,
+    timereturn,
+    carreturn,
+    capacityreturn,
+    pricereturn,
     firstName,
-    lastName,
+    lastname,
     email,
-    phone,
-    typeOfExperience,
-    motorYacht,
-    note,
+    passengerAdult,
+    passengerChildren,
   } = body;
-
   try {
     const { error } = await resend.emails.send({
       from: "Advantage <onboarding@advantageinfinityclub.com>",
       to: [email],
-      subject: "Solicitud Yates",
-      react: YachtsTemplate({
-        nrocontract,
+      subject: "Solicitud",
+      react: TransferTemplate({
+        type,
+        origin,
+        destination,
         date,
         time,
-        passengers,
+        car,
+        capacity,
+        price,
+        
+        datereturn,
+        timereturn,
+        carreturn,
+        capacityreturn,
+        pricereturn,
+        
+    
         firstName,
-        lastName,
+        lastname,
         email,
-        phone,
-        typeOfExperience,
-        motorYacht,
-        note,
+        passengerAdult,
+        passengerChildren,
       }),
     });
 

@@ -14,6 +14,7 @@ import { TransfersStore } from "@/store/TransfersStore";
 import { useRouter } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
 import { useTranslations } from "next-intl";
+import { SelectDestinationTranslate } from "../ui/select/SelectDestinationTranslate";
 
 // interface Transfers {
 //   tripType: "Ida" | "Ida y vuelta";
@@ -74,7 +75,7 @@ const posthog = usePostHog();
           <label htmlFor="rooms" className="block text-sm font-medium ">
           {t("item1.title")}
           </label>
-          <SellectOrigin
+          <SelectDestinationTranslate
             setvalue={setDestination}
             placeholder={t("item1.placeholder")}
           />

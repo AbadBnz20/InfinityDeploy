@@ -32,8 +32,8 @@ export const TapsPerfecttrip = () => {
         </div>
       </section>
       <div className="container mx-auto p-4 ">
-        <div className="flex w-full flex-col justify-center">
-          <Tabs size="lg" aria-label="Options" selectedKey={selected}>
+        <div className="flex w-full flex-col ">
+          <Tabs size="lg" color="primary" aria-label="Options" selectedKey={selected}   className="flex justify-center">
             <Tab key="1" title={t("step")}>
               <div>
                 <ContentCardMain />

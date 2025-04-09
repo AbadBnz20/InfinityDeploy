@@ -31,7 +31,6 @@ import { GetReferences } from "@/actions/yachts/GetReferences";
 import { useTranslations } from "next-intl";
 
 interface FormDateYachts {
-  idLocation: string;
   idEngine: string;
   idExperience: string;
   date: Date;
@@ -53,7 +52,6 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
     formState: { errors },
   } = useForm<FormDateYachts>({
     defaultValues: {
-      idLocation: yachts.idLocation,
       idEngine: yachts.idEngine,
       idExperience: yachts.idExperience,
       passengers: yachts.passengers,
@@ -87,7 +85,6 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
         lastName: data.lastname,
         email: data.email,
         phone: data.phone,
-        ubicationId: data.idLocation,
         typeOfExperienceId: data.idExperience,
         motorYachtId: data.idEngine,
         packageYachtId: data.packageYachtId,
@@ -100,7 +97,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
         });
       }
       const respDate = await GetReferences(
-        data.idLocation,
+
         data.idExperience,
         data.idEngine
       );
@@ -119,7 +116,6 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           lastName: data.lastname,
           email: data.email,
           phone: data.phone,
-          ubication: respDate.nameubicacion,
           typeOfExperience: respDate.namexperience,
           motorYacht: respDate.namemotor,
           note: data.note,

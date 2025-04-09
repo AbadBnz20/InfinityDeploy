@@ -11,7 +11,6 @@ interface User {
 }
 
 interface FormDateYachts {
-  idLocation: string;
   idEngine: string;
   idExperience: string;
   date: string;

@@ -130,9 +130,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
           </label>
           <Textarea
             placeholder={t("item5.placeholder")}
-            {...register("details", {
-              required: "El campo es requerido",
-            })}
+            {...register("details")}
             isInvalid={!!errors.details}
             errorMessage={errors.details?.message}
           />

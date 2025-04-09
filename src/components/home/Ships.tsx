@@ -44,8 +44,6 @@ export const Ships = () => {
     }
     const departureDate = date?.toDate(getLocalTimeZone());
     SetYahtsData(
-      // data.idLocation,
-      "3c177ba6-5d52-4cdf-8031-134dcf954484",
       data.idEngine,
       data.idExperience,
       departureDate,
@@ -71,10 +69,7 @@ export const Ships = () => {
           </label>
           <SelectEngine control={control}  name="idEngine" error={errors.idEngine} />
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <div className="w-full space-y-2 ">
+        <div className="w-full space-y-2 ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
             {t("date")}
             </label>
@@ -84,6 +79,10 @@ export const Ships = () => {
               minValue={today(getLocalTimeZone())}
             />
           </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+        <div className="grid grid-cols-1 gap-2">
+          
           <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
             {t("item2.title")}

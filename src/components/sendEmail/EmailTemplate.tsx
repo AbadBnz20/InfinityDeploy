@@ -61,7 +61,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         style={{ width: "150px" }}
       />
       <h2 style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
-        Solicitud de cotización
+      Mi viaje perfecto
       </h2>
     </div>
 

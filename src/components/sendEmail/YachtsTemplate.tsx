@@ -9,7 +9,6 @@ interface Props {
   lastName: string;
   email: string;
   phone: string;
-  ubication: string;
   typeOfExperience: string;
   motorYacht: string;
 
@@ -25,7 +24,6 @@ export const YachtsTemplate = ({
   lastName,
   email,
   phone,
-  ubication,
   typeOfExperience,
   motorYacht,
 
@@ -49,7 +47,7 @@ export const YachtsTemplate = ({
           style={{ width: "150px" }}
         />
         <h2 style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
-          Solicitud de Experiencia
+          Solicitud de Yates
         </h2>
       </div>
 
@@ -109,12 +107,6 @@ export const YachtsTemplate = ({
               <strong>Número de Teléfono:</strong>
             </td>
             <td>{phone}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Ubicación:</strong>
-            </td>
-            <td>{ubication}</td>
           </tr>
           <tr>
             <td>

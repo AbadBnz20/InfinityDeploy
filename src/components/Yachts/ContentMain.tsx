@@ -19,13 +19,12 @@ interface Props {
 }
 
 export const ContentMain = ({ user,packageYach }: Props) => {
-  const { idLocation, date, idEngine, idExperience, passengers } =
+  const {  date, idEngine, idExperience, passengers } =
     YachtsStore();
   const yachdate = new Date(date);
   const DateYach: YachInterface = {
     user: user,
     yachts: {
-      idLocation: packageYach ? packageYach.ubicationId: idLocation,
       idEngine: idEngine,
       idExperience: idExperience,
       date: yachdate.toISOString(),

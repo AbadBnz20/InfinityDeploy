@@ -18,7 +18,7 @@ export const ContentCardflights = () => {
   const { flight, SetFlightData } = TripStore();
   const t = useTranslations("MyperfectPage");
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg`}>
+    <Card className={`group overflow-hidden transition-all hover:shadow-lg hover:bg-maincolor `}>
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !flight ? "opacity-75" : ""
@@ -90,7 +90,7 @@ export const ContentCardHotels = () => {
     setHotelData((prev) => ({ ...prev, rating: value }));
   };
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg`}>
+    <Card className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor`}>
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !state ? "opacity-75" : ""
@@ -178,7 +178,7 @@ export const ContentCardCars = () => {
   }, [state, carData, SetCarData]);
 
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg `}>
+    <Card className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor `}>
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !state ? "opacity-75" : ""
@@ -239,7 +239,7 @@ export const ContentCardAttraction = () => {
   }, [state, attractionsData, SetAttractionsData]);
 
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg`}>
+    <Card className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor`}>
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !state ? "opacity-75" : ""
