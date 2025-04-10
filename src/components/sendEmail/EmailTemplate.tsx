@@ -56,7 +56,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   >
     <div style={{ textAlign: "center", marginBottom: "20px" }}>
       <img
-        src="https://res.cloudinary.com/devz7obre/image/upload/v1742005463/ACT_350X55px-02_2_f9gxig.png"
+        src="https://res.cloudinary.com/devz7obre/image/upload/v1744321737/logo1_v9yswm.png"
         alt="Infinity Luxury Travel"
         style={{ width: "150px" }}
       />
@@ -210,7 +210,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         borderTop: "1px solid #ccc",
       }}
     >
-      Gracias por elegir Advantage
+      Gracias por elegir Infinity Luxury Travel Club
     </p>
   </div>
 );

@@ -76,17 +76,17 @@ export const Experiences = () => {
               {[
                 {
                   src: "seadust/image3.jpg",
-                  title: "Escoge tu destino",
+                  title: "item",
                   description: "item",
                 },
                 {
                   src: "seadust/image1.jpg",
-                  title: "Personaliza tu viaje",
+                  title: "item2",
                   description: "item1",
                 },
                 {
                   src: "seadust/image2.jfif",
-                  title: "crucero3",
+                  title: "item2",
                   description: "item2",
                 },
               ].map((feature, index) => (
@@ -99,9 +99,9 @@ export const Experiences = () => {
                       className="object-cover w-full mb-5 z-2"
                     />
                   </div>
-                  {/* <h3 className="text-xl font-semibold mb-2 ">
-                    {feature.title}
-                  </h3> */}
+                  <h3 className="text-xl font-semibold mb-2 ">
+                  {tt(`${feature.description}.title`)}
+                  </h3>
                   <p className="text-gray-500 text-justify">
                     {tt(`${feature.description}.description`)}
                   </p>

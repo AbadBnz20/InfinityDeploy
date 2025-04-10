@@ -74,7 +74,7 @@ const ContentButton = ({ next, onchange }: Props) => {
       {/* <Button onPress={() => onchange(prev as Key)} variant="light">
         Anterior
       </Button> */}
-      <Button onPress={() => onchange(next as Key)} variant="flat">
+      <Button size="lg" className="w-[50%]" onPress={() => onchange(next as Key)} variant="flat">
       {t("buttonStepnext")}
       </Button>
     </div>

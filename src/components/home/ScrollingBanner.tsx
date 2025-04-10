@@ -26,9 +26,9 @@ const logos=[
 
 export const ScrollingBanner = () => {
   return (
-    <div className="overflow-hidden whitespace-nowrap  my-[50px]">
-      <div className="inline-block animate-marquee">
-        <div className="flex space-x-6 gap-5 items-center">
+    <div className="container mx-auto overflow-hidden whitespace-nowrap  my-[50px] grid justify-center">
+      <div className="inline-block ">
+        <div className="flex space-x-6 gap-5  items-center">
           {
             logos.map(item=>(
               <Image

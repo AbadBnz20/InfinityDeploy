@@ -336,9 +336,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </label>
                 <Textarea
                   type="text"
-                  {...register("note", {
-                    required: "El campo es requerido",
-                  })}
+                  {...register("note")}
                   isInvalid={!!errors.note}
                   errorMessage={errors.note?.message}
                 />

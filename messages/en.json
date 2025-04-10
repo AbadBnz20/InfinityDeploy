@@ -66,15 +66,15 @@
     "title": "My Perfect Trip",
     "item1": {
       "title": "Choose your destiny",
-      "description": "Discover a world of luxury and exclusivity with Advantage! Choose your dream destination and indulge in one-of-akind experiences designed exclusively for our members. From pristine beaches and vibrant city getaways to tranquil nature retreats, every journey becomes unforgettable. Embrace the freedom to explore the world with style and comfort. Join Advantage today and turn your vacations into cherished memories that will last a lifetime."
+      "description": "Explore the world in style and comfort with Infinity Luxury Travel Club, enjoying exclusive destinations and unforgettable journeys."
     },
     "item2": {
       "title": "Customize your trip",
-      "description": "At Advantage, your journey is as unique as you are. Personalize every aspect of your experience, choosing from a wide range of activities and destinations tailored to your desires. Whether you seek adventure or a relaxing experience, we offer exclusive options available only to our members. Enjoy personalized service and create bespoke memories at every destination you explore. Join Advantage and transform your travels into unparalleled moments."
+      "description": "Customize every detail of your trip with Infinity Luxury Travel Club; tailor-made activities and destinations just for you."
     },
     "item3": {
       "title": "Enjoy your vacation",
-      "description": "Enjoy your vacations like never before with Advantage, where every journey becomes a unique experience. Indulge in exceptional moments crafted exclusively for our members, with personalized services that exceed every expectation. Relax and explore in comfort, enjoying the distinction you deserve. Join Advantage and turn every getaway into an unforgettable memory, filled with sophistication, delight, and moments you will cherish forever."
+      "description": "Enjoy unique experiences with Infinity Luxury Travel Club, offering personalized service and a touch of distinction."
     }
   },
 
@@ -82,27 +82,30 @@
     "title": "Transport",
     "item1": {
       "title": "Private Transportation",
-      "description": "We offer a private and secure transportation service available anywhere, designed to ensure an exceptional travel experience. Enjoy comfort, peace of mind, and punctuality on every journey, with highly trained drivers and well aintained vehicles. Itʼs the ideal choice for Club Advantage members seeking efficient, reliable, and personalized transfers. Travel confidently, knowing you are in the best hands."
+      "description": "Travel safely, on time, and in comfort with private transportation exclusive to Infinity Luxury Travel Club members."
     },
     "item2": {
       "title": "Luxury Transportation",
-      "description": " Experience private transportation that blends safety, comfort, and elegance on every ride. Our professional drivers and pristine vehicles ensure an outstanding experience. Designed especially for Club Advantage members who value exclusivity and peace of mind when traveling. Choose the best option for your transfers and enjoy a worry-free journey."
+      "description": "Enjoy elegant, worry-free transportation with expert drivers and impeccable vehicles."
     },
     "item3": {
-      "title": "Don't wait any longer",
-      "description": "Avoid long waits and the uncertainty of transport that doesnʼt arrive when you need it most. As a Club Advantage member, enjoy a direct, fast, and reliable service by booking your trip with us. Whether to the airport or any other destination, one of our drivers will be waiting for you at the designated pickup point in minutes. Forget about unexpected delays—contact us today and enjoy an exclusive, comfortable transfer to your destination."
+      "title": "Efficient and Fast Service",
+      "description": "Skip delays and waiting; book your transfer with Infinity Luxury Travel Club and always arrive on time."
     }
   },
 
   "Seadust": {
     "item": {
-      "description": " At Seadust Cancun Family Resort, your ideal family vacation becomes a reality. Relax in its stunning pools, enjoy bars with refreshing drinks, and indulge in exceptional cuisine at its excellent restaurants. Experience the excitement of the themed water park, mini-golf, zip lines, and activities for all ages. With nightly entertainment and specialized care for babies, every family member will have a unique and unforgettable experience."
+      "title":"General",
+      "description": "Perfect family getaway with pools, great food, water park, and fun for all ages."
     },
     "item1": {
-      "description": " Enjoy exciting activities, expansive recreational facilities, and a vibrant atmosphere that lets you experience Cancun like never before. At Seadust Cancun Family Resort, everyone can come together, share unique moments, and create unforgettable memories. With options for all ages, every family member will  find the perfect place to make the most of a truly ideal vacation."
+      "title":"Activities",
+      "description": "Exciting activities and a lively atmosphere to create unforgettable family memories."
     },
     "item2": {
-      "description": "After a day full of excitement, unwind with a unique experience at The Spa at Seadust in  Seadust Cancun Family Resort. Enjoy exclusive, personalized service in a serene environment where every detail is designed to balance body and mind. With exclusive rituals and facial and body treatments inspired by Mayan, Asian, and European cultures, your well-being will be our priority. Experience a rejuvenating journey that will revitalize your senses."
+      "title":"Spa",
+      "description": "Total relaxation at an exclusive spa with rituals inspired by global cultures."
     }
   },
 
@@ -166,8 +169,8 @@
       "title": "Children"
     },
     "item5": {
-      "title": "Add Details",
-      "placeholder": "Details"
+      "title": "Note",
+      "placeholder": "Add Note"
     },
     "item6": { "title": "Budget" },
     "item7": { "title": "Currency Type" }
@@ -178,7 +181,7 @@
       "placeholder": "Select Location"
     },
     "item1": {
-      "title": "Yacht Motor",
+      "title": "Type of yacht",
       "placeholder": "Select Engine"
     },
     "item2": {
@@ -197,7 +200,7 @@
     "title1": "User Information",
 
     "item": {
-      "title": "Yacht Engine",
+      "title": "Type of yacht",
       "placeholder": "Select Engine"
     },
     "item1": {
@@ -216,7 +219,7 @@
 
   "Transfers": {
     "item": {
-      "title": "Country of Origin",
+      "title": "Origin",
       "placeholder": "Select Origin"
     },
     "item1": {

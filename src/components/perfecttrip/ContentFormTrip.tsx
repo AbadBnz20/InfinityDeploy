@@ -137,10 +137,10 @@ export const ContentFormTrip = ({ onchange }: Props) => {
         </div>
       </div>
       <div className="w-full flex justify-end gap-3">
-        <Button onPress={() => onchange("1" as Key)} variant="light">
+        <Button  size="lg" className="w-[50%]" onPress={() => onchange("1" as Key)} variant="light">
         {t("buttonStepprev")}
         </Button>
-        <Button type="submit" variant="flat">
+        <Button  size="lg" className="w-[50%]" type="submit" variant="flat">
         {t("buttonStepnext")}
         </Button>
       </div>

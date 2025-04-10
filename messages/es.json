@@ -66,42 +66,45 @@
     "title": "Mi viaje Perfecto",
     "item1": {
       "title": "Escoge tu destino ",
-      "description": " ¡Descubre un mundo de lujo y exclusividad con Advantage! Escoge tu destino soñado y disfruta de experiencias únicas, creadas especialmente para nuestros socios. Desde playas paradisíacas y escapadas urbanas vibrantes hasta refugios tranquilos en la naturaleza, cada viaje será inolvidable. Vive la libertad de explorar el mundo con estilo y comodidad. Únete a Advantage hoy y transforma tus vacaciones en momentos memorables que atesorarás para siempre"
+      "description": "Explora el mundo con estilo y comodidad con Infinity Luxury Travel Club, disfrutando destinos exclusivos y viajes inolvidables."
     },
     "item2": {
       "title": "Personaliza tu viaje",
-      "description": "En Advantage, tu viaje es único, como tú. Personaliza cada aspecto de tu experiencia, eligiendo entre una amplia gama de actividades y destinos adaptados a tus deseos. Ya sea que busques aventura o una experiencia relajante, tenemos opciones exclusivas solo para nuestros socios. Disfruta de una atención personalizada y crea recuerdos a medida en cada lugar que explores. Únete a Advantage y transforma tus viajes en momentos inigualables."
+      "description": "Personaliza cada detalle de tu viaje con Infinity Luxury Travel Club; actividades y destinos hechos a tu medida."
     },
     "item3": {
       "title": "Disfruta tus vacaciones",
-      "description": " Disfruta tus vacaciones como nunca antes con Advantage, donde cada viaje se convierte en una experiencia única. Vive momentos excepcionales diseñados exclusivamente para nuestros socios, con servicios personalizados que superan cualquier expectativa. Relájate y explora con comodidad, disfrutando de la distinción que mereces. Únete a Advantage y transforma cada escapada en un recuerdo inolvidable, lleno de sofisticación, placer y momentos que atesorarás para siempre"
+      "description": " Vive experiencias únicas con Infinity Luxury Travel Club, con servicios personalizados y un toque de distinción."
     }
   },
   "TransfersHome": {
     "title": "Transporte",
     "item1": {
       "title": "Tansporte Privado",
-      "description": "Ofrecemos un servicio de transporte privado y seguro disponible en cualquier lugar, diseñado para garantizar una experiencia de viaje excepcional. Disfrute de comodidad, tranquilidad y puntualidad en cada trayecto, con conductores altamente capacitados y vehículos en óptimas condiciones. Es la opción ideal para los socios del Club Advantage que buscan minutes. Forget about traslados eficientes, confiables y personalizados. Viaje con la certeza de estar en las mejores manos."
+      "description": "Viaja con seguridad, puntualidad y comodidad con transporte privado exclusivo para socios de Infinity Luxury Travel Club."
     },
     "item2": {
       "title": "Transporte de Lujo",
-      "description": "Descubra un servicio de transporte privado que combina seguridad, confort y elegancia en cada recorrido. Contamos con conductores expertos y vehículos impecables para garantizar una experiencia excepcional. Pensado especialmente para los socios del Club Advantage que valoran la exclusividad y la tranquilidad al desplazarse. Elija la mejor opción para sus traslados y disfrute de un viaje sin preocupaciones."
+      "description": "Disfruta un traslado elegante y sin preocupaciones con conductores expertos y vehículos impecables."
     },
     "item3": {
-      "title": "No esperes mas",
-      "description": "Evita largas esperas y la incertidumbre de transportes que no llegan a tiempo. Si eres socio del Club Advantage, disfruta de un servicio directo, rápido y confiable reservando tu trayecto con nosotros. Ya sea al aeropuerto o cualquier otro destino, uno de nuestros conductores estará esperando en el punto de recogida en minutos. Olvídate de retrasos imprevistos, contáctanos hoy mismo y disfruta de un traslado cómodo y exclusivo."
+      "title": "Servicio Eficiente y Rápido",
+      "description": "Evita esperas y retrasos; reserva tu traslado con Infinity Luxury Travel Club y llega siempre a tiempo."
     }
   },
 
 "Seadust":{
    "item":{
-    "description":"En Seadust Cancun Family Resort, tu plan de vacaciones familiares perfecto se hace realidad. Relájate en sus impresionantes piscinas, disfruta de bares con deliciosas bebidas y saborea una gastronomía excepcional en sus excelentes restaurantes. Vive la emoción del parque acuático temático, minigolf, tirolesas y actividades para todas las edades. Con entretenimiento nocturno y atención especializada para bebés, toda la familia vivirá una experiencia única e inolvidable."
+    "title":"General",
+    "description":"Vacaciones familiares ideales con piscinas, gastronomía, parque acuático y entretenimiento para todas las edades."
    },
    "item1":{
-    "description":"Disfruta de emocionantes actividades, amplias instalaciones recreativas y un ambiente vibrante que te permitirá vivir Cancún como nunca antes. En Seadust Cancun Family Resort, toda la familia podrá reunirse, compartir momentos únicos y crear recuerdos inolvidables. Con opciones para todas las edades, cada miembro de la familia encontrará su lugar ideal para disfrutar al máximo de unas vacaciones perfectas."
+    "title":"Actividades",
+    "description":"Actividades emocionantes y ambiente vibrante para crear recuerdos inolvidables en familia."
    },
    "item2":{
-    "description":"Después de un día lleno de emociones, relájate con una experiencia única en The Spa at Seadust en Seadust Cancun Family Resort. Disfruta de un servicio exclusivo y personalizado en un entorno de tranquilidad total, donde cada detalle está diseñado para equilibrar cuerpo y mente. Con rituales exclusivos y tratamientos faciales y corporales inspirados en las culturas maya, asiática y europea, tu bienestar será nuestra prioridad. Vive una experiencia rejuvenecedora que revitalizará tus sentidos."
+    "title":"Spa",
+    "description":"Relajación total en un spa exclusivo con rituales inspirados en culturas del mundo."
    }
 },
 
@@ -169,8 +172,8 @@
       "title":"Niños"
     },
     "item5":{
-      "title":"Agregar Detalle",
-      "placeholder":"Detalle"
+      "title":"Agregar Nota",
+      "placeholder":"Nota"
     },
     "item6":{
       "title":"Presupuesto"
@@ -189,7 +192,7 @@
       "placeholder": "Seleccione ubicacion"
     },
     "item1": {
-      "title": "Motor de Yate",
+      "title": "Tipo de Yate",
       "placeholder": "Seleccione Motor"
     },
     "item2": {
@@ -208,7 +211,7 @@
     "title1":"Informacion De usuario",
 
     "item": {
-      "title": "Motor de Yate",
+      "title": "Tipo de Yate",
       "placeholder": "Seleccione Motor"
     },
     "item1": {
@@ -229,7 +232,7 @@
 
   "Transfers": {
     "item": {
-      "title": "Pais Origen",
+      "title": "Origen",
       "placeholder": "Seleccione Origen"
     },
     "item1": {

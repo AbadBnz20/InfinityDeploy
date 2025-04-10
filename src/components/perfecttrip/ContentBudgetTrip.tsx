@@ -1,4 +1,8 @@
-import { GetNumberContract, RegisterTrip, TripFormRegister } from "@/actions/mytrip/RegisterTrip";
+import {
+  GetNumberContract,
+  RegisterTrip,
+  TripFormRegister,
+} from "@/actions/mytrip/RegisterTrip";
 import { useSession } from "@/hooks/useSession";
 import { TripStore } from "@/store/TripStore";
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
@@ -41,8 +45,8 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
   const [loading, setloading] = useState(false);
   const router = useRouter();
   const { session } = useSession();
-   const t = useTranslations("MyperfectPage");
-  
+  const t = useTranslations("MyperfectPage");
+
   const onSubmit = async (data: FormData) => {
     try {
       const obj: TripFormRegister = {
@@ -124,7 +128,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
         <div className="grid grid-cols-3 gap-3 mb-5">
           <div className="col-span-2">
             <label className="block text-sm font-medium mb-2">
-            {t("item6.title")}
+              {t("item6.title")}
             </label>
             <Input
               placeholder="0"
@@ -138,7 +142,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
           </div>
           <div className="">
             <label className="block text-sm font-medium mb-2">
-            {t("item7.title")}
+              {t("item7.title")}
             </label>
             <Select
               placeholder="seleccione opcion"
@@ -161,12 +165,18 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
           </div>
         </div>
         <div className="w-full flex justify-end gap-3">
-          <Button onPress={() => onchange("2" as Key)} variant="light">
-          {t("buttonStepprev")}
+          <Button
+            size="lg"
+            className="w-[50%]"
+            onPress={() => onchange("2" as Key)}
+            variant="light"
+          >
+            {t("buttonStepprev")}
           </Button>
           <Button
             isLoading={loading}
-            className="bg-black text-white dark:bg-white dark:text-black"
+            size="lg"
+            className="bg-black text-white dark:bg-white dark:text-black w-[50%]"
             type="submit"
             variant="flat"
           >

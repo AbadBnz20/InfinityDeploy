@@ -29,9 +29,9 @@ export async function POST(request: Request) {
 
   try {
     const {  error } = await resend.emails.send({
-      from: "Advantage <onboarding@advantageinfinityclub.com>",
+      from: "Infinity <onboarding@advantageinfinityclub.com>",
       to: [email],
-      subject: "Solicitud",
+      subject: "Solicitud Mi viaje perfecto",
       react: EmailTemplate({
         budget,
         nrocontract,
