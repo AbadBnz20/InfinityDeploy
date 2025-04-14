@@ -49,7 +49,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
         <div className="">
           <label className="block text-sm font-medium mb-2">
-          {t("item.title")}
+          {t("item.title")} <span className="text-red-500">*</span>
           </label>
           <Input
             placeholder="Nombre"
@@ -64,7 +64,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
         </div>
         <div className=" ">
           <label className="block text-sm font-medium mb-2">
-          {t("item1.title")}
+          {t("item1.title")} <span className="text-red-500">*</span>
 
           </label>
           <Input
@@ -79,12 +79,12 @@ export const ContentFormTrip = ({ onchange }: Props) => {
           />
         </div>
         <div className="">
-          <label className="block text-sm font-medium mb-2">Email</label>
+          <label className="block text-sm font-medium mb-2">Email <span className="text-red-500">*</span></label>
           <Input placeholder="Email" type="Email" value={session?.email} />
         </div>
         <div className="">
           <label className="block text-sm font-medium mb-2">
-          {t("item2.title")}
+          {t("item2.title")} <span className="text-red-500">*</span>
 
           </label>
           <Input
@@ -100,7 +100,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
           />
         </div>
         <div className="">
-          <label className="block text-sm font-medium mb-2">{t("item3.title")}
+          <label className="block text-sm font-medium mb-2">{t("item3.title")} <span className="text-red-500">*</span>
           </label>
           <Select
             placeholder={t("item3.placeholder")}

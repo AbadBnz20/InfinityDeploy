@@ -175,7 +175,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div> */}
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("item.title")}
+                  {t("item.title")} <span className="text-red-500">*</span>
                   </label>
                   <SelectEngine
                     control={control}
@@ -185,7 +185,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="w-full space-y-2 ">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("date")}
+                  {t("date")} <span className="text-red-500">*</span>
                   </label>
                   <DatePicker
                     value={date}
@@ -195,7 +195,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("item1.title")}
+                  {t("item1.title")} <span className="text-red-500">*</span>
                   </label>
                   <SelectExperience
                     control={control}
@@ -205,7 +205,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("time")}
+                  {t("time")} <span className="text-red-500">*</span>
                   </label>
 
                   <Controller
@@ -271,14 +271,14 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           <CardHeader>
             <h1 className="flex items-center gap-2  text-xl">
               <IoPersonOutline size={24} />
-              {t("title1")}
+              {t("title1")} <span className="text-red-500">*</span>
             </h1>
           </CardHeader>
           <CardBody className="grid gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                {t("item2")}
+                {t("item2")} <span className="text-red-500">*</span>
                 </label>
                 <Input
                   {...register("firstname", {
@@ -291,7 +291,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                {t("item3")}
+                {t("item3")} <span className="text-red-500">*</span>
                 </label>
                 <Input
                   {...register("lastname", {
@@ -304,7 +304,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="w-full space-y-2 ">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                  Email
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <Input
                   type="email"
@@ -318,7 +318,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                {t("item4")}
+                {t("item4")} <span className="text-red-500">*</span>
                 </label>
                 <Input
                   type="number"

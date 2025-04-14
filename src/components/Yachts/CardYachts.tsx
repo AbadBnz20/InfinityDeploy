@@ -36,10 +36,10 @@ export const CardYachts = ({ yachts }: Props) => {
 
       {/* Contenido */}
       <div className="p-4 space-y-4">
-        <div className="flex items-center gap-2 text-white">
+        {/* <div className="flex items-center gap-2 text-white">
           <IoLocationOutline className="h-5 w-5" />
           <span className="font-medium">{yachts.origin_destination_ship.city.name}, {yachts.origin_destination_ship.name}</span>
-        </div>
+        </div> */}
         <h3 className="text-xl font-semibold ">{yachts.name}</h3>
 
         {/* Detalles */}
@@ -47,7 +47,7 @@ export const CardYachts = ({ yachts }: Props) => {
           <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
             <IoPeopleOutline className="h-5 w-5" />
             <div>
-              <p className="text-sm font-medium">{yachts.passengers}</p>
+              <p className="text-sm font-medium"> 1-{yachts.passengers}</p>
               <p className="text-xs">Personas</p>
             </div>
           </div>

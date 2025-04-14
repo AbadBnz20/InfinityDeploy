@@ -8,8 +8,9 @@ interface Props{
   item:CardProps;
   selected:Dispatch<SetStateAction<Selection>>
   updatetId:(id:string)=>void;
+  idSelected:string| null;
 }
-export const Car = ({item,selected,updatetId}:Props) => {
+export const Car = ({item,selected,updatetId,idSelected}:Props) => {
   const {selected:select}=TransfersStore();
  
   const onChange = (id:string)=>{
@@ -21,7 +22,7 @@ export const Car = ({item,selected,updatetId}:Props) => {
   }
 
   return (
-    <Card  className="overflow-hidden">
+    <Card  className={`overflow-hidden shadow-sm ${idSelected === item.carId ? "border-2 border-primary" : ""}`}>
       <div className="grid md:grid-cols-[300px,1fr,200px] gap-4">
         <div className="relative h-[100%] md:h-full">
          <img
@@ -53,19 +54,19 @@ export const Car = ({item,selected,updatetId}:Props) => {
                 
               </p>
             </div>
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <p className="text-sm text-muted-foreground">
                Descripcion : {item.description}
               </p>
-            </div>
+            </div> */}
           </div>
         </CardBody>
 
         <div className="p-6 flex flex-col justify-between border-t md:border-l md:border-t-0">
           <div className="text-center">
-            <div className="text-2xl font-bold">{item.transferprice} MXN</div>
+            {/* <div className="text-2xl font-bold">{item.transferprice} MXN</div> */}
             {/* <div className="text-sm text-primary">245 Puntos</div> */}
-            <div className="text-sm text-muted-foreground">Precio total</div>
+            {/* <div className="text-sm text-muted-foreground">Precio total</div> */}
           </div>
           <Button onPress={()=>onChange(item.carId)} className="w-full" size="lg">
             Seleccionar

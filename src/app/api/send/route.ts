@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
   try {
     const {  error } = await resend.emails.send({
-      from: "Infinity <onboarding@advantageinfinityclub.com>",
+      from: "InfinityTravelClub <onboarding@advantageinfinityclub.com>",
       to: [email],
       subject: "Solicitud Mi viaje perfecto",
       react: EmailTemplate({

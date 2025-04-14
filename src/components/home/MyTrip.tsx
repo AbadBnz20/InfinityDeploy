@@ -67,9 +67,11 @@ export const MyTrip = () => {
       >
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("item.title")}
+          {t("item.title")}  <span className="text-red-500">*</span>
           </label>
           <Input
+          isRequired
+        
             placeholder= {t("item.placeholder")}
             type="text"
             {...register("country_origin", {
@@ -81,7 +83,7 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("item1.title")}
+          {t("item1.title")} <span className="text-red-500">*</span>
           </label>
           <Input
             placeholder= {t("item1.placeholder")}
@@ -95,7 +97,7 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("item2.title")}
+          {t("item2.title")} <span className="text-red-500">*</span>
           </label>
           <Input
             placeholder= {t("item2.placeholder")}
@@ -109,7 +111,7 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("item3.title")}
+          {t("item3.title")} <span className="text-red-500">*</span>
           </label>
           <Input
             placeholder={t("item3.placeholder")}
@@ -123,7 +125,7 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("date")}
+          {t("date")} <span className="text-red-500">*</span>
           </label>
           <DateRangePicker
             value={date}

@@ -242,6 +242,7 @@
     "title1": "Select Return Transfer",
     "empy": "No results found",
     "button": "Continue",
+    "button1":"Back",
     "item": {
       "title": " Outbound Details",
       "title1": " Return Details",

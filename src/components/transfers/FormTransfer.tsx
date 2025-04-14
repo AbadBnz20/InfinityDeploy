@@ -33,7 +33,6 @@ export interface Passenger {
 
 export interface FormValuesTransfer {
   mainpassenger: User;
-
   codetransport: string;
 }
 
@@ -146,7 +145,7 @@ export const FormTransfer = ({
               <p className=" text-medium">{t("item2.subtitle")}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
                 <div className="space-y-2">
-                  <label className="text-small">{t("item2.item2")}</label>
+                  <label className="text-small">{t("item2.item2")} <span className="text-red-500">*</span></label>
                   <Input
                     {...register("mainpassenger.first_name", {
                       required: "El campo de nombre es requerido",
@@ -159,7 +158,7 @@ export const FormTransfer = ({
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-small">{t("item2.item3")}</label>
+                  <label className="text-small">{t("item2.item3")} <span className="text-red-500">*</span></label>
                   <Input
                     {...register("mainpassenger.last_name", {
                       required: "El campo de apellido es requerido",
@@ -174,7 +173,7 @@ export const FormTransfer = ({
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
                 <div className="space-y-2">
-                  <label className="text-small">Email</label>
+                  <label className="text-small">Email <span className="text-red-500">*</span></label>
 
                   <Input
                     {...register("mainpassenger.email", {
@@ -188,7 +187,7 @@ export const FormTransfer = ({
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-small">{t("item2.item4")}</label>
+                  <label className="text-small">{t("item2.item4")} <span className="text-red-500">*</span></label>
                   <Input
                     {...register("mainpassenger.phone", {
                       required: "El campo de Numero es requerido",

@@ -1,32 +1,31 @@
 import React from "react";
 
 interface Props {
-  nrocontract: string;
-  date: string;
-  time: string;
-  passengers: string;
+  start_date: string;
+  end_date: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  typeOfExperience: string;
-  motorYacht: string;
-  note: string;
+  adult: number;
+  children: string;
+  name: string;
+  numberOfBeds: string;
+  typeOfBed: string;
 }
 
-export const YachtsTemplate = ({
-  nrocontract,
-  date,
-  time,
-  passengers,
+export const SeadustTemplate = ({
+  start_date,
+  end_date,
   firstName,
   lastName,
   email,
   phone,
-  typeOfExperience,
-  motorYacht,
-
-  note,
+  adult,
+  children,
+  name,
+  numberOfBeds,
+  typeOfBed,
 }: Props) => {
   return (
     <div
@@ -46,7 +45,7 @@ export const YachtsTemplate = ({
           style={{ width: "150px" }}
         />
         <h2 style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
-          Solicitud de Yates
+          Solicitud de Habitación
         </h2>
       </div>
 
@@ -58,20 +57,17 @@ export const YachtsTemplate = ({
       <p>
         Es para nosotros un placer servirle y brindarle la mejor experiencia.
       </p>
-      <p>
-        En breve recibirá por correo los detalles referentes a su solicitud:
-      </p>
-
+        <p>Detalles de su solicitud:</p>
       <table
         style={{ width: "100%", borderCollapse: "collapse", lineHeight: "1.6" }}
       >
         <tbody>
-          <tr>
-            <td>
-              <strong>Numero de contrato:</strong>
-            </td>
-            <td>{nrocontract}</td>
-          </tr>
+          {/* <tr>
+        <td>
+          <strong>Numero de contrato:</strong>
+        </td>
+        <td>{nrocontract}</td>
+      </tr> */}
           <tr>
             <td>
               <strong>Email:</strong>
@@ -84,47 +80,53 @@ export const YachtsTemplate = ({
           </tr>
           <tr>
             <td>
-              <strong>Fecha:</strong>
-            </td>
-            <td>{date}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Hora:</strong>
-            </td>
-            <td>{time}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Pasajeros:</strong>
-            </td>
-            <td>{passengers}</td>
-          </tr>
-
-          <tr>
-            <td>
-              <strong>Número de Teléfono:</strong>
+              <strong>Numero:</strong>
             </td>
             <td>{phone}</td>
           </tr>
           <tr>
             <td>
-              <strong>Tipo de Experiencia:</strong>
+              <strong>Fecha Inicio:</strong>
             </td>
-            <td>{typeOfExperience}</td>
+            <td>{start_date}</td>
           </tr>
           <tr>
             <td>
-              <strong>Yate a Motor:</strong>
+              <strong>Fecha Final:</strong>
             </td>
-            <td>{motorYacht}</td>
+            <td>{end_date}</td>
           </tr>
-          
           <tr>
             <td>
-              <strong>Nota Adicional:</strong>
+              <strong>Adultos:</strong>
             </td>
-            <td>{note}</td>
+            <td>{adult}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Niños:</strong>
+            </td>
+            <td>{children}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Habitacion</strong>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Nombre:</strong>
+            </td>
+            <td>{name}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Tipo de cama:</strong>
+            </td>
+            <td>
+              {numberOfBeds} {typeOfBed}
+            </td>
           </tr>
         </tbody>
       </table>

@@ -65,13 +65,13 @@ export const Ships = () => {
         </div> */}
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("item1.title")}
+          {t("item1.title")} <span className="text-red-500">*</span>
           </label>
           <SelectEngine control={control}  name="idEngine" error={errors.idEngine} />
         </div>
         <div className="w-full space-y-2 ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("date")}
+            {t("date")} <span className="text-red-500">*</span>
             </label>
             <DatePicker
               value={date}
@@ -85,7 +85,7 @@ export const Ships = () => {
           
           <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("item2.title")}
+            {t("item2.title")} <span className="text-red-500">*</span>
             </label>
             <SelectExperience
               control={control}
@@ -96,7 +96,7 @@ export const Ships = () => {
         <div className="grid  grid-cols-1 md:grid-cols-2 items-end gap-2">
           <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("item3.title")}
+            {t("item3.title")} <span className="text-red-500">*</span>
             </label>
             <Controller
               control={control}

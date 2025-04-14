@@ -42,8 +42,7 @@ export const ContentMain = ({ firstname, lastname, email, number }: Props) => {
             type="Ida y vuelta"
           />
         )}
-      </div>
-      <FormTransfer
+        <FormTransfer
         passengers={passengers}
         datetime={arrivaltime}
         firstname={firstname}
@@ -51,6 +50,8 @@ export const ContentMain = ({ firstname, lastname, email, number }: Props) => {
         email={email}
         number={number}
       />
+      </div>
+      
     </>
   );
 };

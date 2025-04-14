@@ -173,12 +173,12 @@ const Carcontent = ({ car }: Props2) => {
           </div>
         </div>
       </CardBody>
-      <div className="p-6 flex flex-col justify-between border-t md:border-l md:border-t-0">
+      {/* <div className="p-6 flex flex-col justify-between border-t md:border-l md:border-t-0">
         <div className="text-center">
           <div className="text-2xl font-bold">{car.transferprice} MXN</div>
           <div className="text-sm text-muted-foreground">Precio total</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

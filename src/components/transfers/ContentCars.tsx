@@ -18,17 +18,15 @@ export const ContentCars = () => {
     idcarreturn,
     selected,
     origin,
-    destination
+    destination,
   } = TransfersStore();
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["1"]));
   const router = useRouter();
   const t = useTranslations("TransfersPage");
 
-
   useEffect(() => {
     // console.log(loading)
-  }, [loading])
-  
+  }, [loading]);
 
   useEffect(() => {
     const fetchHotels = async () => {
@@ -39,8 +37,7 @@ export const ContentCars = () => {
       setLoading(false);
     };
     fetchHotels();
-
-  }, [selected,origin,destination]);
+  }, [selected, origin, destination]);
 
   const onRedirect = () => {
     router.push(`/detailstransfers`);
@@ -49,10 +46,7 @@ export const ContentCars = () => {
   return (
     <div className="w-full md:w-full">
       <div className="mb-6">
-        
-         {
-          loading &&  <ModalLoading loading={loading} />
-         }
+        {loading && <ModalLoading loading={loading} />}
       </div>
       <div>
         <Accordion selectedKeys={selectedKeys} className="">
@@ -61,11 +55,9 @@ export const ContentCars = () => {
             aria-label="Accordion 1"
             startContent={
               <div className="text-start">
-                <h2 className="text-2xl font-semibold ">
-                {t("title")}
-                </h2>
+                <h2 className="text-2xl font-semibold ">{t("title")}</h2>
                 <h2 className="text-medium font-medium text-gray-400">
-                {transferCars.going.length}  {t("subtitile")}
+                  {transferCars.going.length} {t("subtitile")}
                 </h2>
               </div>
             }
@@ -78,6 +70,7 @@ export const ContentCars = () => {
               ) : (
                 transferCars.going.map((item) => (
                   <Car
+                  idSelected={idcargoing}
                     key={item.carId}
                     item={item}
                     selected={setSelectedKeys}
@@ -93,9 +86,7 @@ export const ContentCars = () => {
               aria-label="Accordion 2"
               startContent={
                 <div className="text-start">
-                  <h2 className="text-2xl font-semibold ">
-                  {t("title1")}
-                  </h2>
+                  <h2 className="text-2xl font-semibold ">{t("title1")}</h2>
                   <h2 className="text-medium font-medium text-gray-400">
                     {transferCars.going.length} {t("subtitile")}
                   </h2>
@@ -110,6 +101,7 @@ export const ContentCars = () => {
                 ) : (
                   transferCars.return.map((item) => (
                     <Car
+                    idSelected={idcarreturn}
                       key={item.carId}
                       item={item}
                       selected={setSelectedKeys}
@@ -122,25 +114,37 @@ export const ContentCars = () => {
           )}
         </Accordion>
       </div>
-      <div className="grid mt-2">
-        { selected=== 'Ida y vuelta' ?   idcargoing && idcarreturn && (
-          <Button
-            onPress={() => onRedirect()}
-            className="bg-black text-white dark:bg-white dark:text-black"
-            fullWidth
-            size="lg"
-          >
-           {t("button")}
-          </Button>
-        ) :idcargoing && (
-          <Button
-            onPress={() => onRedirect()}
-            fullWidth
-            className="bg-black text-white dark:bg-white dark:text-black "
-            size="lg"
-          >
-          {t("button")}
-          </Button>) }
+      <div className="grid mt-2 grid-cols-2">
+        <Button
+          onPress={() =>{ router.back()}}
+          className="bg-white text-black dark:bg-black dark:text-white"
+          fullWidth
+          size="lg"
+        >
+          {t("button1")}
+        </Button>
+        {selected === "Ida y vuelta"
+          ? idcargoing &&
+            idcarreturn && (
+              <Button
+                onPress={() => onRedirect()}
+                className="bg-black text-white dark:bg-white dark:text-black"
+                fullWidth
+                size="lg"
+              >
+                {t("button")}
+              </Button>
+            )
+          : idcargoing && (
+              <Button
+                onPress={() => onRedirect()}
+                fullWidth
+                className="bg-black text-white dark:bg-white dark:text-black "
+                size="lg"
+              >
+                {t("button")}
+              </Button>
+            )}
       </div>
     </div>
   );

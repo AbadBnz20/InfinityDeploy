@@ -1,5 +1,4 @@
-
-import { YachtsTemplate } from "@/components/sendEmail/YachtsTemplate";
+import { SeadustTemplate } from "@/components/sendEmail/SeadustTemplate";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -7,36 +6,36 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   const body = await request.json();
   const {
-    nrocontract,
-    date,
-    time,
-    passengers,
+    start_date,
+    end_date,
     firstName,
     lastName,
     email,
     phone,
-    typeOfExperience,
-    motorYacht,
-    note,
+    adult,
+    children,
+    name,
+    numberOfBeds,
+    typeOfBed,
   } = body;
 
   try {
     const { error } = await resend.emails.send({
       from: "InfinityTravelClub <onboarding@advantageinfinityclub.com>",
       to: [email],
-      subject: "Solicitud Yates",
-      react: YachtsTemplate({
-        nrocontract,
-        date,
-        time,
-        passengers,
+      subject: "Solicitud Seadust",
+      react: SeadustTemplate({
+        start_date,
+        end_date,
         firstName,
         lastName,
         email,
         phone,
-        typeOfExperience,
-        motorYacht,
-        note,
+        adult,
+        children,
+        name,
+        numberOfBeds,
+        typeOfBed,
       }),
     });
 

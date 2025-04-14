@@ -128,7 +128,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
         <div className="grid grid-cols-3 gap-3 mb-5">
           <div className="col-span-2">
             <label className="block text-sm font-medium mb-2">
-              {t("item6.title")}
+              {t("item6.title")} <span className="text-red-500">*</span>
             </label>
             <Input
               placeholder="0"
@@ -142,7 +142,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
           </div>
           <div className="">
             <label className="block text-sm font-medium mb-2">
-              {t("item7.title")}
+              {t("item7.title")} <span className="text-red-500">*</span>
             </label>
             <Select
               placeholder="seleccione opcion"

@@ -8,11 +8,14 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormSetValue } from "react-hook-form";
 import { SelectGuest } from "../ui/select/SelectGuest";
 import { useTranslations } from "next-intl";
+import { SelectGuestSeadust } from "../ui/select/SelectGuestSeadust";
+import { SeadustStore } from "@/store/SeadustStore";
+import { useRouter } from "next/navigation";
 
-interface Destination {
+export interface DestinationSeadust {
   id: number;
   checkin: string;
   checkout: string;
@@ -20,17 +23,28 @@ interface Destination {
 }
 
 export const Seadust = () => {
-  const { setValue, handleSubmit } = useForm<Destination>();
+  const router = useRouter();
+  const { setValue, handleSubmit } = useForm<DestinationSeadust>();
   const [date, setdate] = useState<RangeValue<DateValue> | null>({
     start: today(getLocalTimeZone()).add({ days: 1 }),
     end: today(getLocalTimeZone()).add({ days: 2 }),
   });
-  const [guest, setGuest] = useState([]);
   const t = useTranslations("Filter");
 
-  const onsubmit = (data: Destination) => {
-    console.log(data);
-    setGuest([]);
+  const { setDestination } = SeadustStore();
+
+  const onsubmit = (data: DestinationSeadust) => {
+    const start = date?.start?.toDate(getLocalTimeZone());
+    const end = date?.end?.toDate(getLocalTimeZone());
+    if (start && end) {
+      setDestination(
+        data.id,
+        start.toISOString(),
+        end.toISOString(),
+        data.guest
+      );
+      router.push(`/seadust`);
+    }
   };
 
   return (
@@ -40,7 +54,7 @@ export const Seadust = () => {
         className="grid grid-cols-1 md:grid-cols-5 items-center gap-2"
       >
         <div className="col-span-2">
-          <SelectDestinationSeadust />
+          <SelectDestinationSeadust setValue={setValue} />
         </div>
         <div className=" col-span-3 grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="space-y-2">
@@ -58,7 +72,7 @@ export const Seadust = () => {
             <label htmlFor="rooms" className="block text-sm font-medium ">
               {t("room.title")}
             </label>
-            <SelectGuest setValue={setValue} value={guest} />
+            <SelectGuestSeadust setValue={setValue} />
           </div>
           <div className="mt-6">
             <Button type="submit" className="w-full">
@@ -71,14 +85,29 @@ export const Seadust = () => {
   );
 };
 
-export const SelectDestinationSeadust = () => {
+interface Props {
+  setValue: UseFormSetValue<DestinationSeadust>;
+}
+
+export const SelectDestinationSeadust = ({ setValue }: Props) => {
   const t = useTranslations("Filter");
+
+  const onSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value) {
+      setValue("id", Number(e.target.value));
+    }
+  };
   return (
     <>
       <label htmlFor="rooms" className="block text-sm font-medium ">
-      {t("seach.title")}
+        {t("seach.title")}
       </label>
-      <Select placeholder={t("seach.placeholder")} className="mt-3">
+      <Select
+        defaultSelectedKeys={["1"]}
+        onChange={onSelectionChange}
+        placeholder={t("seach.placeholder")}
+        className="mt-3"
+      >
         <SelectItem key={"1"}>Seadust</SelectItem>
       </Select>
     </>

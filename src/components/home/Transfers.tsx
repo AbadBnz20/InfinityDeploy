@@ -67,13 +67,13 @@ const posthog = usePostHog();
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("item.title")}
+          {t("item.title")} <span className="text-red-500">*</span>
           </label>
           <SellectOrigin setvalue={setOrigin} placeholder={t("item.placeholder")} />
         </div>
         <div className="space-y-2">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("item1.title")}
+          {t("item1.title")} <span className="text-red-500">*</span>
           </label>
           <SelectDestinationTranslate
             setvalue={setDestination}
@@ -85,7 +85,7 @@ const posthog = usePostHog();
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="w-full ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("item2")}
+            {t("item2")} <span className="text-red-500">*</span>
             </label>
             <DatePicker
               hideTimeZone
@@ -110,7 +110,7 @@ const posthog = usePostHog();
         <div className="grid  grid-cols-1 md:grid-cols-2 items-end gap-2">
           <div>
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("item6")}
+            {t("item6")} <span className="text-red-500">*</span>
             </label>
             <SelectPassengers setPassengers={setPassengers} passengers={passengers} />
           </div>

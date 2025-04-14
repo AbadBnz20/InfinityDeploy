@@ -14,7 +14,7 @@ export const Footer = () => {
             <h3 className="text-xl font-semibold mb-4 text-gold-500">
               Infinity Luxury Travel
             </h3>
-            <p className="text-gray-400">Blvd. Kukulcán km 12.5, Zona Hotelera</p>
+            <p className="text-gray-400">Blvd. Kukulcán km 17, Zona Hotelera</p>
             <p className="text-gray-400">Cancún, Quintana Roo, México</p>
           </div>
           <div>
