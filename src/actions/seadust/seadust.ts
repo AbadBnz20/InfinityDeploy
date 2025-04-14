@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 
 export const ListRoom = async (guest: number) => {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("room")
     .select("*")
     .gte("numberOfGuests", guest);

@@ -1,8 +1,6 @@
 'use client';
 import React from "react";
 import { DetailRoom } from "./DetailRoom";
-import Image from "next/image";
-import { Divider } from "@nextui-org/react";
 import { SeadustStore } from "@/store/SeadustStore";
 import { FormRomSeadust } from "./FormRomSeadust";
 

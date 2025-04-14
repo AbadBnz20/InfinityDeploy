@@ -87,7 +87,7 @@ export const FormRomSeadust = ({
           console.log(datafetch);
 
 
-        // router.push("/");
+        router.push("/");
       }
     } catch (error) {
         console.log(error)

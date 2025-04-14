@@ -3,7 +3,6 @@ import { Button, Card } from "@nextui-org/react";
 import Link from "next/link";
 import React from "react";
 import {
-  IoLocationOutline,
   IoPeopleOutline,
   IoTimeOutline,
 } from "react-icons/io5";

@@ -1,7 +1,7 @@
 import { DestinationSeadust } from '@/components/home/Seadust';
 import { Button } from '@nextui-org/react';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { UseFormSetValue } from 'react-hook-form';
 import { IoCloseOutline } from 'react-icons/io5';
 
@@ -15,9 +15,9 @@ export const SelectGuestSeadust = ({setValue}:Props) => {
   const [rooms, setRooms] = useState<{ adults: number; children: number[] }[]>([
     { adults: 1, children: [] },
   ]);
-  const addRoom = () => {
-    setRooms([...rooms, { adults: 1, children: [] }]);
-  };
+  // const addRoom = () => {
+  //   setRooms([...rooms, { adults: 1, children: [] }]);
+  // };
 
   const removeRoom = (index: number) => {
     if (rooms.length > 1) {
