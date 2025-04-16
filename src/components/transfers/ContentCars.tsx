@@ -114,10 +114,10 @@ export const ContentCars = () => {
           )}
         </Accordion>
       </div>
-      <div className="grid mt-2 grid-cols-2">
+      <div className="grid mt-2 grid-cols-2 gap-2">
         <Button
           onPress={() =>{ router.back()}}
-          className="bg-white text-black dark:bg-black dark:text-white"
+         
           fullWidth
           size="lg"
         >

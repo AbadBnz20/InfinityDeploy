@@ -40,7 +40,11 @@ export const CardYachts = ({ yachts }: Props) => {
           <span className="font-medium">{yachts.origin_destination_ship.city.name}, {yachts.origin_destination_ship.name}</span>
         </div> */}
         <h3 className="text-xl font-semibold ">{yachts.name}</h3>
-
+        <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+            <div>
+              <p className="text-sm font-medium">{yachts.cabin}</p>
+            </div>
+          </div>
         {/* Detalles */}
         <div className="grid grid-cols-2 gap-3">
           <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">

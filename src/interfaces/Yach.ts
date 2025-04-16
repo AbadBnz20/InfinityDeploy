@@ -31,6 +31,7 @@ export interface PackageYachts {
   price: number;
   points: number;
   state: boolean;
+  cabin: string;
   ubicationId: string;
 }
 

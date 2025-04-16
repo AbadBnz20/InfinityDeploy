@@ -1,6 +1,13 @@
 import { GetRoom, InterRoomSeadust } from "@/actions/seadust/seadust";
 import { SeadustStore } from "@/store/SeadustStore";
-import { Button, Card, CardBody, CardHeader, Input } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Input,
+  Textarea,
+} from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -18,6 +25,7 @@ interface FormRoomValues {
   lastname: string;
   email: string;
   number: string;
+  note: string;
 }
 
 export const FormRomSeadust = ({
@@ -50,7 +58,7 @@ export const FormRomSeadust = ({
   const onSubmit = async (data: FormRoomValues) => {
     setloading(true);
     try {
-      const { firstname, lastname, email, number } = data;
+      const { firstname, lastname, email, number,note } = data;
       const response = await InterRoomSeadust(
         checkin,
         checkout,
@@ -60,37 +68,37 @@ export const FormRomSeadust = ({
         number,
         RoomSelected,
         adult,
-        child.toString()
+        child.toString(),
+        note
       );
       if (response.status) {
-            const room = await GetRoom(RoomSelected);
+        const room = await GetRoom(RoomSelected);
         const res = await fetch("/api/seadust", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                start_date:checkin.split("T")[0],
-                end_date:checkout.split("T")[0],
-                firstName: firstname,
-                lastName: lastname,
-                email: email,
-                phone: number,
-                adult: adult,
-                children: child.toString(),
-                name: room?.name,
-                numberOfBeds: room?.numberOfBeds,
-                typeOfBed: room?.typeOfBed,
-            }),
-          });
-          const datafetch = await res.json();
-          console.log(datafetch);
-
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            start_date: checkin.split("T")[0],
+            end_date: checkout.split("T")[0],
+            firstName: firstname,
+            lastName: lastname,
+            email: email,
+            phone: number,
+            adult: adult,
+            children: child.toString(),
+            name: room?.name,
+            numberOfBeds: room?.numberOfBeds,
+            typeOfBed: room?.typeOfBed,
+          }),
+        });
+        const datafetch = await res.json();
+        console.log(datafetch);
 
         router.push("/");
       }
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
     setloading(false);
   };
@@ -167,6 +175,15 @@ export const FormRomSeadust = ({
                     placeholder="Ingrese numero"
                     isInvalid={!!errors.number}
                     errorMessage={errors.number?.message}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium mb-2">Nota</label>
+                  <Textarea
+                    placeholder={"Agregar Nota"}
+                    {...register("note")}
+                    isInvalid={!!errors.note}
+                    errorMessage={errors.note?.message}
                   />
                 </div>
               </div>

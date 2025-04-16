@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import { DetailRoom } from "./DetailRoom";
 import { SeadustStore } from "@/store/SeadustStore";
@@ -17,17 +17,21 @@ export const ContentMainSeadust = ({
   email,
   number,
 }: Props) => {
- const {  RoomSelected, checkin, checkout } = SeadustStore();
+  const { RoomSelected, checkin, checkout } = SeadustStore();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <DetailRoom id={RoomSelected} checkin={checkin} checkout={checkout}  />
-      <FormRomSeadust
-         firstname={firstname}
-         lastname={lastname}
-         email={email}
-         number={number}
-      />
+    <div className="md:flex gap-5">
+      <div className="w-full md:w-1/2">
+        <DetailRoom id={RoomSelected} checkin={checkin} checkout={checkout} />
+      </div>
+      <div className="w-full md:w-1/2">
+        <FormRomSeadust
+          firstname={firstname}
+          lastname={lastname}
+          email={email}
+          number={number}
+        />
+      </div>
     </div>
   );
 };

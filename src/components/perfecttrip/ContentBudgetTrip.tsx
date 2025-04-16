@@ -169,7 +169,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
             size="lg"
             className="w-[50%]"
             onPress={() => onchange("2" as Key)}
-            variant="light"
+           
           >
             {t("buttonStepprev")}
           </Button>

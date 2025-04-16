@@ -36,7 +36,8 @@ export const InterRoomSeadust = async (
   phone: string,
   IdRoom: string,
   adult: number,
-  children: string
+  children: string,
+  note: string
 ) => {
   const supabase = await createClient();
 
@@ -53,6 +54,7 @@ export const InterRoomSeadust = async (
         IdRoom: IdRoom,
         adult: adult,
         children: children,
+        note: note,
       },
     ])
     .select();
