@@ -9,7 +9,6 @@ import {
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { ContentTimer } from "./ContentTimer";
-import { useRouter } from "next/navigation";
 
 interface Props {
   isOpen: boolean;
@@ -36,13 +35,13 @@ export const SignInModal = ({
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit } = useForm<State>();
-  const router = useRouter();
+
 
   const onsubmit = async (state: State) => {
     setLoading(true);
     const res = await functionvalidate(email, state.code);
     if (res.status === "ok") {
-      router.push("/");
+      window.location.replace("/");
     }
 
     setLoading(false);
