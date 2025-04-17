@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { ContentTimer } from "./ContentTimer";
+import { toast } from "react-toastify";
 
 interface Props {
   isOpen: boolean;
@@ -19,7 +20,7 @@ interface Props {
   functionvalidate: (
     confirm: string,
     code: string
-  ) => Promise<{ status: string }>;
+  ) => Promise<{ status: boolean; message: string }>;
 }
 
 interface State {
@@ -36,15 +37,19 @@ export const SignInModal = ({
 
   const { register, handleSubmit } = useForm<State>();
 
-
   const onsubmit = async (state: State) => {
     setLoading(true);
     const res = await functionvalidate(email, state.code);
-    if (res.status === "ok") {
-      window.location.replace("/");
+    console.log("respuesta", res);
+    if (!res.status) {
+      onClose();
+      setLoading(false);
+      return toast.error(res.message, {
+        position: "top-right",
+      });
     }
-
     setLoading(false);
+    window.location.replace("/");
     onClose();
   };
 

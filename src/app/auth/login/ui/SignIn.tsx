@@ -24,7 +24,6 @@ export const SignIn = () => {
     setLoading(true);
     // console.log(captchaToken);
     const resp = await signInAction(state.email, captchaToken);
-    console.log(resp);
     if (!resp.status) {
       setLoading(false);
       return toast.error(resp.message, {

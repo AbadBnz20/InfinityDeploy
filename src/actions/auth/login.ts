@@ -1,6 +1,5 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
-import { encodedRedirect } from "@/utils/utils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -25,7 +24,10 @@ export const signInAction = async (email: string, token: string) => {
   };
 };
 
-export const signInActionVerifyOTP = async (email: string, token: string) => {
+export const signInActionVerifyOTP = async (email: string, token: string):Promise<{
+  status: boolean,
+  message: string,
+}> => {
   const supabase = await createClient();
   const {
     data: { session },
@@ -37,14 +39,10 @@ export const signInActionVerifyOTP = async (email: string, token: string) => {
   });
   console.log(session);
   if (error) {
-    return encodedRedirect("error", "/auth/login", error.message);
+    return { status:false, message: error.message };
   }
-  return { status: "ok" };
-
+  return { status: true, message: "Inicio correcto" };
 };
-
-
-
 
 export const signInActionPhone = async (phone: string, token: string) => {
   const supabase = await createClient();
@@ -72,17 +70,18 @@ export const signInActionVerifyOTPPhone = async (
   token: string
 ) => {
   const supabase = await createClient();
-  const {
-    error,
-  } = await supabase.auth.verifyOtp({
+  const { error } = await supabase.auth.verifyOtp({
     phone: phone,
     token: token,
     type: "sms",
   });
+  // if (error) {
+  //   return encodedRedirect("error", "/auth/login", error.message);
+  // }
   if (error) {
-    return encodedRedirect("error", "/auth/login", error.message);
+    return { status:false, message: error.message };
   }
-  return { status: "ok" };
+  return { status: true, message: "Inicio correcto" };
 };
 
 export const signOutAction = async () => {
@@ -91,4 +90,3 @@ export const signOutAction = async () => {
   cookies().delete("userAuth");
   return redirect("/auth/login");
 };
-
