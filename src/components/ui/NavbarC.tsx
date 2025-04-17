@@ -17,7 +17,7 @@ import { useTranslations } from "next-intl";
 export const NavbarC = () => {
   const { theme, setTheme } = useTheme();
    const t = useTranslations("Navbar");
-  const image = theme === 'dark' ? "https://res.cloudinary.com/devz7obre/image/upload/v1744321737/logo1_v9yswm.png" : "https://res.cloudinary.com/devz7obre/image/upload/v1744321737/logo1_v9yswm.png"
+  const image = theme === 'dark' ? "https://res.cloudinary.com/devz7obre/image/upload/v1744926909/logo1dark_xmwuhb.png" : "https://res.cloudinary.com/devz7obre/image/upload/v1744321737/logo1_v9yswm.png"
   const Onchange = () => {
     if (theme === "light") {
       setTheme("dark");

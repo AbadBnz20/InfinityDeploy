@@ -38,19 +38,25 @@ export const SignInModal = ({
   const { register, handleSubmit } = useForm<State>();
 
   const onsubmit = async (state: State) => {
-    setLoading(true);
-    const res = await functionvalidate(email, state.code);
-    console.log("respuesta", res);
-    if (!res.status) {
-      onClose();
+    try {
+      setLoading(true);
+      const res = await functionvalidate(email, state.code);
+      console.log("respuesta", res);
+      if (!res.status) {
+        onClose();
+        setLoading(false);
+        return toast.error(res.message, {
+          position: "top-right",
+        });
+      }
       setLoading(false);
-      return toast.error(res.message, {
-        position: "top-right",
-      });
+      window.location.replace("/");
+      onClose();
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      onClose();
     }
-    setLoading(false);
-    window.location.replace("/");
-    onClose();
   };
 
   return (

@@ -20,15 +20,14 @@ export const LoginForm = ({searchParams}:Props) => {
   // const [isVisible, setIsVisible] = useState(false);
   const [selected, setSelected] = useState<string | number | null>("login");
    const { theme } = useTheme();
-  const image = theme === 'dark' ? "https://res.cloudinary.com/devz7obre/image/upload/v1742005463/ACT_350X55px-04_b5dqrf.png" : "https://res.cloudinary.com/devz7obre/image/upload/v1742005463/ACT_350X55px-02_2_f9gxig.png"
-
+ 
   return (
     <div className="w-full max-w-md m-auto p-6">
     
-     
+      
       <div className="space-y-2 text-center flex justify-center items-center flex-col">
         <img
-          src={image}
+          src={ theme === 'dark' ? "https://res.cloudinary.com/devz7obre/image/upload/v1744926909/logo1dark_xmwuhb.png" : "https://res.cloudinary.com/devz7obre/image/upload/v1744321737/logo1_v9yswm.png"}
           alt="Infinity Luxury Travel Logo"
           className="h-20"
         />
