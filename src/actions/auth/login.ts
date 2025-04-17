@@ -39,7 +39,7 @@ export const signInActionVerifyOTP = async (email: string, token: string) => {
   if (error) {
     return encodedRedirect("error", "/auth/login", error.message);
   }
-  return redirect("/");
+  return { status: "ok" };
 
 };
 
@@ -82,7 +82,7 @@ export const signInActionVerifyOTPPhone = async (
   if (error) {
     return encodedRedirect("error", "/auth/login", error.message);
   }
-  return redirect("/");
+  return { status: "ok" };
 };
 
 export const signOutAction = async () => {

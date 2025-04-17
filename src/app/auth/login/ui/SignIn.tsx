@@ -47,12 +47,6 @@ export const SignIn = () => {
             required: "El campo de Email es requerido",
           })}
         />
-        {/* <HCaptcha
-          sitekey={site}
-          onVerify={(token) => {
-            setCaptchaToken(token);
-          }}
-        /> */}
         <Turnstile
           siteKey={site}
           onSuccess={(token) => {
