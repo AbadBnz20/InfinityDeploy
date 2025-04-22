@@ -12,6 +12,7 @@ import {
   Select,
   SelectItem,
   Textarea,
+  useDisclosure,
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import {
@@ -29,6 +30,7 @@ import { RegisterYacht } from "@/actions/yachts/RegisterYacht";
 import { useRouter } from "next/navigation";
 import { GetReferences } from "@/actions/yachts/GetReferences";
 import { useTranslations } from "next-intl";
+import { ModalConfirm } from "../ui/modal/ModalConfirm";
 
 interface FormDateYachts {
   idEngine: string;
@@ -60,8 +62,8 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
     },
   });
   const [loading, setloading] = useState(false);
-    const t = useTranslations("YachtsPage");
-  
+  const t = useTranslations("YachtsPage");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [date, setdate] = useState<DateValue | null>(
     parseDate(yachts.date.split("T")[0])
   );
@@ -96,11 +98,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           position: "top-right",
         });
       }
-      const respDate = await GetReferences(
-
-        data.idExperience,
-        data.idEngine
-      );
+      const respDate = await GetReferences(data.idExperience, data.idEngine);
 
       const res = await fetch("/api/yachts", {
         method: "POST",
@@ -123,14 +121,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
       });
       const datafetch = await res.json();
       console.log(datafetch);
-
-      toast.success(resp.message, {
-        position: "top-right",
-      });
-
-      setTimeout(() => {
-        router.push(`/`);
-      }, 2000);
+      onOpen();
     } catch (error) {
       console.log(error);
       toast.error("Ha ocurrido un error inesperado", {
@@ -142,6 +133,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
 
   return (
     <div>
+      <ModalConfirm isOpen={isOpen} onOpenChange={onOpenChange} />
       <form onSubmit={handleSubmit(OnSubmit)}>
         <Card className="my-3 shadow">
           <CardHeader>
@@ -152,15 +144,17 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           </CardHeader>
           <CardBody>
             <div className="grid  grid-cols-1 md:grid-cols-3">
-              {yachts.image && (
-                <div>
-                  <Image
-                    alt="HeroUI Album Cover"
-                    src={yachts.image}
-                    width={340}
-                  />
-                </div>
-              )}
+              <div>
+                <Image
+                  alt="HeroUI Album Cover"
+                  src={
+                    yachts.image
+                      ? yachts.image
+                      : "https://res.cloudinary.com/devz7obre/image/upload/v1745266123/Pagasus-V_ijnn8f.webp"
+                  }
+                  width={340}
+                />
+              </div>
               <div className="col-span-2  grid grid-cols-1 md:grid-cols-2 gap-3 my-3">
                 {/* <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
@@ -175,7 +169,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div> */}
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("item.title")} <span className="text-red-500">*</span>
+                    {t("item.title")} <span className="text-red-500">*</span>
                   </label>
                   <SelectEngine
                     control={control}
@@ -185,7 +179,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="w-full space-y-2 ">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("date")} <span className="text-red-500">*</span>
+                    {t("date")} <span className="text-red-500">*</span>
                   </label>
                   <DatePicker
                     value={date}
@@ -195,7 +189,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("item1.title")} <span className="text-red-500">*</span>
+                    {t("item1.title")} <span className="text-red-500">*</span>
                   </label>
                   <SelectExperience
                     control={control}
@@ -205,7 +199,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="rooms" className="block text-sm font-medium ">
-                  {t("time")} <span className="text-red-500">*</span>
+                    {t("time")} <span className="text-red-500">*</span>
                   </label>
 
                   <Controller
@@ -278,7 +272,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                {t("item2")} <span className="text-red-500">*</span>
+                  {t("item2")} <span className="text-red-500">*</span>
                 </label>
                 <Input
                   {...register("firstname", {
@@ -291,7 +285,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                {t("item3")} <span className="text-red-500">*</span>
+                  {t("item3")} <span className="text-red-500">*</span>
                 </label>
                 <Input
                   {...register("lastname", {
@@ -318,7 +312,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="space-y-2">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                {t("item4")} <span className="text-red-500">*</span>
+                  {t("item4")} <span className="text-red-500">*</span>
                 </label>
                 <Input
                   type="number"
@@ -332,7 +326,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
               </div>
               <div className="col-span-full mt-3">
                 <label htmlFor="rooms" className="block text-sm font-medium ">
-                {t("item5")}
+                  {t("item5")}
                 </label>
                 <Textarea
                   type="text"
@@ -341,7 +335,16 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   errorMessage={errors.note?.message}
                 />
               </div>
-              <div className="col-span-full mt-3">
+              <div className="col-span-full mt-3 grid gap-2 grid-cols-2">
+                <Button
+                  onPress={() => {
+                    router.back();
+                  }}
+                  fullWidth
+                  size="lg"
+                >
+                  Atras
+                </Button>
                 <Button
                   fullWidth
                   isLoading={loading}

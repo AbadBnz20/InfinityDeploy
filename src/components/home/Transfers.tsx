@@ -1,5 +1,5 @@
 'use client';
-import { getLocalTimeZone, now, } from "@internationalized/date";
+import { getLocalTimeZone, now, today, } from "@internationalized/date";
 import {
   Button,
   DatePicker,
@@ -92,6 +92,7 @@ const posthog = usePostHog();
               showMonthAndYearPickers
               value={arrivaltime}
               onChange={setArrivaltime}
+               minValue={today(getLocalTimeZone())}
             />
           </div>
           <div className="w-full ">
@@ -104,6 +105,7 @@ const posthog = usePostHog();
               showMonthAndYearPickers
               value={departuretime}
               onChange={setDeparturetime}
+               minValue={today(getLocalTimeZone())}
             />
           </div>
         </div>

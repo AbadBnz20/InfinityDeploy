@@ -29,7 +29,7 @@ export const TapsMain = () => {
             key="seadust"
             title={
               <div className="flex items-center space-x-2">
-                <span> Seadust</span>
+                <span> {t("option4")}</span>
               </div>
             }
           >

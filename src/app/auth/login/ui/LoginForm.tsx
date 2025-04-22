@@ -11,19 +11,20 @@ import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 import { FormMessage, Message } from "./form-message";
 import { useTheme } from "next-themes";
+import { SelectLenguage } from "@/components/ui/user/SelectLenguage";
+import { useTranslations } from "next-intl";
   interface Props{
     searchParams:Message
   }
 
 export const LoginForm = ({searchParams}:Props) => {
-  // const [state, dispath] = useFormState(authenticate, undefined);
-  // const [isVisible, setIsVisible] = useState(false);
+  const t = useTranslations("Auth");
   const [selected, setSelected] = useState<string | number | null>("login");
    const { theme } = useTheme();
- 
+  
   return (
     <div className="w-full max-w-md m-auto p-6">
-    
+      <SelectLenguage/>
       
       <div className="space-y-2 text-center flex justify-center items-center flex-col">
         <img
@@ -43,10 +44,10 @@ export const LoginForm = ({searchParams}:Props) => {
               selectedKey={selected}
               onSelectionChange={setSelected}
             >
-              <Tab key="login" title="Email">
+              <Tab key="login" title={t("title")}>
                 <SignIn />
               </Tab>
-              <Tab key="sign-up" title="Phone">
+              <Tab key="sign-up" title={t("title1")}>
                 <SignUp />
               </Tab>
             </Tabs>

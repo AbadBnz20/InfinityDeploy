@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 
 interface State {
   id: number;
-  RoomSelected: string;
+  RoomSelected: string[];
   checkin: string;
   checkout: string;
   guest: any[];
@@ -19,13 +19,14 @@ interface State {
   Rooms: Room[];
   getRoom: () => void;
   updateroom: (room: string) => void;
+  Deleteroom: (room: string) => void;
 }
 
 export const SeadustStore = create<State>()(
   persist(
     (set, get) => ({
       id: 0,
-      RoomSelected: "",
+      RoomSelected: [],
       checkin: "",
       checkout: "",
       guest: [],
@@ -36,16 +37,33 @@ export const SeadustStore = create<State>()(
       },
       getRoom: async () => {
         const { guest } = get();
-        const totalPeople = guest.reduce((acc, room) => {
-          const adults = room.adults;
-          const children = room.children.length;
-          return acc + adults + children;
-        }, 0);
-        const resp = await ListRoom(totalPeople);
+        const minSum = guest.reduce((min, room) => {
+          const sum = room.adults + room.children;
+          return sum < min ? sum : min;
+        }, Infinity);
+        const resp = await ListRoom(minSum);
 
         set({ Rooms: resp });
       },
-      updateroom: (room) => set(() => ({ RoomSelected: room })),
+      updateroom: (room) => {
+        const { guest,RoomSelected } = get();
+        console.log(guest.length,RoomSelected.length )
+        if (RoomSelected.length < guest.length) {
+          if ( !RoomSelected.includes(room)) {
+            set((state) => ({
+              RoomSelected: [...state.RoomSelected, room],
+            }));
+            
+          }
+          
+        }
+        
+      },
+      Deleteroom: (room) => {
+        set((state) => ({
+          RoomSelected: state.RoomSelected.filter((item) => item !== room),
+        }));
+      },
     }),
     {
       name: "seadust-filter",

@@ -9,6 +9,7 @@ import {
 import { toast } from "react-toastify";
 import { SignInModal } from "./SignInModal";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { useTranslations } from "next-intl";
 
 export interface StateForm {
   code: string;
@@ -23,6 +24,7 @@ export const SignUp = () => {
   const [captchaToken, setCaptchaToken] = useState("");
   // const site = "29125b28-4758-4a6e-9c02-1334e26a77da";
   const site = "0x4AAAAAABAG3GMy0bEbQ6Da";
+  const t = useTranslations("Auth");
   const Onhandle = async (state: StateForm) => {
     setLoading(true);
 
@@ -52,10 +54,10 @@ export const SignUp = () => {
             radius="none"
             isRequired
             {...register("phone", {
-              required: "El campo de phone es requerido",
+              required: t("require"),
             })}
-            label="Phone"
-            placeholder="Enter your phone"
+            label={t("loginPhone.title")}
+            placeholder={t("loginPhone.placeholder")}
             type="number"
           />
         </div>
@@ -73,7 +75,7 @@ export const SignUp = () => {
         />
         <div className="flex gap-2 justify-end">
           <Button isLoading={loading} type="submit" fullWidth color="primary">
-            Login
+          {t("button")}
           </Button>
         </div>
       </form>

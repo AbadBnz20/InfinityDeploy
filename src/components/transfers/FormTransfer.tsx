@@ -6,10 +6,10 @@ import {
   CardHeader,
 
   Input,
+  useDisclosure,
 } from "@nextui-org/react";
 import React, {  useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { TransfersStore } from "@/store/TransfersStore";
 import {
@@ -17,6 +17,7 @@ import {
   GetDetailsDestination,
 } from "@/actions/originDestination/OriginDestination";
 import { Car } from "@/interfaces/Transfers-response";
+import { ModalConfirm } from "../ui/modal/ModalConfirm";
 
 interface User {
   first_name: string;
@@ -74,7 +75,7 @@ export const FormTransfer = ({
   // const [accepted, setAccepted] = useState(false);
   const [loading, setloading] = useState(false);
   const t = useTranslations("TransfersPage");
-  const router = useRouter();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const onSubmit = async (data: FormValuesTransfer) => {
     setloading(true);
@@ -123,17 +124,18 @@ export const FormTransfer = ({
         });
         const datafetch = await res.json();
         console.log(datafetch);
+        onOpen();
       }
     } catch (error) {
       console.log(error);
       
     }
-    setloading(false);
-
-    router.push(`/`);
+    setloading(false);   
   };
 
   return (
+    <>
+    <ModalConfirm isOpen={isOpen} onOpenChange={onOpenChange}/>
     <Card className="my-3 shadow">
       <CardHeader>
         <h1 className="flex items-center gap-2  text-xl">{t("item2.title")}</h1>
@@ -254,5 +256,7 @@ export const FormTransfer = ({
         </form>
       </CardBody>
     </Card>
+  
+    </>
   );
 };

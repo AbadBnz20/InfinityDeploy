@@ -27,7 +27,7 @@
     "option1": "Hotels",
     "option2": "Last Minute Weeks",
     "option3": "yachts",
-    "option4": "Plan your vacation",
+    "option4": "Week Infinity",
     "option5": "Transportation",
     "option6": "My perfect trip"
   },
@@ -96,15 +96,15 @@
 
   "Seadust": {
     "item": {
-      "title":"General",
+      "title": "General",
       "description": "Perfect family getaway with pools, great food, water park, and fun for all ages."
     },
     "item1": {
-      "title":"Activities",
+      "title": "Activities",
       "description": "Exciting activities and a lively atmosphere to create unforgettable family memories."
     },
     "item2": {
-      "title":"Spa",
+      "title": "Spa",
       "description": "Total relaxation at an exclusive spa with rituals inspired by global cultures."
     }
   },
@@ -242,7 +242,7 @@
     "title1": "Select Return Transfer",
     "empy": "No results found",
     "button": "Continue",
-    "button1":"Back",
+    "button1": "Back",
     "item": {
       "title": " Outbound Details",
       "title1": " Return Details",
@@ -257,8 +257,8 @@
       "subtitle": "Primary Contact",
       "item2": "First Name",
       "item3": "Last Name",
-      "placeholder":"Enter First Name",
-"placeholder1":"Enter Last Name",
+      "placeholder": "Enter First Name",
+      "placeholder1": "Enter Last Name",
       "item4": "Phone",
       "item5": "Adult Passengers",
       "item6": "Child Passengers",
@@ -267,7 +267,7 @@
       "item7": "Age",
       "item8": "Transportation Details",
       "item9": "Transportation Number",
-      "placeholder2":"Enter the transport number (flight, train, bus),",
+      "placeholder2": "Enter the transport number (flight, train, bus),",
       "item10": "Date",
       "item11": "Terms of Use",
       "item12": "Mandatory",
@@ -326,5 +326,32 @@
       "option2": "Activities or facilities for children",
       "option3": "Proximity or access to the beach"
     }
+  },
+  "ModalConfirm": {
+    "title": "Message Sent",
+    "strong": "Request Successful",
+    "description": "An email was sent to you. Please check your inbox or spam folder to make sure you received it. If you didn't receive it, please don't hesitate to contact us for further assistance.",
+    "button": "Accept"
+  },
+  "Auth": {
+    "title": "Email",
+    "title1": "Phone",
+    "loginEmail": {
+      "title": "Email",
+      "placeholder": "Enter your email"
+    },
+    "loginPhone": {
+      "title": "Phone",
+      "placeholder": "Enter your phone number",
+      "title1": "Code",
+      "placeholder1": "code"
+    },
+    "require": "The field is required",
+    "button": "Login"
+  },
+  "ModalCode": {
+    "title": "Verification",
+    "description": "Enter 6-digit code.",
+    "button": "Verify Code"
   }
 }

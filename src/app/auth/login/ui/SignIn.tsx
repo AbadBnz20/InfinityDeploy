@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { useTranslations } from "next-intl";
 
 interface State {
   email: string;
@@ -16,13 +17,12 @@ export const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [captchaToken, setCaptchaToken] = useState("");
-  // const site = "29125b28-4758-4a6e-9c02-1334e26a77da";
   const site = "0x4AAAAAABAG3GMy0bEbQ6Da";
-
+  const t = useTranslations("Auth");
   const emailValue = watch("email");
   const OnSubmit = async (state: State) => {
     setLoading(true);
-    // console.log(captchaToken);
+
     const resp = await signInAction(state.email, captchaToken);
     if (!resp.status) {
       setLoading(false);
@@ -39,11 +39,11 @@ export const SignIn = () => {
       <form onSubmit={handleSubmit(OnSubmit)} className="flex flex-col gap-4">
         <Input
           isRequired
-          label="Email"
-          placeholder="Enter your email"
+          label={t("loginEmail.title")}
+          placeholder={t("loginEmail.placeholder")}
           type="email"
           {...register("email", {
-            required: "El campo de Email es requerido",
+            required: t("require"),
           })}
         />
         <Turnstile
@@ -54,7 +54,7 @@ export const SignIn = () => {
         />
         <div className="flex gap-2 justify-end">
           <Button fullWidth color="primary" type="submit" isLoading={loading}>
-            Login
+          {t("button")}
           </Button>
         </div>
       </form>

@@ -31,7 +31,6 @@ interface Props {
     time,
     car,
     capacity,
-    price,
     
     datereturn,
     timereturn,
@@ -136,12 +135,12 @@ interface Props {
               </td>
               <td>{capacity}</td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>
                 <strong>Precio:</strong>
               </td>
               <td>{price}</td>
-            </tr>
+            </tr> */}
             {type === "Ida y vuelta" && (
               <>
                 <tr>

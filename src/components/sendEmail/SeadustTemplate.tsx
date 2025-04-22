@@ -1,3 +1,4 @@
+import { RoomEmail } from "@/interfaces/Room-responses";
 import React from "react";
 
 interface Props {
@@ -9,9 +10,7 @@ interface Props {
   phone: string;
   adult: number;
   children: string;
-  name: string;
-  numberOfBeds: string;
-  typeOfBed: string;
+  Rooms: RoomEmail[];
 }
 
 export const SeadustTemplate = ({
@@ -23,9 +22,7 @@ export const SeadustTemplate = ({
   phone,
   adult,
   children,
-  name,
-  numberOfBeds,
-  typeOfBed,
+  Rooms,
 }: Props) => {
   return (
     <div
@@ -57,7 +54,7 @@ export const SeadustTemplate = ({
       <p>
         Es para nosotros un placer servirle y brindarle la mejor experiencia.
       </p>
-        <p>Detalles de su solicitud:</p>
+      <p>Detalles de su solicitud:</p>
       <table
         style={{ width: "100%", borderCollapse: "collapse", lineHeight: "1.6" }}
       >
@@ -110,24 +107,31 @@ export const SeadustTemplate = ({
           </tr>
           <tr>
             <td>
-              <strong>Habitacion</strong>
+              <strong>Habitaciones</strong>
             </td>
             <td></td>
           </tr>
-          <tr>
-            <td>
-              <strong>Nombre:</strong>
-            </td>
-            <td>{name}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Tipo de cama:</strong>
-            </td>
-            <td>
-              {numberOfBeds} {typeOfBed}
-            </td>
-          </tr>
+
+          {Rooms.map((room, index) => (
+            <>
+              <tr key={index}>
+                <td>
+                  <strong>Nombre:</strong>
+                </td>
+                <td>{room.name}</td>
+              </tr>
+             
+              <tr key={index}>
+                <td>
+                  <strong>Tipo de cama:</strong>
+                </td>
+                <td>
+                  {room.numberOfBeds} {room.typeOfBed}
+                </td>
+              </tr>
+              <tr></tr>
+            </>
+          ))}
         </tbody>
       </table>
 

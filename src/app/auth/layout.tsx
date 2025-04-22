@@ -1,3 +1,5 @@
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default async function ShopLayout({
@@ -5,13 +7,13 @@ export default async function ShopLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const supabase = await createClient();
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser();
-  // if (user) {
-  //   return redirect("/");
-  // }
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    return redirect("/");
+  }
   return (
     <main className="">
       <ToastContainer />

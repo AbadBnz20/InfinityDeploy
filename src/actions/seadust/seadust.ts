@@ -1,6 +1,6 @@
 "use server";
 
-import { Room } from "@/interfaces/Room-responses";
+import { Room, RoomEmail } from "@/interfaces/Room-responses";
 import { createClient } from "@/utils/supabase/server";
 
 export const ListRoom = async (guest: number) => {
@@ -27,6 +27,31 @@ export const GetRoom = async (id: string) => {
   return data as Room;
 };
 
+export const GetRoomArray = async (Rooms: string[]) => {
+  const supabase = await createClient();
+
+  const RoomsRequest: RoomEmail[] = [];
+
+  const promises = Rooms.map(async (item) => {
+    const { data, error } = await supabase
+      .from("room")
+      .select("name, numberOfBeds, typeOfBed")
+      .eq("IdRoom", item)
+      .single();
+    if (error) {
+      console.log(error);
+    }
+    if (data) {
+      RoomsRequest.push(data as RoomEmail);
+    }
+  });
+
+  await Promise.all(promises);
+
+  return RoomsRequest;
+};
+
+
 export const InterRoomSeadust = async (
   start_date: string,
   end_date: string,
@@ -34,14 +59,14 @@ export const InterRoomSeadust = async (
   lastName: string,
   email: string,
   phone: string,
-  IdRoom: string,
+  Rooms: string[],
   adult: number,
   children: string,
   note: string
 ) => {
   const supabase = await createClient();
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("seadusRequest")
     .insert([
       {
@@ -51,13 +76,31 @@ export const InterRoomSeadust = async (
         lastName: lastName,
         email: email,
         phone: phone,
-        IdRoom: IdRoom,
         adult: adult,
         children: children,
         note: note,
       },
     ])
-    .select();
+    .select("IdSeadusRequest")
+    .single();
+
+  const promises = Rooms.map(async (item) => {
+    const { error } = await supabase
+      .from("seadustRequest_Room")
+      .insert([
+        {
+          IdSeadustRequest: data?.IdSeadusRequest,
+          IdRoom: item,
+        },
+      ])
+      .select();
+    if (error) {
+      console.log(error);
+    }
+  });
+
+  await Promise.all(promises);
+
   if (error) {
     return {
       status: false,

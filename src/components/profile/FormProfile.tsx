@@ -7,14 +7,14 @@ interface FormData {
   LastName: string;
   Country: string;
   Email: string;
-  Age: string;
+  number: string;
 }
 
 interface Props {
   firstname: string;
   lastname: string;
   email: string;
-  birthdate: string;
+  number: string;
   country: string;
 }
 
@@ -22,7 +22,7 @@ export const FormProfile = ({
   firstname,
   lastname,
   country,
-  birthdate,
+  number,
   email,
 }: Props) => {
   const { register } = useForm<FormData>({
@@ -32,7 +32,7 @@ export const FormProfile = ({
       Country: country,
       Email: email,
 
-      Age: birthdate,
+      number: number,
     },
   });
 
@@ -60,16 +60,10 @@ export const FormProfile = ({
         </div>
         <div className="grid ">
           <label className="text-sm font-medium" htmlFor="firstName">
-            fecha nacimiento
+            Celular
           </label>
-          <Input {...register("Age")} id="email" type="text" />
+          <Input {...register("number")} id="email" type="text" />
         </div>
-        {/* <div>
-              <label className="text-sm font-medium" htmlFor="designation">
-                Pais
-              </label>
-              <Input {...register("Country")}  id="designation" />
-            </div> */}
       </div>
     
      

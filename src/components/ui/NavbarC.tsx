@@ -31,7 +31,7 @@ export const NavbarC = () => {
       <div className="w-full  bg-maincolor py-2 flex justify-center items-center space-x-4 flex-col  md:flex-row  ">
         <div className="flex items-center space-x-2">
           <IoCallOutline />
-          <span className="text-small">(+52) 998 500 2798 | (+1) 800 871 9040</span>
+          <span className="text-small">(+52) 998 478 8050 | (+1) 800 871 9040</span>
         </div>
         <div className="flex items-center space-x-2">
           <IoMailOutline  /> <span className="text-small">members@infinityluxurytravelclub.com </span> <span className="mx-2">|</span> <SelectLenguage/>

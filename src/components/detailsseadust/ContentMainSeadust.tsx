@@ -22,7 +22,11 @@ export const ContentMainSeadust = ({
   return (
     <div className="md:flex gap-5">
       <div className="w-full md:w-1/2">
-        <DetailRoom id={RoomSelected} checkin={checkin} checkout={checkout} />
+        {
+          RoomSelected.map((room) => (
+            <DetailRoom key={room} id={room} checkin={checkin} checkout={checkout} />
+          ))
+        }
       </div>
       <div className="w-full md:w-1/2">
         <FormRomSeadust

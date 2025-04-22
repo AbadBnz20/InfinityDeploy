@@ -14,9 +14,7 @@ export async function POST(request: Request) {
     phone,
     adult,
     children,
-    name,
-    numberOfBeds,
-    typeOfBed,
+    Rooms,
   } = body;
 
   try {
@@ -33,9 +31,7 @@ export async function POST(request: Request) {
         phone,
         adult,
         children,
-        name,
-        numberOfBeds,
-        typeOfBed,
+        Rooms,
       }),
     });
 

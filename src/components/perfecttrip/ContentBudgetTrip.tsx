@@ -5,13 +5,13 @@ import {
 } from "@/actions/mytrip/RegisterTrip";
 import { useSession } from "@/hooks/useSession";
 import { TripStore } from "@/store/TripStore";
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import React, { Key, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ModalConfirm } from "../ui/modal/ModalConfirm";
 
 interface FormData {
   budget: string;
@@ -43,7 +43,9 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
     details,
   } = TripStore();
   const [loading, setloading] = useState(false);
-  const router = useRouter();
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  
+ 
   const { session } = useSession();
   const t = useTranslations("MyperfectPage");
 
@@ -105,12 +107,10 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
         });
         const datafetch = await res.json();
         console.log(datafetch);
+        onOpen();
       }
 
-      toast.success(response.message, {
-        position: "top-right",
-      });
-      router.push(`/`);
+
     } catch (error) {
       console.log(error);
       toast.error("Ha ocurrido un error inesperado", {
@@ -124,6 +124,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
   return (
     <div>
       <ToastContainer />
+      <ModalConfirm isOpen={isOpen} onOpenChange={onOpenChange}  />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-3 gap-3 mb-5">
           <div className="col-span-2">

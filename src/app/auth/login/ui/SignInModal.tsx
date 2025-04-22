@@ -10,6 +10,8 @@ import {
 import { useForm } from "react-hook-form";
 import { ContentTimer } from "./ContentTimer";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface Props {
   isOpen: boolean;
@@ -34,9 +36,9 @@ export const SignInModal = ({
   functionvalidate,
 }: Props) => {
   const [loading, setLoading] = useState(false);
-
+ const router= useRouter();
   const { register, handleSubmit } = useForm<State>();
-
+  const t = useTranslations("ModalCode");
   const onsubmit = async (state: State) => {
     try {
       setLoading(true);
@@ -50,7 +52,7 @@ export const SignInModal = ({
         });
       }
       setLoading(false);
-      window.location.replace("/");
+      router.replace("/");
       onClose();
     } catch (error) {
       setLoading(false);
@@ -71,11 +73,11 @@ export const SignInModal = ({
         <ModalContent>
           <>
             <ModalHeader className="flex flex-col gap-1">
-              Verificar{" "}
+            {t("title")}
             </ModalHeader>
             <ModalBody>
               <ContentTimer />
-              <p className="text-center mb-4">Ingrese código de 6 dígitos.</p>
+              <p className="text-center mb-4">  {t("description")}</p>
               <div className="flex justify-center gap-2 my-3">
                 <form className="" onSubmit={handleSubmit(onsubmit)}>
                   <InputOtp
@@ -94,7 +96,7 @@ export const SignInModal = ({
                     fullWidth
                     color="primary"
                   >
-                    Verificar Codigo
+                    {t("button")}
                   </Button>
                 </form>
               </div>

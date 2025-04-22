@@ -27,7 +27,7 @@
     "option1": "Hoteles",
     "option2": "Semanas Ultimo Minuto",
     "option3": "Yates",
-    "option4": "Planea vacaciones",
+    "option4": "Semanas Infinity",
     "option5": "Transportacion",
     "option6": "Mi viaje perfecto"
   },
@@ -347,5 +347,33 @@
       "option2": "Actividades o instalaciones para niños",
       "option3": "Cercanía o acceso a la playa"
     }
+  },
+   "ModalConfirm":{
+    "title":"Mensaje Enviado",
+    "strong":"Solicitud Exitosa",
+    "description":"Se le envio un correo por favor, revise su bandeja de entrada o carpeta de spam para asegurarse de que lo haya recibido. Si no lo ha recibido, no dude en ponerse en contacto con nosotros para obtener ayuda adicional.",
+    "button":"Aceptar"
+  },
+  "Auth":{
+    "title":"Correo",
+    "title1":"Celular",
+    "loginEmail":{
+      "title":"Correo",
+      "placeholder":"Ingrese su correo"
+    },
+    "loginPhone":{
+      "title":"Celular",
+      "placeholder":"Ingrese su celular",
+      "title1":"Codigo",
+      "placeholder1":" codigo"
+    },
+    "require":"El campo es requerido",
+    "button":"Ingresar"
+    
+  },
+  "ModalCode":{
+    "title":"Verificacion",
+    "description":"Ingrese código de 6 dígitos.",
+    "button":"Veriricar Codigo"
   }
 }

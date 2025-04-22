@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import { useTranslations } from "next-intl";
-
+import { IoLogoFacebook, IoLogoInstagram } from "react-icons/io5";
+import { FaXTwitter } from "react-icons/fa6";
 export const Footer = () => {
-    const t = useTranslations("Footer");
-  
+  const t = useTranslations("Footer");
 
   return (
     <footer className="bg-maincolor  py-12 ">
@@ -19,10 +19,12 @@ export const Footer = () => {
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gold-500">
-              {t('contact')}
+              {t("contact")}
             </h3>
-            <p className="text-gray-400">{t('phone')}: +52 998 123 4567</p>
-            <p className="text-gray-400">Email: info@infinityluxury.com</p>
+            <p className="text-gray-400">{t("phone")}: +52 998 478 8050</p>
+            <p className="text-gray-400">
+              Email: members@infinityluxurytravelclub.com
+            </p>
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gold-500">
@@ -31,21 +33,22 @@ export const Footer = () => {
             <div className="flex space-x-4">
               <a
                 href="https://www.facebook.com/infinityluxurytravel"
-                className="hover:text-gold-500 transition-colors duration-300 text-gray-400"
+                className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
               >
-                Facebook
+                <IoLogoFacebook />
+                <span>Facebook</span>
               </a>
               <a
                 href="https://www.instagram.com/infinityluxurytravelclub/"
-                className="hover:text-gold-500 transition-colors duration-300 text-gray-400"
+                className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
               >
-                Instagram
+               <IoLogoInstagram /> <span>Instagram</span>
               </a>
               <a
                 href="#"
-                className="hover:text-gold-500 transition-colors duration-300 text-gray-400"
+                className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
               >
-                Twitter
+               <FaXTwitter /> <span>Twitter</span>
               </a>
             </div>
           </div>
