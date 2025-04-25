@@ -1,34 +1,31 @@
 "use client";
 
-import {
-  Card,
-  CardBody,
-  Tab,
-  Tabs,
-} from "@nextui-org/react";
-import {  useState } from "react";
+import { Card, CardBody, Tab, Tabs } from "@nextui-org/react";
+import { useState } from "react";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 import { FormMessage, Message } from "./form-message";
 import { useTheme } from "next-themes";
 import { SelectLenguage } from "@/components/ui/user/SelectLenguage";
 import { useTranslations } from "next-intl";
-  interface Props{
-    searchParams:Message
-  }
+interface Props {
+  searchParams: Message;
+}
 
-export const LoginForm = ({searchParams}:Props) => {
+export const LoginForm = ({ searchParams }: Props) => {
   const t = useTranslations("Auth");
   const [selected, setSelected] = useState<string | number | null>("login");
-   const { theme } = useTheme();
-  
+  const { theme } = useTheme();
+
   return (
     <div className="w-full max-w-md m-auto p-6">
-      <SelectLenguage/>
-      
       <div className="space-y-2 text-center flex justify-center items-center flex-col">
         <img
-          src={ theme === 'dark' ? "https://res.cloudinary.com/devz7obre/image/upload/v1744926909/logo1dark_xmwuhb.png" : "https://res.cloudinary.com/devz7obre/image/upload/v1744321737/logo1_v9yswm.png"}
+          src={
+            theme === "dark"
+              ? "https://res.cloudinary.com/devz7obre/image/upload/v1744926909/logo1dark_xmwuhb.png"
+              : "https://res.cloudinary.com/devz7obre/image/upload/v1744321737/logo1_v9yswm.png"
+          }
           alt="Infinity Luxury Travel Logo"
           className="h-20"
         />
@@ -52,6 +49,9 @@ export const LoginForm = ({searchParams}:Props) => {
               </Tab>
             </Tabs>
           </CardBody>
+          <div className="grid">
+            <SelectLenguage />
+          </div>
         </Card>
       </div>
       <FormMessage message={searchParams} />

@@ -37,9 +37,17 @@ export const FormRomSeadust = ({
 }: Props) => {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormRoomValues>();
+  } = useForm<FormRoomValues>({
+    defaultValues: {
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      number: number,
+    },
+  });
 
   const [loading, setloading] = useState(false);
   const t = useTranslations("TransfersPage");
@@ -129,7 +137,7 @@ export const FormRomSeadust = ({
                         required: "El campo de nombre es requerido",
                       })}
                       placeholder="Ingrese nombre"
-                      value={firstname}
+                      value={watch("firstname")}
                       isInvalid={!!errors.firstname}
                       errorMessage={errors.firstname?.message}
                       type="text"
@@ -144,7 +152,7 @@ export const FormRomSeadust = ({
                         required: "El campo de apellido es requerido",
                       })}
                       type="text"
-                      value={lastname}
+                      value={watch("lastname")}
                       placeholder="Ingrese apellido"
                       isInvalid={!!errors.lastname}
                       errorMessage={errors.lastname?.message}
@@ -162,7 +170,7 @@ export const FormRomSeadust = ({
                         required: "El campo de Correo es requerido",
                       })}
                       type="email"
-                      value={email}
+                      value={watch("email")}
                       placeholder="Ingrese Correo"
                       isInvalid={!!errors.email}
                       errorMessage={errors.email?.message}
@@ -173,11 +181,12 @@ export const FormRomSeadust = ({
                       {t("item2.item4")} <span className="text-red-500">*</span>
                     </label>
                     <Input
+                    startContent={<span>+</span>}
                       {...register("number", {
                         required: "El campo de Numero es requerido",
                       })}
                       type="text"
-                      value={number}
+                      value={watch("number")}
                       placeholder="Ingrese numero"
                       isInvalid={!!errors.number}
                       errorMessage={errors.number?.message}

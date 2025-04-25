@@ -51,6 +51,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
     handleSubmit,
     control,
     register,
+    watch,
     formState: { errors },
   } = useForm<FormDateYachts>({
     defaultValues: {
@@ -59,6 +60,11 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
       passengers: yachts.passengers,
       packageYachtId: yachts.yachtPackageId,
       time: yachts.time,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      phone: user.number,
+
     },
   });
   const [loading, setloading] = useState(false);
@@ -280,7 +286,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   })}
                   isInvalid={!!errors.firstname}
                   errorMessage={errors.firstname?.message}
-                  value={user.firstname}
+                  value={watch("firstname")}
                 />
               </div>
               <div className="space-y-2">
@@ -293,7 +299,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   })}
                   isInvalid={!!errors.lastname}
                   errorMessage={errors.lastname?.message}
-                  value={user.lastname}
+                  value={watch("lastname")}
                 />
               </div>
               <div className="w-full space-y-2 ">
@@ -307,7 +313,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   })}
                   isInvalid={!!errors.email}
                   errorMessage={errors.email?.message}
-                  value={user.email}
+                  value={watch("email")}
                 />
               </div>
               <div className="space-y-2">
@@ -321,7 +327,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   })}
                   isInvalid={!!errors.phone}
                   errorMessage={errors.phone?.message}
-                  value={`${user.number}`}
+                  value={watch("phone")}
                 />
               </div>
               <div className="col-span-full mt-3">

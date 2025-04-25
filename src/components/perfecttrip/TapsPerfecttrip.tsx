@@ -5,8 +5,14 @@ import { ContentCardMain } from "./ContentCardMain";
 import { ContentFormTrip } from "./ContentFormTrip";
 import { ContentBudgetTrip } from "./ContentBudgetTrip";
 import { useTranslations } from "next-intl";
+export interface PropsMain {
+  firstname: string;
+  lastname: string;
+  email: string | undefined;
+  number: string;
+}
 
-export const TapsPerfecttrip = () => {
+export const TapsPerfecttrip = ({firstname,lastname,email,number}:PropsMain) => {
   const [selected, setSelected] = useState<string>("1");
  const t = useTranslations("MyperfectPage");
   const handleSelectionChange = (key: Key) => {
@@ -46,7 +52,7 @@ export const TapsPerfecttrip = () => {
             </Tab>
             <Tab key="2" title={t("step1")}>
               <div>
-                <ContentFormTrip onchange={handleSelectionChange} />
+                <ContentFormTrip onchange={handleSelectionChange} lastname={lastname} firstname={firstname} email={email} number={number} />
               </div>
             </Tab>
             <Tab key="3" title={t("step2")}>

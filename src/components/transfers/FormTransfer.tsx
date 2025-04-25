@@ -58,9 +58,19 @@ export const FormTransfer = ({
 }: Props) => {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValuesTransfer>();
+  } = useForm<FormValuesTransfer>({
+    defaultValues: {
+      mainpassenger: {
+        first_name: firstname,
+        last_name: lastname,
+        phone: number,
+        email: email,
+      },
+    },
+  });
   const {
     selected,
     origin,
@@ -117,7 +127,7 @@ export const FormTransfer = ({
             pricereturn: respreturn?.transferprice,
             firstName: data.mainpassenger.first_name,
             lastname: data.mainpassenger.last_name,
-            email: email,
+            email: data.mainpassenger.email,
             passengerAdult: passengersmain.adults.toString(),
             passengerChildren: passengersmain.children.toString(),
           }),
@@ -153,7 +163,7 @@ export const FormTransfer = ({
                       required: "El campo de nombre es requerido",
                     })}
                     placeholder="Ingrese nombre"
-                    value={firstname}
+                    value={watch("mainpassenger.first_name")}
                     isInvalid={!!errors.mainpassenger?.first_name}
                     errorMessage={errors.mainpassenger?.first_name?.message}
                     type="text"
@@ -166,7 +176,7 @@ export const FormTransfer = ({
                       required: "El campo de apellido es requerido",
                     })}
                     type="text"
-                    value={lastname}
+                    value={watch("mainpassenger.last_name")}
                     placeholder="Ingrese apellido"
                     isInvalid={!!errors.mainpassenger?.last_name}
                     errorMessage={errors.mainpassenger?.last_name?.message}
@@ -182,7 +192,7 @@ export const FormTransfer = ({
                       required: "El campo de Correo es requerido",
                     })}
                     type="email"
-                    value={email}
+                    value={watch("mainpassenger.email")}
                     placeholder="Ingrese Correo"
                     isInvalid={!!errors.mainpassenger?.email}
                     errorMessage={errors.mainpassenger?.email?.message}
@@ -194,8 +204,11 @@ export const FormTransfer = ({
                     {...register("mainpassenger.phone", {
                       required: "El campo de Numero es requerido",
                     })}
-                    type="text"
-                    value={number}
+                    type="number"
+                    startContent={
+                      <span >+</span>
+                    }
+                    value={watch("mainpassenger.phone")}
                     placeholder="Ingrese numero"
                     isInvalid={!!errors.mainpassenger?.phone}
                     errorMessage={errors.mainpassenger?.phone?.message}

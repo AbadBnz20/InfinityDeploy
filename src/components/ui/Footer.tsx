@@ -35,20 +35,20 @@ export const Footer = () => {
                 href="https://www.facebook.com/infinityluxurytravel"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
               >
-                <IoLogoFacebook />
-                <span>Facebook</span>
+                <IoLogoFacebook size={"30px"} />
+                
               </a>
               <a
                 href="https://www.instagram.com/infinityluxurytravelclub/"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
               >
-               <IoLogoInstagram /> <span>Instagram</span>
+               <IoLogoInstagram  size={"30px"} /> 
               </a>
               <a
                 href="#"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
               >
-               <FaXTwitter /> <span>Twitter</span>
+               <FaXTwitter  size={"30px"} />
               </a>
             </div>
           </div>

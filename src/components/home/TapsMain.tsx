@@ -65,7 +65,7 @@ export const TapsMain = () => {
             title={
               <div className="flex items-center space-x-2">
                 <a href="https://www.rcihotelsavings.com/v6/register" target="_blank">
-                  SAVINGS
+                  Saving
                 </a>
               </div>
             }

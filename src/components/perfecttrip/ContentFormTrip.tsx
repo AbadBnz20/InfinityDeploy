@@ -1,4 +1,3 @@
-import { useSession } from "@/hooks/useSession";
 import { TripStore } from "@/store/TripStore";
 import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
@@ -10,6 +9,7 @@ interface FormData {
   name: string;
   phone: string;
   email: string;
+  secondEmail:string;
   adults: number;
   children: Array<string>;
   details: string;
@@ -17,18 +17,36 @@ interface FormData {
 
 interface Props {
   onchange: (key: Key) => void;
+  firstname: string;
+  lastname: string;
+  email: string | undefined;
+  number: string;
 }
 
-export const ContentFormTrip = ({ onchange }: Props) => {
-  const { session } = useSession();
+export const ContentFormTrip = ({
+  onchange,
+  lastname,
+  firstname,
+  email,
+  number,
+}: Props) => {
   const { SetPersonalData } = TripStore();
   const t = useTranslations("MyperfectPage");
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: {
+      name: `${firstname} ${lastname}`,
+      phone: number,
+      email: email,
+    },
+  });
+
+   const MainEmail = watch("email");
   const [selection, setSelection] = useState({
     children: 0,
     childrenAges: ["", ""],
@@ -36,11 +54,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
 
   const onSubmit = async (data: FormData) => {
     console.log(data);
-    SetPersonalData(
-      data.adults,
-      selection.childrenAges,
-      data.details
-    );
+    SetPersonalData(data.adults, selection.childrenAges, data.details);
     onchange("3" as Key);
   };
 
@@ -49,7 +63,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
         <div className="">
           <label className="block text-sm font-medium mb-2">
-          {t("item.title")} <span className="text-red-500">*</span>
+            {t("item.title")} <span className="text-red-500">*</span>
           </label>
           <Input
             placeholder="Nombre"
@@ -57,35 +71,33 @@ export const ContentFormTrip = ({ onchange }: Props) => {
             {...register("name", {
               required: "El campo es requerido",
             })}
-            value={`${session?.firstname} ${session?.lastname}`}
+            value={watch("name")}
             isInvalid={!!errors.name}
             errorMessage={errors.name?.message}
           />
         </div>
         <div className=" ">
           <label className="block text-sm font-medium mb-2">
-          {t("item1.title")} <span className="text-red-500">*</span>
-
+            {t("item1.title")} <span className="text-red-500">*</span>
           </label>
           <Input
             placeholder="Telefono"
-            type="text"
+            startContent={<span>+</span>}
             {...register("phone", {
               required: "El campo es requerido",
             })}
-            value={`${session?.number}`}
+            type="number"
+            {...register("phone", {
+              required: "El campo es requerido",
+            })}
+            value={watch("phone")}
             isInvalid={!!errors.phone}
             errorMessage={errors.phone?.message}
           />
         </div>
         <div className="">
-          <label className="block text-sm font-medium mb-2">Email <span className="text-red-500">*</span></label>
-          <Input placeholder="Email" type="Email" value={session?.email} />
-        </div>
-        <div className="">
           <label className="block text-sm font-medium mb-2">
-          {t("item2.title")} <span className="text-red-500">*</span>
-
+            Email <span className="text-red-500">*</span>
           </label>
           <Input
             placeholder="Email"
@@ -93,14 +105,30 @@ export const ContentFormTrip = ({ onchange }: Props) => {
             {...register("email", {
               required: "El campo es requerido",
               validate: (value) =>
-                value === session?.email || "El email no coincide con el original",
+                value === email || "El email no coincide con el original",
             })}
-            isInvalid={!!errors.email}
-            errorMessage={errors.email?.message}
+            value={watch("email")}
           />
         </div>
         <div className="">
-          <label className="block text-sm font-medium mb-2">{t("item3.title")} <span className="text-red-500">*</span>
+          <label className="block text-sm font-medium mb-2">
+            {t("item2.title")} <span className="text-red-500">*</span>
+          </label>
+          <Input
+            placeholder="Email"
+            type="Email"
+            {...register("secondEmail", {
+              required: "El campo es requerido",
+              validate: (value) =>
+                value === MainEmail || "El email no coincide con el original",
+            })}
+            isInvalid={!!errors.secondEmail}
+            errorMessage={errors.secondEmail?.message}
+          />
+        </div>
+        <div className="">
+          <label className="block text-sm font-medium mb-2">
+            {t("item3.title")} <span className="text-red-500">*</span>
           </label>
           <Select
             placeholder={t("item3.placeholder")}
@@ -118,7 +146,9 @@ export const ContentFormTrip = ({ onchange }: Props) => {
           </Select>
         </div>
         <div className="">
-          <label className="block text-sm font-medium mb-2">{t("item4.title")}</label>
+          <label className="block text-sm font-medium mb-2">
+            {t("item4.title")}
+          </label>
           <ContentFormChildren
             selection={selection}
             setSelection={setSelection}
@@ -126,7 +156,7 @@ export const ContentFormTrip = ({ onchange }: Props) => {
         </div>
         <div className="col-span-2">
           <label className="block text-sm font-medium mb-2">
-          {t("item5.title")}
+            {t("item5.title")}
           </label>
           <Textarea
             placeholder={t("item5.placeholder")}
@@ -137,11 +167,20 @@ export const ContentFormTrip = ({ onchange }: Props) => {
         </div>
       </div>
       <div className="w-full flex justify-end gap-3">
-        <Button   size="lg" className="w-[50%]" onPress={() => onchange("1" as Key)} >
-        {t("buttonStepprev")}
+        <Button
+          size="lg"
+          className="w-[50%]"
+          onPress={() => onchange("1" as Key)}
+        >
+          {t("buttonStepprev")}
         </Button>
-        <Button  size="lg"  className="bg-black text-white dark:bg-white dark:text-black w-[50%]"  type="submit" variant="flat">
-        {t("buttonStepnext")}
+        <Button
+          size="lg"
+          className="bg-black text-white dark:bg-white dark:text-black w-[50%]"
+          type="submit"
+          variant="flat"
+        >
+          {t("buttonStepnext")}
         </Button>
       </div>
     </form>

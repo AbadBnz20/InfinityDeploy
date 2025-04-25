@@ -9,7 +9,7 @@ const logos=[
     id:1
   },
   {
-    src:"home/logos/logo2.png",
+    src:"home/logos/logo2dark.png",
     id:2
   },
   {
