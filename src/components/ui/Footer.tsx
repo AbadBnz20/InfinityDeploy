@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { IoLogoFacebook, IoLogoInstagram } from "react-icons/io5";
+import { IoLogoFacebook, IoLogoInstagram, IoLogoTiktok } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
 export const Footer = () => {
   const t = useTranslations("Footer");
@@ -34,21 +34,26 @@ export const Footer = () => {
               <a
                 href="https://www.facebook.com/infinityluxurytravel"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
+                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <IoLogoFacebook size={"30px"} />
-                
               </a>
               <a
                 href="https://www.instagram.com/infinityluxurytravelclub/"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
+                 target="_blank"
+                rel="noopener noreferrer"
               >
-               <IoLogoInstagram  size={"30px"} /> 
+                <IoLogoInstagram size={"30px"} />
               </a>
               <a
-                href="#"
+                href="https://www.tiktok.com/@infinityluxurytravelclub"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-               <FaXTwitter  size={"30px"} />
+                <IoLogoTiktok size={"30px"} />
               </a>
             </div>
           </div>

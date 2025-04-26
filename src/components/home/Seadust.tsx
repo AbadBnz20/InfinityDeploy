@@ -58,7 +58,7 @@ export const Seadust = () => {
         <div className=" col-span-3 grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="space-y-2">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-              Check-in Check-out
+              Check-in Check-out (mm/dd/aaa)
             </label>
             <DateRangePicker
               value={date}

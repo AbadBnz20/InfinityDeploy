@@ -6,6 +6,7 @@ import {
   CardHeader,
 
   Input,
+  Textarea,
   useDisclosure,
 } from "@nextui-org/react";
 import React, {  useState } from "react";
@@ -35,6 +36,7 @@ export interface Passenger {
 export interface FormValuesTransfer {
   mainpassenger: User;
   codetransport: string;
+  note: string;
 }
 
 export interface Props {
@@ -214,6 +216,17 @@ export const FormTransfer = ({
                     errorMessage={errors.mainpassenger?.phone?.message}
                   />
                 </div>
+                <div className="col-span-full mt-3">
+                <label htmlFor="rooms" className="block text-sm font-medium ">
+                  Nota
+                </label>
+                <Textarea
+                  type="text"
+                  {...register("note")}
+                  isInvalid={!!errors.note}
+                  errorMessage={errors.note?.message}
+                />
+              </div>
               </div>
             </div>
             <div className="my-5  space-y-2">

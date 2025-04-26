@@ -18,7 +18,9 @@ export const ContentCardflights = () => {
   const { flight, SetFlightData } = TripStore();
   const t = useTranslations("MyperfectPage");
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg hover:bg-maincolor `}>
+    <Card
+      className={`group overflow-hidden transition-all hover:shadow-lg hover:bg-maincolor `}
+    >
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !flight ? "opacity-75" : ""
@@ -90,14 +92,16 @@ export const ContentCardHotels = () => {
     setHotelData((prev) => ({ ...prev, rating: value }));
   };
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor`}>
+    <Card
+      className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor`}
+    >
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !state ? "opacity-75" : ""
         }`}
       >
         <img
-            src="perfecttrip/hoteles.jfif"
+          src="perfecttrip/hoteles.jfif"
           alt="Hotel breakfast service"
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
         />
@@ -107,33 +111,34 @@ export const ContentCardHotels = () => {
           <h3 className="text-xl font-semibold"> {t("card1.title")}</h3>
         </div>
       </CardHeader>
-      <CardBody >
+      <CardBody>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <Select
-          value={hotelData.includesMeals}
-          variant="bordered"
-          placeholder={t("card1.placeholder")}
-          defaultSelectedKeys={["con_alimentos"]}
-          isDisabled={!state}
-          onChange={(e) => handleMealsChange(e.target.value)}
-        >
-          <SelectItem key="Con alimentos">Con Alimentos</SelectItem>
-          <SelectItem key="Sin alimentos">Sin Alimentos</SelectItem>
-        </Select>
-        <Select
-          variant="bordered"
-          placeholder="Seleccione categoria"
-          defaultSelectedKeys={["1"]}
-          isDisabled={!state}
-          value={hotelData.rating}
-          onChange={(e) => handleRatingChange(e.target.value)}
-        >
-          <SelectItem key="1">★</SelectItem>
-          <SelectItem key="2">★★</SelectItem>
-          <SelectItem key="3">★★★</SelectItem>
-          <SelectItem key="4">★★★★</SelectItem>
-          <SelectItem key="5">★★★★★</SelectItem>
-        </Select>
+          <Select
+            value={hotelData.includesMeals}
+            variant="bordered"
+            placeholder={t("card1.placeholder")}
+            defaultSelectedKeys={["con_alimentos"]}
+            isDisabled={!state}
+            onChange={(e) => handleMealsChange(e.target.value)}
+          >
+            <SelectItem key="Con alimentos">Con Alimentos</SelectItem>
+            <SelectItem key="Sin alimentos">Sin Alimentos</SelectItem>
+          </Select>
+          <Select
+            variant="bordered"
+            placeholder="Seleccione categoria"
+             selectionMode="multiple"
+            defaultSelectedKeys={["1"]}
+            isDisabled={!state}
+            value={hotelData.rating}
+            onChange={(e) => handleRatingChange(e.target.value)}
+          >
+            <SelectItem key="1">★</SelectItem>
+            <SelectItem key="2">★★</SelectItem>
+            <SelectItem key="3">★★★</SelectItem>
+            <SelectItem key="4">★★★★</SelectItem>
+            <SelectItem key="5">★★★★★</SelectItem>
+          </Select>
         </div>
       </CardBody>
       <CardFooter className="p-4">
@@ -178,7 +183,9 @@ export const ContentCardCars = () => {
   }, [state, carData, SetCarData]);
 
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor `}>
+    <Card
+      className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor `}
+    >
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !state ? "opacity-75" : ""
@@ -196,7 +203,11 @@ export const ContentCardCars = () => {
         </div>
       </CardHeader>
       <CardBody className="p-4">
-        <SelectCategoryCar carData={carData} state={state} handleCarsChange={handleCarsChange} />
+        <SelectCategoryCar
+          carData={carData}
+          state={state}
+          handleCarsChange={handleCarsChange}
+        />
       </CardBody>
       <CardFooter className="p-4">
         <Button
@@ -239,14 +250,16 @@ export const ContentCardAttraction = () => {
   }, [state, attractionsData, SetAttractionsData]);
 
   return (
-    <Card className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor`}>
+    <Card
+      className={`group overflow-hidden transition-all hover:shadow-lg  hover:bg-maincolor`}
+    >
       <CardHeader
         className={`relative h-48 overflow-hidden p-0  ${
           !state ? "opacity-75" : ""
         }`}
       >
         <img
-            src="perfecttrip/atracciones.jpg"
+          src="perfecttrip/atracciones.jpg"
           alt="Disney characters at Magic Kingdom"
           className="w-full h-full object-cover transition-transform group-hover:scale-105"
         />
@@ -257,7 +270,11 @@ export const ContentCardAttraction = () => {
         </div>
       </CardHeader>
       <CardBody className="p-4">
-        <SelectAttraction attractionsData={attractionsData}  state={state}  handleAttractionsChange={handleAttractionsChange} />
+        <SelectAttraction
+          attractionsData={attractionsData}
+          state={state}
+          handleAttractionsChange={handleAttractionsChange}
+        />
       </CardBody>
       <CardFooter className="p-4">
         <Button

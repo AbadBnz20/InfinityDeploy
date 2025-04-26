@@ -125,7 +125,7 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-          {t("date")} <span className="text-red-500">*</span>
+          {t("date")} (mm/dd/aaa) <span className="text-red-500">*</span>
           </label>
           <DateRangePicker
             value={date}

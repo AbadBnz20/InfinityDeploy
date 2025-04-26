@@ -85,7 +85,7 @@ const posthog = usePostHog();
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="w-full ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("item2")} <span className="text-red-500">*</span>
+            {t("item2")}(mm/dd/aaa) <span className="text-red-500">*</span>
             </label>
             <DatePicker
               hideTimeZone
@@ -97,7 +97,7 @@ const posthog = usePostHog();
           </div>
           <div className="w-full ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("item3")}
+            {t("item3")} (mm/dd/aaa)
             </label>
             <DatePicker
               isDisabled={selected !== "Ida y vuelta"}

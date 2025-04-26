@@ -104,8 +104,6 @@ export const ContentFormTrip = ({
             type="Email"
             {...register("email", {
               required: "El campo es requerido",
-              validate: (value) =>
-                value === email || "El email no coincide con el original",
             })}
             value={watch("email")}
           />

@@ -71,7 +71,7 @@ export const Ships = () => {
         </div>
         <div className="w-full space-y-2 ">
             <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("date")} <span className="text-red-500">*</span>
+            {t("date")} (mm/dd/aaa) <span className="text-red-500">*</span>
             </label>
             <DatePicker
               value={date}
