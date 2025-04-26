@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { IoLogoFacebook, IoLogoInstagram, IoLogoTiktok } from "react-icons/io5";
-import { FaXTwitter } from "react-icons/fa6";
+
 export const Footer = () => {
   const t = useTranslations("Footer");
 
