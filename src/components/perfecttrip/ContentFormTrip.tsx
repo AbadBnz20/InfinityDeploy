@@ -9,7 +9,7 @@ interface FormData {
   name: string;
   phone: string;
   email: string;
-  secondEmail:string;
+  secondEmail: string;
   adults: number;
   children: Array<string>;
   details: string;
@@ -46,7 +46,7 @@ export const ContentFormTrip = ({
     },
   });
 
-   const MainEmail = watch("email");
+  const MainEmail = watch("email");
   const [selection, setSelection] = useState({
     children: 0,
     childrenAges: ["", ""],
@@ -66,6 +66,7 @@ export const ContentFormTrip = ({
             {t("item.title")} <span className="text-red-500">*</span>
           </label>
           <Input
+            isDisabled
             placeholder="Nombre"
             type="text"
             {...register("name", {
@@ -81,6 +82,7 @@ export const ContentFormTrip = ({
             {t("item1.title")} <span className="text-red-500">*</span>
           </label>
           <Input
+            isDisabled
             placeholder="Telefono"
             startContent={<span>+</span>}
             {...register("phone", {

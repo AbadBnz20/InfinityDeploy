@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, Tab, Tabs } from "@nextui-org/react";
+import { Button, Card, CardBody, Tab, Tabs } from "@nextui-org/react";
 import { useState } from "react";
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
@@ -8,6 +8,7 @@ import { FormMessage, Message } from "./form-message";
 import { useTheme } from "next-themes";
 import { SelectLenguage } from "@/components/ui/user/SelectLenguage";
 import { useTranslations } from "next-intl";
+import { ContentTheme } from "@/components/ui/user/ContentTheme";
 interface Props {
   searchParams: Message;
 }
@@ -15,7 +16,15 @@ interface Props {
 export const LoginForm = ({ searchParams }: Props) => {
   const t = useTranslations("Auth");
   const [selected, setSelected] = useState<string | number | null>("login");
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
+
+  const Onchange = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
 
   return (
     <div className="w-full max-w-md m-auto p-6">
@@ -49,8 +58,13 @@ export const LoginForm = ({ searchParams }: Props) => {
               </Tab>
             </Tabs>
           </CardBody>
-          <div className="grid">
-            <SelectLenguage />
+          <div className="flex  flex-row gap-4 m-2 items-center  justify-between">
+           <div>
+           <SelectLenguage />
+           </div>
+            <Button isIconOnly onPress={() => Onchange()}>
+              <ContentTheme />
+            </Button>
           </div>
         </Card>
       </div>

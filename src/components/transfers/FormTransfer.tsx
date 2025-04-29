@@ -4,12 +4,11 @@ import {
   Card,
   CardBody,
   CardHeader,
-
   Input,
   Textarea,
   useDisclosure,
 } from "@nextui-org/react";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { TransfersStore } from "@/store/TransfersStore";
@@ -93,7 +92,11 @@ export const FormTransfer = ({
     setloading(true);
     try {
       let respreturn: Car | null = null;
-      const resp = await GetDetailsDestination(origin, destination, idcargoing!);
+      const resp = await GetDetailsDestination(
+        origin,
+        destination,
+        idcargoing!
+      );
       if (selected === "Ida y vuelta") {
         respreturn = await GetCar(idcarreturn!);
       }
@@ -106,7 +109,7 @@ export const FormTransfer = ({
         .toISOString()
         .split("T")[1]
         .split(".")[0];
-  
+
       if (resp) {
         const res = await fetch("/api/transfers", {
           method: "POST",
@@ -140,107 +143,120 @@ export const FormTransfer = ({
       }
     } catch (error) {
       console.log(error);
-      
     }
-    setloading(false);   
+    setloading(false);
   };
 
   return (
     <>
-    <ModalConfirm isOpen={isOpen} onOpenChange={onOpenChange}/>
-    <Card className="my-3 shadow">
-      <CardHeader>
-        <h1 className="flex items-center gap-2  text-xl">{t("item2.title")}</h1>
-      </CardHeader>
-      <CardBody>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="p-3">
-            <div className="">
-              <p className=" text-medium">{t("item2.subtitle")}</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
-                <div className="space-y-2">
-                  <label className="text-small">{t("item2.item2")} <span className="text-red-500">*</span></label>
-                  <Input
-                    {...register("mainpassenger.first_name", {
-                      required: "El campo de nombre es requerido",
-                    })}
-                    placeholder="Ingrese nombre"
-                    value={watch("mainpassenger.first_name")}
-                    isInvalid={!!errors.mainpassenger?.first_name}
-                    errorMessage={errors.mainpassenger?.first_name?.message}
-                    type="text"
-                  />
+      <ModalConfirm isOpen={isOpen} onOpenChange={onOpenChange} />
+      <Card className="my-3 shadow">
+        <CardHeader>
+          <h1 className="flex items-center gap-2  text-xl">
+            {t("item2.title")}
+          </h1>
+        </CardHeader>
+        <CardBody>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="p-3">
+              <div className="">
+                <p className=" text-medium">{t("item2.subtitle")}</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+                  <div className="space-y-2">
+                    <label className="text-small">
+                      {t("item2.item2")} <span className="text-red-500">*</span>
+                    </label>
+                    <Input
+                      isDisabled
+                      {...register("mainpassenger.first_name", {
+                        required: "El campo de nombre es requerido",
+                      })}
+                      placeholder="Ingrese nombre"
+                      value={watch("mainpassenger.first_name")}
+                      isInvalid={!!errors.mainpassenger?.first_name}
+                      errorMessage={errors.mainpassenger?.first_name?.message}
+                      type="text"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-small">
+                      {t("item2.item3")} <span className="text-red-500">*</span>
+                    </label>
+                    <Input
+                      isDisabled
+                      {...register("mainpassenger.last_name", {
+                        required: "El campo de apellido es requerido",
+                      })}
+                      type="text"
+                      value={watch("mainpassenger.last_name")}
+                      placeholder="Ingrese apellido"
+                      isInvalid={!!errors.mainpassenger?.last_name}
+                      errorMessage={errors.mainpassenger?.last_name?.message}
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-small">{t("item2.item3")} <span className="text-red-500">*</span></label>
-                  <Input
-                    {...register("mainpassenger.last_name", {
-                      required: "El campo de apellido es requerido",
-                    })}
-                    type="text"
-                    value={watch("mainpassenger.last_name")}
-                    placeholder="Ingrese apellido"
-                    isInvalid={!!errors.mainpassenger?.last_name}
-                    errorMessage={errors.mainpassenger?.last_name?.message}
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
-                <div className="space-y-2">
-                  <label className="text-small">Email <span className="text-red-500">*</span></label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+                  <div className="space-y-2">
+                    <label className="text-small">
+                      Email <span className="text-red-500">*</span>
+                    </label>
 
-                  <Input
-                    {...register("mainpassenger.email", {
-                      required: "El campo de Correo es requerido",
-                    })}
-                    type="email"
-                    value={watch("mainpassenger.email")}
-                    placeholder="Ingrese Correo"
-                    isInvalid={!!errors.mainpassenger?.email}
-                    errorMessage={errors.mainpassenger?.email?.message}
-                  />
+                    <Input
+                      {...register("mainpassenger.email", {
+                        required: "El campo de Correo es requerido",
+                      })}
+                      type="email"
+                      value={watch("mainpassenger.email")}
+                      placeholder="Ingrese Correo"
+                      isInvalid={!!errors.mainpassenger?.email}
+                      errorMessage={errors.mainpassenger?.email?.message}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-small">
+                      {t("item2.item4")} <span className="text-red-500">*</span>
+                    </label>
+                    <Input
+                      isDisabled
+                      {...register("mainpassenger.phone", {
+                        required: "El campo de Numero es requerido",
+                      })}
+                      type="number"
+                      startContent={<span>+</span>}
+                      value={watch("mainpassenger.phone")}
+                      placeholder="Ingrese numero"
+                      isInvalid={!!errors.mainpassenger?.phone}
+                      errorMessage={errors.mainpassenger?.phone?.message}
+                    />
+                  </div>
+                  <div className="col-span-full mt-3">
+                    <label
+                      htmlFor="rooms"
+                      className="block text-sm font-medium "
+                    >
+                      Nota
+                    </label>
+                    <Textarea
+                      type="text"
+                      {...register("note")}
+                      isInvalid={!!errors.note}
+                      errorMessage={errors.note?.message}
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-small">{t("item2.item4")} <span className="text-red-500">*</span></label>
-                  <Input
-                    {...register("mainpassenger.phone", {
-                      required: "El campo de Numero es requerido",
-                    })}
-                    type="number"
-                    startContent={
-                      <span >+</span>
-                    }
-                    value={watch("mainpassenger.phone")}
-                    placeholder="Ingrese numero"
-                    isInvalid={!!errors.mainpassenger?.phone}
-                    errorMessage={errors.mainpassenger?.phone?.message}
-                  />
-                </div>
-                <div className="col-span-full mt-3">
-                <label htmlFor="rooms" className="block text-sm font-medium ">
-                  Nota
-                </label>
-                <Textarea
-                  type="text"
-                  {...register("note")}
-                  isInvalid={!!errors.note}
-                  errorMessage={errors.note?.message}
-                />
               </div>
+              <div className="my-5  space-y-2">
+                <p className=" text-medium">
+                  Pasajeros adultos:{passengers.adults}
+                </p>
+                <p className=" text-medium">
+                  Pasajeros Niños:{passengers.children}
+                </p>
               </div>
-            </div>
-            <div className="my-5  space-y-2">
-              <p className=" text-medium">
-                Pasajeros adultos:{passengers.adults}
-              </p>
-              <p className=" text-medium">
-                Pasajeros Niños:{passengers.children}
-              </p>
-            </div>
-            <div className=" w-full mt-3">
-              {/* <Contenttransport date={datetime} register={register} errors={errors} /> */}
-              <div className="space-y-6 p-4 mt-3">
-                {/* <div className="space-y-4">
+              <div className=" w-full mt-3">
+                {/* <Contenttransport date={datetime} register={register} errors={errors} /> */}
+                <div className="space-y-6 p-4 mt-3">
+                  {/* <div className="space-y-4">
                   <div className="flex items-center gap-2">
                     <h2 className="text-lg font-medium">{t("item2.item11")}</h2>
                     <span className="text-sm text-blue-600">
@@ -268,21 +284,20 @@ export const FormTransfer = ({
                   </div>
                 </div> */}
 
-                <Button
-                  className="w-full bg-black text-white dark:bg-white dark:text-black"
-                  type="submit"
-                  isLoading={loading}
-                  // isDisabled={!accepted}
-                >
-                  {t("item2.button")}
-                </Button>
+                  <Button
+                    className="w-full bg-black text-white dark:bg-white dark:text-black"
+                    type="submit"
+                    isLoading={loading}
+                    // isDisabled={!accepted}
+                  >
+                    {t("item2.button")}
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-      </CardBody>
-    </Card>
-  
+          </form>
+        </CardBody>
+      </Card>
     </>
   );
 };

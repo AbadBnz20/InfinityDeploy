@@ -133,6 +133,7 @@ export const FormRomSeadust = ({
                       {t("item2.item2")} <span className="text-red-500">*</span>
                     </label>
                     <Input
+                    isDisabled
                       {...register("firstname", {
                         required: "El campo de nombre es requerido",
                       })}
@@ -148,6 +149,7 @@ export const FormRomSeadust = ({
                       {t("item2.item3")} <span className="text-red-500">*</span>
                     </label>
                     <Input
+                    isDisabled
                       {...register("lastname", {
                         required: "El campo de apellido es requerido",
                       })}

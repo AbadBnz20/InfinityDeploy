@@ -21,7 +21,7 @@ export const Footer = () => {
             <h3 className="text-xl font-semibold mb-4 text-gold-500">
               {t("contact")}
             </h3>
-            <p className="text-gray-400">{t("phone")}: +52 998 478 8050</p>
+            <p className="text-gray-400">{t("phone")}:+52 998 500 2798</p>
             <p className="text-gray-400">
               Email: members@infinityluxurytravelclub.com
             </p>

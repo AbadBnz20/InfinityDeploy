@@ -67,7 +67,7 @@ export const ContentCardHotels = () => {
   const t = useTranslations("MyperfectPage");
 
   const [hotelData, setHotelData] = useState({
-    includesMeals: "con_alimentos",
+    includesMeals: "Con alimentos",
     rating: "1",
   });
 
@@ -76,6 +76,7 @@ export const ContentCardHotels = () => {
   };
 
   useEffect(() => {
+    console.log(hotelData)
     if (state) {
       SetHotelsData({
         service: hotelData.includesMeals,
@@ -117,7 +118,7 @@ export const ContentCardHotels = () => {
             value={hotelData.includesMeals}
             variant="bordered"
             placeholder={t("card1.placeholder")}
-            defaultSelectedKeys={["con_alimentos"]}
+            defaultSelectedKeys={["Con alimentos"]}
             isDisabled={!state}
             onChange={(e) => handleMealsChange(e.target.value)}
           >

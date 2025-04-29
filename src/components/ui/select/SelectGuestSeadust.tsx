@@ -1,14 +1,15 @@
 import { DestinationSeadust } from "@/components/home/Seadust";
 import { Button } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface Props {
   setValue: UseFormSetValue<DestinationSeadust>;
+  value: { adults: number; children: number,infant:number }[]; 
 }
-export const SelectGuestSeadust = ({ setValue }: Props) => {
+export const SelectGuestSeadust = ({ setValue,value }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("Filter");
 
@@ -25,11 +26,11 @@ export const SelectGuestSeadust = ({ setValue }: Props) => {
       setRooms(newRooms);
     }
   };
-  //   useEffect(() => {
-  //     if (value.length >0) {
-  //       setRooms(value);
-  //     }
-  //   }, [value])
+    useEffect(() => {
+      if (value.length >0) {
+        setRooms(value);
+      }
+    }, [value])
 
   const updateRoom = (
     index: number,
@@ -70,7 +71,7 @@ export const SelectGuestSeadust = ({ setValue }: Props) => {
         {getSummary()}
       </Button>
       {isOpen && (
-        <div className="absolute top-full left-0 w-full mt-2 p-4 bg-white border rounded-md shadow-lg z-5">
+        <div className="absolute top-full left-0 w-full mt-2 p-4 bg-white border rounded-md shadow-lg z-20">
           {rooms.map((room, index) => (
             <div
               key={index}

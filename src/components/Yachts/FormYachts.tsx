@@ -281,6 +281,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   {t("item2")} <span className="text-red-500">*</span>
                 </label>
                 <Input
+                isDisabled
                   {...register("firstname", {
                     required: "El campo es requerido",
                   })}
@@ -294,6 +295,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   {t("item3")} <span className="text-red-500">*</span>
                 </label>
                 <Input
+                isDisabled
                   {...register("lastname", {
                     required: "El campo es requerido",
                   })}
@@ -321,6 +323,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   {t("item4")} <span className="text-red-500">*</span>
                 </label>
                 <Input
+                isDisabled
                   type="number"
                   {...register("phone", {
                     required: "El campo es requerido",

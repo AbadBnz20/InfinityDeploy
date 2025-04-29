@@ -30,7 +30,7 @@ export const Seadust = () => {
   });
   const t = useTranslations("Filter");
 
-  const { setDestination } = SeadustStore();
+  const { setDestination,guest } = SeadustStore();
 
   const onsubmit = (data: DestinationSeadust) => {
     const start = date?.start?.toDate(getLocalTimeZone());
@@ -71,7 +71,7 @@ export const Seadust = () => {
             <label htmlFor="rooms" className="block text-sm font-medium ">
               {t("room.title")}
             </label>
-            <SelectGuestSeadust setValue={setValue} />
+            <SelectGuestSeadust value={guest} setValue={setValue} />
           </div>
           <div className="mt-6">
             <Button type="submit" className="w-full">
