@@ -18,6 +18,10 @@ import {
 } from "@/actions/originDestination/OriginDestination";
 import { Car } from "@/interfaces/Transfers-response";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
+import {
+  registerTransfer,
+  TransferFormRegister,
+} from "@/actions/transfers/transfer";
 
 interface User {
   first_name: string;
@@ -110,36 +114,61 @@ export const FormTransfer = ({
         .split("T")[1]
         .split(".")[0];
 
-      if (resp) {
-        const res = await fetch("/api/transfers", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            type: selected,
-            origin: resp.origin,
-            destination: resp.destination,
-            date: formattedDate,
-            time: formattedTime,
-            car: ` ${resp?.car?.brand} ${resp?.car?.model}`,
-            capacity: resp?.car?.ability,
-            price: resp?.car?.transferprice,
-            datereturn: formattedDateReturn,
-            timereturn: formattedTimeReturn,
-            carreturn: ` ${respreturn?.brand} ${respreturn?.model}`,
-            capacityreturn: respreturn?.ability,
-            pricereturn: respreturn?.transferprice,
-            firstName: data.mainpassenger.first_name,
-            lastname: data.mainpassenger.last_name,
-            email: data.mainpassenger.email,
-            passengerAdult: passengersmain.adults.toString(),
-            passengerChildren: passengersmain.children.toString(),
-          }),
-        });
-        const datafetch = await res.json();
-        console.log(datafetch);
-        onOpen();
+      const datatransfer: TransferFormRegister = {
+        type: selected,
+        arrival_date: formattedDate,
+        arrival_time: formattedTime,
+        return_date: formattedDateReturn,
+        return_time: formattedTimeReturn,
+        passengers: {
+          aduts: passengersmain.adults,
+          children: passengersmain.children,
+        },
+        description: data.note,
+        transport_arrival_Id: idcargoing!,
+        transport_return_Id: idcarreturn ? idcarreturn : null,
+        originId: origin,
+        destinationId: destination,
+        name:
+          data.mainpassenger.first_name + " " + data.mainpassenger.last_name,
+        email: data.mainpassenger.email,
+        phone: data.mainpassenger.phone,
+      };
+
+      const respTransfer = await registerTransfer(datatransfer);
+      console.log(respTransfer);
+      if (respTransfer) {
+        if (resp) {
+          const res = await fetch("/api/transfers", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              type: selected,
+              origin: resp.origin,
+              destination: resp.destination,
+              date: formattedDate,
+              time: formattedTime,
+              car: ` ${resp?.car?.brand} ${resp?.car?.model}`,
+              capacity: resp?.car?.ability,
+              price: resp?.car?.transferprice,
+              datereturn: formattedDateReturn,
+              timereturn: formattedTimeReturn,
+              carreturn: ` ${respreturn?.brand} ${respreturn?.model}`,
+              capacityreturn: respreturn?.ability,
+              pricereturn: respreturn?.transferprice,
+              firstName: data.mainpassenger.first_name,
+              lastname: data.mainpassenger.last_name,
+              email: data.mainpassenger.email,
+              passengerAdult: passengersmain.adults.toString(),
+              passengerChildren: passengersmain.children.toString(),
+            }),
+          });
+          const datafetch = await res.json();
+          console.log(datafetch);
+          onOpen();
+        }
       }
     } catch (error) {
       console.log(error);

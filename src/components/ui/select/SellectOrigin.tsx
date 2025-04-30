@@ -13,7 +13,9 @@ export const SellectOrigin = ({placeholder,setvalue,defaultSelectedKeys=""}:Prop
   const {setSelect}=SelectStore()
 
   const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(Items);
     console.log(e.target.value);
+
     setvalue(e.target.value);
     setSelect(e.target.value);
   };
