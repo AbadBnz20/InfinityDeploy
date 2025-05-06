@@ -1,6 +1,7 @@
 import React from "react";
 
 interface Props {
+  language: "es" | "en";
   nrocontract: string;
   date: string;
   time: string;
@@ -14,7 +15,44 @@ interface Props {
   note: string;
 }
 
+
+const translations = {
+  es: {
+    title: "Solicitud de Yates",
+    greeting: "Apreciable",
+    message: "Es para nosotros un placer servirle y brindarle la mejor experiencia.",
+    detailsMessage: "En breve recibirá por correo los detalles referentes a su solicitud:",
+    contractNumber: "Número de contrato",
+    email: "Email",
+    date: "Fecha",
+    time: "Hora",
+    passengers: "Pasajeros",
+    phone: "Número de Teléfono",
+    experienceType: "Tipo de Experiencia",
+    motorYacht: "Yate a Motor",
+    additionalNote: "Nota Adicional",
+    footer: "Gracias por elegir Infinity Luxury Travel Club",
+  },
+  en: {
+    title: "Yacht Request",
+    greeting: "Dear",
+    message: "It is our pleasure to serve you and provide the best experience.",
+    detailsMessage: "You will soon receive an email with the details of your request:",
+    contractNumber: "Contract Number",
+    email: "Email",
+    date: "Date",
+    time: "Time",
+    passengers: "Passengers",
+    phone: "Phone Number",
+    experienceType: "Type of Experience",
+    motorYacht: "Motor Yacht",
+    additionalNote: "Additional Note",
+    footer: "Thank you for choosing Infinity Luxury Travel Club",
+  },
+};
+
 export const YachtsTemplate = ({
+  language,
   nrocontract,
   date,
   time,
@@ -25,9 +63,10 @@ export const YachtsTemplate = ({
   phone,
   typeOfExperience,
   motorYacht,
-
   note,
 }: Props) => {
+  const t = translations[language]; 
+
   return (
     <div
       style={{
@@ -46,21 +85,17 @@ export const YachtsTemplate = ({
           style={{ width: "150px" }}
         />
         <h2 style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
-          Solicitud de Yates
+          {t.title}
         </h2>
       </div>
 
       <p>
         <strong>
-          Apreciable {firstName} {lastName},
+          {t.greeting} {firstName} {lastName},
         </strong>
       </p>
-      <p>
-        Es para nosotros un placer servirle y brindarle la mejor experiencia.
-      </p>
-      <p>
-        En breve recibirá por correo los detalles referentes a su solicitud:
-      </p>
+      <p>{t.message}</p>
+      <p>{t.detailsMessage}</p>
 
       <table
         style={{ width: "100%", borderCollapse: "collapse", lineHeight: "1.6" }}
@@ -68,61 +103,59 @@ export const YachtsTemplate = ({
         <tbody>
           <tr>
             <td>
-              <strong>Numero de contrato:</strong>
+              <strong>{t.contractNumber}:</strong>
             </td>
             <td>{nrocontract}</td>
           </tr>
           <tr>
             <td>
-              <strong>Email:</strong>
+              <strong>{t.email}:</strong>
             </td>
             <td>
-              <a href={email} style={{ color: "#007bff" }}>
+              <a href={`mailto:${email}`} style={{ color: "#007bff" }}>
                 {email}
               </a>
             </td>
           </tr>
           <tr>
             <td>
-              <strong>Fecha:</strong>
+              <strong>{t.date}:</strong>
             </td>
             <td>{date}</td>
           </tr>
           <tr>
             <td>
-              <strong>Hora:</strong>
+              <strong>{t.time}:</strong>
             </td>
             <td>{time}</td>
           </tr>
           <tr>
             <td>
-              <strong>Pasajeros:</strong>
+              <strong>{t.passengers}:</strong>
             </td>
             <td>{passengers}</td>
           </tr>
-
           <tr>
             <td>
-              <strong>Número de Teléfono:</strong>
+              <strong>{t.phone}:</strong>
             </td>
             <td>{phone}</td>
           </tr>
           <tr>
             <td>
-              <strong>Tipo de Experiencia:</strong>
+              <strong>{t.experienceType}:</strong>
             </td>
             <td>{typeOfExperience}</td>
           </tr>
           <tr>
             <td>
-              <strong>Yate a Motor:</strong>
+              <strong>{t.motorYacht}:</strong>
             </td>
             <td>{motorYacht}</td>
           </tr>
-          
           <tr>
             <td>
-              <strong>Nota Adicional:</strong>
+              <strong>{t.additionalNote}:</strong>
             </td>
             <td>{note}</td>
           </tr>
@@ -137,7 +170,7 @@ export const YachtsTemplate = ({
           borderTop: "1px solid #ccc",
         }}
       >
-        Gracias por elegir Infinity Luxury Travel Club
+        {t.footer}
       </p>
     </div>
   );

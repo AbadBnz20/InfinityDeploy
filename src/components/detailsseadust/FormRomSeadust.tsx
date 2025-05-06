@@ -13,6 +13,7 @@ import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
+import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 
 export interface Props {
   firstname: string;
@@ -87,6 +88,7 @@ export const FormRomSeadust = ({
       console.log(response)
       if (response.status) {
         const room = await GetRoomArray(RoomSelected);
+         const cookieLanguage = await getLanguageFromCookie();
         const res = await fetch("/api/seadust", {
           method: "POST",
           headers: {
@@ -101,7 +103,8 @@ export const FormRomSeadust = ({
             phone: number,
             adult: adult,
             children: child.toString(),
-            Rooms:room
+            Rooms:room,
+            language: cookieLanguage,
           }),
         });
         const datafetch = await res.json();

@@ -53,7 +53,6 @@ export const ContentFormTrip = ({
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
     SetPersonalData(data.adults, selection.childrenAges, data.details);
     onchange("3" as Key);
   };

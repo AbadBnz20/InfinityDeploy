@@ -24,7 +24,7 @@ export const ContentMainSeadust = ({
       <div className="w-full md:w-1/2">
         {
           RoomSelected.map((room) => (
-            <DetailRoom key={room} id={room} checkin={checkin} checkout={checkout} />
+            <DetailRoom key={room.idRoom} id={room.idRoom} checkin={checkin} checkout={checkout} amount={room.amount} />
           ))
         }
       </div>

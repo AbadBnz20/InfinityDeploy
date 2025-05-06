@@ -22,6 +22,7 @@ import {
   registerTransfer,
   TransferFormRegister,
 } from "@/actions/transfers/transfer";
+import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 
 interface User {
   first_name: string;
@@ -136,7 +137,7 @@ export const FormTransfer = ({
       };
 
       const respTransfer = await registerTransfer(datatransfer);
-      console.log(respTransfer);
+      const cookieLanguage = await getLanguageFromCookie();
       if (respTransfer) {
         if (resp) {
           const res = await fetch("/api/transfers", {
@@ -163,6 +164,7 @@ export const FormTransfer = ({
               email: data.mainpassenger.email,
               passengerAdult: passengersmain.adults.toString(),
               passengerChildren: passengersmain.children.toString(),
+              language:cookieLanguage
             }),
           });
           const datafetch = await res.json();

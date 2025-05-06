@@ -11,7 +11,46 @@ interface Props {
   adult: number;
   children: string;
   Rooms: RoomEmail[];
+  language: "es" | "en";
 }
+
+const translations = {
+  es: {
+    title: "Solicitud de Habitación",
+    greeting: "Apreciable",
+    message: "Es para nosotros un placer servirle y brindarle la mejor experiencia.",
+    details: "Detalles de su solicitud:",
+    email: "Email",
+    phone: "Número",
+    startDate: "Fecha Inicio",
+    endDate: "Fecha Final",
+    adults: "Adultos",
+    children: "Niños",
+    rooms: "Habitaciones",
+    roomName: "Nombre",
+    bedType: "Tipo de cama",
+    amountType:"Cantidad",
+    footer: "Gracias por elegir Infinity Luxury Travel Club",
+  },
+  en: {
+    title: "Room Request",
+    greeting: "Dear",
+    message: "It is our pleasure to serve you and provide the best experience.",
+    details: "Details of your request:",
+    email: "Email",
+    phone: "Phone",
+    startDate: "Start Date",
+    endDate: "End Date",
+    adults: "Adults",
+    children: "Children",
+    rooms: "Rooms",
+    roomName: "Name",
+    bedType: "Bed Type",
+    amountType:"Amount",
+    footer: "Thank you for choosing Infinity Luxury Travel Club",
+  },
+};
+
 
 export const SeadustTemplate = ({
   start_date,
@@ -23,7 +62,10 @@ export const SeadustTemplate = ({
   adult,
   children,
   Rooms,
+  language = "es",
 }: Props) => {
+  const t = translations[language];
+
   return (
     <div
       style={{
@@ -42,95 +84,93 @@ export const SeadustTemplate = ({
           style={{ width: "150px" }}
         />
         <h2 style={{ borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
-          Solicitud de Habitación
+          {t.title}
         </h2>
       </div>
 
       <p>
         <strong>
-          Apreciable {firstName} {lastName},
+          {t.greeting} {firstName} {lastName},
         </strong>
       </p>
-      <p>
-        Es para nosotros un placer servirle y brindarle la mejor experiencia.
-      </p>
-      <p>Detalles de su solicitud:</p>
+      <p>{t.message}</p>
+      <p>{t.details}</p>
       <table
         style={{ width: "100%", borderCollapse: "collapse", lineHeight: "1.6" }}
       >
         <tbody>
-          {/* <tr>
-        <td>
-          <strong>Numero de contrato:</strong>
-        </td>
-        <td>{nrocontract}</td>
-      </tr> */}
           <tr>
             <td>
-              <strong>Email:</strong>
+              <strong>{t.email}:</strong>
             </td>
             <td>
-              <a href={email} style={{ color: "#007bff" }}>
+              <a href={`mailto:${email}`} style={{ color: "#007bff" }}>
                 {email}
               </a>
             </td>
           </tr>
           <tr>
             <td>
-              <strong>Numero:</strong>
+              <strong>{t.phone}:</strong>
             </td>
             <td>{phone}</td>
           </tr>
           <tr>
             <td>
-              <strong>Fecha Inicio:</strong>
+              <strong>{t.startDate}:</strong>
             </td>
             <td>{start_date}</td>
           </tr>
           <tr>
             <td>
-              <strong>Fecha Final:</strong>
+              <strong>{t.endDate}:</strong>
             </td>
             <td>{end_date}</td>
           </tr>
           <tr>
             <td>
-              <strong>Adultos:</strong>
+              <strong>{t.adults}:</strong>
             </td>
             <td>{adult}</td>
           </tr>
           <tr>
             <td>
-              <strong>Niños:</strong>
+              <strong>{t.children}:</strong>
             </td>
             <td>{children}</td>
           </tr>
           <tr>
             <td>
-              <strong>Habitaciones</strong>
+              <strong>{t.rooms}:</strong>
             </td>
             <td></td>
           </tr>
 
           {Rooms.map((room, index) => (
-            <>
-              <tr key={index}>
+            <React.Fragment key={index}>
+              <tr>
                 <td>
-                  <strong>Nombre:</strong>
+                  <strong>{t.roomName}:</strong>
                 </td>
                 <td>{room.name}</td>
               </tr>
-             
-              <tr key={index}>
+              <tr>
                 <td>
-                  <strong>Tipo de cama:</strong>
+                  <strong>{t.bedType}:</strong>
                 </td>
                 <td>
                   {room.numberOfBeds} {room.typeOfBed}
                 </td>
               </tr>
-              <tr></tr>
-            </>
+              <tr>
+                <td>
+                  <strong>{t.amountType}:</strong>
+                </td>
+                <td>
+                  {room.amount} 
+                </td>
+              </tr>
+            </React.Fragment>
           ))}
         </tbody>
       </table>
@@ -143,7 +183,7 @@ export const SeadustTemplate = ({
           borderTop: "1px solid #ccc",
         }}
       >
-        Gracias por elegir Infinity Luxury Travel Club
+        {t.footer}
       </p>
     </div>
   );

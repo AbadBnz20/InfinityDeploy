@@ -1,3 +1,4 @@
+import { SeadustStore } from "@/store/SeadustStore";
 import {
   Button,
   Card,
@@ -6,7 +7,6 @@ import {
   Divider,
   Image,
 } from "@nextui-org/react";
-import React from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
   url: string;
   updatetId: (id: string) => void;
   deleteId: (id: string) => void;
-  idSelected: string[];
+  idSelected: { idRoom: string; amount: number }[];
 }
 
 export const CardRoom = ({
@@ -37,16 +37,21 @@ export const CardRoom = ({
   return (
     <Card
       className={`w-full max-w-4xl overflow-hidden bg-maincolor shadow-sm ${
-        idSelected.includes(IdRoom) ? "border-2 border-primary" : ""
+        idSelected.some((item) => item.idRoom === IdRoom)
+          ? "border-2 border-primary"
+          : ""
       }`}
     >
-      {idSelected.includes(IdRoom) && (
-        <button
+      {idSelected.some((item) => item.idRoom === IdRoom) && (
+        <Button
+          isIconOnly
+          size="sm"
+          color="danger"
           onClick={() => deleteId(IdRoom)}
-          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center shadow-md hover:bg-red-600"
+          className="absolute top-2 right-2  rounded-full  flex items-center justify-center shadow-md"
         >
           <IoCloseOutline />
-        </button>
+        </Button>
       )}
       <div className="grid grid-cols-3 p-3 gap-2">
         <div className="col-span-1">
@@ -68,6 +73,7 @@ export const CardRoom = ({
                 </span>
                 <span className="text-xs">•</span>
                 <span>{numberOfGuests} huespedes</span>
+                <span>{numberOfGuests} Cantidad</span>
               </div>
             </div>
 
@@ -97,7 +103,11 @@ export const CardRoom = ({
             </CardBody>
           </div>
 
-          <CardFooter className="flex justify-end pt-0">
+          <CardFooter className="flex justify-end pt-0 gap-2">
+            {idSelected.some((item) => item.idRoom === IdRoom) && (
+              <ContentAmount  IdRoom={IdRoom}/>
+            )}
+
             <Button onPress={() => updatetId(IdRoom)} color="primary">
               Seleccionar
             </Button>
@@ -105,5 +115,51 @@ export const CardRoom = ({
         </div>
       </div>
     </Card>
+  );
+};
+
+
+
+interface ContentAmountProps {
+  IdRoom:string;
+}
+export const ContentAmount = ({ IdRoom}:ContentAmountProps) => {
+ const { RoomSelected,increaseRoomAmount,decreaseRoomAmount } =
+    SeadustStore();
+
+  const amountRoom = RoomSelected.find((item) => item.idRoom === IdRoom);
+
+  const handleIncrement = () => {
+    increaseRoomAmount(IdRoom);
+  };
+  const handleDecrement = () => {
+    if (amountRoom?.amount === 1) {
+      return;
+    }
+    decreaseRoomAmount(IdRoom); 
+  };
+
+  return (
+    <div className="flex items-center justify-center gap-2">
+      <Button
+        isIconOnly
+        color="danger"
+        variant="flat"
+        size="sm"
+        onPress={handleDecrement}
+      >
+        -
+      </Button>
+      <span>{amountRoom?.amount}</span>
+      <Button
+        isIconOnly
+        color="primary"
+        variant="flat"
+        size="sm"
+        onPress={handleIncrement}
+      >
+        +
+      </Button>
+    </div>
   );
 };

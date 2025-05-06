@@ -10,12 +10,21 @@ export const ContentRooms = () => {
   const [loading, setLoading] = useState(false);
   const t = useTranslations("Hotels");
   const router = useRouter();
-  const { getRoom, id, checkin, checkout, Rooms, updateroom,Deleteroom , RoomSelected,guest } =
-    SeadustStore();
+  const {
+    getRoom,
+    id,
+    checkin,
+    checkout,
+    Rooms,
+    updateroom,
+    Deleteroom,
+    RoomSelected,
+    guest,
+  } = SeadustStore();
 
   useEffect(() => {
     fetchHotels();
-  }, [id, checkin, checkout]);
+  }, [id, checkin, checkout, guest]);
 
   const fetchHotels = async () => {
     setLoading(true);
@@ -55,12 +64,15 @@ export const ContentRooms = () => {
           ))
         )}
       </div>
-      <div className="grid mt-5 grid-cols-2 c col-span-full">
-        {RoomSelected.length === guest.length && (
+      <div className="grid mt-5 grid-cols-2   col-span-full">
+        <div></div>
+        {(RoomSelected.length === guest.length ||
+          RoomSelected.reduce((sum, item) => sum + item.amount, 0) ===
+            guest.length) && (
           <Button
             onPress={() => onRedirect()}
             fullWidth
-            className="bg-black text-white dark:bg-white dark:text-black "
+            className="bg-black text-white dark:bg-white dark:text-black"
             size="lg"
           >
             Siguiente

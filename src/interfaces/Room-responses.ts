@@ -15,4 +15,5 @@ export interface RoomEmail {
   name: string;
   numberOfBeds: number;
   typeOfBed: string;
+  amount: number;
 }

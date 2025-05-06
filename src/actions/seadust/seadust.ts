@@ -27,7 +27,9 @@ export const GetRoom = async (id: string) => {
   return data as Room;
 };
 
-export const GetRoomArray = async (Rooms: string[]) => {
+export const GetRoomArray = async (
+  Rooms: { idRoom: string; amount: number }[]
+) => {
   const supabase = await createClient();
 
   const RoomsRequest: RoomEmail[] = [];
@@ -36,13 +38,18 @@ export const GetRoomArray = async (Rooms: string[]) => {
     const { data, error } = await supabase
       .from("room")
       .select("name, numberOfBeds, typeOfBed")
-      .eq("IdRoom", item)
+      .eq("IdRoom", item.idRoom)
       .single();
     if (error) {
       console.log(error);
     }
     if (data) {
-      RoomsRequest.push(data as RoomEmail);
+      RoomsRequest.push({
+        name: data.name,
+        numberOfBeds: data.numberOfBeds,
+        typeOfBed: data.typeOfBed,
+        amount: item.amount,
+      });
     }
   });
 
@@ -51,6 +58,19 @@ export const GetRoomArray = async (Rooms: string[]) => {
   return RoomsRequest;
 };
 
+export const GetLanguageById = async (id: string) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("profile")
+    .select("languageId, language(name)")
+    .eq("profileId", id)
+    .single();
+
+  if (error) {
+    return null;
+  }
+  return data.language as unknown as string;
+};
 
 export const InterRoomSeadust = async (
   start_date: string,
@@ -59,7 +79,7 @@ export const InterRoomSeadust = async (
   lastName: string,
   email: string,
   phone: string,
-  Rooms: string[],
+  Rooms: { idRoom: string; amount: number }[],
   adult: number,
   children: string,
   note: string
@@ -90,7 +110,8 @@ export const InterRoomSeadust = async (
       .insert([
         {
           IdSeadustRequest: data?.IdSeadusRequest,
-          IdRoom: item,
+          IdRoom: item.idRoom,
+          amount: +item.amount,
         },
       ])
       .select();

@@ -25,6 +25,7 @@ export async function POST(request: Request) {
     email,
     passengerAdult,
     passengerChildren,
+    language,
   } = body;
   try {
     const { error } = await resend.emails.send({
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
       to: [email],
       subject: "Solicitud Transportacion",
       react: TransferTemplate({
+        language,
         type,
         origin,
         destination,
@@ -60,6 +62,42 @@ export async function POST(request: Request) {
       console.log(error);
       return Response.json({ error }, { status: 500 });
     }
+
+    const { error:error2 } = await resend.emails.send({
+      from: "InfinityTravelClub <onboarding@advantageinfinityclub.com>",
+      to: "transportacion@infinityluxurytravelclub.com",
+      subject: "Solicitud Transportacion",
+      react: TransferTemplate({
+        language,
+        type,
+        origin,
+        destination,
+        date,
+        time,
+        car,
+        capacity,
+        price,
+        
+        datereturn,
+        timereturn,
+        carreturn,
+        capacityreturn,
+        pricereturn,
+        
+    
+        firstName,
+        lastname,
+        email,
+        passengerAdult,
+        passengerChildren,
+      }),
+    });
+
+    if (error2) {
+      console.log(error2);
+      return Response.json({ error2 }, { status: 500 });
+    }
+
 
     return Response.json({ message: "Email Enviado" });
   } catch (error) {

@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     typeOfExperience,
     motorYacht,
     note,
+    language
   } = body;
 
   try {
@@ -26,6 +27,7 @@ export async function POST(request: Request) {
       to: [email],
       subject: "Solicitud Yates",
       react: YachtsTemplate({
+        language,
         nrocontract,
         date,
         time,
@@ -43,6 +45,30 @@ export async function POST(request: Request) {
     if (error) {
       console.log(error);
       return Response.json({ error }, { status: 500 });
+    }
+    const { error:error2 } = await resend.emails.send({
+      from: "InfinityTravelClub <onboarding@advantageinfinityclub.com>",
+      to: "yates@infinityluxurytravelclub.com",
+      subject: "Solicitud Yates",
+      react: YachtsTemplate({
+        language,
+        nrocontract,
+        date,
+        time,
+        passengers,
+        firstName,
+        lastName,
+        email,
+        phone,
+        typeOfExperience,
+        motorYacht,
+        note,
+      }),
+    });
+
+    if (error2) {
+      console.log(error2);
+      return Response.json({ error2 }, { status: 500 });
     }
 
     return Response.json({ message: "Email Enviado" });

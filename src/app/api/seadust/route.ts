@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     adult,
     children,
     Rooms,
+    language,
   } = body;
 
   try {
@@ -32,12 +33,36 @@ export async function POST(request: Request) {
         adult,
         children,
         Rooms,
+        language,
       }),
     });
 
     if (error) {
       console.log(error);
       return Response.json({ error }, { status: 500 });
+    }
+
+    const { error: error2 } = await resend.emails.send({
+      from: "InfinityTravelClub <onboarding@advantageinfinityclub.com>",
+      to: "infinityweeks@infinityluxurytravelclub.com",
+      subject: "Solicitud Seadust",
+      react: SeadustTemplate({
+        start_date,
+        end_date,
+        firstName,
+        lastName,
+        email,
+        phone,
+        adult,
+        children,
+        Rooms,
+        language,
+      }),
+    });
+
+    if (error2) {
+      console.log(error2);
+      return Response.json({ error2 }, { status: 500 });
     }
 
     return Response.json({ message: "Email Enviado" });

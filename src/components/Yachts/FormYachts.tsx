@@ -31,6 +31,7 @@ import { useRouter } from "next/navigation";
 import { GetReferences } from "@/actions/yachts/GetReferences";
 import { useTranslations } from "next-intl";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
+import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 
 interface FormDateYachts {
   idEngine: string;
@@ -105,7 +106,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
         });
       }
       const respDate = await GetReferences(data.idExperience, data.idEngine);
-
+      const cookieLanguage = await getLanguageFromCookie();
       const res = await fetch("/api/yachts", {
         method: "POST",
         headers: {
@@ -123,6 +124,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           typeOfExperience: respDate.namexperience,
           motorYacht: respDate.namemotor,
           note: data.note,
+          language:cookieLanguage
         }),
       });
       const datafetch = await res.json();

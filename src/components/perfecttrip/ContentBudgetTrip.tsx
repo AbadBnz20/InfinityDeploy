@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
+import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 
 interface FormData {
   budget: string;
@@ -78,6 +79,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
 
       if (session) {
         const numberContract = await GetNumberContract();
+        const cookieLanguage = await getLanguageFromCookie();
         const res = await fetch("/api/send", {
           method: "POST",
           headers: {
@@ -103,6 +105,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
             children,
             details,
             currency: data.currency,
+            language:cookieLanguage
           }),
         });
         const datafetch = await res.json();

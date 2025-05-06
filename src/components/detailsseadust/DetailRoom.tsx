@@ -8,10 +8,10 @@ interface Props {
   id: string;
   checkin: string;
   checkout: string;
-
+  amount: number;
 }
 
-export const DetailRoom = ({id, checkin, checkout}:Props) => {
+export const DetailRoom = ({id, checkin, checkout,amount}:Props) => {
   const [room, setroom] = useState<Room | null>();
   useEffect(() => {
     if (id && checkin && checkout) {
@@ -54,6 +54,8 @@ export const DetailRoom = ({id, checkin, checkout}:Props) => {
                 </span>
                 <span className="text-xs">•</span>
                 <span>{room.numberOfGuests} huespedes</span>
+                <span>{amount} Cantidad</span>
+
               </div>
             </div>
 
