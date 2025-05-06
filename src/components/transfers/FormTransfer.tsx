@@ -164,7 +164,7 @@ export const FormTransfer = ({
               email: data.mainpassenger.email,
               passengerAdult: passengersmain.adults.toString(),
               passengerChildren: passengersmain.children.toString(),
-              language:cookieLanguage
+              language:cookieLanguage ? cookieLanguage : "es"
             }),
           });
           const datafetch = await res.json();

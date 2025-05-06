@@ -124,7 +124,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           typeOfExperience: respDate.namexperience,
           motorYacht: respDate.namemotor,
           note: data.note,
-          language:cookieLanguage
+          language: cookieLanguage ? cookieLanguage : "es"
         }),
       });
       const datafetch = await res.json();

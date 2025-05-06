@@ -105,7 +105,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
             children,
             details,
             currency: data.currency,
-            language:cookieLanguage
+            language: cookieLanguage ? cookieLanguage : "es"
           }),
         });
         const datafetch = await res.json();

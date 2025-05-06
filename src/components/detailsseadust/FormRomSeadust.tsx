@@ -104,7 +104,7 @@ export const FormRomSeadust = ({
             adult: adult,
             children: child.toString(),
             Rooms:room,
-            language: cookieLanguage,
+            language: cookieLanguage ? cookieLanguage : "es",
           }),
         });
         const datafetch = await res.json();
