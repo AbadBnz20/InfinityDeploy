@@ -24,6 +24,7 @@ export const ContentMain = ({ firstname, lastname, email, number }: Props) => {
 
   return (
     <>
+   
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <ContentTransferdetail
           origin={origin}

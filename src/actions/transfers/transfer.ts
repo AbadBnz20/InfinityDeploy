@@ -47,6 +47,9 @@ export const registerTransfer = async (transferData: TransferFormRegister) => {
     ])
     .select();
 
+
+console.log(error)
+
   if (error) {
     return {
       status: false,
