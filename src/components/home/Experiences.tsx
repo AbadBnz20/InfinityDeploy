@@ -4,7 +4,7 @@ import { TapsStore } from "@/store/TapsMainStore";
 import { useTranslations } from "next-intl";
 import { ContentYachts } from "../Yachts/ContentYachts";
 import { Image } from "@nextui-org/react";
-import { WeekMinute } from "./WeekMinute";
+
 
 export const Experiences = () => {
   const t = useTranslations("Experiences");
@@ -62,10 +62,6 @@ export const Experiences = () => {
                 </div>
               ))}
             </div>
-          </>
-        ): tapName === "ultimo" ? (
-          <>
-            <WeekMinute/>
           </>
         ) : tapName === "seadust" ? (
           <>

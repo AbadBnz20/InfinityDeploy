@@ -1,7 +1,7 @@
 "use client";
 import { Tabs, Tab } from "@nextui-org/react";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {  LuShip } from "react-icons/lu";
 import { FaRegClock } from "react-icons/fa";
 import { IoSwapHorizontalOutline } from "react-icons/io5";
@@ -15,6 +15,10 @@ import { Seadust } from "./Seadust";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
   const [selected, setSelected] = useState("");
+   const locale = useLocale();
+  const languaje = locale === 'en' ?  "https://www.mywebrezvacations.com/travser": "https://www.mywebrezlatino.com/travser";
+
+
  const {SetYahtsData}=TapsStore();
 
     const onChange = (e:Key)=>{
@@ -54,7 +58,10 @@ export const TapsMain = () => {
             title={
               <div className="flex items-center space-x-2">
                 <FaRegClock size={24} />
-                <span>{t("option2")}</span>
+                <a href={languaje} target="_blank">
+                  <span>{t("option2")}</span>
+                </a>
+               
               </div>
             }
           >
