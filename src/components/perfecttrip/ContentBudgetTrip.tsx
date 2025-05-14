@@ -30,8 +30,10 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
   } = useForm<FormData>();
   const {
     country_origin,
+    region_origin,
     city_origin,
     contry_destination,
+    region_destination,
     city_destination,
     date_start,
     date_end,
@@ -46,16 +48,16 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
   const [loading, setloading] = useState(false);
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
   
- 
   const { session } = useSession();
   const t = useTranslations("MyperfectPage");
-
   const onSubmit = async (data: FormData) => {
     try {
       const obj: TripFormRegister = {
         country_origin,
+        region_origin,
         city_origin,
         contry_destination,
+        region_destination,
         city_destination,
         date_start,
         date_end,
@@ -92,8 +94,10 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
             email: session.email,
             phone: session.number,
             country_origin,
+            region_origin,
             city_origin,
             contry_destination,
+            region_destination,
             city_destination,
             date_start: date_start.split("T")[0],
             date_end: date_end.split("T")[0],

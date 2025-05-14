@@ -4,14 +4,16 @@ interface Hotel {
 }
 interface EmailTemplateProps {
   language: "es" | "en";
-  budget:string,
-  nrocontract:string,
+  budget: string;
+  nrocontract: string;
   fullname: string;
   email: string;
   phone: string;
   country_origin: string;
   city_origin: string;
+  region_origin: string;
   contry_destination: string;
+  region_destination: string;
   city_destination: string;
   date_start: string;
   date_end: string;
@@ -29,46 +31,58 @@ const translations = {
   es: {
     title: "Mi viaje perfecto",
     greeting: "Apreciable",
-    message: "Es para nosotros un placer servirle y trabajar en las mejores opciones para usted.",
+    message:
+      "Es para nosotros un placer servirle y trabajar en las mejores opciones para usted.",
     contractNumber: "Número de contrato",
     phone: "Número de Teléfono",
     email: "Email",
     countryOrigin: "País de origen",
+    regionOrigin: "Region de origen",
     cityOrigin: "Ciudad de origen",
     countryDestination: "País de destino",
+    regionDestination: "Region de destino",
     cityDestination: "Ciudad de destino",
     dateStart: "Fecha de salida",
     dateEnd: "Fecha de regreso",
     flights: "Vuelos",
     hotels: "Hoteles",
+    item: "Estrellas",
     cars: "Autos",
     attractions: "Atracciones",
     budget: "Presupuesto",
     currency: "Tipo de moneda",
     passengers: "Pasajeros",
+    adults: "Adultos",
+    childs: "Niños",
     childrenAges: "Edades de los niños",
     footer: "Gracias por elegir Infinity Luxury Travel Club",
   },
   en: {
     title: "My Perfect Trip",
     greeting: "Dear",
-    message: "It is our pleasure to serve you and work on the best options for you.",
+    message:
+      "It is our pleasure to serve you and work on the best options for you.",
     contractNumber: "Contract Number",
     phone: "Phone Number",
     email: "Email",
     countryOrigin: "Country of Origin",
+    regionOrigin: "Region of origin",
     cityOrigin: "City of Origin",
     countryDestination: "Country of Destination",
+    regionDestination: "Region of Destination",
     cityDestination: "City of Destination",
     dateStart: "Departure Date",
     dateEnd: "Return Date",
     flights: "Flights",
     hotels: "Hotels",
+    item: "Stars",
     cars: "Cars",
     attractions: "Attractions",
     budget: "Budget",
     currency: "Currency Type",
     passengers: "Passengers",
+    adults: "Adults",
+    childs: "children",
     childrenAges: "Children's Ages",
     footer: "Thank you for choosing Infinity Luxury Travel Club",
   },
@@ -82,8 +96,10 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   email,
   phone,
   country_origin,
+  region_origin,
   city_origin,
   contry_destination,
+  region_destination,
   city_destination,
   date_start,
   date_end,
@@ -161,6 +177,12 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           </tr>
           <tr>
             <td>
+              <strong>{t.regionOrigin}:</strong>
+            </td>
+            <td>{region_origin}</td>
+          </tr>
+          <tr>
+            <td>
               <strong>{t.cityOrigin}:</strong>
             </td>
             <td style={{ fontWeight: "bold" }}>{city_origin}</td>
@@ -170,6 +192,12 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
               <strong>{t.countryDestination}:</strong>
             </td>
             <td>{contry_destination}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>{t.regionDestination}:</strong>
+            </td>
+            <td>{region_destination}</td>
           </tr>
           <tr>
             <td>
@@ -203,7 +231,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
                 <strong>{t.hotels}:</strong>
               </td>
               <td>
-                {hotel.service} {hotel.rating} Stars
+                {hotel.service},{t.item}: {hotel.rating}
               </td>
             </tr>
           )}
@@ -240,15 +268,19 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
               <strong>{t.passengers}:</strong>
             </td>
             <td>
-              {adult} {+adult > 1 ? "Adults" : "Adult"}, {children.length}{" "}
-              {children.length > 1 ? "Children" : "Child"}
+              {adult} {+adult > 1 ? t.adults : t.adults}, {children.length}{" "}
+              {children.length > 1 ? t.childs : t.childs}
             </td>
           </tr>
           <tr>
             <td>
               <strong>{t.childrenAges}:</strong>
             </td>
-            <td>{children.map((age) => `${age} ${language === "es" ? "Años" : "Years"}`).join(", ")}</td>
+            <td>
+              {children
+                .map((age) => `${age} ${language === "es" ? "Años" : "Years"}`)
+                .join(", ")}
+            </td>
           </tr>
         </tbody>
       </table>

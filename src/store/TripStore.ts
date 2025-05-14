@@ -1,14 +1,16 @@
 import { create } from "zustand";
 
 interface Hotel {
-  rating: number;
+  rating: string;
   service: string;
 }
 
 interface State {
   country_origin: string;
+  region_origin:string;
   city_origin: string;
   contry_destination: string;
+  region_destination:string;
   city_destination: string;
   date_start: string;
   date_end: string;
@@ -24,8 +26,10 @@ interface State {
 
   SetbudgetData: (
     country_origin: string,
+    region_origin:string,
     city_origin: string,
     contry_destination: string,
+    region_destination:string,
     city_destination: string,
     date_start: string,
     date_end: string
@@ -46,8 +50,10 @@ interface State {
 
 export const TripStore = create<State>()((set) => ({
   country_origin: "",
+  region_origin:"",
   city_origin: "",
   contry_destination: "",
+  region_destination:"",
   city_destination: "",
   date_start: "",
   date_end: "",
@@ -65,16 +71,20 @@ export const TripStore = create<State>()((set) => ({
   currency: "",
   SetbudgetData: (
     country_origin: string,
+    region_origin:string,
     city_origin: string,
     contry_destination: string,
+    region_destination:string,
     city_destination: string,
     date_start: string,
     date_end: string
   ) => {
     set({
       country_origin,
+      region_origin,
       city_origin,
       contry_destination,
+      region_destination,
       city_destination,
       date_start,
       date_end,

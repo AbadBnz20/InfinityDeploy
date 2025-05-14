@@ -12,8 +12,10 @@ export async function POST(request: Request) {
     email,
     phone,
     country_origin,
+    region_origin,
     city_origin,
     contry_destination,
+    region_destination,
     city_destination,
     date_start,
     date_end,
@@ -41,8 +43,10 @@ export async function POST(request: Request) {
         email: email,
         phone: phone,
         country_origin: country_origin,
+        region_origin:region_origin,
         city_origin: city_origin,
         contry_destination: contry_destination,
+        region_destination:region_destination,
         city_destination: city_destination,
         date_start: date_start,
         date_end: date_end,
@@ -73,8 +77,10 @@ export async function POST(request: Request) {
         email: email,
         phone: phone,
         country_origin: country_origin,
+         region_origin:region_origin,
         city_origin: city_origin,
         contry_destination: contry_destination,
+        region_destination:region_destination,
         city_destination: city_destination,
         date_start: date_start,
         date_end: date_end,
@@ -88,6 +94,8 @@ export async function POST(request: Request) {
         currency: currency,
       }),
     });
+
+
 
     if (error2) {
       console.log(error2);

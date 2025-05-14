@@ -26,7 +26,7 @@ const translations = {
     endDate: "Fecha Final",
     adults: "Adultos",
     children: "Niños",
-    rooms: "Habitaciones",
+    rooms: "Habitacion",
     roomName: "Nombre",
     bedType: "Tipo de cama",
     amountType:"Cantidad",
@@ -43,7 +43,7 @@ const translations = {
     endDate: "End Date",
     adults: "Adults",
     children: "Children",
-    rooms: "Rooms",
+    rooms: "Room",
     roomName: "Name",
     bedType: "Bed Type",
     amountType:"Amount",
@@ -139,18 +139,18 @@ export const SeadustTemplate = ({
             </td>
             <td>{children}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>
               <strong>{t.rooms}:</strong>
             </td>
             <td></td>
-          </tr>
+          </tr> */}
 
           {Rooms.map((room, index) => (
             <React.Fragment key={index}>
               <tr>
                 <td>
-                  <strong>{t.roomName}:</strong>
+                  <strong>{t.rooms}:</strong>
                 </td>
                 <td>{room.name}</td>
               </tr>

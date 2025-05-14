@@ -59,6 +59,10 @@ export const signInActionVerifyOTP = async (
       return { status: false, message: "Paquete expirado" };
     }
   } else if (errorauth) {
+    if (errorauth.code == "user_banned") {
+      return { status: false, message: 'Este usuario se encuentra inactivo intente nuevamente en las proximas 24 horas' };
+    }
+
     return { status: false, message: errorauth.message };
   } else {
     return { status: true, message: "Inicio correcto" };
@@ -106,7 +110,6 @@ export const signInActionVerifyOTPPhone = async (
 };
 
 export const signOutAction = async () => {
-  
   const supabase = await createClient();
   await supabase.auth.signOut();
   cookies().delete("userAuth");
@@ -128,7 +131,7 @@ export const VerifyPackage = async (id: string) => {
     const diffInMs = endDate.getTime() - today.getTime();
     const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
     return { status: true, count: diffInDays };
-  } else { 
+  } else {
     return { status: false, count: 0 };
   }
 };

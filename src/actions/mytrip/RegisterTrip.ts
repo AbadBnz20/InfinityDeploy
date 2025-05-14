@@ -2,13 +2,15 @@
 
 import { createClient } from "@/utils/supabase/server";
 interface Hotel {
-  rating: number;
+  rating: string;
   service: string;
 }
 export interface TripFormRegister {
   country_origin: string;
+  region_origin:string;
   city_origin: string;
   contry_destination: string;
+  region_destination:string;
   city_destination: string;
   date_start: string;
   date_end: string;
@@ -38,8 +40,10 @@ export const RegisterTrip = async (trip: TripFormRegister) => {
         email: user?.email,
         phone: user?.phone,
         country_origin: trip.country_origin,
+        region_origin:trip.region_origin,
         city_origin: trip.city_origin,
         contry_destination: trip.contry_destination,
+        region_destination:trip.region_destination,
         city_destination: trip.city_origin,
         departure_date: trip.date_start,
         return_date: trip.date_end,

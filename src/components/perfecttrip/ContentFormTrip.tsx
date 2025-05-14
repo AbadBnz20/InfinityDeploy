@@ -47,9 +47,9 @@ export const ContentFormTrip = ({
   });
 
   const MainEmail = watch("email");
-  const [selection, setSelection] = useState({
+  const [selection, setSelection] = useState<{children:number,childrenAges:Array<string>}>({
     children: 0,
-    childrenAges: ["", ""],
+    childrenAges: [],
   });
 
   const onSubmit = async (data: FormData) => {

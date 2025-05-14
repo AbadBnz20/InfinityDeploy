@@ -80,7 +80,7 @@ export const ContentCardHotels = () => {
     if (state) {
       SetHotelsData({
         service: hotelData.includesMeals,
-        rating: parseInt(hotelData.rating),
+        rating: hotelData.rating,
       });
     } else {
       SetHotelsData(undefined);
