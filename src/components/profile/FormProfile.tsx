@@ -39,6 +39,7 @@ export const FormProfile = ({ firstname, lastname, number, email }: Props) => {
     formState: { errors },
   } = useForm<FormDataProfile>();
   const { isOpen, onOpenChange, onOpen, onClose } = useDisclosure();
+  const [numberOrigina, setNumberOrigina] = useState('');
   const [loading, setloading] = useState(false);
   const emailValue = `${watch("Email")}`;
   const numberValue = `${watch("number")}`;
@@ -53,7 +54,7 @@ export const FormProfile = ({ firstname, lastname, number, email }: Props) => {
     setValue("LastName", lastname);
 
     const phoneNumber = parsePhoneNumberFromString(`+${number}`);
-
+setNumberOrigina(phoneNumber?.nationalNumber || '');
     const code = Contries.find(
       (x) => x.code === `+${phoneNumber?.countryCallingCode}`
     );
@@ -136,8 +137,9 @@ export const FormProfile = ({ firstname, lastname, number, email }: Props) => {
               Email
             </label>
             <Input
-              disabled={watch("number") !== number}
+              disabled={watch("number") !== numberOrigina}
               {...register("Email")}
+              value={watch("Email")}
               id="email"
               type="email"
             />
@@ -163,6 +165,7 @@ export const FormProfile = ({ firstname, lastname, number, email }: Props) => {
                   inputWrapper: "rounded-none  rounded-br-md rounded-tr-md",
                 }}
                 disabled={watch("Email") !== email}
+                value={watch("number")}
                 {...register("number")}
                 id="email"
                 type="text"
