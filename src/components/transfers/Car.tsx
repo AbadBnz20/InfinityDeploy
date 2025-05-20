@@ -44,7 +44,7 @@ export const Car = ({item,selected,updatetId,idSelected}:Props) => {
 
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground">
-                Espesificaciones del vehículo: 
+                Especificaciones del vehículo: 
               </p>
               <ul className="text-sm text-muted-foreground">
                 <li>• Capacidad maxima: 1-{item.ability} pasajeros</li>

@@ -41,7 +41,7 @@ export const Experiences = () => {
                 {
                   src: "home/disfrutatusvacaciones.jpg",
                   title: "item3",
-                  description: "item2",
+                  description: "item3",
                 },
               ].map((feature, index) => (
                 <div key={index} className="text-center group">
@@ -125,7 +125,7 @@ export const Experiences = () => {
                 {
                   src: "transport/image3.jpg",
                   title: "item3",
-                  description: "item2",
+                  description: "item3",
                 },
               ].map((feature, index) => (
                 <div key={index} className="text-center group">

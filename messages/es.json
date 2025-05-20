@@ -259,7 +259,7 @@
   "item":{
     "title":" Detalles de Ida",
     "title1":" Detalles de Vuelta",
-    "item":"Lugar de Recogida",
+    "item":"Lugar de salida",
     "item1":"Destino",
     "item2":"Fecha",
     "item3":"Hora",
@@ -374,6 +374,6 @@
   "ModalCode":{
     "title":"Verificacion",
     "description":"Ingrese código de 6 dígitos.",
-    "button":"Veriricar Codigo"
+    "button":"Verificar Codigo"
   }
 }

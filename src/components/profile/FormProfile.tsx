@@ -39,7 +39,7 @@ export const FormProfile = ({ firstname, lastname, number, email }: Props) => {
     formState: { errors },
   } = useForm<FormDataProfile>();
   const { isOpen, onOpenChange, onOpen, onClose } = useDisclosure();
-  const [numberOrigina, setNumberOrigina] = useState('');
+  const [numberOrigina, setNumberOrigina] = useState("");
   const [loading, setloading] = useState(false);
   const emailValue = `${watch("Email")}`;
   const numberValue = `${watch("number")}`;
@@ -54,7 +54,7 @@ export const FormProfile = ({ firstname, lastname, number, email }: Props) => {
     setValue("LastName", lastname);
 
     const phoneNumber = parsePhoneNumberFromString(`+${number}`);
-setNumberOrigina(phoneNumber?.nationalNumber || '');
+    setNumberOrigina(phoneNumber?.nationalNumber || "");
     const code = Contries.find(
       (x) => x.code === `+${phoneNumber?.countryCallingCode}`
     );
@@ -84,7 +84,7 @@ setNumberOrigina(phoneNumber?.nationalNumber || '');
       if (data.number.trim() !== number.trim()) {
         const code = Contries.find((x) => x.key === data.code);
 
-        const codeNumber= code?.code.split('+')[1];
+        const codeNumber = code?.code.split("+")[1];
         const resp = await ChangeNumber(`${codeNumber}${data.number.trim()}`);
         if (!resp.status) {
           return toast.error(resp.message, {
