@@ -35,7 +35,7 @@ export const SelectCities = ({ control, name, error,OnchageCity,countrycode,regi
             className="w-full"
             isLoading={isLoading}
             defaultItems={items}
-            placeholder="Ingrese pais"
+            placeholder="Ingrese ciudad"
             onInputChange={handleInputChange}
             onSelectionChange={async (key) => {
               console.log(key);

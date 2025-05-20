@@ -33,7 +33,7 @@ export const SelectRegions = ({ control, name, error,OnchageRegion,countrycode }
             className="w-full"
             isLoading={isLoading}
             defaultItems={items}
-            placeholder="Ingrese pais"
+            placeholder="Ingrese region"
             onInputChange={handleInputChange}
             onSelectionChange={async (key) => {
               console.log(key);
