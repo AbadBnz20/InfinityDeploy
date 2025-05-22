@@ -126,6 +126,15 @@
       "title": "Ciudad de Destino",
       "placeholder": " ciudad destino"
     },
+    "item4": {
+      "title": "Estado/Region de Origen",
+      "placeholder": "origen Estado/Region"
+    },
+    "item5": {
+      "title": "Estado/Region de Destino",
+      "placeholder": "destino Estado/Region"
+     
+    },
     "date": "Fecha",
     "button": "Buscar"
   },

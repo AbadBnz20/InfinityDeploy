@@ -1,8 +1,10 @@
 import { GetRegions } from '@/actions/mytrip/Countries';
 import { Datum } from '@/interfaces/Regions';
+import { useLocale } from 'next-intl';
 import  { useState } from 'react'
 
 export const useRegions = (code:string) => {
+     const locale = useLocale();
   const [items, setItems] = useState<Datum[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const LoadRegions = async (text: string)=> {
@@ -10,7 +12,7 @@ export const useRegions = (code:string) => {
     try {
 
 
-      const resp = await GetRegions(text,code);
+      const resp = await GetRegions(text,code,locale);
       setItems(resp);
     } catch (error) {
       console.log(error);

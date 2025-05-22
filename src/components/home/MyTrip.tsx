@@ -100,7 +100,7 @@ export const MyTrip = () => {
 
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Region Origen <span className="text-red-500">*</span>
+            {t("item4.title")} <span className="text-red-500">*</span>
           </label>
 
           <SelectRegions
@@ -125,6 +125,17 @@ export const MyTrip = () => {
             regioncode={region_origin_code}
           />
         </div>
+         <div className="w-full ">
+          <label htmlFor="rooms" className="block text-sm font-medium ">
+            {t("date")} (mm/dd/aaa) <span className="text-red-500">*</span>
+          </label>
+          <DateRangePicker
+            value={date}
+            onChange={setdate}
+            minValue={today(getLocalTimeZone())}
+            className="text-blue-600"
+          />
+        </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
             {t("item2.title")} <span className="text-red-500">*</span>
@@ -138,7 +149,7 @@ export const MyTrip = () => {
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            Region Destino <span className="text-red-500">*</span>
+            {t("item5.title")}<span className="text-red-500">*</span>
           </label>
           <SelectRegions
             control={control}
@@ -169,17 +180,7 @@ export const MyTrip = () => {
 
 
 
-        <div className="w-full ">
-          <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("date")} (mm/dd/aaa) <span className="text-red-500">*</span>
-          </label>
-          <DateRangePicker
-            value={date}
-            onChange={setdate}
-            minValue={today(getLocalTimeZone())}
-            className="text-blue-600"
-          />
-        </div>
+       
         <div className="w-full flex items-end ">
           <Button
             type="submit"

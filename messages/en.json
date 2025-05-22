@@ -26,8 +26,8 @@
   "TapsMain": {
     "option1": "Hotels",
     "option2": "Last Minute Weeks",
-    "option3": "yachts",
-    "option4": "Week Infinity",
+    "option3": "Yachts",
+    "option4": "Infinity Weeks",
     "option5": "Transportation",
     "option6": "My perfect trip"
   },
@@ -125,6 +125,14 @@
     "item3": {
       "title": "City of Destination",
       "placeholder": "destination city"
+    },
+    "item4": {
+      "title": "State/Region of Origin",
+      "placeholder": "origin State/Region"
+    },
+    "item5": {
+      "title": "State/Region of Destination",
+      "placeholder": "destination State/Region"
     },
     "date": "Date",
     "button": "Search"

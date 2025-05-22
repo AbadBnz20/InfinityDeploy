@@ -73,7 +73,7 @@ export const CardRoom = ({
                 </span>
                 <span className="text-xs">•</span>
                 <span>{numberOfGuests} huespedes</span>
-                <span>{numberOfGuests} Cantidad</span>
+                {/* <span>{numberOfGuests} Cantidad</span> */}
               </div>
             </div>
 
