@@ -6,13 +6,12 @@ import {
 import { useSession } from "@/hooks/useSession";
 import { TripStore } from "@/store/TripStore";
 import { Button, Input, Select, SelectItem, useDisclosure } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { Key, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
-import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 
 interface FormData {
   budget: string;
@@ -49,8 +48,10 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
   
   const { session } = useSession();
+   const cookieLanguage = useLocale();
   const t = useTranslations("MyperfectPage");
   const onSubmit = async (data: FormData) => {
+    console.log('el lenguaje es', cookieLanguage);
     try {
       const obj: TripFormRegister = {
         country_origin,
@@ -81,7 +82,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
 
       if (session) {
         const numberContract = await GetNumberContract();
-        const cookieLanguage = await getLanguageFromCookie();
+       
         const res = await fetch("/api/send", {
           method: "POST",
           headers: {
@@ -109,7 +110,7 @@ export const ContentBudgetTrip = ({ onchange }: Props) => {
             children,
             details,
             currency: data.currency,
-            language: cookieLanguage ? cookieLanguage : "es"
+            language:cookieLanguage
           }),
         });
         const datafetch = await res.json();

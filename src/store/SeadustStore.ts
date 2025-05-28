@@ -3,12 +3,18 @@ import { Room } from "@/interfaces/Room-responses";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+interface Guest {
+  adults: number;
+  children: number;
+  infant: number;
+}
+
 interface State {
   id: number;
   RoomSelected: { idRoom: string; amount: number }[];
   checkin: string;
   checkout: string;
-  guest: any[];
+  guest: Guest[];
   loading: boolean;
   setDestination: (
     id: number,
@@ -31,7 +37,7 @@ export const SeadustStore = create<State>()(
       RoomSelected: [],
       checkin: "",
       checkout: "",
-      guest: [],
+      guest: [{ adults: 1, children: 0, infant: 0 }],
       Rooms: [],
       loading: false,
       setDestination: (id, checkin, checkout, guest) => {
@@ -49,19 +55,19 @@ export const SeadustStore = create<State>()(
       },
       updateroom: (room) => {
         const { guest, RoomSelected } = get();
-        const totalAmount = RoomSelected.reduce((sum, item) => sum + item.amount, 0);
+        const totalAmount = RoomSelected.reduce(
+          (sum, item) => sum + item.amount,
+          0
+        );
         if (totalAmount >= guest.length) {
           return;
         }
-      
+
         const roomExists = RoomSelected.find((item) => item.idRoom === room);
-      
+
         if (!roomExists) {
           set((state) => ({
-            RoomSelected: [
-              ...state.RoomSelected,
-              { idRoom: room, amount: 1 },
-            ],
+            RoomSelected: [...state.RoomSelected, { idRoom: room, amount: 1 }],
           }));
         }
       },
@@ -71,16 +77,15 @@ export const SeadustStore = create<State>()(
             (sum, item) => sum + item.amount,
             0
           );
-      
-        
+
           if (totalAmount >= state.guest.length) {
             return state;
           }
-      
+
           return {
             RoomSelected: state.RoomSelected.map((item) =>
               item.idRoom === idRoom
-                ? { ...item, amount: item.amount + 1 } 
+                ? { ...item, amount: item.amount + 1 }
                 : item
             ),
           };

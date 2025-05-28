@@ -50,6 +50,7 @@ const translations = {
     cars: "Autos",
     attractions: "Atracciones",
     budget: "Presupuesto",
+    note: "Nota",
     currency: "Tipo de moneda",
     passengers: "Pasajeros",
     adults: "Adultos",
@@ -79,6 +80,7 @@ const translations = {
     cars: "Cars",
     attractions: "Attractions",
     budget: "Budget",
+    note: "Note",
     currency: "Currency Type",
     passengers: "Passengers",
     adults: "Adults",
@@ -110,6 +112,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   adult,
   children,
   currency,
+  details,
 }) => {
   const t = translations[language];
 
@@ -264,6 +267,10 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             <td>{currency}</td>
           </tr>
           <tr>
+            <td>{t.note}:</td>
+            <td>{details}</td>
+          </tr>
+          <tr>
             <td>
               <strong>{t.passengers}:</strong>
             </td>
@@ -272,16 +279,21 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
               {children.length > 1 ? t.childs : t.childs}
             </td>
           </tr>
-          <tr>
-            <td>
-              <strong>{t.childrenAges}:</strong>
-            </td>
-            <td>
-              {children
-                .map((age) => `${age} ${language === "es" ? "Años" : "Years"}`)
-                .join(", ")}
-            </td>
-          </tr>
+          
+          {children.length > 0 && (
+            <tr>
+              <td>
+                <strong>{t.childrenAges}:</strong>
+              </td>
+              <td>
+                {children
+                  .map(
+                    (age) => `${age} ${language === "es" ? "Años" : "Years"}`
+                  )
+                  .join(", ")}
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
 
