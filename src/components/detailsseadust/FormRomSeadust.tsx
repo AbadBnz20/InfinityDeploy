@@ -52,6 +52,8 @@ export const FormRomSeadust = ({
 
   const [loading, setloading] = useState(false);
   const t = useTranslations("TransfersPage");
+  const tt = useTranslations("SeadustPage");
+
   const { guest, RoomSelected, checkin, checkout } = SeadustStore();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   
@@ -123,7 +125,7 @@ export const FormRomSeadust = ({
     <ModalConfirm   isOpen={isOpen} onOpenChange={onOpenChange}/>
       <Card className="my-3 shadow">
         <CardHeader>
-          <h1 className="flex items-center gap-2  text-xl">Detalle Huesped</h1>
+          <h1 className="flex items-center gap-2  text-xl">{tt("subtitle1")}</h1>
         </CardHeader>
         <CardBody>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -211,9 +213,9 @@ export const FormRomSeadust = ({
                 </div>
               </div>
               <div className="my-5  space-y-2">
-                <p className=" text-small">Pasajeros Adultos:{adult}</p>
-                <p className=" text-small">Pasajeros Infantes:{infant}</p>
-                <p className=" text-small">Pasajeros Niños:{child}</p>
+                <p className=" text-small">{tt("item")}:{adult}</p>
+                <p className=" text-small">{tt("item1")}:{infant}</p>
+                <p className=" text-small">{tt("item2")}:{child}</p>
               </div>
               <div className=" w-full mt-3">
                 <div className="space-y-6 p-4 mt-3">

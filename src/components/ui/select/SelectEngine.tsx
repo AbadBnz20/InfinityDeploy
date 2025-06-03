@@ -1,7 +1,7 @@
 import { GetSelectEngine } from "@/actions/yachts/GetSelect";
 import { motorYacht } from "@/interfaces/selectYatch-response";
 import { Progress, Select, SelectItem } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import {
   Control,
@@ -20,6 +20,7 @@ export const SelectEngine = <T extends FieldValues>({ control,name,error }: Prop
   const [data, setdata] = useState<motorYacht[]>([]);
   const [loading, setLoading] = useState(false);
   const t = useTranslations("Yachts");
+  const language = useLocale();
   useEffect(() => {
     const GetCountry = async () => {
       setLoading(true);
@@ -61,7 +62,7 @@ export const SelectEngine = <T extends FieldValues>({ control,name,error }: Prop
           onSelectionChange={(keys) => field.onChange(Array.from(keys).pop())}
           >
             {(item) => (
-              <SelectItem key={item.motorYachtId}>{item.name}</SelectItem>
+              <SelectItem key={item.motorYachtId}>{language == 'es'? item.name: item.name_en}</SelectItem>
             )}
           </Select>
         );

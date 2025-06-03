@@ -1,6 +1,7 @@
 import { Car as CardProps } from "@/interfaces/Transfers-response";
 import { TransfersStore } from "@/store/TransfersStore";
 import { Button, Card, CardBody, Selection } from "@nextui-org/react";
+import { useLocale } from "next-intl";
 import React, { Dispatch, SetStateAction } from "react";
 
 
@@ -12,7 +13,7 @@ interface Props{
 }
 export const Car = ({item,selected,updatetId,idSelected}:Props) => {
   const {selected:select}=TransfersStore();
- 
+  const language = useLocale()
   const onChange = (id:string)=>{
     updatetId(id);
     if (select === "Ida y vuelta") {
@@ -27,15 +28,23 @@ export const Car = ({item,selected,updatetId,idSelected}:Props) => {
         <div className="relative h-[100%] md:h-full">
          <img
             src={item.image}
-            className="w-full max-h-[240px] object-cover"
+            className="w-full  h-full object-cover"
           />
         </div>
 
         <CardBody className="p-6">
           <div className="space-y-4">
             <div>
-              <h2 className="text-xl font-semibold">{item.brand} {item.model}</h2>
-              <p className="text-muted-foreground">{item.type}</p>
+              <h2 className="text-xl font-semibold">{item.brand} {language == "es"
+                  ? item.model
+                  : item.model_en && item.model_en.trim() !== ""
+                  ? item.model_en
+                  : "Not translated"}</h2>
+              <p className="text-muted-foreground"> {language == "es"
+                  ? item.type
+                  : item.type_en && item.type_en.trim() !== ""
+                  ? item.type_en
+                  : "Not translated"}</p>
             </div>
 
             <div className="flex items-center gap-2 text-muted-foreground">
@@ -44,11 +53,11 @@ export const Car = ({item,selected,updatetId,idSelected}:Props) => {
 
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground">
-                Especificaciones del vehículo: 
+                { language === 'es' ? 'Especificaciones del vehículo:':'Vehicle specifications:'} 
               </p>
               <ul className="text-sm text-muted-foreground">
-                <li>• Capacidad maxima: 1-{item.ability} pasajeros</li>
-                <li>• Color: {item.color}</li>
+                <li>•  { language === 'es' ? 'Capacidad maxima':'Maximum capacity'}: 1-{item.ability} { language === 'es' ? 'Pasajeros':'Passengers'}</li>
+                <li>• Color: {language === 'es' ? item.color: item.color_en}</li>
               </ul>
               <p className="text-sm text-muted-foreground">
                 
@@ -69,7 +78,7 @@ export const Car = ({item,selected,updatetId,idSelected}:Props) => {
             {/* <div className="text-sm text-muted-foreground">Precio total</div> */}
           </div>
           <Button onPress={()=>onChange(item.carId)} className="w-full" size="lg">
-            Seleccionar
+           { language === 'es' ? 'Seleccionar':'Select'}
           </Button>
         </div>
       </div>

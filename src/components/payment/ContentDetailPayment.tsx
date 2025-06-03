@@ -72,8 +72,8 @@ export const ContentDetailPayment = () => {
         ]);
       setInformation({
         departure: {
-          from: respOrigin,
-          to: respDestination,
+          from: "respOrigin",
+          to: "respDestination",
           date: DateTime.fromJSDate(time).setLocale('es').toFormat('dd LLL yyyy'),
           time: DateTime.fromJSDate(time).setLocale('es').toFormat('HH:mm'),
           vehicle: {
@@ -94,6 +94,7 @@ export const ContentDetailPayment = () => {
               }
             : undefined,
       });
+      console.log({respOrigin, respDestination})
       setLoading(false);
     } catch (error) {
       console.log(error);

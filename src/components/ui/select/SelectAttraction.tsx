@@ -1,6 +1,7 @@
 import { GetSelectAttraction } from '@/actions/attraction/GetAttraction';
 import { Attraction } from '@/interfaces/Attaction-responses';
 import { Select, SelectItem } from '@nextui-org/react';
+import { useLocale } from 'next-intl';
 import React, { useEffect, useState } from 'react'
 
 
@@ -17,7 +18,7 @@ export const SelectAttraction = ({
 
     const [data, setdata] = useState<Attraction[]>([]);
       const [loading, setLoading] = useState(false);
-    
+      const language = useLocale();
       useEffect(() => {
         const GetCateogryCar = async () => {
           setLoading(true);
@@ -40,7 +41,7 @@ export const SelectAttraction = ({
       isLoading={loading}
       onChange={(e) => handleAttractionsChange(e.target.value)}
     >
-      {(item) => <SelectItem key={item.name}>{item.name}</SelectItem>}
+      {(item) => <SelectItem key={item.name}>{language == 'es'? item.name: item.name_en}</SelectItem>}
     </Select>
   )
 }

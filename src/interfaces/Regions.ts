@@ -4,9 +4,9 @@ export interface Region {
 }
 
 export interface Datum {
-    countryCode: string;
-    fipsCode:    string;
-    isoCode:     string;
+    countryCode?: string;
+    fipsCode?:    string;
+    isoCode?:     string;
     name:        string;
     wikiDataId:  string;
 }

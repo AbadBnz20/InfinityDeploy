@@ -1,5 +1,6 @@
 import {  PackageYachtsLocation } from "@/interfaces/Yach";
 import { Button, Card } from "@nextui-org/react";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 import React from "react";
 import {
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const CardYachts = ({ yachts }: Props) => {
+  const language = useLocale()
   return (
     <Card className="group max-w-[450px] overflow-hidden  rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
       {/* Imagen y overlay */}
@@ -39,10 +41,10 @@ export const CardYachts = ({ yachts }: Props) => {
           <IoLocationOutline className="h-5 w-5" />
           <span className="font-medium">{yachts.origin_destination_ship.city.name}, {yachts.origin_destination_ship.name}</span>
         </div> */}
-        <h3 className="text-xl font-semibold ">{yachts.name}</h3>
+        <h3 className="text-xl font-semibold ">{language == 'es' ? yachts.name: yachts.name_en}</h3>
         <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
             <div>
-              <p className="text-sm font-medium">{yachts.cabin}</p>
+              <p className="text-sm font-medium">{language == 'es' ? yachts.cabin: yachts.cabin_en}</p>
             </div>
           </div>
         {/* Detalles */}
@@ -51,14 +53,14 @@ export const CardYachts = ({ yachts }: Props) => {
             <IoPeopleOutline className="h-5 w-5" />
             <div>
               <p className="text-sm font-medium"> 1-{yachts.passengers}</p>
-              <p className="text-xs">Personas</p>
+              <p className="text-xs">{language == 'es' ? 'Personas': 'Peole'}</p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
             <IoTimeOutline className="h-5 w-5" />
             <div>
               <p className="text-sm font-medium">{yachts.time}</p>
-              <p className="text-xs">Horas</p>
+              <p className="text-xs">{language == 'es' ? 'Horas': 'Hours'}</p>
             </div>
           </div>
         </div>
@@ -73,7 +75,7 @@ export const CardYachts = ({ yachts }: Props) => {
           </div>
          <Link href={`/yachts/${yachts.yachtPackageId}`}>
          <Button className="bg-black dark:bg-white dark:text-black text-white px-6">
-            Solicitar
+           {language == 'es' ? 'Solicitar': 'Request'}
           </Button>
          </Link>
         </div>

@@ -2,6 +2,7 @@
 import { useOriginaDestination } from '@/hooks/useOriginaDestination';
 import { SelectStore } from '@/store/TransferSelect';
 import { Progress, Select, SelectItem, SelectSection } from '@nextui-org/react';
+import { useLocale } from 'next-intl';
 import React, { useEffect } from 'react'
 
 
@@ -12,7 +13,8 @@ interface Props{
 }
 export const SelectDestinationTranslate = ({placeholder,setvalue,defaultSelectedKeys=""}:Props) => {
     const { loading, Items,loadItems } = useOriginaDestination();
-     const {IdOrigin}=SelectStore()
+     const {IdOrigin}=SelectStore();
+     const language = useLocale();
     useEffect(() => {
         loadItems(IdOrigin);
     }, [IdOrigin])
@@ -52,11 +54,11 @@ export const SelectDestinationTranslate = ({placeholder,setvalue,defaultSelected
                 <SelectSection
                   key={item.categoryId}
                   
-                  title={item.name}
+                  title={language === 'es' ? item.name : item.name_en}
                 >
                   {item.origin_destination.map((obj) => (
                     <SelectItem key={obj.origindestinationId}>
-                      {obj.name}
+                      {language === 'es' ? obj.name : obj.name_en}
                     </SelectItem>
                   ))}
                 </SelectSection>

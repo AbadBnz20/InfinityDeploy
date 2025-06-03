@@ -93,21 +93,20 @@
     }
   },
 
-"Seadust":{
-   "item":{
-    "title":"General",
-    "description":"Vacaciones familiares ideales con piscinas, gastronomía, parque acuático y entretenimiento para todas las edades."
-   },
-   "item1":{
-    "title":"Actividades",
-    "description":"Actividades emocionantes y ambiente vibrante para crear recuerdos inolvidables en familia."
-   },
-   "item2":{
-    "title":"Spa",
-    "description":"Relajación total en un spa exclusivo con rituales inspirados en culturas del mundo."
-   }
-},
-
+  "Seadust": {
+    "item": {
+      "title": "General",
+      "description": "Vacaciones familiares ideales con piscinas, gastronomía, parque acuático y entretenimiento para todas las edades."
+    },
+    "item1": {
+      "title": "Actividades",
+      "description": "Actividades emocionantes y ambiente vibrante para crear recuerdos inolvidables en familia."
+    },
+    "item2": {
+      "title": "Spa",
+      "description": "Relajación total en un spa exclusivo con rituales inspirados en culturas del mundo."
+    }
+  },
 
   "Myperfect": {
     "item": {
@@ -133,67 +132,61 @@
     "item5": {
       "title": "Estado/Region de Destino",
       "placeholder": "destino Estado/Region"
-     
     },
     "date": "Fecha",
     "button": "Buscar"
   },
 
   "MyperfectPage": {
-    "title":"Mi viaje Perfecto",
-    "step":"Paso 1",
-    "step1":"Paso 2",
-    "step2":"Paso 3",
-    "buttonStepprev":"Atras",
-    "buttonStepnext":"Siguiente",
-    "buttoncarddelete":"Eliminar",
-    "buttoncardadd":"Agregar",
-    "button":"Registrar",
+    "title": "Mi viaje Perfecto",
+    "step": "Paso 1",
+    "step1": "Paso 2",
+    "step2": "Paso 3",
+    "buttonStepprev": "Atras",
+    "buttonStepnext": "Siguiente",
+    "buttoncarddelete": "Eliminar",
+    "buttoncardadd": "Agregar",
+    "button": "Registrar",
 
-    "card":{
-      "title":"Vuelos"
-     
+    "card": {
+      "title": "Vuelos"
     },
-    "card1":{
-      "title":"Hotels",
-      "placeholder":"Seleccione Opcion"
+    "card1": {
+      "title": "Hotels",
+      "placeholder": "Seleccione Opcion"
     },
-    "card2":{
-      "title":"Autos"
+    "card2": {
+      "title": "Autos"
     },
-    "card3":{
-      "title":"Atracciones"
+    "card3": {
+      "title": "Atracciones"
     },
-    "item":{
-      "title":"Nombre Completo"
+    "item": {
+      "title": "Nombre Completo"
     },
-    "item1":{
-      "title":"Numero de telefono"
+    "item1": {
+      "title": "Numero de telefono"
     },
-    "item2":{
-      "title":"Confirmar Email"
+    "item2": {
+      "title": "Confirmar Email"
     },
-    "item3":{
-      "title":"Adultos",
-      "placeholder":"Seleccione opcion"
+    "item3": {
+      "title": "Adultos",
+      "placeholder": "Seleccione opcion"
     },
-    "item4":{
-      "title":"Niños"
+    "item4": {
+      "title": "Niños"
     },
-    "item5":{
-      "title":"Agregar Nota",
-      "placeholder":"Nota"
+    "item5": {
+      "title": "Agregar Nota",
+      "placeholder": "Nota"
     },
-    "item6":{
-      "title":"Presupuesto"
+    "item6": {
+      "title": "Presupuesto"
     },
-    "item7":{
-      "title":"Tipo de moneda"
+    "item7": {
+      "title": "Tipo de moneda"
     }
-
-
-
-
   },
   "Yachts": {
     "item": {
@@ -215,9 +208,9 @@
     "date": "Fecha",
     "button": "Buscar"
   },
-  "YachtsPage":{
-    "title":"Solicitud de yates",
-    "title1":"Informacion De usuario",
+  "YachtsPage": {
+    "title": "Solicitud de yates",
+    "title1": "Informacion De usuario",
 
     "item": {
       "title": "Tipo de Yate",
@@ -227,17 +220,16 @@
       "title": "Tipo de experiencia",
       "placeholder": "Seleccione Experiencia"
     },
-    "item2":"Nombre",
-    "item3":"Apellido",
-    "item4":"Telefono",
-    "item5":"Nota",
-    "item6":"Pasajeros",
+    "item2": "Nombre",
+    "item3": "Apellido",
+    "item4": "Telefono",
+    "item5": "Nota",
+    "item6": "Pasajeros",
 
     "date": "Fecha",
-    "time":"Tiempo",
-    "Button":"Enviar Solicitud"
+    "time": "Tiempo",
+    "Button": "Enviar Solicitud"
   },
-
 
   "Transfers": {
     "item": {
@@ -249,65 +241,62 @@
       "placeholder": "Seleccione Destino"
     },
     "item2": "Hora Y fecha de llegada",
-    "item3":"Hora y fecha de salida de vuelo o transporte",
-    "item4":"Ida",
-    "item5":"Ida y vuelta",
-    "item6":"Pasajeros",
-    "item7":"Adultos",
-    "item8":"Niños",
-    "item9":"Aceptar",
+    "item3": "Hora y fecha de salida de vuelo o transporte",
+    "item4": "Ida",
+    "item5": "Ida y vuelta",
+    "item6": "Pasajeros",
+    "item7": "Adultos",
+    "item8": "Niños",
+    "item9": "Aceptar",
     "button": "Buscar"
   },
- "TransfersPage":{
-  "title":"Seleccione traslado Llegada",
-  "subtitile":"Vehiculos encontrados",
-  "title1":"Seleccionar traslado Regreso",
-  "empy":"No se encontraron resultados",
-  "button":"Continuar",
-  "button1":"Atras",
-  "item":{
-    "title":" Detalles de Ida",
-    "title1":" Detalles de Vuelta",
-    "item":"Lugar de salida",
-    "item1":"Destino",
-    "item2":"Fecha",
-    "item3":"Hora",
-    "subtitle":"Detalles del vehiculo"
+  "TransfersPage": {
+    "titleMain": "Datos del traslado",
+    "title": "Seleccione traslado Llegada",
+    "subtitile": "Vehiculos encontrados",
+    "title1": "Seleccionar traslado Regreso",
+    "empy": "No se encontraron resultados",
+    "button": "Continuar",
+    "button1": "Atras",
+    "item4": "Pasajeros Adultos",
+    "item5": "Pasajeros Niños",
+    "item": {
+      "title": " Detalles de Ida",
+      "title1": " Detalles de Vuelta",
+      "item": "Lugar de salida",
+      "item1": "Destino",
+      "item2": "Fecha",
+      "item3": "Hora",
+      "subtitle": "Detalles del vehiculo"
+    },
+    "item2": {
+      "title": "Detalle de Pasajero",
+      "subtitle": "Contacto Principal",
+      "item2": "Nombre",
+      "item3": "Apellido",
+      "placeholder": "Ingrese Nombre",
+      "placeholder1": "Ingrese Apellido",
+
+      "item4": "Telefono",
+      "item5": "Pasajeros Adultos",
+      "item6": "Pasajeros niños",
+      "adult": "Adulto",
+      "children": "Niño",
+
+      "item7": "Edad",
+      "item8": "Detalles del Transporte",
+      "item9": "Numero de transporte",
+      "placeholder2": "Introduzca el numero de transporte vuelo,tren,bus",
+      "item10": "Fecha",
+      "item11": "Condiciones de Uso",
+      "item12": "Obligatorio",
+      "item13": " Al continuar acepto las",
+      "item14": "condiciones de privacidad",
+      "item15": "condiciones de visa",
+      "item16": "condiciones de uso, las observaciones y las políticas de cancelación.",
+      "button": "Continuar"
+    }
   },
-  "item2":{
-    "title":"Detalle de Pasajero",
-    "subtitle":"Contacto Principal",
-    "item2":"Nombre",
-    "item3":"Apellido",
-    "placeholder":"Ingrese Nombre",
-    "placeholder1":"Ingrese Apellido",
-
-    "item4":"Telefono",
-    "item5":"Pasajeros Adultos",
-    "item6":"Pasajeros niños",
-    "adult":"Adulto",
-    "children":"Niño",
-
-    "item7":"Edad",
-    "item8":"Detalles del Transporte",
-    "item9":"Numero de transporte",
-    "placeholder2":"Introduzca el numero de transporte vuelo,tren,bus",
-    "item10":"Fecha",
-    "item11":"Condiciones de Uso",
-    "item12":"Obligatorio",
-    "item13":" Al continuar acepto las",
-    "item14":"condiciones de privacidad",
-    "item15":"condiciones de visa",
-    "item16":"condiciones de uso, las observaciones y las políticas de cancelación.",
-    "button":"Continuar"
-  }
-
-
-
- },
-
-
-
 
   "Footer": {
     "contact": "Contacto",
@@ -357,32 +346,39 @@
       "option3": "Cercanía o acceso a la playa"
     }
   },
-   "ModalConfirm":{
-    "title":"Mensaje Enviado",
-    "strong":"Solicitud Exitosa",
-    "description":"Se le envio un correo por favor, revise su bandeja de entrada o carpeta de spam para asegurarse de que lo haya recibido. Si no lo ha recibido, no dude en ponerse en contacto con nosotros para obtener ayuda adicional.",
-    "button":"Aceptar"
+  "ModalConfirm": {
+    "title": "Mensaje Enviado",
+    "strong": "Solicitud Exitosa",
+    "description": "Se le envio un correo por favor, revise su bandeja de entrada o carpeta de spam para asegurarse de que lo haya recibido. Si no lo ha recibido, no dude en ponerse en contacto con nosotros para obtener ayuda adicional.",
+    "button": "Aceptar"
   },
-  "Auth":{
-    "title":"Correo",
-    "title1":"Celular",
-    "loginEmail":{
-      "title":"Correo",
-      "placeholder":"Ingrese su correo"
+  "Auth": {
+    "title": "Correo",
+    "title1": "Celular",
+    "loginEmail": {
+      "title": "Correo",
+      "placeholder": "Ingrese su correo"
     },
-    "loginPhone":{
-      "title":"Celular",
-      "placeholder":"Ingrese su celular",
-      "title1":"Codigo",
-      "placeholder1":" codigo"
+    "loginPhone": {
+      "title": "Celular",
+      "placeholder": "Ingrese su celular",
+      "title1": "Codigo",
+      "placeholder1": " codigo"
     },
-    "require":"El campo es requerido",
-    "button":"Ingresar"
-    
+    "require": "El campo es requerido",
+    "button": "Ingresar"
   },
-  "ModalCode":{
-    "title":"Verificacion",
-    "description":"Ingrese código de 6 dígitos.",
-    "button":"Verificar Codigo"
+  "ModalCode": {
+    "title": "Verificacion",
+    "description": "Ingrese código de 6 dígitos.",
+    "button": "Verificar Codigo"
+  },
+  "SeadustPage": {
+    "title": "Datos de la Reserva",
+    "subtitle": "Detalle Habitacion",
+    "subtitle1": "Detalle Huesped",
+    "item": "Pasajeros Adultos",
+    "item1": "Pasajeros Infantes",
+    "item2": "Pasajeros Niños"
   }
 }

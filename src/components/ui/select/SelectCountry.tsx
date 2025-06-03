@@ -1,14 +1,23 @@
 import { TripForm } from "@/components/home/MyTrip";
 import { useCountries } from "@/hooks/useCountries";
-import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
-import React, { useRef } from "react";
-import { Control, Controller, FieldError, Path } from "react-hook-form";
+import { LocationCityStore } from "@/store/CodeDestinationStore";
+import { Autocomplete, AutocompleteItem, Progress } from "@nextui-org/react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Control,
+  Controller,
+  FieldError,
+  Path,
+  UseFormWatch,
+} from "react-hook-form";
 
 interface Props {
   control: Control<TripForm>;
   name: Path<TripForm>;
   error?: FieldError;
   OnchageCountry: (code: string) => void;
+  locationCityorigin: LocationCityStore;
+  watch: UseFormWatch<TripForm>;
 }
 
 export const SelectCountry = ({
@@ -16,9 +25,32 @@ export const SelectCountry = ({
   name,
   error,
   OnchageCountry,
+  locationCityorigin,
+  watch,
 }: Props) => {
-  const { items, isLoading, LoadCountries } = useCountries();
+  const { items, isLoading, LoadCountries } = useCountries(locationCityorigin);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  const region = watch(name);
+  const [loading, setLoading] = useState(false);
+  const [data, setdata] = useState("");
+
+  useEffect(() => {
+    const GetCountry = async () => {
+      setLoading(true);
+      setTimeout(() => {
+        setdata(locationCityorigin.countryCode);
+        setLoading(false);
+      }, 50);
+    };
+
+
+    if (locationCityorigin.countryCode) {
+      GetCountry();
+    }
+  
+  }, [region]);
+
+
 
   const handleInputChange = (e: string) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -26,6 +58,19 @@ export const SelectCountry = ({
       LoadCountries(e);
     }, 600);
   };
+
+  if (loading) {
+    return (
+      <div className="my-4">
+        <Progress
+          size="sm"
+          isIndeterminate
+          aria-label="Loading..."
+          className="max-w-md"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full  relative">
@@ -40,6 +85,7 @@ export const SelectCountry = ({
             isLoading={isLoading}
             defaultItems={items}
             placeholder="Ingrese pais"
+            defaultSelectedKey={data}
             onInputChange={handleInputChange}
             onSelectionChange={async (key) => {
               console.log(key);

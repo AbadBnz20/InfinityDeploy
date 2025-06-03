@@ -1,5 +1,12 @@
 import { create } from "zustand";
 
+export interface LocationCityStore {
+  country: string;
+  countryCode: string;
+  region: string;
+  regionWdId: string;
+}
+
 interface State {
   country_origin_code: string;
   region_origin_code: string;
@@ -13,10 +20,26 @@ interface State {
   SetCountryDestination: (code: string) => void;
   SetRegionDestination: (code: string) => void;
   SetCityDestination: (code: string) => void;
+  SetLocationCityOrigin: (data: LocationCityStore) => void;
+  locationCityorigin: LocationCityStore;
+  SetLocationCityDestination: (data: LocationCityStore) => void;
+  locationCityDestination: LocationCityStore;
 }
 
 export const CodesStore = create<State>()((set) => ({
   country_origin_code: "",
+  locationCityorigin: {
+    country: "",
+    countryCode: "",
+    region: "",
+    regionWdId: "",
+  },
+  locationCityDestination: {
+    country: "",
+    countryCode: "",
+    region: "",
+    regionWdId: "",
+  },
   region_origin_code: "",
   city_origin_code: "",
   contry_destination_code: "",
@@ -32,4 +55,8 @@ export const CodesStore = create<State>()((set) => ({
     set({ region_destination_code }),
   SetCityDestination: (city_destination_code: string) =>
     set({ city_destination_code }),
+  SetLocationCityOrigin: (data: LocationCityStore) =>
+    set({ locationCityorigin: data }),
+  SetLocationCityDestination: (data: LocationCityStore) =>
+    set({ locationCityDestination: data }),
 }));

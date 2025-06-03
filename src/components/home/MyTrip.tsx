@@ -11,7 +11,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SelectCountry } from "../ui/select/SelectCountry";
 import { CodesStore } from "@/store/CodeDestinationStore";
@@ -30,6 +30,8 @@ export interface TripForm {
 
 export const MyTrip = () => {
   const {
+    watch,
+    setValue,
     control,
     handleSubmit,
     formState: { errors },
@@ -51,13 +53,21 @@ export const MyTrip = () => {
     SetRegionDestination,
     region_destination_code,
     SetCityDestination,
+    locationCityorigin,
+    locationCityDestination,
+    SetLocationCityOrigin,
+    SetLocationCityDestination,
   } = CodesStore();
+
+  useEffect(() => {
+      console.log(locationCityorigin)
+  }, [locationCityorigin])
+
   const router = useRouter();
   const posthog = usePostHog();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: TripForm) => {
-
     if (!date) {
       return;
     }
@@ -74,6 +84,19 @@ export const MyTrip = () => {
       departureDate.toISOString(),
       returnDate.toISOString()
     );
+    SetLocationCityOrigin({
+      country: "",
+      countryCode: "",
+      region: "",
+      regionWdId: "",
+    });
+    SetLocationCityDestination({
+      country: "",
+      countryCode: "",
+      region: "",
+      regionWdId: "",
+    });
+
     router.push(`/perfecttrip`);
     posthog.capture("$pageview", { $current_url: "/perfecttrip" });
     setLoading(false);
@@ -95,6 +118,8 @@ export const MyTrip = () => {
             name="country_origin"
             error={errors.country_origin}
             OnchageCountry={SetCountryOrigin}
+            locationCityorigin={locationCityorigin}
+            watch={watch}
           />
         </div>
 
@@ -104,11 +129,14 @@ export const MyTrip = () => {
           </label>
 
           <SelectRegions
+            watch={watch}
             control={control}
             name="region_origin"
             error={errors.region_origin}
             OnchageRegion={SetRegionOrigin}
             countrycode={country_origin_code}
+            regioncode={region_origin_code}
+            locationCityorigin={locationCityorigin}
           />
         </div>
 
@@ -117,22 +145,26 @@ export const MyTrip = () => {
             {t("item1.title")} <span className="text-red-500">*</span>
           </label>
           <SelectCities
+            setValue={setValue}
             control={control}
             name="city_origin"
             error={errors.city_origin}
             OnchageCity={SetCityOrigin}
             countrycode={country_origin_code}
             regioncode={region_origin_code}
+            changenameregion="region_origin"
+            changenamecountry="country_origin"
+            SetLocationCityOrigin={SetLocationCityOrigin}
           />
         </div>
-         <div className="w-full ">
+        <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
             {t("date")} (mm/dd/aaa) <span className="text-red-500">*</span>
           </label>
           <DateRangePicker
             value={date}
             onChange={setdate}
-            minValue={today(getLocalTimeZone())}
+            minValue={today(getLocalTimeZone()).add({ days: 1 })}
             className="text-blue-600"
           />
         </div>
@@ -145,18 +177,24 @@ export const MyTrip = () => {
             name="contry_destination"
             error={errors.contry_destination}
             OnchageCountry={SetCountryDestination}
+            locationCityorigin={locationCityDestination}
+            watch={watch}
           />
         </div>
         <div className="w-full ">
           <label htmlFor="rooms" className="block text-sm font-medium ">
-            {t("item5.title")}<span className="text-red-500">*</span>
+            {t("item5.title")}
+            <span className="text-red-500">*</span>
           </label>
           <SelectRegions
+            watch={watch}
             control={control}
             name="region_destination"
             error={errors.region_destination}
             OnchageRegion={SetRegionDestination}
             countrycode={contry_destination_code}
+            regioncode={region_destination_code}
+            locationCityorigin={locationCityDestination}
           />
         </div>
         <div className="w-full ">
@@ -164,23 +202,19 @@ export const MyTrip = () => {
             {t("item3.title")} <span className="text-red-500">*</span>
           </label>
           <SelectCities
+            setValue={setValue}
             control={control}
             name="city_destination"
             error={errors.city_destination}
             OnchageCity={SetCityDestination}
             countrycode={contry_destination_code}
             regioncode={region_destination_code}
+            changenameregion="region_destination"
+            changenamecountry="contry_destination"
+            SetLocationCityOrigin={SetLocationCityDestination}
           />
         </div>
 
-
-
-
-
-
-
-
-       
         <div className="w-full flex items-end ">
           <Button
             type="submit"

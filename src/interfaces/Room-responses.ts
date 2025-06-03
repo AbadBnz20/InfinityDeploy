@@ -7,6 +7,9 @@ export interface Room {
   typeOfBed: string;
   url: string;
   stateRoom: string;
+  name_en: string;
+  typeOfBed_en: string;
+  detail_en: string;
   state: boolean;
   creationDate: string;
 }

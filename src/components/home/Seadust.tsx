@@ -63,7 +63,7 @@ export const Seadust = () => {
             <DateRangePicker
               value={date}
               onChange={setdate}
-              minValue={today(getLocalTimeZone())}
+              minValue={today(getLocalTimeZone()).add({ days: 1 })}
               className="text-blue-600"
             />
           </div>

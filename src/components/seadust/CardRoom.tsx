@@ -7,6 +7,7 @@ import {
   Divider,
   Image,
 } from "@nextui-org/react";
+import { useLocale } from "next-intl";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface Props {
@@ -16,6 +17,10 @@ interface Props {
   detail: string;
   numberOfGuests: number;
   typeOfBed: string;
+  name_en: string;
+  typeOfBed_en: string;
+  detail_en: string;
+  creationDate: string;
   url: string;
   updatetId: (id: string) => void;
   deleteId: (id: string) => void;
@@ -29,11 +34,16 @@ export const CardRoom = ({
   detail,
   numberOfGuests,
   typeOfBed,
+  name_en,
+  typeOfBed_en,
+  detail_en,
   url,
   updatetId,
   deleteId,
   idSelected,
 }: Props) => {
+  const language = useLocale();
+
   return (
     <Card
       className={`w-full max-w-4xl overflow-hidden bg-maincolor shadow-sm ${
@@ -47,7 +57,7 @@ export const CardRoom = ({
           isIconOnly
           size="sm"
           color="danger"
-          onClick={() => deleteId(IdRoom)}
+          onPress={() => deleteId(IdRoom)}
           className="absolute top-2 right-2  rounded-full  flex items-center justify-center shadow-md"
         >
           <IoCloseOutline />
@@ -66,13 +76,23 @@ export const CardRoom = ({
         <div className="col-span-2 flex flex-col justify-between">
           <div>
             <div className="pb-2">
-              <h2 className="text-xl font-medium ">{name}</h2>
+              <h2 className="text-xl font-medium ">
+                {language == "es"
+                  ? name
+                  : name_en && name_en.trim() !== ""
+                  ? name_en
+                  : "Not translated"}
+              </h2>
               <div className="flex flex-wrap items-center ml-2 gap-2 text-sm text-gray-500">
                 <span>
-                  {numberOfBeds} {typeOfBed}
+                  {numberOfBeds} {language == "es"
+                  ? typeOfBed
+                  : typeOfBed_en && typeOfBed_en.trim() !== ""
+                  ? typeOfBed_en
+                  : "Not translated"}
                 </span>
                 <span className="text-xs">•</span>
-                <span>{numberOfGuests} huespedes</span>
+                <span>{numberOfGuests} {language == 'es' ? 'huespedes':'guests'}  </span>
                 {/* <span>{numberOfGuests} Cantidad</span> */}
               </div>
             </div>
@@ -84,9 +104,10 @@ export const CardRoom = ({
                 href="#"
                 className="text-medium font-semibold  hover:underline"
               >
-                Detalle de habitacion
+                {language == 'es' ? ' Detalle de habitacion':'Room detail'}
+               
               </a>
-              <p className="text-sm ">{detail}</p>
+              <p className="text-sm ">{language == 'es'? detail: detail_en}</p>
 
               {/* <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
             <span>Book Now, Pay Later!</span>
@@ -105,11 +126,12 @@ export const CardRoom = ({
 
           <CardFooter className="flex justify-end pt-0 gap-2">
             {idSelected.some((item) => item.idRoom === IdRoom) && (
-              <ContentAmount  IdRoom={IdRoom}/>
+              <ContentAmount IdRoom={IdRoom} />
             )}
 
             <Button onPress={() => updatetId(IdRoom)} color="primary">
-              Seleccionar
+               {language == 'es' ? 'Seleccionar':'Select'}
+              
             </Button>
           </CardFooter>
         </div>
@@ -118,13 +140,11 @@ export const CardRoom = ({
   );
 };
 
-
-
 interface ContentAmountProps {
-  IdRoom:string;
+  IdRoom: string;
 }
-export const ContentAmount = ({ IdRoom}:ContentAmountProps) => {
- const { RoomSelected,increaseRoomAmount,decreaseRoomAmount } =
+export const ContentAmount = ({ IdRoom }: ContentAmountProps) => {
+  const { RoomSelected, increaseRoomAmount, decreaseRoomAmount } =
     SeadustStore();
 
   const amountRoom = RoomSelected.find((item) => item.idRoom === IdRoom);
@@ -136,7 +156,7 @@ export const ContentAmount = ({ IdRoom}:ContentAmountProps) => {
     if (amountRoom?.amount === 1) {
       return;
     }
-    decreaseRoomAmount(IdRoom); 
+    decreaseRoomAmount(IdRoom);
   };
 
   return (

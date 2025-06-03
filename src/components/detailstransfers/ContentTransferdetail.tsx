@@ -11,7 +11,7 @@ import {
   Input,
   TimeInput,
 } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import {
   IoArrowBackOutline,
@@ -41,7 +41,7 @@ export const ContentTransferdetail = ({
     parseAbsoluteToLocal("2024-04-08T18:45:22Z")
   );
     const t = useTranslations("TransfersPage");
-  
+   const language = useLocale()
   useEffect(() => {
     if (origin && destination && car) {
       GetDetails();
@@ -81,7 +81,7 @@ export const ContentTransferdetail = ({
               <Input
                
                 startContent={<IoLocationOutline size={24} />}
-                value={date?.origin}
+                value={language === "es" ? date?.origin : date?.origin_en}
                 isDisabled
                 placeholder="Ej: Aeropuerto Internacional"
                 aria-label="Lugar de Recogida"
@@ -95,7 +95,7 @@ export const ContentTransferdetail = ({
               <div className="flex gap-2">
                 <Input
                   startContent={<IoLocationOutline size={24} />}
-                  value={date?.destination}
+                  value={language === "es" ? date?.destination : date?.destination_en}
                   isDisabled
                   placeholder="Ej: Aeropuerto Internacional"
                   aria-label="Destino"
@@ -151,6 +151,7 @@ interface Props2 {
 }
 
 const Carcontent = ({ car }: Props2) => {
+  const language = useLocale();
   return (
     <div className="grid md:grid-cols-[200px,1fr,100px] gap-4">
       <div className="relative h-[100%] md:h-full">
@@ -160,16 +161,16 @@ const Carcontent = ({ car }: Props2) => {
         <div className="space-y-2">
           <div>
             <h2 className="text-xl font-semibold">
-              {car.brand} {car.model}
+              {car.brand} {language === "es" ? car.model : car.model_en}
             </h2>
-            <p className="text-muted-foreground">{car.type}</p>
+            <p className="text-muted-foreground">{language === 'es'?car.type : car.type_en}</p>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground"></div>
           <div className="space-y-1">
             <p className="text-sm text-muted-foreground">
-              Capacidad maxima : 1-{car.ability} pasajeros
+             { language === 'es' ? 'Capacidad maxima':'Maximum capacity'} : 1-{car.ability} { language === 'es' ? 'Pasajeros':'Passengers'}
             </p>
-            <p className="text-sm text-muted-foreground">Color : {car.color}</p>
+            <p className="text-sm text-muted-foreground">Color : {language === 'es' ? car.color: car.color_en}</p>
           </div>
         </div>
       </CardBody>

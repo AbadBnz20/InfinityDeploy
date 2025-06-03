@@ -286,10 +286,10 @@ export const FormTransfer = ({
               </div>
               <div className="my-5  space-y-2">
                 <p className=" text-medium">
-                  Pasajeros adultos:{passengers.adults}
+                   {t("item4")}:{passengers.adults}
                 </p>
                 <p className=" text-medium">
-                  Pasajeros Niños:{passengers.children}
+                   {t("item5")}:{passengers.children}
                 </p>
               </div>
               <div className=" w-full mt-3">

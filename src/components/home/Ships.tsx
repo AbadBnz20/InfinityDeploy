@@ -13,7 +13,7 @@ import { SelectExperience } from "../ui/select/SelectExperience";
 import { YachtsStore } from "@/store/YachtsStore";
 import { useRouter } from "next/navigation";
 import { usePostHog } from "posthog-js/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export interface FormYacht {
   idLocation: string;
@@ -24,7 +24,7 @@ export interface FormYacht {
 }
 
 export const Ships = () => {
-  const [date, setdate] = useState<DateValue | null>(today(getLocalTimeZone()));
+  const [date, setdate] = useState<DateValue | null>(today(getLocalTimeZone()).add({days:1}));
   const {
     handleSubmit,
     control,
@@ -34,6 +34,7 @@ export const Ships = () => {
   const router = useRouter();
   const posthog = usePostHog();
    const t = useTranslations("Yachts");
+   const language = useLocale()
   // useEffect(() => {
   //   setValue('idEngine',"b1aa48c4-97ba-4293-af9d-0faacd9ac395")
   // }, []);
@@ -76,7 +77,7 @@ export const Ships = () => {
             <DatePicker
               value={date}
               onChange={setdate}
-              minValue={today(getLocalTimeZone())}
+              minValue={today(getLocalTimeZone()).add({days:1})}
             />
           </div>
       </div>
@@ -110,10 +111,10 @@ export const Ships = () => {
                     isInvalid={fieldState.invalid}
                     errorMessage={formState.errors.passengers?.message}
                   >
-                    <SelectItem key={"1-6"}>1-6 Huespedes</SelectItem>
-                    <SelectItem key={"7-12"}>7-12 Huespedes</SelectItem>
-                    <SelectItem key={"13-18"}>13-18 Huespedes</SelectItem>
-                    <SelectItem key={"+19"}>+19 Huespedes</SelectItem>
+                    <SelectItem key={"1-6"}>{`1-6 ${language == 'es' ? "Huespedes":"Guests"}`}</SelectItem>
+                    <SelectItem key={"7-12"}>{`7-12 ${language == 'es' ? "Huespedes":"Guests"}`}</SelectItem>
+                    <SelectItem key={"13-18"}>{`13-18 ${language == 'es' ? "Huespedes":"Guests"}`}</SelectItem>
+                    <SelectItem key={"+19"}>{`+19 ${language == 'es' ? "Huespedes":"Guests"}`}</SelectItem>
                   </Select>
                 );
               }}

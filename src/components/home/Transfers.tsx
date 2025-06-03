@@ -29,8 +29,8 @@ export const Transfers = () => {
   const [selected, setSelected] = useState("Ida");
   const [origin, setOrigin] = useState<string>("");
   const [Destination, setDestination] = useState<string>("");
-  const [arrivaltime, setArrivaltime] = React.useState<DateValue | null>(now(getLocalTimeZone()));
-  const [departuretime, setDeparturetime] = React.useState<DateValue | null>(now(getLocalTimeZone()));
+  const [arrivaltime, setArrivaltime] = React.useState<DateValue | null>(now(getLocalTimeZone()).add({ days: 1 }));
+  const [departuretime, setDeparturetime] = React.useState<DateValue | null>(now(getLocalTimeZone()).add({ days: 1 }));
   const [passengers, setPassengers] = useState({
     adults:"1",
     children:"0"
@@ -92,7 +92,7 @@ const posthog = usePostHog();
               showMonthAndYearPickers
               value={arrivaltime}
               onChange={setArrivaltime}
-               minValue={today(getLocalTimeZone())}
+               minValue={today(getLocalTimeZone()).add({ days: 1 })}
             />
           </div>
           <div className="w-full ">
@@ -105,7 +105,7 @@ const posthog = usePostHog();
               showMonthAndYearPickers
               value={departuretime}
               onChange={setDeparturetime}
-               minValue={today(getLocalTimeZone())}
+              minValue={today(getLocalTimeZone()).add({ days: 1 })}
             />
           </div>
         </div>

@@ -29,7 +29,7 @@ import { toast } from "react-toastify";
 import { RegisterYacht } from "@/actions/yachts/RegisterYacht";
 import { useRouter } from "next/navigation";
 import { GetReferences } from "@/actions/yachts/GetReferences";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
 import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 
@@ -70,6 +70,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
   });
   const [loading, setloading] = useState(false);
   const t = useTranslations("YachtsPage");
+  const language = useLocale()
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [date, setdate] = useState<DateValue | null>(
     parseDate(yachts.date.split("T")[0])
@@ -232,9 +233,9 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                               </SelectItem>
                             )}
                           </>
-                          <SelectItem key={"4 Horas"}>4 Horas</SelectItem>
-                          <SelectItem key={"6 Horas"}>6 Horas</SelectItem>
-                          <SelectItem key={"7 Horas"}>8 Horas</SelectItem>
+                          <SelectItem key={"4 Horas"}>{`4 ${ language == 'es' ? "Horas": "Hours"}`}</SelectItem>
+                          <SelectItem key={"6 Horas"}>{`6 ${ language == 'es' ? "Horas": "Hours"}`}</SelectItem>
+                          <SelectItem key={"7 Horas"}>{`7 ${ language == 'es' ? "Horas": "Hours"}`}</SelectItem>
                         </Select>
                       );
                     }}
@@ -354,7 +355,9 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   fullWidth
                   size="lg"
                 >
-                  Atras
+                 {
+                  language == 'es' ? "Volver" : "Back"
+                 }
                 </Button>
                 <Button
                   fullWidth

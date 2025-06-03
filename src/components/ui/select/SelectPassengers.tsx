@@ -1,6 +1,6 @@
 'use client';
 import { Button, Select, SelectItem } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 export const adultsArray = [
@@ -41,11 +41,11 @@ interface Props {
 }
 export const SelectPassengers = ({passengers,setPassengers}:Props) => {
   const [isOpen, setIsOpen] = useState(false);
-
+ const language = useLocale();
   const t = useTranslations("Transfers");
   const getSummaryText = () => {
-    const adultsText = `${passengers.adults} adultos`;
-    const childrenText = passengers.children !== "0" ? `, ${passengers.children} niños` : "";
+    const adultsText = `${passengers.adults} ${language === "es" ? "adultos" : "adults"}`;
+    const childrenText = passengers.children !== "0" ? `, ${passengers.children} ${language === "es" ? "niños" : "children"}` : "";
     return `${adultsText}${childrenText}`;
   };
 

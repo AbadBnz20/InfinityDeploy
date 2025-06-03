@@ -3,6 +3,7 @@ import React from "react";
 import { ContentTransferdetail } from "../detailstransfers/ContentTransferdetail";
 import { FormTransfer } from "./FormTransfer";
 import { TransfersStore } from "@/store/TransfersStore";
+import { useTranslations } from "next-intl";
 
 interface Props {
   firstname: string;
@@ -21,10 +22,10 @@ export const ContentMain = ({ firstname, lastname, email, number }: Props) => {
     departuretime,
     passengers,
   } = TransfersStore();
-
+  const t = useTranslations("TransfersPage");
   return (
     <>
-   
+      <h1 className="text-2xl font-bold mb-2">{t("titleMain")}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <ContentTransferdetail
           origin={origin}
@@ -44,15 +45,14 @@ export const ContentMain = ({ firstname, lastname, email, number }: Props) => {
           />
         )}
         <FormTransfer
-        passengers={passengers}
-        datetime={arrivaltime}
-        firstname={firstname}
-        lastname={lastname}
-        email={email}
-        number={number}
-      />
+          passengers={passengers}
+          datetime={arrivaltime}
+          firstname={firstname}
+          lastname={lastname}
+          email={email}
+          number={number}
+        />
       </div>
-      
     </>
   );
 };

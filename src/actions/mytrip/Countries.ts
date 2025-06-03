@@ -3,6 +3,7 @@
 import { GeoApi } from "@/Api/HubAPI";
 import { City } from "@/interfaces/City";
 import { Country } from "@/interfaces/Country";
+import { LocationCity } from "@/interfaces/LocationCity";
 import { Region } from "@/interfaces/Regions";
 
 export const GetCountries = async (text: string, languaje: string) => {
@@ -28,12 +29,16 @@ export const GetCountry = async (text: string) => {
   }
 };
 
-export const GetRegions = async (text: string, code: string,languaje: string) => {
+export const GetRegions = async (
+  text: string,
+  code: string,
+  languaje: string
+) => {
   try {
     const resp = await GeoApi.get<Region>(`/countries/${code}/regions`, {
       params: {
         namePrefix: text,
-        languageCode: languaje
+        languageCode: languaje,
       },
     });
 
@@ -56,11 +61,27 @@ export const GetCities = async (
       {
         params: {
           namePrefix: text,
-           languageCode: languaje
+          languageCode: languaje,
         },
       }
     );
 
+    return resp.data.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const LocationCities = async (text: string, languaje: string) => {
+  try {
+    const resp = await GeoApi.get<LocationCity>(`/cities`, {
+      params: {
+        namePrefix: text,
+        languageCode: languaje,
+      },
+    });
+    
     return resp.data.data;
   } catch (error) {
     console.log(error);

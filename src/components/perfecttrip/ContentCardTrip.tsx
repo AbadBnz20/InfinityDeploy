@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { IoAddOutline, IoTrashOutline } from "react-icons/io5";
 import { SelectCategoryCar } from "../ui/select/SelectCategoryCar";
 import { SelectAttraction } from "../ui/select/SelectAttraction";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export const ContentCardflights = () => {
   const { flight, SetFlightData } = TripStore();
@@ -65,6 +65,7 @@ export const ContentCardHotels = () => {
   const [state, setstate] = useState(false);
   const { SetHotelsData } = TripStore();
   const t = useTranslations("MyperfectPage");
+  const language = useLocale()
 
   const [hotelData, setHotelData] = useState({
     includesMeals: "Con alimentos",
@@ -122,8 +123,8 @@ export const ContentCardHotels = () => {
             isDisabled={!state}
             onChange={(e) => handleMealsChange(e.target.value)}
           >
-            <SelectItem key="Con alimentos">Con Alimentos</SelectItem>
-            <SelectItem key="Sin alimentos">Sin Alimentos</SelectItem>
+            <SelectItem key="Con alimentos">{` ${language == 'es' ? "Con Alimentos": "With Food"}`}</SelectItem>
+            <SelectItem key="Sin alimentos">{` ${language == 'es' ? "Sin Alimentos": "withoutFood"}`}</SelectItem>
           </Select>
           <Select
             variant="bordered"

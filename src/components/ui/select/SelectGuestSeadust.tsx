@@ -1,17 +1,18 @@
 import { DestinationSeadust } from "@/components/home/Seadust";
 import { Button } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface Props {
   setValue: UseFormSetValue<DestinationSeadust>;
-  value: { adults: number; children: number,infant:number }[]; 
+  value: { adults: number; children: number; infant: number }[];
 }
-export const SelectGuestSeadust = ({ setValue,value }: Props) => {
+export const SelectGuestSeadust = ({ setValue, value }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("Filter");
+  const language = useLocale()
 
   const [rooms, setRooms] = useState<
     { adults: number; children: number; infant: number }[]
@@ -26,11 +27,11 @@ export const SelectGuestSeadust = ({ setValue,value }: Props) => {
       setRooms(newRooms);
     }
   };
-    useEffect(() => {
-      if (value.length >0) {
-        setRooms(value);
-      }
-    }, [value])
+  useEffect(() => {
+    if (value.length > 0) {
+      setRooms(value);
+    }
+  }, [value]);
 
   const updateRoom = (
     index: number,
@@ -46,17 +47,12 @@ export const SelectGuestSeadust = ({ setValue,value }: Props) => {
 
   const getSummary = () => {
     setValue("guest", rooms);
+  
     const totalRooms = rooms.length;
     const totalAdults = rooms.reduce((sum, room) => sum + room.adults, 0);
     const totalChildren = rooms.reduce((sum, room) => sum + room.children, 0);
     const totalInfant = rooms.reduce((sum, room) => sum + room.infant, 0);
-    return `${totalRooms} Habitación${
-      totalRooms > 1 ? "es" : ""
-    }, ${totalAdults} adulto${
-      totalAdults > 1 ? "s" : ""
-    }, ${totalChildren} niño${
-      totalChildren > 1 ? "s" : ""
-    }, ${totalInfant} infante${totalInfant > 1 ? "s" : ""}`;
+    return `${totalRooms} ${language == 'es' ? 'Habitación': "Room"} ${ totalRooms > 1 ? "es" : "" }, ${totalAdults} ${language == 'es' ? 'Adulto': "Adult"}  ${totalAdults > 1 ? "s" : ""}, ${totalChildren} ${language == 'es' ? 'Niño': "Child"} ${totalChildren > 1 ? "s" : ""}, ${totalInfant} ${language == 'es' ? 'Infante': "Infant"} ${totalInfant > 1 ? "s" : ""}`;
   };
 
   return (
@@ -126,11 +122,7 @@ export const SelectGuestSeadust = ({ setValue,value }: Props) => {
                     variant="bordered"
                     className="text-black"
                     onPress={() =>
-                      updateRoom(
-                        index,
-                        "infant",
-                        Math.max(0, room.infant - 1)
-                      )
+                      updateRoom(index, "infant", Math.max(0, room.infant - 1))
                     }
                   >
                     -
@@ -141,9 +133,7 @@ export const SelectGuestSeadust = ({ setValue,value }: Props) => {
                     isIconOnly
                     variant="bordered"
                     className="text-black"
-                    onPress={() =>
-                      updateRoom(index, "infant", room.infant + 1)
-                    }
+                    onPress={() => updateRoom(index, "infant", room.infant + 1)}
                   >
                     +
                   </Button>

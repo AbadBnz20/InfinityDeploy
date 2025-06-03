@@ -1,5 +1,5 @@
 import { SeadustStore } from "@/store/SeadustStore";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { ModalLoading } from "../ui/modal/ModalLoading";
 import { CardRoom } from "./CardRoom";
@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 export const ContentRooms = () => {
   const [loading, setLoading] = useState(false);
   const t = useTranslations("Hotels");
+  const language = useLocale()
   const router = useRouter();
   const {
     getRoom,
@@ -75,7 +76,7 @@ export const ContentRooms = () => {
             className="bg-black text-white dark:bg-white dark:text-black"
             size="lg"
           >
-            Siguiente
+               {language == 'es' ? 'Seleccionar':'Select'}
           </Button>
         )}
       </div>

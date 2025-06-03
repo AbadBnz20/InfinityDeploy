@@ -5,9 +5,9 @@ export interface Country {
 
 export interface Datum {
     code:          string;
-    currencyCodes: string[];
+    currencyCodes?: string[];
     name:          string;
-    wikiDataId:    string;
+    wikiDataId?:    string;
 }
 
 export interface Metadata {

@@ -245,12 +245,16 @@
     "button": "Search"
   },
   "TransfersPage": {
+    "titleMain": "Transfer data",
     "title": "Select Arrival Transfer",
     "subtitile": "Vehicles Found",
     "title1": "Select Return Transfer",
     "empy": "No results found",
     "button": "Continue",
     "button1": "Back",
+    "item4": "Adult Passengers",
+    "item5": "Child Passengers",
+
     "item": {
       "title": " Outbound Details",
       "title1": " Return Details",
@@ -361,5 +365,13 @@
     "title": "Verification",
     "description": "Enter 6-digit code.",
     "button": "Verify Code"
+  },
+  "SeadustPage": {
+    "title": "Reservation Details",
+    "subtitle": "Room Details",
+    "subtitle1": "Guest Details",
+    "item": "Adult Passengers",
+    "item1": "Child Passengers",
+    "item2": "Infant Passengers"
   }
 }

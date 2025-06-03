@@ -1,6 +1,6 @@
 import { TripStore } from "@/store/TripStore";
 import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { Key, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronDown } from "react-icons/io5";
@@ -32,7 +32,7 @@ export const ContentFormTrip = ({
 }: Props) => {
   const { SetPersonalData } = TripStore();
   const t = useTranslations("MyperfectPage");
-
+ const language = useLocale();
   const {
     register,
     handleSubmit,
@@ -139,7 +139,7 @@ export const ContentFormTrip = ({
           >
             {Array.from({ length: 12 }, (_, i) => i + 1).map((num) => (
               <SelectItem key={num} value={num.toString()}>
-                {`${num} Adulto${num > 1 ? "s" : ""}`}
+                {`${num} ${language == 'es' ? 'Adulto': 'Adult'}${num > 1 ? "s" : ""}`}
               </SelectItem>
             ))}
           </Select>
@@ -201,7 +201,7 @@ interface Props2 {
 
 export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
   const [isOpen, setIsOpen] = useState(false);
-
+ const language = useLocale()
   useEffect(() => {}, [selection]);
 
   const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -229,8 +229,8 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
 
   const getSummaryText = () => {
     const { children } = selection;
-    if (children === 0) return "Agregar niños";
-    return `${children} ${children === 1 ? "niño" : "niños"}`;
+    if (children === 0) return language == 'es'? "Agregar niños": "Add children";
+    return `${children} ${children === 1 ? `${language == 'es'? 'Niño': 'Children'}` : ` ${language == 'es'? 'Niños': 'Children'}`}`;
   };
 
   return (
@@ -266,7 +266,7 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
             >
               {[0, 1, 2, 3, 4].map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {` ${num} ${num === 1 ? "niño" : "niños"}`}
+                  {` ${num} ${num === 1 ? `${language == 'es'? 'Niño': 'Children'}` : ` ${language == 'es'? 'Niños': 'Children'}`}`}
                 </SelectItem>
               ))}
             </Select>
@@ -274,9 +274,9 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
           {/* Edades de los niños */}
           {selection.children > 0 && (
             <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-600">
+              {/* <label className="block text-sm font-medium text-gray-600">
                 Edad niños en el momento del viaje
-              </label>
+              </label> */}
               <div className="grid grid-cols-2 gap-3">
                 {selection.childrenAges
                   .slice(0, selection.children)
@@ -293,14 +293,14 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
                     >
                       {Array.from({ length: 18 }, (_, i) => (
                         <SelectItem key={i} value={i.toString()}>
-                          {` ${i} ${i === 1 ? "año" : "años"}`}
+                          {` ${i} ${i === 1 ? `${language == 'es'? 'Año': 'Year'}` : ` ${language == 'es'? 'Años': 'Years'}`}`}
                         </SelectItem>
                       ))}
                     </Select>
                   ))}
               </div>
               <p className="text-xs text-gray-500 italic">
-                *Edades respecto al último día del viaje
+                *{language == 'es' ? "Si no sabe la edad exacta, puede seleccionar una aproximada." : "If you don't know the exact age, you can select an approximate one."}
               </p>
             </div>
           )}
@@ -312,7 +312,7 @@ export const ContentFormChildren = ({ selection, setSelection }: Props2) => {
               onPress={() => setIsOpen(false)}
               className="min-w-[100px] bg-black text-white"
             >
-              Aceptar
+            {language == 'es' ? "Aceptar" : "Accept"}
             </Button>
           </div>
         </div>

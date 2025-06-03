@@ -13,9 +13,9 @@ export const GetOriginDestination = async (id:string) => {
 let query = supabase
     .from("category_origin_destination")
     .select(`
-      categoryId, name,
+      categoryId, name, name_en,
       origin_destination (
-        origindestinationId, name
+        origindestinationId, name, name_en
       )
     `)
     .eq("origin_destination.state", true);
@@ -25,7 +25,6 @@ let query = supabase
   }
 
   const { data: categories } = await query;
-
   return categories as OriginDestination[];
 };
 
@@ -71,8 +70,10 @@ export const GetDetailsDestination = async (
     ]);
 
     const details: DetailsDestination = {
-      origin: origin,
-      destination: destination,
+      origin: origin?.name_es,
+      origin_en: origin?.name_en,
+      destination: destination?.name_es,
+      destination_en: destination?.name_en,
       car: car,
     };
 
@@ -88,7 +89,7 @@ export const GetDestination = async (idDestination: string) => {
 
   const { data: origin_destination, error } = await supabase
     .from("origin_destination")
-    .select("name")
+    .select("name,name_en")
     .eq("origindestinationId", idDestination)
     .single();
 
@@ -96,7 +97,10 @@ export const GetDestination = async (idDestination: string) => {
     return null;
   }
 
-  return origin_destination?.name;
+  return {
+    name_es: origin_destination.name,
+    name_en: origin_destination.name_en,
+  };
 };
 
  export const GetCar = async (id: string) => {
