@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoTimeOutline } from "react-icons/io5";
 
 export const ContentTimer = () => {
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(180);
 
   useEffect(() => {
     if (seconds <= 0) return;
