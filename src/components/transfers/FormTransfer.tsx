@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { TransfersStore } from "@/store/TransfersStore";
 import {
   GetCar,
@@ -22,7 +22,6 @@ import {
   registerTransfer,
   TransferFormRegister,
 } from "@/actions/transfers/transfer";
-import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 import { toast } from "react-toastify";
 
 interface User {
@@ -92,6 +91,7 @@ export const FormTransfer = ({
   // const [accepted, setAccepted] = useState(false);
   const [loading, setloading] = useState(false);
   const t = useTranslations("TransfersPage");
+  const language = useLocale();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const onSubmit = async (data: FormValuesTransfer) => {
@@ -140,12 +140,12 @@ export const FormTransfer = ({
       const respTransfer = await registerTransfer(datatransfer);
 
       if (!respTransfer.status) {
+        setloading(false);
         return toast.error(respTransfer.message, {
           position: "top-right",
         });
       }
 
-      const cookieLanguage = await getLanguageFromCookie();
       if (respTransfer.status) {
         if (resp) {
           const res = await fetch("/api/transfers", {
@@ -172,7 +172,7 @@ export const FormTransfer = ({
               email: data.mainpassenger.email,
               passengerAdult: passengersmain.adults.toString(),
               passengerChildren: passengersmain.children.toString(),
-              language: cookieLanguage ? cookieLanguage : "es",
+              language: language,
             }),
           });
           const datafetch = await res.json();
@@ -286,10 +286,10 @@ export const FormTransfer = ({
               </div>
               <div className="my-5  space-y-2">
                 <p className=" text-medium">
-                   {t("item4")}:{passengers.adults}
+                  {t("item4")}:{passengers.adults}
                 </p>
                 <p className=" text-medium">
-                   {t("item5")}:{passengers.children}
+                  {t("item5")}:{passengers.children}
                 </p>
               </div>
               <div className=" w-full mt-3">

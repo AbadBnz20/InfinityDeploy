@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: "InfinityTravelClub <onboarding@advantageinfinityclub.com>",
       to: [email],
-      subject: "Solicitud Seadust",
+      subject:  language === 'es'? "Solicitud Seadust": "Seadust Request",
       react: SeadustTemplate({
         start_date,
         end_date,

@@ -68,7 +68,7 @@ export const ContentCardHotels = () => {
   const language = useLocale()
 
   const [hotelData, setHotelData] = useState({
-    includesMeals: "Con alimentos",
+    includesMeals: `${language == 'es' ? "Sin Alimentos": "European Plan"}`,
     rating: "1",
   });
 
@@ -88,6 +88,7 @@ export const ContentCardHotels = () => {
     }
   }, [state, hotelData, SetHotelsData]);
   const handleMealsChange = (value: string) => {
+    console.log(value);
     setHotelData((prev) => ({ ...prev, includesMeals: value }));
   };
   const handleRatingChange = (value: string) => {
@@ -123,8 +124,8 @@ export const ContentCardHotels = () => {
             isDisabled={!state}
             onChange={(e) => handleMealsChange(e.target.value)}
           >
-            <SelectItem key="Con alimentos">{` ${language == 'es' ? "Con Alimentos": "With Food"}`}</SelectItem>
-            <SelectItem key="Sin alimentos">{` ${language == 'es' ? "Sin Alimentos": "withoutFood"}`}</SelectItem>
+            <SelectItem key={`${language == 'es' ? "Con Alimentos": "All Inclusive"}`}>{`${language == 'es' ? "Con Alimentos": "All Inclusive"}`}</SelectItem>
+            <SelectItem key={`${language == 'es' ? "Sin Alimentos": "European Plan"}`}>{`${language == 'es' ? "Sin Alimentos": "European Plan"}`}</SelectItem>
           </Select>
           <Select
             variant="bordered"

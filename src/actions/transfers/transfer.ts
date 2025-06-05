@@ -35,7 +35,7 @@ export const registerTransfer = async (transferData: TransferFormRegister) => {
         passengers: transferData.passengers,
         transfer_code: transferData.transfer_code,
         description: transferData.description,
-        total: transferData.total,
+        total: 0,
         transport_arrival_Id: transferData.transport_arrival_Id,
         transport_return_Id: transferData.transport_return_Id,
         originId: transferData.originId,
@@ -47,8 +47,7 @@ export const registerTransfer = async (transferData: TransferFormRegister) => {
     ])
     .select();
 
-
-console.log(error)
+  console.log(error);
 
   if (error) {
     return {
