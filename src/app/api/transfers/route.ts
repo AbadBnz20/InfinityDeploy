@@ -7,6 +7,7 @@ export async function POST(request: Request) {
   const body = await request.json();
 
   const {
+    nrocontract,
     type,
     origin,
     destination,
@@ -33,6 +34,7 @@ export async function POST(request: Request) {
       to: [email],
       subject:  language === 'es'?"Solicitud Transportacion": "Transportation Request",
       react: TransferTemplate({
+        nrocontract,
         language,
         type,
         origin,
@@ -68,6 +70,7 @@ export async function POST(request: Request) {
       to: "transportacion@infinityluxurytravelclub.com",
       subject: "Solicitud Transportacion",
       react: TransferTemplate({
+        nrocontract,
         language,
         type,
         origin,

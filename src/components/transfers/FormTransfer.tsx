@@ -23,6 +23,7 @@ import {
   TransferFormRegister,
 } from "@/actions/transfers/transfer";
 import { toast } from "react-toastify";
+import { GetNumberContract } from "@/actions/mytrip/RegisterTrip";
 
 interface User {
   first_name: string;
@@ -148,12 +149,14 @@ export const FormTransfer = ({
 
       if (respTransfer.status) {
         if (resp) {
+          const numberContract = await GetNumberContract();
           const res = await fetch("/api/transfers", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              nrocontract: numberContract.data,
               type: selected,
               origin: resp.origin,
               destination: resp.destination,

@@ -6,6 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   const body = await request.json();
   const {
+    nrocontract,
     start_date,
     end_date,
     firstName,
@@ -24,6 +25,7 @@ export async function POST(request: Request) {
       to: [email],
       subject:  language === 'es'? "Solicitud Seadust": "Seadust Request",
       react: SeadustTemplate({
+        nrocontract,
         start_date,
         end_date,
         firstName,
@@ -47,6 +49,7 @@ export async function POST(request: Request) {
       to: "infinityweeks@infinityluxurytravelclub.com",
       subject: "Solicitud Seadust",
       react: SeadustTemplate({
+        nrocontract,
         start_date,
         end_date,
         firstName,

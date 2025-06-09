@@ -31,7 +31,6 @@ import { useRouter } from "next/navigation";
 import { GetReferences } from "@/actions/yachts/GetReferences";
 import { useLocale, useTranslations } from "next-intl";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
-import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
 
 interface FormDateYachts {
   idEngine: string;
@@ -65,12 +64,11 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
       lastname: user.lastname,
       email: user.email,
       phone: user.number,
-
     },
   });
   const [loading, setloading] = useState(false);
   const t = useTranslations("YachtsPage");
-  const language = useLocale()
+  const language = useLocale();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [date, setdate] = useState<DateValue | null>(
     parseDate(yachts.date.split("T")[0])
@@ -107,7 +105,6 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
         });
       }
       const respDate = await GetReferences(data.idExperience, data.idEngine);
-      const cookieLanguage = await getLanguageFromCookie();
       const res = await fetch("/api/yachts", {
         method: "POST",
         headers: {
@@ -125,7 +122,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
           typeOfExperience: respDate.namexperience,
           motorYacht: respDate.namemotor,
           note: data.note,
-          language: cookieLanguage ? cookieLanguage : "es"
+          language: language,
         }),
       });
       const datafetch = await res.json();
@@ -233,9 +230,15 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                               </SelectItem>
                             )}
                           </>
-                          <SelectItem key={"4 Horas"}>{`4 ${ language == 'es' ? "Horas": "Hours"}`}</SelectItem>
-                          <SelectItem key={"6 Horas"}>{`6 ${ language == 'es' ? "Horas": "Hours"}`}</SelectItem>
-                          <SelectItem key={"7 Horas"}>{`7 ${ language == 'es' ? "Horas": "Hours"}`}</SelectItem>
+                          <SelectItem key={"4 Horas"}>{`4 ${
+                            language == "es" ? "Horas" : "Hours"
+                          }`}</SelectItem>
+                          <SelectItem key={"6 Horas"}>{`6 ${
+                            language == "es" ? "Horas" : "Hours"
+                          }`}</SelectItem>
+                          <SelectItem key={"7 Horas"}>{`7 ${
+                            language == "es" ? "Horas" : "Hours"
+                          }`}</SelectItem>
                         </Select>
                       );
                     }}
@@ -284,7 +287,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   {t("item2")} <span className="text-red-500">*</span>
                 </label>
                 <Input
-                isDisabled
+                  isDisabled
                   {...register("firstname", {
                     required: "El campo es requerido",
                   })}
@@ -298,7 +301,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   {t("item3")} <span className="text-red-500">*</span>
                 </label>
                 <Input
-                isDisabled
+                  isDisabled
                   {...register("lastname", {
                     required: "El campo es requerido",
                   })}
@@ -326,7 +329,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   {t("item4")} <span className="text-red-500">*</span>
                 </label>
                 <Input
-                isDisabled
+                  isDisabled
                   type="number"
                   {...register("phone", {
                     required: "El campo es requerido",
@@ -355,9 +358,7 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                   fullWidth
                   size="lg"
                 >
-                 {
-                  language == 'es' ? "Volver" : "Back"
-                 }
+                  {language == "es" ? "Volver" : "Back"}
                 </Button>
                 <Button
                   fullWidth

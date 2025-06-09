@@ -2,6 +2,7 @@ import { RoomEmail } from "@/interfaces/Room-responses";
 import React from "react";
 
 interface Props {
+  nrocontract: string;
   start_date: string;
   end_date: string;
   firstName: string;
@@ -17,8 +18,10 @@ interface Props {
 const translations = {
   es: {
     title: "Solicitud de Habitación",
+    contractNumber: "Número de contrato",
     greeting: "Apreciable",
-    message: "Es para nosotros un placer servirle y brindarle la mejor experiencia.",
+    message:
+      "Es para nosotros un placer servirle y brindarle la mejor experiencia.",
     details: "Detalles de su solicitud:",
     email: "Email",
     phone: "Número",
@@ -29,12 +32,13 @@ const translations = {
     rooms: "Habitacion",
     roomName: "Nombre",
     bedType: "Tipo de cama",
-    amountType:"Cantidad",
+    amountType: "Cantidad",
     footer: "Gracias por elegir Infinity Luxury Travel Club",
   },
   en: {
     title: "Room Request",
     greeting: "Dear",
+    contractNumber: "Contract Number",
     message: "It is our pleasure to serve you and provide the best experience.",
     details: "Details of your request:",
     email: "Email",
@@ -46,13 +50,13 @@ const translations = {
     rooms: "Room",
     roomName: "Name",
     bedType: "Bed Type",
-    amountType:"Amount",
+    amountType: "Amount",
     footer: "Thank you for choosing Infinity Luxury Travel Club",
   },
 };
 
-
 export const SeadustTemplate = ({
+  nrocontract,
   start_date,
   end_date,
   firstName,
@@ -99,6 +103,12 @@ export const SeadustTemplate = ({
         style={{ width: "100%", borderCollapse: "collapse", lineHeight: "1.6" }}
       >
         <tbody>
+            <tr>
+            <td>
+              <strong>{t.contractNumber}:</strong>
+            </td>
+            <td>{nrocontract}</td>
+          </tr>
           <tr>
             <td>
               <strong>{t.email}:</strong>
@@ -166,9 +176,7 @@ export const SeadustTemplate = ({
                 <td>
                   <strong>{t.amountType}:</strong>
                 </td>
-                <td>
-                  {room.amount} 
-                </td>
+                <td>{room.amount}</td>
               </tr>
             </React.Fragment>
           ))}

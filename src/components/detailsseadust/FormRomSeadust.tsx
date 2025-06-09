@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ModalConfirm } from "../ui/modal/ModalConfirm";
 import { getLanguageFromCookie } from "@/actions/lenguaje/lenguaje";
+import { GetNumberContract } from "@/actions/mytrip/RegisterTrip";
 
 export interface Props {
   firstname: string;
@@ -89,7 +90,9 @@ export const FormRomSeadust = ({
       );
       console.log(response)
       if (response.status) {
-        const room = await GetRoomArray(RoomSelected);
+
+        const [room,numberContract]= await Promise.all([GetRoomArray(RoomSelected),GetNumberContract()])
+      
          const cookieLanguage = await getLanguageFromCookie();
         const res = await fetch("/api/seadust", {
           method: "POST",
@@ -97,6 +100,7 @@ export const FormRomSeadust = ({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+             nrocontract: numberContract.data,
             start_date: checkin.split("T")[0],
             end_date: checkout.split("T")[0],
             firstName: firstname,
