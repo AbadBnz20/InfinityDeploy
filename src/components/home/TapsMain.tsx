@@ -2,7 +2,7 @@
 import { Tabs, Tab } from "@nextui-org/react";
 
 import { useLocale, useTranslations } from "next-intl";
-import {  LuShip } from "react-icons/lu";
+import { LuShip } from "react-icons/lu";
 import { FaRegClock } from "react-icons/fa";
 import { IoSwapHorizontalOutline } from "react-icons/io5";
 import { Transfers } from "./Transfers";
@@ -15,20 +15,28 @@ import { Seadust } from "./Seadust";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
   const [selected, setSelected] = useState("");
-   const locale = useLocale();
-  const languaje = locale === 'en' ?  "https://www.mywebrezvacations.com/travser": "https://www.mywebrezlatino.com/travser";
+  const locale = useLocale();
+  const languaje =
+    locale === "en"
+      ? "https://www.mywebrezvacations.com/travser"
+      : "https://www.mywebrezlatino.com/travser";
 
+  const { SetYahtsData } = TapsStore();
 
- const {SetYahtsData}=TapsStore();
-
-    const onChange = (e:Key)=>{
-     setSelected(e.toString())
-     SetYahtsData(e.toString())
-    }
+  const onChange = (e: Key) => {
+    setSelected(e.toString());
+    SetYahtsData(e.toString());
+  };
   return (
     <section className="container mx-auto -mt-[165px] relative z-10">
       <div className="bg-maincolor shadow-xl rounded-lg  py-2 px-4 flex w-full flex-col">
-        <Tabs size="lg" variant="light" aria-label="Options" selectedKey={selected} onSelectionChange={onChange}>
+        <Tabs
+          size="lg"
+          variant="light"
+          aria-label="Options"
+          selectedKey={selected}
+          onSelectionChange={onChange}
+        >
           <Tab
             key="seadust"
             title={
@@ -38,7 +46,7 @@ export const TapsMain = () => {
             }
           >
             <div>
-             <Seadust/>
+              <Seadust />
             </div>
           </Tab>
           <Tab
@@ -58,10 +66,9 @@ export const TapsMain = () => {
             title={
               <div className="flex items-center space-x-2">
                 <FaRegClock size={24} />
-                <a href={languaje} target="_blank">
+                <a href={languaje} target="_blank" rel="noopener noreferrer">
                   <span>{t("option2")}</span>
                 </a>
-               
               </div>
             }
           >
@@ -71,15 +78,17 @@ export const TapsMain = () => {
             key="saving"
             title={
               <div className="flex items-center space-x-2">
-                <a href="https://www.rcihotelsavings.com/v6/register" target="_blank">
+                <a
+                  href="https://www.rcihotelsavings.com/v6/register"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Saving
                 </a>
               </div>
             }
           >
-            <div>
-             
-            </div>
+            <div></div>
           </Tab>
           <Tab
             key="yates"

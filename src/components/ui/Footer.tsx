@@ -21,7 +21,9 @@ export const Footer = () => {
             <h3 className="text-xl font-semibold mb-4 text-gold-500">
               {t("contact")}
             </h3>
-            <p className="text-gray-400">{t("phone")}:+52 998 500 2798  | (+1) 800 871 9040</p>
+            <p className="text-gray-400">
+              {t("phone")}:+52 998 500 2798 | (+1) 800 871 9040
+            </p>
             <p className="text-gray-400">
               Email: members@infinityluxurytravelclub.com
             </p>
@@ -34,7 +36,7 @@ export const Footer = () => {
               <a
                 href="https://www.facebook.com/infinityluxurytravel"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
-                 target="_blank"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <IoLogoFacebook size={"30px"} />
@@ -42,7 +44,7 @@ export const Footer = () => {
               <a
                 href="https://www.instagram.com/infinityluxurytravelclub/"
                 className="hover:text-gold-500 transition-colors duration-300 text-gray-400 flex items-center space-x-2"
-                 target="_blank"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <IoLogoInstagram size={"30px"} />
