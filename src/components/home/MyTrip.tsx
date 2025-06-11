@@ -120,6 +120,7 @@ export const MyTrip = () => {
             OnchageCountry={SetCountryOrigin}
             locationCityorigin={locationCityorigin}
             watch={watch}
+             SetLocationCityOrigin={SetLocationCityOrigin}
           />
         </div>
 
@@ -173,6 +174,7 @@ export const MyTrip = () => {
             {t("item2.title")} <span className="text-red-500">*</span>
           </label>
           <SelectCountry
+           SetLocationCityOrigin={SetLocationCityOrigin}
             control={control}
             name="contry_destination"
             error={errors.contry_destination}

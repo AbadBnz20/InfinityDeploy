@@ -88,7 +88,7 @@ export const SelectRegions = ({
             onInputChange={handleInputChange}
             defaultSelectedKey={data}
             onSelectionChange={async (key) => {
-              console.log(key);
+              // console.log(key);
               if (key) {
                 const resp = items.find((x) => x.wikiDataId === key);
                 if (resp) {
@@ -96,6 +96,9 @@ export const SelectRegions = ({
                 }
 
                 OnchageRegion(key.toString());
+              } else{
+                field.onChange("");
+                OnchageRegion("");
               }
             }}
             isInvalid={fieldState.invalid}

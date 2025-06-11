@@ -18,6 +18,7 @@ interface Props {
   OnchageCountry: (code: string) => void;
   locationCityorigin: LocationCityStore;
   watch: UseFormWatch<TripForm>;
+  SetLocationCityOrigin: (data: LocationCityStore) => void;
 }
 
 export const SelectCountry = ({
@@ -27,6 +28,7 @@ export const SelectCountry = ({
   OnchageCountry,
   locationCityorigin,
   watch,
+  SetLocationCityOrigin,
 }: Props) => {
   const { items, isLoading, LoadCountries } = useCountries(locationCityorigin);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
@@ -35,6 +37,7 @@ export const SelectCountry = ({
   const [data, setdata] = useState("");
 
   useEffect(() => {
+    console.log(locationCityorigin)
     const GetCountry = async () => {
       setLoading(true);
       setTimeout(() => {
@@ -88,13 +91,23 @@ export const SelectCountry = ({
             defaultSelectedKey={data}
             onInputChange={handleInputChange}
             onSelectionChange={async (key) => {
-              console.log(key);
+              console.log(key)
               if (key) {
                 const resp = items.find((x) => x.code === key);
+                // console.log(resp)
                 if (resp) {
                   field.onChange(resp.name);
                 }
                 OnchageCountry(key.toString());
+              }else{
+                field.onChange("");
+                OnchageCountry("");
+                 SetLocationCityOrigin({
+                      country: "",
+                      countryCode: "",
+                      region: "",
+                      regionWdId: "",
+                    });
               }
             }}
             isInvalid={fieldState.invalid}
