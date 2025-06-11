@@ -356,7 +356,6 @@ export const FormYachts = ({ user, yachts }: YachInterface) => {
                     router.back();
                   }}
                   fullWidth
-                  size="lg"
                 >
                   {language == "es" ? "Volver" : "Back"}
                 </Button>

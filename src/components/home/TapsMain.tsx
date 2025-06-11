@@ -24,6 +24,14 @@ export const TapsMain = () => {
   const { SetYahtsData } = TapsStore();
 
   const onChange = (e: Key) => {
+    if (e === "saving") {
+      window.open("https://www.rcihotelsavings.com/v6/register", "_blank");
+      return;
+    }
+    if (e === "ultimo") {
+        window.open(languaje, "_blank");
+      return;
+    }
     setSelected(e.toString());
     SetYahtsData(e.toString());
   };
@@ -77,18 +85,17 @@ export const TapsMain = () => {
           <Tab
             key="saving"
             title={
-              <div className="flex items-center space-x-2">
-                <a
-                  href="https://www.rcihotelsavings.com/v6/register"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Saving
-                </a>
-              </div>
+              <a
+                href="https://www.rcihotelsavings.com/v6/register"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 "
+              >
+                Saving
+              </a>
             }
           >
-            <div></div>
+          
           </Tab>
           <Tab
             key="yates"
