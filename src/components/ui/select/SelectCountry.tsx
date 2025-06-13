@@ -113,10 +113,13 @@ export const SelectCountry = ({
               }
             }}
             inputProps={{
-              autoFocus: false, 
+              autoFocus: false,
               autoCorrect: "off",
               autoComplete: "off",
               spellCheck: "false",
+              style: {
+                fontSize: "16px",
+              },
             }}
             isInvalid={fieldState.invalid}
             errorMessage={error?.message}
