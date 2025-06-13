@@ -32,12 +32,13 @@ export const SelectCountry = ({
 }: Props) => {
   const { items, isLoading, LoadCountries } = useCountries(locationCityorigin);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  const [inputValue, setInputValue] = useState("");
   const region = watch(name);
   const [loading, setLoading] = useState(false);
   const [data, setdata] = useState("");
 
   useEffect(() => {
-    console.log(locationCityorigin)
+    console.log(locationCityorigin);
     const GetCountry = async () => {
       setLoading(true);
       setTimeout(() => {
@@ -46,14 +47,10 @@ export const SelectCountry = ({
       }, 50);
     };
 
-
     if (locationCityorigin.countryCode) {
       GetCountry();
     }
-  
   }, [region]);
-
-
 
   const handleInputChange = (e: string) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -85,13 +82,17 @@ export const SelectCountry = ({
           <Autocomplete
             labelPlacement={"outside"}
             className="w-full"
+            inputValue={inputValue}
             isLoading={isLoading}
             defaultItems={items}
             placeholder="Ingrese pais"
             defaultSelectedKey={data}
-            onInputChange={handleInputChange}
+            onInputChange={(value) => {
+              setInputValue(value);
+              handleInputChange(value); // aquí haces la llamada a la API
+            }}
             onSelectionChange={async (key) => {
-              console.log(key)
+              console.log(key);
               if (key) {
                 const resp = items.find((x) => x.code === key);
                 // console.log(resp)
@@ -99,15 +100,15 @@ export const SelectCountry = ({
                   field.onChange(resp.name);
                 }
                 OnchageCountry(key.toString());
-              }else{
+              } else {
                 field.onChange("");
                 OnchageCountry("");
-                 SetLocationCityOrigin({
-                      country: "",
-                      countryCode: "",
-                      region: "",
-                      regionWdId: "",
-                    });
+                SetLocationCityOrigin({
+                  country: "",
+                  countryCode: "",
+                  region: "",
+                  regionWdId: "",
+                });
               }
             }}
             isInvalid={fieldState.invalid}
