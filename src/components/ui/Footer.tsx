@@ -24,7 +24,7 @@ export const Footer = () => {
             <p className="text-gray-400">
               {t("phone")}:+52 998 500 2798 | (+1) 800 871 9040
             </p>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-small  break-all">
               Email: members@infinityluxurytravelclub.com
             </p>
           </div>

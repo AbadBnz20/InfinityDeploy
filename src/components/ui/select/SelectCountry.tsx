@@ -30,7 +30,7 @@ export const SelectCountry = ({
   watch,
   SetLocationCityOrigin,
 }: Props) => {
-  const { items,isLoading, LoadCountries } = useCountries(locationCityorigin);
+  const { items, isLoading, LoadCountries } = useCountries(locationCityorigin);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const [inputValue, setInputValue] = useState("");
   const region = watch(name);
@@ -111,6 +111,12 @@ export const SelectCountry = ({
                   regionWdId: "",
                 });
               }
+            }}
+            inputProps={{
+              autoFocus: false, 
+              autoCorrect: "off",
+              autoComplete: "off",
+              spellCheck: "false",
             }}
             isInvalid={fieldState.invalid}
             errorMessage={error?.message}
