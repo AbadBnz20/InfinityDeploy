@@ -32,13 +32,12 @@ export const SelectCountry = ({
 }: Props) => {
   const { items, isLoading, LoadCountries } = useCountries(locationCityorigin);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
-  const [inputValue, setInputValue] = useState("");
   const region = watch(name);
   const [loading, setLoading] = useState(false);
   const [data, setdata] = useState("");
 
   useEffect(() => {
-    console.log(locationCityorigin);
+    // console.log(locationCityorigin);
     const GetCountry = async () => {
       setLoading(true);
       setTimeout(() => {
@@ -83,13 +82,11 @@ export const SelectCountry = ({
           <Autocomplete
             labelPlacement={"outside"}
             className="w-full"
-            inputValue={inputValue}
             isLoading={isLoading}
             items={items}
             placeholder="Ingrese pais"
             defaultSelectedKey={data}
             onInputChange={(value) => {
-              setInputValue(value);
               handleInputChange(value); // aquí haces la llamada a la API
             }}
             onSelectionChange={async (key) => {
