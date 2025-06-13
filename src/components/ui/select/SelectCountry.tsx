@@ -2,7 +2,7 @@ import { TripForm } from "@/components/home/MyTrip";
 import { useCountries } from "@/hooks/useCountries";
 import { LocationCityStore } from "@/store/CodeDestinationStore";
 import { Autocomplete, AutocompleteItem, Progress } from "@nextui-org/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Control,
   Controller,
@@ -30,8 +30,8 @@ export const SelectCountry = ({
   watch,
   SetLocationCityOrigin,
 }: Props) => {
-  const { items, isLoading, LoadCountries } = useCountries(locationCityorigin);
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  const { items, isLoading, } = useCountries(locationCityorigin);
+  // const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const [inputValue, setInputValue] = useState("");
   const region = watch(name);
   const [loading, setLoading] = useState(false);
@@ -52,11 +52,14 @@ export const SelectCountry = ({
     }
   }, [region]);
 
+
+ 
   const handleInputChange = (e: string) => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      LoadCountries(e);
-    }, 600);
+    console.log(e)
+    // if (debounceRef.current) clearTimeout(debounceRef.current);
+    // debounceRef.current = setTimeout(() => {
+    //   LoadCountries(e);
+    // }, 600);
   };
 
   if (loading) {
