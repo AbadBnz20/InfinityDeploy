@@ -71,7 +71,7 @@ export const ScrollingBanner = () => {
               key={logo.id}
               src={logo.src}
               alt="Logo"
-             
+              className=" w-7 md:w-32"
               width={150}
              
             />
