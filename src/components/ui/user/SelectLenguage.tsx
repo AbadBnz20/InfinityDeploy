@@ -39,7 +39,7 @@ export const SelectLenguage = () => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button  className="capitalize" variant="flat">
+        <Button  size="sm" className="capitalize" variant="flat">
           {selectedValue === "es" ? (
             <>
               <img

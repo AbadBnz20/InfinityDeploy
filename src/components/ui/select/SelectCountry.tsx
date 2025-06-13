@@ -30,7 +30,7 @@ export const SelectCountry = ({
   watch,
   SetLocationCityOrigin,
 }: Props) => {
-  const { items, LoadCountries } = useCountries(locationCityorigin);
+  const { items,isLoading, LoadCountries } = useCountries(locationCityorigin);
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const [inputValue, setInputValue] = useState("");
   const region = watch(name);
@@ -84,7 +84,7 @@ export const SelectCountry = ({
             labelPlacement={"outside"}
             className="w-full"
             inputValue={inputValue}
-            // isLoading={isLoading}
+            isLoading={isLoading}
             items={items}
             placeholder="Ingrese pais"
             defaultSelectedKey={data}
