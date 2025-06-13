@@ -22,8 +22,7 @@ export const useCountries = (locationCity: LocationCityStore) => {
 
 
   const LoadCountries = async (text: string)=> {
-     
-  
+
     setIsLoading(true);
     try {
       const resp = await GetCountries(text,locale);
