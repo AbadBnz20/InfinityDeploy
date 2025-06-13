@@ -12,6 +12,7 @@ export const signInAction = async (email: string, token: string) => {
       captchaToken: token,
     },
   });
+  // console.log({error,token})
   if (error) {
     return {
       status: false,

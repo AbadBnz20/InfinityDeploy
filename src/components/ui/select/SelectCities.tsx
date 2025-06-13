@@ -1,6 +1,6 @@
 import { TripForm } from "@/components/home/MyTrip";
 import { useCities } from "@/hooks/useCities";
-import {  LocationCityStore } from "@/store/CodeDestinationStore";
+import { LocationCityStore } from "@/store/CodeDestinationStore";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import React, { useRef } from "react";
 import {
@@ -91,6 +91,11 @@ export const SelectCities = ({
             isInvalid={fieldState.invalid}
             errorMessage={error?.message}
             defaultFilter={() => true}
+            inputProps={{
+              autoCorrect: "off",
+              autoComplete: "off",
+              spellCheck: "false",
+            }}
             // inputProps={{
             //   onFocus: () => handleInputChange(""),
             // }}
