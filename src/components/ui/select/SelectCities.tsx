@@ -92,9 +92,13 @@ export const SelectCities = ({
             errorMessage={error?.message}
             defaultFilter={() => true}
             inputProps={{
+              autoFocus: false,
               autoCorrect: "off",
               autoComplete: "off",
               spellCheck: "false",
+              style: {
+                fontSize: "16px",
+              },
             }}
             // inputProps={{
             //   onFocus: () => handleInputChange(""),
