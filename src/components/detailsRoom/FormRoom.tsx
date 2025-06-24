@@ -51,8 +51,6 @@ interface Props {
 export const FormRoom = ({
   firstname,
   lastname,
-  country,
-  birthdate,
   phone,
   email,
 }: Props) => {
@@ -74,9 +72,12 @@ export const FormRoom = ({
   useEffect(() => {
     if (guest && guest.length > 0) {
       reset({
-        rooms: guest.map((room) => ({
+        rooms: guest.map((room,index) => ({
           guests: [
-            ...Array(room.adults).fill({ first_name: "", last_name: "" }),
+           ...Array.from({ length: room.adults }, (_, adultIndex) => ({
+        first_name: index === 0 && adultIndex === 0 ? firstname : "",
+        last_name: index === 0 && adultIndex === 0 ? lastname : "",
+      })),
             ...room.children.map(() => ({
               first_name: "",
               last_name: "",
@@ -173,12 +174,6 @@ export const FormRoom = ({
                     errors.supplier_data?.last_name_original?.message
                   }
                 />
-                <Input
-                  label="Pais"
-                  type="text"
-                  defaultValue={country}
-                  placeholder="Ingrese pais"
-                />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-3">
                 <Input
@@ -202,12 +197,6 @@ export const FormRoom = ({
                   placeholder="Ingrese numero"
                   isInvalid={!!errors.supplier_data?.phone}
                   errorMessage={errors.supplier_data?.phone?.message}
-                />
-                <Input
-                  type="text"
-                  label="Fecha Nacimiento"
-                  defaultValue={birthdate}
-                  placeholder="Ingrese Edad"
                 />
               </div>
             </div>
