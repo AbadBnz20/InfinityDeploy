@@ -2,7 +2,7 @@
 import { Tabs, Tab } from "@nextui-org/react";
 
 import { useLocale, useTranslations } from "next-intl";
-import { LuShip } from "react-icons/lu";
+import { LuHotel, LuShip } from "react-icons/lu";
 import { FaRegClock } from "react-icons/fa";
 import { IoSwapHorizontalOutline } from "react-icons/io5";
 import { Transfers } from "./Transfers";
@@ -12,6 +12,7 @@ import { MyTrip } from "./MyTrip";
 import { Key, useState } from "react";
 import { TapsStore } from "@/store/TapsMainStore";
 import { Seadust } from "./Seadust";
+import { Reservation } from "./Reservation";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
   const [selected, setSelected] = useState("");
@@ -119,7 +120,7 @@ export const TapsMain = () => {
           >
             <Transfers />
           </Tab>
-          {/* <Tab
+          <Tab
             key="main"
             title={
               <div className="flex items-center space-x-2">
@@ -131,7 +132,7 @@ export const TapsMain = () => {
             <div>
               <Reservation />
             </div>
-          </Tab> */}
+          </Tab>
         </Tabs>
       </div>
     </section>

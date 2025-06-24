@@ -4,6 +4,7 @@ import { Destination } from "@/interfaces/Destination";
 import { DestinationStore } from "@/store/DestinationStore";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
 import {  UseFormSetValue } from "react-hook-form";
 
 interface Props {
@@ -12,6 +13,8 @@ interface Props {
 
 export const SelectDestination = ({ setValue }: Props) => {
   const { items, isLoading, loadDestination } = useDestination();
+    const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  
   const { setname } = DestinationStore();
      const t = useTranslations("Filter");
   
@@ -26,6 +29,16 @@ export const SelectDestination = ({ setValue }: Props) => {
     }
   };
 
+
+  const handleInputChange = (e: string) => {
+    console.log(e);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      loadDestination(e);
+    }, 600);
+  };
+
+
   return (
     <div className="w-full  relative">
       <Autocomplete
@@ -36,7 +49,7 @@ export const SelectDestination = ({ setValue }: Props) => {
         label={t('seach.title')}
         placeholder={t('seach.placeholder')}
         onInputChange={(e) => {
-          loadDestination(e)
+          handleInputChange(e)
         }}
         onSelectionChange={onSelectionChange}
         defaultFilter={() => true}
