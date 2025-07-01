@@ -21,25 +21,29 @@ export const ContentMainSeadust = ({
   const { RoomSelected, checkin, checkout } = SeadustStore();
   const t = useTranslations("SeadustPage");
   return (
-     <>
-     <h1 className="text-2xl font-bold mb-2"> {t("title")}</h1>
-    <div className="md:flex gap-5">
-      <div className="w-full md:w-1/2">
-        {
-          RoomSelected.map((room) => (
-            <DetailRoom key={room.idRoom} id={room.idRoom} checkin={checkin} checkout={checkout} amount={room.amount} />
-          ))
-        }
+    <>
+      <h1 className="text-2xl font-bold mb-2"> {t("title")}</h1>
+      <div className="md:flex gap-5">
+        <div className="w-full md:w-1/2">
+          {RoomSelected.map((room) => (
+            <DetailRoom
+              key={room.idRoom}
+              id={room.idRoom}
+              checkin={checkin}
+              checkout={checkout}
+              amount={room.amount}
+            />
+          ))}
+        </div>
+        <div className="w-full md:w-1/2">
+          <FormRomSeadust
+            firstname={firstname}
+            lastname={lastname}
+            email={email}
+            number={number}
+          />
+        </div>
       </div>
-      <div className="w-full md:w-1/2">
-        <FormRomSeadust
-          firstname={firstname}
-          lastname={lastname}
-          email={email}
-          number={number}
-        />
-      </div>
-    </div>
-     </>
+    </>
   );
 };

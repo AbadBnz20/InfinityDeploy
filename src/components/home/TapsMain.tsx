@@ -1,7 +1,7 @@
 "use client";
 import { Tabs, Tab } from "@nextui-org/react";
 
-import { useLocale, useTranslations } from "next-intl";
+import {  useTranslations } from "next-intl";
 import { LuHotel, LuShip } from "react-icons/lu";
 import { FaRegClock } from "react-icons/fa";
 import { IoSwapHorizontalOutline } from "react-icons/io5";
@@ -16,11 +16,12 @@ import { Reservation } from "./Reservation";
 export const TapsMain = () => {
   const t = useTranslations("TapsMain");
   const [selected, setSelected] = useState("");
-  const locale = useLocale();
-  const languaje =
-    locale === "en"
-      ? "https://www.mywebrezvacations.com/travser"
-      : "https://www.mywebrezlatino.com/travser";
+  // const locale = useLocale();
+  // const languaje =
+
+  //   locale === "en"
+  //     ? "https://www.mywebrezvacations.com/travser"
+  //     : "https://www.mywebrezlatino.com/travser";
 
   const { SetYahtsData } = TapsStore();
 
@@ -29,10 +30,10 @@ export const TapsMain = () => {
       window.open("https://www.rcihotelsavings.com/v6/register", "_blank");
       return;
     }
-    if (e === "ultimo") {
-        window.open(languaje, "_blank");
-      return;
-    }
+    // if (e === "ultimo") {
+    //     window.open(languaje, "_blank");
+    //   return;
+    // }
     setSelected(e.toString());
     SetYahtsData(e.toString());
   };
@@ -75,9 +76,10 @@ export const TapsMain = () => {
             title={
               <div className="flex items-center space-x-2">
                 <FaRegClock size={24} />
-                <a href={languaje} target="_blank" rel="noopener noreferrer">
+                {/* <a href={languaje} target="_blank" rel="noopener noreferrer">
                   <span>{t("option2")}</span>
-                </a>
+                </a> */}
+                 <span>{t("option2")}</span>
               </div>
             }
           >

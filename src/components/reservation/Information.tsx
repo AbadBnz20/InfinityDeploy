@@ -33,7 +33,7 @@ export const Information = () => {
   } = useForm<Card>();
   const [loading, setLoading] = useState(false);
   const { item_id, supplier_data, partner, rooms } = PaymentStore();
-  const { price,total } = ReservationStore();
+  const { price, total } = ReservationStore();
 
   useEffect(() => {
     const getinfo = async () => {
@@ -97,8 +97,8 @@ export const Information = () => {
         type: "now",
         amount: price,
         currency_code: "USD",
-        init_uuid: myUuid2,
-        pay_uuid: myUuid,
+        // init_uuid: myUuid2,
+        // pay_uuid: myUuid,
       },
       return_path: "http://localhost:3000/success",
     };
@@ -117,7 +117,7 @@ export const Information = () => {
       return;
     }
 
-await  RegisterPointsBySession(Math.round(total))
+    await RegisterPointsBySession(Math.round(total));
 
     toast.success("Se ha registrado correctamente.", {
       position: "top-right",
@@ -138,7 +138,6 @@ await  RegisterPointsBySession(Math.round(total))
 
   return (
     <>
-     
       <div className="md:col-span-2 space-y-6">
         <div>
           <div>

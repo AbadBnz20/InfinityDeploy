@@ -16,8 +16,8 @@ export interface PaymentType {
     type:          string;
     amount:        string;
     currency_code: string;
-    init_uuid:     string;
-    pay_uuid:      string;
+    // init_uuid:     string;
+    // pay_uuid:      string;
 }
 
 export interface Room {

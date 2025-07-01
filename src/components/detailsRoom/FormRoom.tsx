@@ -3,7 +3,6 @@ import { DestinationStore } from "@/store/DestinationStore";
 import { Button, Divider, Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { PaymentStore } from "@/store/PaymentStore";
 import { ReservationStore } from "@/store/ReservationStore";
 import {
   OrderBookingForm,
@@ -11,8 +10,11 @@ import {
   ReservationStrapi,
 } from "@/actions/reservation/registerreservation";
 import { formatDateToISO } from "@/actions/getDestination";
-import { useRouter } from "next/navigation";
 import { InformationRoom } from "../reservation/InformationRoom";
+import { OrderBooking } from "@/interfaces/OrderBookingInterface";
+import { CreateOrderBooking } from "@/actions/reservation/orderbooking";
+import { RegisterPointsBySession } from "@/actions/points/RegisterPoints";
+import { toast } from "react-toastify";
 
 export interface Guest {
   first_name: string;
@@ -48,15 +50,10 @@ interface Props {
   phone: string;
 }
 
-export const FormRoom = ({
-  firstname,
-  lastname,
-  phone,
-  email,
-}: Props) => {
+export const FormRoom = ({ firstname, lastname, phone, email }: Props) => {
   const { guest } = DestinationStore();
   const { checkin, checkout } = DestinationStore();
-  const { destination, name, nameroom, subtotal, total, book_hash } =
+  const { destination, name, nameroom, price, subtotal, total, book_hash } =
     ReservationStore();
   const [loading, setLoading] = useState(false);
   const {
@@ -67,17 +64,17 @@ export const FormRoom = ({
   } = useForm<FormValues>({
     defaultValues: { rooms: [] },
   });
-  const router = useRouter();
-  const { setPaymentData } = PaymentStore();
+  // const router = useRouter();
+  // const { setPaymentData } = PaymentStore();
   useEffect(() => {
     if (guest && guest.length > 0) {
       reset({
-        rooms: guest.map((room,index) => ({
+        rooms: guest.map((room, index) => ({
           guests: [
-           ...Array.from({ length: room.adults }, (_, adultIndex) => ({
-        first_name: index === 0 && adultIndex === 0 ? firstname : "",
-        last_name: index === 0 && adultIndex === 0 ? lastname : "",
-      })),
+            ...Array.from({ length: room.adults }, (_, adultIndex) => ({
+              first_name: index === 0 && adultIndex === 0 ? firstname : "",
+              last_name: index === 0 && adultIndex === 0 ? lastname : "",
+            })),
             ...room.children.map(() => ({
               first_name: "",
               last_name: "",
@@ -103,7 +100,7 @@ export const FormRoom = ({
       discount: 0,
       destination: destination,
       end_date: await formatDateToISO(checkout),
-      start_date: await formatDateToISO( checkin),
+      start_date: await formatDateToISO(checkin),
       hotel_name: name,
       room_name: nameroom,
       number_adults: guest.reduce((sum, item) => sum + item.adults, 0),
@@ -128,20 +125,58 @@ export const FormRoom = ({
       );
 
       if (resp?.data) {
-        setPaymentData(
-          resp.data.item_id,
-          data.rooms,
-          data.supplier_data,
-          parther
-        );
+        // setPaymentData(
+        //   resp.data.item_id,
+        //   data.rooms,
+        //   data.supplier_data,
+        //   parther
+        // );
 
-        router.push("/reservation");
+        const orderbooking: OrderBooking = {
+          user: {
+            email: "infinity@gmail.com",
+            comment: "comment",
+            phone: "+525585266251",
+          },
+          supplier_data: {
+            first_name_original: data.supplier_data.first_name_original,
+            last_name_original: data.supplier_data.last_name_original,
+            phone: data.supplier_data.phone,
+            email: data.supplier_data.email,
+          },
+          partner: {
+            partner_order_id: parther.partner_order_id,
+          },
+          language: "es",
+          rooms: data.rooms,
+          payment_type: {
+            type: "now",
+            amount: price,
+            currency_code: "USD",
+          },
+          return_path: "http://localhost:3000/success",
+        };
+
+        const booking = await CreateOrderBooking(orderbooking);
+        console.log(booking);
+        if (!booking.status) {
+          toast.error(
+            `Ha ocurrido un error a registrar la reserva: ${booking.message}`,
+            {
+              position: "top-right",
+            }
+          );
+          setLoading(false);
+          return;
+        }
+
+        await RegisterPointsBySession(Math.round(total));
+        toast.success("Se ha registrado correctamente.", {
+          position: "top-right",
+        });
       }
     }
     setLoading(false);
-
-    // router.push("/checkoutpayment");
-    // setLoading(false);
   };
 
   return (
@@ -358,7 +393,7 @@ export const FormRoom = ({
                 type="submit"
                 isLoading={loading}
               >
-                Continuar
+                Realizar Reserva
               </Button>
             </div>
           </div>

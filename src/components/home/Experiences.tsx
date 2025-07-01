@@ -4,6 +4,7 @@ import { TapsStore } from "@/store/TapsMainStore";
 import { useTranslations } from "next-intl";
 import { ContentYachts } from "../Yachts/ContentYachts";
 import { Image } from "@nextui-org/react";
+import { WeekMinute } from "./WeekMinute";
 
 
 export const Experiences = () => {
@@ -149,46 +150,7 @@ export const Experiences = () => {
           </>
         ) : tapName === "ultimo" ? (
           <>
-            <h2 className="text-3xl font-bold text-center mb-16 text-gold-500 ">
-              {/* {t("title")} */}
-              Semanas ultimo minuto
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {[
-                {
-                  src: "home/0003.jpeg",
-                  title: "item1",
-                  description: "item1",
-                },
-                {
-                  src: "home/0004.jpeg",
-                  title: "item2",
-                  description: "item2",
-                },
-                {
-                  src: "home/0005.jpeg",
-                  title: "item3",
-                  description: "item3",
-                },
-              ].map((feature, index) => (
-                <div key={index} className="text-center group">
-                  <div>
-                    <Image
-                      isZoomed
-                      isBlurred
-                      src={feature.src}
-                      className="object-cover w-full mb-5 z-2"
-                    />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2 ">
-                    {t(`${feature.title}.title`)}
-                  </h3>
-                  <p className="text-gray-500 text-justify">
-                    {t(`${feature.description}.description`)}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <WeekMinute/>
           </>
         )  : (
           <>

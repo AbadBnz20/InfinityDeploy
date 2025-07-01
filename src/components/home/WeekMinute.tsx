@@ -1,12 +1,10 @@
 import React from "react";
 import "./style.css";
-import { useLocale } from "next-intl";
 export const WeekMinute = () => {
-  const locale = useLocale();
 
   return (
     <div className="h-[100vh]">
-      {locale === "en" ? (
+      {/* {locale === "en" ? (
         <iframe
           src="/api/scrape"
           width="100%"
@@ -22,9 +20,14 @@ export const WeekMinute = () => {
           style={{ border: "none" }}
           title="Página sin Navbar"
         />
-      )}
+      )} */}
 
-      <h1>{locale}</h1>
+      {/* <h1>{locale}</h1> */}
+
+      <iframe
+        src="/api/scrape?url=https://www.mywebrezvacations.com/travser"
+        style={{ width: "100%", height: "600px", border: "none" }}
+      ></iframe>
     </div>
   );
 };
