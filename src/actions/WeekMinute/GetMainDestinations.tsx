@@ -11,7 +11,7 @@ export const getMainDestinations = async () => {
     });
 
     const scrapeResult = await app.scrapeUrl(
-      "https://www.mywebrezvacations.com/travser/",
+      "https://www.mywebrezlatino.com/travser/",
       {
         formats: ["html"],
         // render: true,
@@ -45,7 +45,7 @@ export const getMainDestinations = async () => {
       if (href && imageUrl && titleDiv.length) {
         cards.push({
           title: titleDiv.text().trim(),
-          url: new URL(href, "https://www.mywebrezvacations.com").href,
+          url: new URL(href, "https://www.mywebrezlatino.com").href,
           background_image: imageUrl.startsWith("//")
             ? "https:" + imageUrl
             : imageUrl,

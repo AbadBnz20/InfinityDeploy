@@ -14,7 +14,7 @@ export const WidgetChatbot = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image src="home/logos/logo3.png" width={80} />
+          <Image src="https://res.cloudinary.com/devz7obre/image/upload/v1751666402/logo3_d4by3n.png" width={80} />
         </a>
       </div>
 
