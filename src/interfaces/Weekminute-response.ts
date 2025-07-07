@@ -12,6 +12,12 @@ export interface Resort {
   see_resort_url: string;
 }
 
+
+export interface DataRooms{
+   pagination: { currentEnd: number| null, total: number| null };
+   rooms:Resort[]
+}
+
 export interface TraverRoom {
   resort_name: string;
   images: string[];

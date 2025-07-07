@@ -1,5 +1,6 @@
-import { hotelInformation } from "@/actions/WeekMinute/DetailRoomtraver";
-import { ContentMain } from "@/components/DetailRoomTraver/ContentMain";
+import { GetSession } from "@/actions/auth/getuser";
+import ContentInfoRoom from "@/components/DetailRoomTraver/ContentInfoRoom";
+
 
 interface Props {
   params: {
@@ -9,11 +10,12 @@ interface Props {
 
 export default async function DetailRoomTraverPage({ params }: Props) {
   const { slug } = params;
-
-   const room = await hotelInformation(slug);
+ 
+   const user = await GetSession()
+ 
   return (
     <div className="container mx-auto p-4">
-      <ContentMain room={room} />
+     <ContentInfoRoom slug={slug} user={user}/>
     </div>
   );
 }

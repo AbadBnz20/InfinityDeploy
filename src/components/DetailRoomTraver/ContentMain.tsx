@@ -1,14 +1,28 @@
+'use client';
 import { TraverRoom } from "@/interfaces/Weekminute-response";
 import React from "react";
 import { ContentImage } from "../details/ContentImage";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
+import { CardDetailWeek } from "../WeekMinute/CardDetailWeek";
+import { useLocale } from "next-intl";
+import { ModalConfirm } from "../ui/modal/ModalConfirm";
+import { useDisclosure } from "@nextui-org/react";
 interface Props {
   room: TraverRoom | null;
+  user:{
+  firstname: string;
+  lastname: string;
+  email: string | undefined;
+  number: string;
 }
 
-export const ContentMain = ({ room }: Props) => {
+}
+
+export const ContentMain = ({ room,user }: Props) => {
+  const language = useLocale();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <div>
+      <ModalConfirm isOpen={isOpen} onOpenChange={onOpenChange} />
       <div className=" items-center mb-4">
         <h1 className="text-4xl font-bold ">{room?.resort_name}</h1>
         <p className="text-md font-normal text-gray-400">{room?.address}</p>
@@ -20,20 +34,20 @@ export const ContentMain = ({ room }: Props) => {
         <div className="w-full mx-auto p-5 space-y-6">
           <section>
             <h2 className="text-2xl font-bold mb-2 ">
-              Acerca de la habitacion
+              { language == 'es' ?'Acerca de la habitacion':'About the room'} 
             </h2>
             <div className="flex justify-between py-5">
               <p className="text-gray-500 dark:text-gray-300">
-                Precio desde:{" "}
+                  { language == 'es' ?'Precio desde:':'Price from:'}  
                 <span className="text-red-500 font-bold">
                   {room?.starting_price}
                 </span>
               </p>
               <p className="text-gray-500 dark:text-gray-300">
-                ID de propiedad: {room?.property_id}
+                 { language == 'es' ?'ID de propiedad:':'Property ID:'}   {room?.property_id}
               </p>
               <p className="text-gray-500 dark:text-gray-300">
-                Teléfono:{" "}
+                 { language == 'es' ?'Teléfono:':'Phone:'} {" "}
                 <a
                   href={`tel:${room?.phone}`}
                   className="text-blue-500 hover:underline"
@@ -47,7 +61,7 @@ export const ContentMain = ({ room }: Props) => {
 
             <div className="my-5">
               <h2 className="text-xl font-bold mb-2 ">
-                Tarifas del Desarrollo
+                 { language == 'es' ?'Tarifas del Desarrollo':'Development Rates'} 
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -59,34 +73,11 @@ export const ContentMain = ({ room }: Props) => {
 
             <div>
               <h2 className="text-xl font-bold mb-2 ">
-                Lista de disponibilidad
+                { language == 'es' ?'Lista de disponibilidad':'Availability list'} 
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {room?.availabilityList.map((item, index) => (
-                  <Card key={index} className="bg-maincolor">
-                    <CardHeader className="flex gap-3">
-                      <div className="flex flex-col">
-                        <p className="text-sm font-bold">Fechas de estadia:</p>
-                        <p>
-                          {" "}
-                          {item.travelDates.startDate} -{" "}
-                          {item.travelDates.endDate}
-                        </p>
-                      </div>
-                    </CardHeader>
-                    <CardBody>
-                      <p className="text-sm font-bold">Detalles:</p>
-                      <p>
-                        {item.unitDetails.join(", ")}
-                      </p>
-                    </CardBody>
-                    <CardFooter>
-                      <div>
-                        <span className="text-lg font-bold">{item.price} </span>
-                        <span className="text-sm text-blue-500"> {item.pricePerNight}</span>
-                      </div>
-                    </CardFooter>
-                  </Card>
+                  <CardDetailWeek key={index} onOpen={onOpen} user={user}  {...item} address={room?.address} phone={room?.phone} property_id={room?.property_id} hotel_name={room?.resort_name} />
                 ))}
               </div>
             </div>

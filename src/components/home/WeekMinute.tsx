@@ -1,6 +1,8 @@
-import { getMainDestinations } from "@/actions/WeekMinute/GetMainDestinations";
+import { destinations_EN, destinations_ES } from "@/data/Destinations";
 import { WeekMinuteResponse } from "@/interfaces/Weekminute-response";
+import { LastMinuteWeeksStore } from "@/store/LastMinuteWeeksStore";
 import { Card, Spinner } from "@nextui-org/react";
+import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -8,19 +10,24 @@ export const WeekMinute = () => {
   const [data, setdata] = useState<WeekMinuteResponse[]>([]);
   const [loading, setLoading] = useState(false);
    const router = useRouter();
+   const language = useLocale();
+  const {SetDestination}=LastMinuteWeeksStore();
+
+
   useEffect(() => {
     OnGetDestinations();
-  }, []);
+  }, [language]);
 
   const OnGetDestinations = async () => {
     setLoading(true);
-    const resp = await getMainDestinations();
-    setdata(resp);
+    // const resp = await getMainDestinations();
+    setdata( language === 'es'? destinations_ES:destinations_EN);
     setLoading(false);
   };
 
   const handleClick = (url: string) => {
     const slug = url.split("/").pop() || "";
+    SetDestination(slug);
     router.push(`/weekMinute/${slug}`);
   };
 

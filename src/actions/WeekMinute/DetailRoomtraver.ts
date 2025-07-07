@@ -4,14 +4,17 @@ import { TraverRoom } from "@/interfaces/Weekminute-response";
 import FirecrawlApp from "@mendable/firecrawl-js";
 import * as cheerio from "cheerio";
 
-export const hotelInformation = async (id:string) => {
+export const hotelInformation = async (id:string, languaje:string) => {
+ const  domain = languaje === 'es' ? 'https://www.mywebrezlatino.com/' : 'https://www.mywebrezvacations.com/'
+
+
   try {
     const app = new FirecrawlApp({
        apiKey: process.env.FireCrawlApp_API_KEY || "",
     });
 
     const scrapeResult = await app.scrapeUrl(
-      `https://www.mywebrezlatino.com/travser/search-resorts/resort/${id}`,
+      `${domain}travser/search-resorts/resort/${id}`,
       {
         formats: ["html"],
         waitFor: 4000,
@@ -45,14 +48,14 @@ export const hotelInformation = async (id:string) => {
     const resort_name = $(".resort-name").first().text().trim();
     const starting_price = $(".resort-starting-price").first().text().trim();
 
-    const property_id = $(".resort-logistic-detail-label:contains('Property ID:')")
+    const property_id = $(`.resort-logistic-detail-label:contains('${languaje === 'es' ? 'ID Propiedad':'Property ID'}:')`)
       .next(".resort-logistic-detail-data")
       .text()
       .trim();
 
     const address = $(".resort-logistic-detail-data.address").first().text().trim();
 
-    const phone = $(".resort-logistic-detail-label:contains('Phone Number:')")
+    const phone = $(`.resort-logistic-detail-label:contains('${languaje === 'es' ? 'Número telefónico':'Phone Number'}:')`)
       .next(".resort-logistic-detail-data")
       .text()
       .trim();

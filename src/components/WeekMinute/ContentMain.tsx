@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { CardRoomWeek } from "./CardRoomWeek";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Resort } from "@/interfaces/Weekminute-response";
 import { GetRoomsDestinations } from "@/actions/WeekMinute/GetRoomsDestinations";
 import { ModalLoading } from "../ui/modal/ModalLoading";
+import { Button } from "@nextui-org/react";
 
 interface Props {
   slug: string;
@@ -15,15 +16,44 @@ export const ContentMain = ({ slug }: Props) => {
   const t = useTranslations("Hotels");
   const [loading, setloading] = useState(true);
   const [data, setdata] = useState<Resort[]>([]);
+ const language = useLocale();
+
+ const domain= language === 'es' ? 'https://www.mywebrezlatino.com/': 'https://www.mywebrezvacations.com/'
+
+
+  const [Pagination, setPagination] = useState({
+    init: 0,
+    final: 0,
+    pagination: 1,
+  });
 
   useEffect(() => {
     fetchHotels();
-  }, []);
+  }, [language]);
   const fetchHotels = async () => {
     setloading(true);
-    const resorts = await GetRoomsDestinations(slug);
-    setdata(resorts);
+    const resorts = await GetRoomsDestinations(slug,domain);
+    setdata(resorts.rooms);
+    setPagination({
+      init: 1,
+      final: resorts.pagination.total || 0,
+      pagination: Pagination.pagination + 1,
+    });
     setloading(false);
+  };
+
+  const onChangePagination = async () => {
+    const url = `${slug}/page/${Pagination.pagination}`;
+    setloading(true);
+    const resorts = await GetRoomsDestinations(url,domain);
+    setPagination({
+      init: resorts.pagination.currentEnd || 0,
+      final: resorts.pagination.total || 0,
+      pagination: Pagination.pagination + 1,
+    });
+
+    setloading(false);
+    setdata(resorts.rooms);
   };
 
   return (
@@ -43,7 +73,25 @@ export const ContentMain = ({ slug }: Props) => {
             <em>No se encontraron resultados</em>
           </div>
         ) : (
-          data.map((item, index) => <CardRoomWeek key={index} background_image={item.background_image} price={item.price} resort_location={item.resort_location} resort_name={item.resort_name} see_resort_url={item.see_resort_url} />)
+          data.map((item, index) => (
+            <CardRoomWeek
+              key={index}
+              background_image={item.background_image}
+              price={item.price}
+              resort_location={item.resort_location}
+              resort_name={item.resort_name}
+              see_resort_url={item.see_resort_url}
+            />
+          ))
+        )}
+      </div>
+      <div className="w-full flex justify-center">
+        {Pagination.final !=0 && (
+          <Button onPress={() => onChangePagination()}>
+            {" "}
+            1 - {data.length} de {Pagination.final} Cargar
+            mas...
+          </Button>
         )}
       </div>
     </div>
