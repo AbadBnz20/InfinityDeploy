@@ -75,6 +75,7 @@ const ListRooms = async (html: string) => {
   const $ = Cheerio.load(html);
   const baseUrl = ``;
 
+
   const resorts: {
     background_image: string;
     resort_location: string;
